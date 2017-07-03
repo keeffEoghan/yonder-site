@@ -7,7 +7,6 @@
     {squarespace-headers}
   </head>
   <body id="{squarespace.page-id}" class="{squarespace.page-classes}">
-
     <header>
       {.section website}
         <h1>
