@@ -1,9 +1,9 @@
 {
-  "name": "npm-base-template",
+  "name": "yonder-site",
   "version": "1.0.0",
-  "description": "Squarespace Base Template using NPM",
-  "author": "Squarespace, Inc.",
-  "license": "Apache-2.0",
+  "description": "Yonder site",
+  "author": "Yonder",
+  "license": "derp",
   "private": true,
   "scripts": {
     "build": "squarespace assemble && webpack --display-modules",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com:squarespace/base-template-npm.git"
+    "url": "ssh://git@github.com:keeffEoghan/yonder-site.git"
   },
   "dependencies": {
     "@squarespace/core": "^0.1.5"
