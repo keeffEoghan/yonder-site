@@ -8,7 +8,7 @@
   </head>
   <body id="{squarespace.page-id}" class="{squarespace.page-classes}">
     <header>
-      {.section website}
+      {.section website} EOK
         <h1>
           <a href="/" data-content-field="site-title">
             {.section logoImageUrl}
