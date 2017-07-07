@@ -1,0 +1,144 @@
+/**
+ * Site
+ */
+
+// tweak: { "category" : "Site", "label" : "Background", "title" : "tweak-site-body-background-color", "type" : "color", "disableTransparency" : "true", "showOnlyWhenPresent" : ".tweak-site-width-option-constrained-width" }
+@tweak-site-body-background-color: #fbefe2;
+
+
+/**
+ * AJAX Loading
+ */
+
+// tweak: { "category" : "Site: Loading", "label" : "Enable Ajax Loading", "title" : "tweak-site-ajax-loading-enable", "type" : "checkbox", "active" : true, "js" : "true" }
+
+// tweak: { "category" : "Site: Loading", "label" : "Show Loading Bar", "title" : "tweak-site-ajax-loading-bar-show", "type" : "checkbox", "active" : true, "showOnlyWhenPresent" : ".tweak-site-ajax-loading-enable" }
+
+// tweak: { "category" : "Site: Loading", "label" : "Width", "title" : "tweak-site-ajax-loading-bar-width", "type" : "value", "step" : 1, "min" : 1, "max" : 120, "showOnlyWhenPresent" : ".tweak-site-ajax-loading-enable.tweak-site-ajax-loading-bar-show" }
+@tweak-site-ajax-loading-bar-width: 5px;
+
+// tweak: { "category" : "Site: Loading", "label" : "Color", "title" : "tweak-site-ajax-loading-bar-color", "type" : "color", "showOnlyWhenPresent" : ".tweak-site-ajax-loading-enable.tweak-site-ajax-loading-bar-show" }
+@tweak-site-ajax-loading-bar-color: #ff7c3b;
+
+
+/**
+ * Fonts
+ */
+
+// tweak: { "category" : "Fonts", "label" : "Body Text", "title" : "tweak-body-font", "type" : "font", "loadAllVariants" : true }
+.tweak-body-font {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6em;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0em;
+    text-transform: none;
+}
+
+// tweak: { "category" : "Fonts", "label" : "Heading 1", "title" : "tweak-h1-font", "type" : "font", "loadAllVariants" : true }
+.tweak-h1-font {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 32px;
+    letter-spacing: 0em;
+    line-height: 1.0em;
+    text-transform: none;
+}
+
+// tweak: { "category": "Fonts", "label" : "Heading 2", "title" : "tweak-h2-font", "type" : "font", "loadAllVariants" : true }
+.tweak-h2-font {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 24px;
+    letter-spacing: 0em;
+    line-height: 1.2em;
+    text-transform: none;
+}
+
+// tweak: { "category": "Fonts", "label" : "Heading 3", "title" : "tweak-h3-font", "type" : "font", "loadAllVariants" : true }
+.tweak-h3-font {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 18px;
+    letter-spacing: 0em;
+    line-height: 1.2em;
+    text-transform: none;
+}
+
+// tweak: { "category": "Fonts", "label" : "Heading 4", "title" : "tweak-h4-font", "type" : "font", "loadAllVariants" : true }
+.tweak-h4-font {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 18px;
+    letter-spacing: 0em;
+    line-height: 1.2em;
+    text-transform: none;
+}
+
+// tweak: { "category": "Fonts", "label" : "Heading 5", "title" : "tweak-h5-font", "type" : "font", "loadAllVariants" : true }
+.tweak-h5-font {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 18px;
+    letter-spacing: 0em;
+    line-height: 1.2em;
+    text-transform: none;
+}
+
+// tweak: { "category": "Fonts", "label" : "Heading 6", "title" : "tweak-h6-font", "type" : "font", "loadAllVariants" : true }
+.tweak-h6-font {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 18px;
+    letter-spacing: 0em;
+    line-height: 1.2em;
+    text-transform: none;
+}
+
+/**
+ * This fixes the following bug:
+ *     site.css:1      .Share {
+ *     site.css:1          &-buttons {
+ *     site.css:1              &-item {
+ *     site.css:10019              padding: 0 (.5 * (@tweak-share-buttons-size - @tweak-share-buttons-label-font-font-size))
+ *
+ *     ExecuteError VAR_UNDEFINED: Failed to locate a definition for the variable @tweak-share-buttons-label-font-font-size in current scope
+ */
+// (bugfix) tweak: { "category": "Fonts", "label" : "Share Buttons Label Font Size", "title" : "tweak-share-buttons-label-font-font-size", "type" : "value" }
+@tweak-share-buttons-label-font-font-size: 16px;
+
+
+/**
+ * Colors
+ */
+
+// tweak: { "category": "Colors", "label" : "Body Text", "title" : "tweak-body-text-color", "type" : "color", "target" : ".Intro:not(.Intro--has-image) .sqs-layout p, .Main-content .sqs-layout p, .Index-page:not(.Index-page--has-image) .sqs-layout p" }
+@tweak-body-text-color: #000000;
+
+// tweak: { "category": "Colors", "label" : "Heading 1", "title" : "tweak-h1-color", "type" : "color", "target" : ".Intro:not(.Intro--has-image) .sqs-layout h1, .Main-content .sqs-layout h1, .Index-page:not(.Index-page--has-image) .sqs-layout h1, .eventlist-title, .eventitem-title", "showOnlyWhenPresent" : ".sqs-layout h1, .eventlist-title, .eventitem-title" }
+@tweak-h1-color: #000000;
+
+// tweak: { "category": "Colors", "label" : "Heading 2", "title" : "tweak-h2-color", "type" : "color", "target" : ".Intro:not(.Intro--has-image) .sqs-layout h2, .Main-content .sqs-layout h2, .Index-page:not(.Index-page--has-image) .sqs-layout h2", "showOnlyWhenPresent" : ".sqs-layout h2" }
+@tweak-h2-color: #000000;
+
+// tweak: { "category": "Colors", "label" : "Heading 3", "title" : "tweak-h3-color", "type" : "color", "target" : ".Intro:not(.Intro--has-image) .sqs-layout h3, .Main-content .sqs-layout h3, .Index-page:not(.Index-page--has-image) .sqs-layout h3, h3.comment-count", "showOnlyWhenPresent" : ".sqs-layout h3, h3.comment-count" }
+@tweak-h3-color: #000000;
+
+// tweak: { "category": "Colors", "label" : "Heading 4", "title" : "tweak-h4-color", "type" : "color", "target" : ".Intro:not(.Intro--has-image) .sqs-layout h3, .Main-content .sqs-layout h3, .Index-page:not(.Index-page--has-image) .sqs-layout h3, h3.comment-count", "showOnlyWhenPresent" : ".sqs-layout h3, h3.comment-count" }
+@tweak-h4-color: #000000;
+
+// tweak: { "category": "Colors", "label" : "Heading 5", "title" : "tweak-h5-color", "type" : "color", "target" : ".Intro:not(.Intro--has-image) .sqs-layout h3, .Main-content .sqs-layout h3, .Index-page:not(.Index-page--has-image) .sqs-layout h3, h3.comment-count", "showOnlyWhenPresent" : ".sqs-layout h3, h3.comment-count" }
+@tweak-h5-color: #000000;
+
+// tweak: { "category": "Colors", "label" : "Heading 6", "title" : "tweak-h6-color", "type" : "color", "target" : ".Intro:not(.Intro--has-image) .sqs-layout h3, .Main-content .sqs-layout h3, .Index-page:not(.Index-page--has-image) .sqs-layout h3, h3.comment-count", "showOnlyWhenPresent" : ".sqs-layout h3, h3.comment-count" }
+@tweak-h6-color: #000000;
+
+// tweak: { "category": "Colors", "label" : "Links", "title" : "tweak-link-color", "type" : "color", "target" : ".Intro:not(.Intro--has-image) .sqs-layout p, .Main-content .sqs-layout p, .Index-page:not(.Index-page--has-image) .sqs-layout p", "showOnlyWhenPresent" : ".sqs-layout p a, .sqs-layout ol a, .sqs-layout ul a" }
+@tweak-link-color: #00aeef;
