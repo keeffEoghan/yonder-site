@@ -1,8 +1,14 @@
 {
-  "extends": "eslint-config-squarespace/vanilla",
-  "parser": "babel-eslint",
-  "env": {
+    "extends": "eslint-config-squarespace/vanilla",
+    "parser": "babel-eslint",
+    "env": {
     "browser": true,
     "es6": true
-  }
+    },
+    "rules": {
+        "indent": ["warn", 4],
+        "operator-linebreak": "off",
+        "no-multi-spaces": "off",
+        "space-infix-ops": "off"
+    }
 }

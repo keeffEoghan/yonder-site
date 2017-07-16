@@ -11,6 +11,12 @@
         {squarespace-headers}
     </head>
     <body>
+        <!-- Little `Y` home button -->
+        <!-- Side nav -->
+        <!-- Main content -->
+
+
+
         <header>
             {.section website}
                 <h1>
