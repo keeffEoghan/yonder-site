@@ -11,27 +11,11 @@
         {squarespace-headers}
     </head>
     <body>
+        <div class="yr-loader"></div>
         <!-- Little `Y` home button -->
         <!-- Side nav -->
         <!-- Main content -->
-
-
-
-        <header>
-            {.section website}
-                <h1>
-                    <a href="/" data-content-field="site-title">
-                        {.section logoImageUrl}
-                            <img src="{logoImageUrl}?format=original" alt="{siteTitle}" title="{siteTitle}" />
-                        {.or}
-                            {siteTitle}
-                        {.end}
-                    </a>
-                </h1>
-
-                {.section siteTagLine}<p>{@}</p>{.end}
-            {.end}
-        </header>
+        <!-- (Footer) -->
 
         <squarespace:navigation navigationId="primary-nav" template="navigation" />
 

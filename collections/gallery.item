@@ -1,5 +1,5 @@
-{.repeated section items}
-    <article id="post-{id}" class="yr-gallery-list-item {@|item-classes}" data-item-id="{id}">
+{.section item}
+    <article id="post-{id}" class="yr-gallery-item {@|item-classes}" data-item-id="{id}">
         {.image?}<img {@|image-meta} data-load="false" />{.end}
         {.section title}<h1>{@}</h1>{.end}
         {.section body}<div>{@}</div>{.end}

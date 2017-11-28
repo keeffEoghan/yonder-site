@@ -1,7 +1,7 @@
 import { refresh } from '@squarespace/controller';
 import { Lifecycle, Tweak } from '@squarespace/core';
 import Mercury from '@squarespace/mercury';
-import { authenticated } from '../constants';
+import { authenticated, debug } from '../constants';
 
 // Exceptions: external links, hash links
 const onClickExceptions = [
@@ -55,7 +55,7 @@ function siteLoader() {
     const ajaxEnabled = Tweak.getValue('tweak-site-ajax-loading-enable') === 'true';
 
     // Don't use ajax in authenticated session or when tweak option is disabled.
-    if (authenticated || !ajaxEnabled) {
+    if ((!debug && authenticated) || !ajaxEnabled) {
         return false;
     }
 

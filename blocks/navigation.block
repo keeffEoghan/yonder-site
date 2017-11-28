@@ -1,4 +1,18 @@
-<nav data-content-field="navigation-primary-nav">
+<nav class="yr-nav" data-content-field="navigation-primary-nav">
+    {.section website}
+        <h1 class="yr-site-title">
+            <a href="/" data-content-field="site-title">
+                {.section logoImageUrl}
+                    <img src="{logoImageUrl}?format=original" alt="{siteTitle}" title="{siteTitle}" />
+                {.or}
+                    {siteTitle}
+                {.end}
+            </a>
+        </h1>
+
+        {.section siteTagLine}<h2 class="yr-site-title">{@}</h2>{.end}
+    {.end}
+
     {.repeated section items}
         {.folder?}
             <a href="{collection.fullUrl}">{collection.navigationTitle}</a>
