@@ -40,12 +40,7 @@ const updateMatrix = [
     { selector: 'link[rel="image_src"]', updateAttrs: true },
     { selector: 'link[rel="alternate"]', updateAttrs: true },
     { selector: 'body', updateAttrs: true },
-    { selector: '.Parallax-host-outer', updateHTML: true },
-    { selector: '.Site-inner', updateAttrs: true },
-    { selector: '.Header--bottom', updateAttrs: true },
-    { selector: '.Header-nav--primary', updateHTML: true },
-    { selector: '.Header-nav--secondary', updateHTML: true },
-    { selector: '.Content-outer', updateHTML: true }
+    { selector: 'main', updateHTML: true }
 ];
 
 /**

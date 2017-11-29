@@ -4,6 +4,10 @@
 }
 
 .yr-nav {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     right: 0;
     top: 0;
@@ -11,5 +15,22 @@
     width: 100%;
     max-width: 40em;
     z-index: @yr-z-nav;
+    padding: 3em;
+    color: @tweak-nav-text-color;
     background-color: @tweak-nav-background-color;
+    text-align: center;
+
+    .yr-nav-header {}
+
+    .yr-site-title-link {
+        display: inline-block;
+    }
+
+    .yr-nav-links {
+        margin: auto;
+    }
+
+    .yr-nav-link {
+        display: block;
+    }
 }
