@@ -23,12 +23,12 @@
             {squarespace.main-content}
         </main>
 
-        <footer>
-            <squarespace:block-field id="footer-blocks" columns="12" />
-        </footer>
+        {@|apply footer.block}
 
         <squarespace:script src="site-bundle.js" combo="false" />
 
         {squarespace-footers}
+
+        <script type="text/debug">{@|json-pretty|html}</script>
     </body>
 </html>

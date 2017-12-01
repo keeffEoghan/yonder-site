@@ -19,7 +19,7 @@
     color: @tweak-nav-text-color;
     background-color: @tweak-nav-background-color;
     text-align: center;
-    overflow-y: auto;
+    overflow: hidden;
 
     .yr-nav-header {}
 
@@ -28,10 +28,26 @@
     }
 
     .yr-nav-links {
-        margin: auto;
+        flex: 0 1 auto;
+        width: 100%;
+        margin: 2em auto;
+        overflow-y: auto;
+    }
+
+    .yr-nav-folder-link {
+        border-bottom: 2px dashed @tweak-nav-folder-divide-color;
+    }
+
+    .yr-nav-folder-links {
+        background-color: @tweak-nav-folder-divide-color;
     }
 
     .yr-nav-link {
         display: block;
+    }
+
+    .yr-nav-footer {
+        margin-top: 17px;
+        font-size: 0.8em;
     }
 }

@@ -13,6 +13,7 @@
 
             {.section siteTagLine}<h2 class="yr-site-title">{@}</h2>{.end}
             {.section siteDescription}<h3 class="yr-site-title">{@}</h3>{.end}
+            <squarespace:block-field id="nav-header-block" columns="12"/>
         </header>
     {.end}
 
@@ -51,9 +52,10 @@
         {.end}
     </div>
 
+    <squarespace:block-field id="nav-footer-block" class="yr-nav-footer" columns="12"/>
+
     {##BEGIN}
-        {@|json-pretty}
         {shareButtonOptions|social-button}
+        <div class="social-links" data-content-field="connected-accounts"></div>
     {END##}
-    <squarespace:block-field id="navigationFooterBlocks" columns="12"/>
 </nav>
