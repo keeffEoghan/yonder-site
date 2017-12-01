@@ -12,6 +12,7 @@
             </h1>
 
             {.section siteTagLine}<h2 class="yr-site-title">{@}</h2>{.end}
+            {.section siteDescription}<h3 class="yr-site-title">{@}</h3>{.end}
         </header>
     {.end}
 
@@ -49,4 +50,10 @@
             {.end}
         {.end}
     </div>
+
+    {##BEGIN}
+        {@|json-pretty}
+        {shareButtonOptions|social-button}
+    {END##}
+    <squarespace:block-field id="navigationFooterBlocks" columns="12"/>
 </nav>
