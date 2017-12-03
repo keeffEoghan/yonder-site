@@ -2,44 +2,46 @@
  * Site
  */
 
-// tweak: { "category": "Site", "label": "Background", "title": "tweak-site-body-background-color", "type": "color", "disableTransparency": "true" }
-@tweak-site-body-background-color: #fbefe2;
+// tweak: { "category": "Site", "label": "Background", "title": "tweak-yr-site-body-background-color", "type": "color", "disableTransparency": "true" }
+@tweak-yr-site-body-background-color: #fbefe2;
 
 /**
  * Navigation
  */
 
-// tweak: { "category": "Navigation", "label": "Text", "title": "tweak-nav-text-color", "type": "color", "disableTransparency": "false", "showOnlyWhenPresent": ".yr-nav" }
-@tweak-nav-text-color: #f7efe4;
+// tweak: { "category": "Navigation", "label": "Navigation Position", "title": "tweak-yr-nav-align", "type": "dropdown", "options": ["left", "right"], "default": "right" }
 
-// tweak: { "category": "Navigation", "label": "Background", "title": "tweak-nav-background-color", "type": "color", "disableTransparency": "false", "showOnlyWhenPresent": ".yr-nav" }
-@tweak-nav-background-color: #367b73;
+// tweak: { "category": "Navigation", "label": "Text", "title": "tweak-yr-nav-text-color", "type": "color", "disableTransparency": "false", "showOnlyWhenPresent": ".yr-nav" }
+@tweak-yr-nav-text-color: #f7efe4;
 
-// tweak: { "category": "Navigation: Folders", "label": "Folder Divide Color", "title": "tweak-nav-folder-divide-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-folder-link, .yr-nav-folder-links", "showOnlyWhenPresent": ".yr-nav" }
-@@tweak-nav-folder-divide-color: rgba(255, 255, 255, 0.2);
+// tweak: { "category": "Navigation", "label": "Background", "title": "tweak-yr-nav-background-color", "type": "color", "disableTransparency": "false", "showOnlyWhenPresent": ".yr-nav" }
+@tweak-yr-nav-background-color: #367b73;
+
+// tweak: { "category": "Navigation: Folders", "label": "Folder Divide Color", "title": "tweak-yr-nav-folder-divide-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-folder-link, .yr-nav-folder-links", "showOnlyWhenPresent": ".yr-nav" }
+@tweak-yr-nav-folder-divide-color: rgba(255, 255, 255, 0.2);
 
 
 /**
  * AJAX Loading
  */
 
-// tweak: { "category": "Site: Loading", "label": "Enable Ajax Loading", "title": "tweak-site-ajax-loading-enable", "type": "checkbox", "active": true, "js": "true" }
+// tweak: { "category": "Site: Loading", "label": "Enable Ajax Loading", "title": "tweak-yr-site-ajax-loading-enable", "type": "checkbox", "active": true, "js": "true" }
 
-// tweak: { "category": "Site: Loading", "label": "Show Loading Bar", "title": "tweak-site-ajax-loading-bar-show", "type": "checkbox", "active": true, "showOnlyWhenPresent": ".tweak-site-ajax-loading-enable" }
+// tweak: { "category": "Site: Loading", "label": "Show Loading Bar", "title": "tweak-yr-site-ajax-loading-bar-show", "type": "checkbox", "active": true, "showOnlyWhenPresent": ".tweak-yr-site-ajax-loading-enable" }
 
-// tweak: { "category": "Site: Loading", "label": "Size", "title": "tweak-site-ajax-loading-bar-size", "type": "value", "step": 1, "min": 1, "max": 120, "showOnlyWhenPresent": ".tweak-site-ajax-loading-enable.tweak-site-ajax-loading-bar-show" }
-@tweak-site-ajax-loading-bar-size: 3px;
+// tweak: { "category": "Site: Loading", "label": "Size", "title": "tweak-yr-site-ajax-loading-bar-size", "type": "value", "step": 1, "min": 1, "max": 120, "showOnlyWhenPresent": ".tweak-yr-site-ajax-loading-enable.tweak-yr-site-ajax-loading-bar-show" }
+@tweak-yr-site-ajax-loading-bar-size: 3px;
 
-// tweak: { "category": "Site: Loading", "label": "Color", "title": "tweak-site-ajax-loading-bar-color", "type": "color", "showOnlyWhenPresent": ".tweak-site-ajax-loading-enable.tweak-site-ajax-loading-bar-show" }
-@tweak-site-ajax-loading-bar-color: #ec854c;
+// tweak: { "category": "Site: Loading", "label": "Color", "title": "tweak-yr-site-ajax-loading-bar-color", "type": "color", "showOnlyWhenPresent": ".tweak-yr-site-ajax-loading-enable.tweak-yr-site-ajax-loading-bar-show" }
+@tweak-yr-site-ajax-loading-bar-color: #ec854c;
 
 
 /**
  * Fonts
  */
 
-// tweak: { "category": "Fonts", "label": "Body Text", "title": "tweak-body-font", "type": "font", "loadAllVariants": true }
-.tweak-body-font {
+// tweak: { "category": "Fonts", "label": "Body Text", "title": "tweak-yr-body-font", "type": "font", "loadAllVariants": true }
+.tweak-yr-body-font {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 16px;
     line-height: 1.6em;
@@ -49,8 +51,8 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Fonts", "label": "Heading 1", "title": "tweak-h1-font", "type": "font", "loadAllVariants": true }
-.tweak-h1-font {
+// tweak: { "category": "Fonts", "label": "Heading 1", "title": "tweak-yr-h1-font", "type": "font", "loadAllVariants": true }
+.tweak-yr-h1-font {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -60,8 +62,8 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Fonts", "label": "Heading 2", "title": "tweak-h2-font", "type": "font", "loadAllVariants": true }
-.tweak-h2-font {
+// tweak: { "category": "Fonts", "label": "Heading 2", "title": "tweak-yr-h2-font", "type": "font", "loadAllVariants": true }
+.tweak-yr-h2-font {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -71,8 +73,8 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Fonts", "label": "Heading 3", "title": "tweak-h3-font", "type": "font", "loadAllVariants": true }
-.tweak-h3-font {
+// tweak: { "category": "Fonts", "label": "Heading 3", "title": "tweak-yr-h3-font", "type": "font", "loadAllVariants": true }
+.tweak-yr-h3-font {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -82,8 +84,8 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Fonts", "label": "Heading 4", "title": "tweak-h4-font", "type": "font", "loadAllVariants": true }
-.tweak-h4-font {
+// tweak: { "category": "Fonts", "label": "Heading 4", "title": "tweak-yr-h4-font", "type": "font", "loadAllVariants": true }
+.tweak-yr-h4-font {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -93,8 +95,8 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Fonts", "label": "Heading 5", "title": "tweak-h5-font", "type": "font", "loadAllVariants": true }
-.tweak-h5-font {
+// tweak: { "category": "Fonts", "label": "Heading 5", "title": "tweak-yr-h5-font", "type": "font", "loadAllVariants": true }
+.tweak-yr-h5-font {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -104,8 +106,8 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Fonts", "label": "Heading 6", "title": "tweak-h6-font", "type": "font", "loadAllVariants": true }
-.tweak-h6-font {
+// tweak: { "category": "Fonts", "label": "Heading 6", "title": "tweak-yr-h6-font", "type": "font", "loadAllVariants": true }
+.tweak-yr-h6-font {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -114,64 +116,66 @@
     line-height: 1.2em;
     text-transform: none;
 }
-
-/**
- * This fixes the following bug:
- *     site.css:1      .Share {
- *     site.css:1          &-buttons {
- *     site.css:1              &-item {
- *     site.css:10019              padding: 0 (.5 * (@tweak-share-buttons-size - @tweak-share-buttons-label-font-font-size))
- *
- *     ExecuteError VAR_UNDEFINED: Failed to locate a definition for the variable @tweak-share-buttons-label-font-font-size in current scope
- */
-// (bugfix) tweak: { "category": "Fonts", "label": "Share Buttons Label Font Size", "title": "tweak-share-buttons-label-font-font-size", "type": "value" }
-@tweak-share-buttons-label-font-font-size: 16px;
 
 
 /**
  * Colors
  */
 
-// tweak: { "category": "Colors", "label": "Body Text", "title": "tweak-body-text-color", "type": "color", "target": "p" }
-@tweak-body-text-color: #000000;
+// tweak: { "category": "Colors", "label": "Body Text", "title": "tweak-yr-body-text-color", "type": "color", "target": "p" }
+@tweak-yr-body-text-color: #000000;
 
-// tweak: { "category": "Colors", "label": "Heading 1", "title": "tweak-h1-color", "type": "color", "target": "h1", "showOnlyWhenPresent": ".sqs-layout h1, .eventlist-title, .eventitem-title" }
-@tweak-h1-color: #000000;
+// tweak: { "category": "Colors", "label": "Heading 1", "title": "tweak-yr-h1-color", "type": "color", "target": "h1", "showOnlyWhenPresent": ".sqs-layout h1, .eventlist-title, .eventitem-title" }
+@tweak-yr-h1-color: #000000;
 
-// tweak: { "category": "Colors", "label": "Heading 2", "title": "tweak-h2-color", "type": "color", "target": "h2", "showOnlyWhenPresent": ".sqs-layout h2" }
-@tweak-h2-color: #000000;
+// tweak: { "category": "Colors", "label": "Heading 2", "title": "tweak-yr-h2-color", "type": "color", "target": "h2", "showOnlyWhenPresent": ".sqs-layout h2" }
+@tweak-yr-h2-color: #000000;
 
-// tweak: { "category": "Colors", "label": "Heading 3", "title": "tweak-h3-color", "type": "color", "target": "h3", "showOnlyWhenPresent": ".sqs-layout h3, h3.comment-count" }
-@tweak-h3-color: #000000;
+// tweak: { "category": "Colors", "label": "Heading 3", "title": "tweak-yr-h3-color", "type": "color", "target": "h3", "showOnlyWhenPresent": ".sqs-layout h3, h3.comment-count" }
+@tweak-yr-h3-color: #000000;
 
-// tweak: { "category": "Colors", "label": "Heading 4", "title": "tweak-h4-color", "type": "color", "target": "h4", "showOnlyWhenPresent": ".sqs-layout h3, h3.comment-count" }
-@tweak-h4-color: #000000;
+// tweak: { "category": "Colors", "label": "Heading 4", "title": "tweak-yr-h4-color", "type": "color", "target": "h4", "showOnlyWhenPresent": ".sqs-layout h3, h3.comment-count" }
+@tweak-yr-h4-color: #000000;
 
-// tweak: { "category": "Colors", "label": "Heading 5", "title": "tweak-h5-color", "type": "color", "target": "h5", "showOnlyWhenPresent": ".sqs-layout h3, h3.comment-count" }
-@tweak-h5-color: #000000;
+// tweak: { "category": "Colors", "label": "Heading 5", "title": "tweak-yr-h5-color", "type": "color", "target": "h5", "showOnlyWhenPresent": ".sqs-layout h3, h3.comment-count" }
+@tweak-yr-h5-color: #000000;
 
-// tweak: { "category": "Colors", "label": "Heading 6", "title": "tweak-h6-color", "type": "color", "target": "h6", "showOnlyWhenPresent": ".sqs-layout h3, h3.comment-count" }
-@tweak-h6-color: #000000;
+// tweak: { "category": "Colors", "label": "Heading 6", "title": "tweak-yr-h6-color", "type": "color", "target": "h6", "showOnlyWhenPresent": ".sqs-layout h3, h3.comment-count" }
+@tweak-yr-h6-color: #000000;
 
-// tweak: { "category": "Colors", "label": "Links", "title": "tweak-link-color", "type": "color", "target": "a", "showOnlyWhenPresent": ".sqs-layout p a, .sqs-layout ol a, .sqs-layout ul a" }
-@tweak-link-color: #00aeef;
+// tweak: { "category": "Colors", "label": "Links", "title": "tweak-yr-link-color", "type": "color", "target": "a", "showOnlyWhenPresent": ".sqs-layout p a, .sqs-layout ol a, .sqs-layout ul a" }
+@tweak-yr-link-color: #00aeef;
 
 
 /**
  * Footer
  */
 
-// tweak: { "category" : "Footer", "label" : "Show Footer", "title" : "tweak-footer-show", "type" : "checkbox", "active" : true, "target" : ".yr-footer" }
+// tweak: { "category" : "Footer", "label" : "Show Footer", "title" : "tweak-yr-footer-show", "type" : "checkbox", "active" : true, "target" : ".yr-footer" }
 
-// tweak: { "category": "Footer", "label": "Background Color", "title" : "tweak-footer-color", "type" : "color", "target" : ".yr-footer", "showOnlyWhenPresent": ".tweak-footer-show" }
-@tweak-footer-color: rgba(255, 255, 255, 0.6);
+// tweak: { "category": "Footer", "label": "Background Color", "title" : "tweak-yr-footer-color", "type" : "color", "target" : ".yr-footer", "showOnlyWhenPresent": ".tweak-yr-footer-show" }
+@tweak-yr-footer-color: rgba(255, 255, 255, 0.6);
 
-// tweak: { "category": "Footer", "label": "Text Color", "title" : "tweak-footer-text-color", "type" : "color", "target" : ".yr-footer", "showOnlyWhenPresent": ".tweak-footer-show" }
-@tweak-footer-text-color: #333;
+// tweak: { "category": "Footer", "label": "Text Color", "title" : "tweak-yr-footer-text-color", "type" : "color", "target" : ".yr-footer", "showOnlyWhenPresent": ".tweak-yr-footer-show" }
+@tweak-yr-footer-text-color: #333;
 
-// tweak: { "category" : "Footer: Contact", "label" : "Show Contact Info", "title" : "tweak-footer-contact-show", "type" : "checkbox", "active" : false, "target" : ".yr-footer", "showOnlyWhenPresent": ".tweak-footer-show" }
+// tweak: { "category" : "Footer: Contact", "label" : "Show Contact Info", "title" : "tweak-yr-footer-contact-show", "type" : "checkbox", "active" : false, "target" : ".yr-footer", "showOnlyWhenPresent": ".tweak-yr-footer-show" }
 
 
 /**
  * Contact
  */
+
+
+
+/**
+ * This fixes the following bug:
+ *     site.css:1      .Share {
+ *     site.css:1          &-buttons {
+ *     site.css:1              &-item {
+ *     site.css:10019              padding: 0 (.5 * (@tweak-yr-share-buttons-size - @tweak-yr-share-buttons-label-font-font-size))
+ *
+ *     ExecuteError VAR_UNDEFINED: Failed to locate a definition for the variable @tweak-yr-share-buttons-label-font-font-size in current scope
+ */
+// (bugfix) tweak: { "category": "Fonts", "label": "Share Buttons Label Font Size", "title": "tweak-share-buttons-label-font-font-size", "type": "value" }
+@tweak-share-buttons-label-font-font-size: 16px;

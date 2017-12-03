@@ -47,7 +47,7 @@ const updateMatrix = [
  * Instantiates a mercury loader for the site in unauthenticated sessions.
  */
 function siteLoader() {
-    const ajaxEnabled = Tweak.getValue('tweak-site-ajax-loading-enable') === 'true';
+    const ajaxEnabled = Tweak.getValue('tweak-yr-site-ajax-loading-enable') === 'true';
 
     // Don't use ajax in authenticated session or when tweak option is disabled.
     if ((!debug && authenticated) || !ajaxEnabled) {

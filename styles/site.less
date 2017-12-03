@@ -10,36 +10,36 @@ body {
 }
 
 html {
-    background-color: @tweak-site-body-background-color;
+    background-color: @tweak-yr-site-body-background-color;
 }
 
 body {
-    .tweak-body-font;
+    .tweak-yr-body-font;
     margin: 0 auto;
 }
 
 h1 {
-    .tweak-h1-font;
+    .tweak-yr-h1-font;
 }
 
 h2 {
-    .tweak-h2-font;
+    .tweak-yr-h2-font;
 }
 
 h3 {
-    .tweak-h3-font;
+    .tweak-yr-h3-font;
 }
 
 h4 {
-    .tweak-h4-font;
+    .tweak-yr-h4-font;
 }
 
 h5 {
-    .tweak-h5-font;
+    .tweak-yr-h5-font;
 }
 
 h6 {
-    .tweak-h6-font;
+    .tweak-yr-h6-font;
 }
 
 strong {
@@ -63,7 +63,7 @@ small {
     top: 0;
     left: -100%;
     width: 100%;
-    height: @tweak-site-ajax-loading-bar-size;
+    height: @tweak-yr-site-ajax-loading-bar-size;
     z-index: @yr-z-loader;
     pointer-events: none;
 
@@ -71,7 +71,7 @@ small {
     .transition(background-color 0.3s ease-out, transform 0s 0.3s linear;);
 
     [data-mercury-loading] & {
-        background-color: @tweak-site-ajax-loading-bar-color;
+        background-color: @tweak-yr-site-ajax-loading-bar-color;
         .transition(transform 0.3s cubic-bezier(0, 0, 0, 0.618));
         .transform(translatex(60%));
     }
@@ -83,7 +83,7 @@ small {
     // Show
     display: none;
 
-    .tweak-site-ajax-loading-enable.tweak-site-ajax-loading-bar-show & {
+    .tweak-yr-site-ajax-loading-enable.tweak-yr-site-ajax-loading-bar-show & {
         display: block;
     }
 }

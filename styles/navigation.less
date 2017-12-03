@@ -1,27 +1,58 @@
-.yr-nav-toggle {
-    position: fixed;
-    z-index: @yr-z-nav-toggle;
-}
-
 .yr-nav {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    max-width: 40em;
-    z-index: @yr-z-nav;
-    padding: 3em;
-    color: @tweak-nav-text-color;
-    background-color: @tweak-nav-background-color;
-    text-align: center;
-    overflow: hidden;
+    .yr-nav-toggle,
+    .yr-nav-toggler {
+        position: fixed;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        margin: 2rem;
+        right: 0;
 
-    .yr-nav-header {}
+        .tweak-yr-nav-align-left & {
+            left: 0;
+            right: auto;
+        }
+    }
+
+    .yr-nav-toggle {
+        background-color: red;
+        z-index: @yr-z-nav-toggle;
+    }
+
+    .yr-nav-toggler {
+        z-index: @yr-z-nav-toggler;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .yr-nav-panel {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        max-width: 40em;
+        z-index: @yr-z-nav;
+        padding: 3em;
+        color: @tweak-yr-nav-text-color;
+        background-color: @tweak-yr-nav-background-color;
+        text-align: center;
+        overflow: hidden;
+        transition: transform 300ms @ease-slide 200ms;
+        left: 100%;
+
+        .tweak-yr-nav-align-left & {
+            right: 100%;
+            left: auto;
+        }
+    }
+
+    .yr-nav-header {
+        margin-bottom: 2em;
+    }
 
     .yr-site-title-link {
         display: inline-block;
@@ -30,16 +61,16 @@
     .yr-nav-links {
         flex: 0 1 auto;
         width: 100%;
-        margin: 2em auto;
+        margin: auto;
         overflow-y: auto;
     }
 
     .yr-nav-folder-link {
-        border-bottom: 2px dashed @tweak-nav-folder-divide-color;
+        border-bottom: 2px dashed @tweak-yr-nav-folder-divide-color;
     }
 
     .yr-nav-folder-links {
-        background-color: @tweak-nav-folder-divide-color;
+        background-color: @tweak-yr-nav-folder-divide-color;
     }
 
     .yr-nav-link {
@@ -47,7 +78,44 @@
     }
 
     .yr-nav-footer {
-        margin-top: 17px;
+        margin-top: 2em;
         font-size: 0.8em;
+    }
+
+    /**
+     * Animation
+     */
+
+    .fade-loop(@n, @start, @gap) when (@n > 0) {
+        .fade-loop((@n - 1), @start, @gap);
+
+        &:nth-child(@n) {
+            transition-delay: @start + ((@n - 1) * @gap);
+        }
+    }
+
+    .yr-nav-fade {
+        opacity: 0;
+        transition: opacity 200ms @ease-fade-in;
+        .fade-loop(5, 0ms, 100ms);
+    }
+
+
+    /**
+     * Toggle state
+     */
+
+    .yr-nav-toggler:checked + .yr-nav-panel {
+        transform: translateX(-100%);
+        transition-delay: 0ms;
+
+        .tweak-yr-nav-align-left & {
+            transform: translateX(100%);
+        }
+
+        .yr-nav-fade {
+            opacity: 1;
+            .fade-loop(5, 200ms, 100ms);
+        }
     }
 }

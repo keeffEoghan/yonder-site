@@ -1,61 +1,67 @@
-<nav class="yr-nav" data-content-field="navigation-primary-nav">
-    {.section website}
-        <header class="yr-nav-header">
-            <h1 class="yr-site-title">
-                <a class="yr-site-title-link" href="/" data-content-field="site-title">
-                    {.section logoImageUrl}
-                        <img src="{logoImageUrl}?format=original" alt="{siteTitle}" title="{siteTitle}" />
-                    {.or}
-                        {siteTitle}
-                    {.end}
-                </a>
-            </h1>
+<div class="yr-nav">
+    <div class="yr-nav-toggle yr-nav-toggle-open"></div>
+    <input class="yr-nav-toggler" type="checkbox">
+    <nav class="yr-nav-panel" data-content-field="navigation-primary-nav">
+        <div class="yr-nav-toggle yr-nav-toggle-close yr-nav-fade"></div>
 
-            {.section siteTagLine}<h2 class="yr-site-title">{@}</h2>{.end}
-            {.section siteDescription}<h3 class="yr-site-title">{@}</h3>{.end}
-            <squarespace:block-field id="nav-header-block" columns="12"/>
-        </header>
-    {.end}
-
-    <div class="yr-nav-links">
-        {.repeated section items}
-            {.folder?}
-                <a class="yr-nav-link yr-nav-folder-link" href="{collection.fullUrl}">{collection.navigationTitle}</a>
-
-                <div class="yr-nav-folder-links">
-                    {.repeated section items}
-                        {.section collection}
-                            <a class="yr-nav-link yr-nav-collection-link"
-                                href="{collection.fullUrl}">
-                                {collection.navigationTitle}
-                            </a>
+        {.section website}
+            <header class="yr-nav-header yr-nav-fade">
+                <h1 class="yr-site-title">
+                    <a class="yr-site-title-link" href="/" data-content-field="site-title">
+                        {.section logoImageUrl}
+                            <img src="{logoImageUrl}?format=original" alt="{siteTitle}" title="{siteTitle}" />
+                        {.or}
+                            {siteTitle}
                         {.end}
-                        {.section externalLink}
-                            <a class="yr-nav-link yr-nav-out-link" href="{url}"
-                                {.section newWindow} target="_blank"{.end}>
-                                {title}
-                            </a>
-                        {.end}
-                    {.end}
-                </div>
-            {.or}
-                {.section collection}
-                    <a class="yr-nav-link yr-nav-collection-link" href="{fullUrl}">{navigationTitle}</a>
-                {.end}
-                {.section externalLink}
-                    <a class="yr-nav-link yr-nav-out-link" href="{url}"
-                        {.section newWindow} target="_blank"{.end}>
-                        {title}
                     </a>
+                </h1>
+
+                {.section siteTagLine}<h2 class="yr-site-title">{@}</h2>{.end}
+                {.section siteDescription}<h3 class="yr-site-title">{@}</h3>{.end}
+                <squarespace:block-field id="nav-header-block" columns="12"/>
+            </header>
+        {.end}
+
+        <div class="yr-nav-links yr-nav-fade">
+            {.repeated section items}
+                {.folder?}
+                    <a class="yr-nav-link yr-nav-folder-link" href="{collection.fullUrl}">{collection.navigationTitle}</a>
+
+                    <div class="yr-nav-folder-links">
+                        {.repeated section items}
+                            {.section collection}
+                                <a class="yr-nav-link yr-nav-collection-link"
+                                    href="{collection.fullUrl}">
+                                    {collection.navigationTitle}
+                                </a>
+                            {.end}
+                            {.section externalLink}
+                                <a class="yr-nav-link yr-nav-out-link" href="{url}"
+                                    {.section newWindow} target="_blank"{.end}>
+                                    {title}
+                                </a>
+                            {.end}
+                        {.end}
+                    </div>
+                {.or}
+                    {.section collection}
+                        <a class="yr-nav-link yr-nav-collection-link" href="{fullUrl}">{navigationTitle}</a>
+                    {.end}
+                    {.section externalLink}
+                        <a class="yr-nav-link yr-nav-out-link" href="{url}"
+                            {.section newWindow} target="_blank"{.end}>
+                            {title}
+                        </a>
+                    {.end}
                 {.end}
             {.end}
-        {.end}
-    </div>
+        </div>
 
-    <squarespace:block-field id="nav-footer-block" class="yr-nav-footer" columns="12"/>
+        <squarespace:block-field id="nav-footer-block" class="yr-nav-footer yr-nav-fade" columns="12"/>
 
-    {##BEGIN}
-        {shareButtonOptions|social-button}
-        <div class="social-links" data-content-field="connected-accounts"></div>
-    {END##}
-</nav>
+        {##BEGIN}
+            {shareButtonOptions|social-button}
+            <div class="social-links" data-content-field="connected-accounts"></div>
+        {END##}
+    </nav>
+</div>
