@@ -1,39 +1,89 @@
 .yr-nav {
-    @toggler-size: @tweak-yr-nav-toggle-size;
+    /**
+     * Switch which side of the view the nav is on.
+     *
+     * @param side {String}
+     * @param size {Length}
+     */
+    .align-nav(@side, @size) when (@side = left) {
+        left: @size;
 
-    .toggler-size() when (@yr-hit-min-size > @tweak-yr-nav-toggle-size) {
-        @toggler-size: @yr-hit-min-size;
+        .tweak-yr-nav-align-switch & {
+            right: @size;
+            left: auto;
+        }
     }
-    .toggler-size;
+    .align-nav(@side, @size) when (@side = right) {
+        right: @size;
 
-    .yr-nav-toggle,
-    .yr-nav-toggler {
-        position: fixed;
-        top: @tweak-yr-nav-toggle-offset;
-        right: @tweak-yr-nav-toggle-offset;
-
-        .tweak-yr-nav-align-left & {
-            left: @tweak-yr-nav-toggle-offset;
+        .tweak-yr-nav-align-switch & {
+            left: @size;
             right: auto;
         }
     }
 
+
+    /**
+     * Nav buttons
+     */
+
+    .yr-nav-button,
+    .yr-nav-toggler {
+        position: fixed;
+        top: @tweak-yr-nav-button-offset;
+    }
+
+    .yr-nav-button {
+        width: @tweak-yr-nav-button-size;
+        height: @tweak-yr-nav-button-size;
+        min-width: @yr-hit-min-size;
+        min-height: @yr-hit-min-size;
+        background-size: @tweak-yr-nav-button-size;
+        transition: opacity 300ms @ease-fade;
+    }
+
+    .yr-nav-home {
+        z-index: @yr-z-nav-home;
+        .tweak-yr-nav-home-image;
+        .align-nav(left, @tweak-yr-nav-button-offset);
+
+        .homepage & {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+
+    .yr-nav-toggler,
     .yr-nav-toggle {
-        width: @tweak-yr-nav-toggle-size;
-        height: @tweak-yr-nav-toggle-size;
-        margin: (@toggler-size - @tweak-yr-nav-toggle-size) * 0.5;
-        z-index: @yr-z-nav-toggle;
+        .align-nav(right, @tweak-yr-nav-button-offset);
     }
 
     .yr-nav-toggler {
-        width: @toggler-size;
-        height: @toggler-size;
+        /**
+         * Need to do the `max` size this way, because `<input>` doesn't
+         * respect `min-width`/`min-height` properly.
+         * (Can't believe this is a LESS `if`/`else`...)
+         */
+        @button-size: @tweak-yr-nav-button-size;
+
+        .button-size() when (@yr-hit-min-size > @tweak-yr-nav-button-size) {
+            @button-size: @yr-hit-min-size;
+        }
+        .button-size;
+
+        width: @button-size;
+        height: @button-size;
+
         z-index: @yr-z-nav-toggler;
         opacity: 0;
         cursor: pointer;
         margin: 0;
         padding: 0;
         border: none;
+    }
+
+    .yr-nav-toggle {
+        z-index: @yr-z-nav-toggle;
     }
 
     .yr-nav-toggle-open {
@@ -43,6 +93,11 @@
     .yr-nav-toggle-close {
         .tweak-yr-nav-toggle-image-close;
     }
+
+
+    /**
+     * Nav menu
+     */
 
     .yr-nav-panel {
         display: flex;
@@ -61,12 +116,8 @@
         text-align: center;
         overflow: hidden;
         transition: transform 300ms @ease-slide 200ms;
-        left: 100%;
-
-        .tweak-yr-nav-align-left & {
-            right: 100%;
-            left: auto;
-        }
+        
+        .align-nav(left, 100%);
     }
 
     .yr-nav-header {
@@ -115,7 +166,7 @@
 
     .yr-nav-fade {
         opacity: 0;
-        transition: opacity 200ms @ease-fade-in;
+        transition: opacity 200ms @ease-fade;
         .fade-loop(5, 0ms, 100ms);
     }
 
@@ -128,13 +179,13 @@
         transform: translateX(-100%);
         transition-delay: 0ms;
 
-        .tweak-yr-nav-align-left & {
+        .tweak-yr-nav-align-switch & {
             transform: translateX(100%);
         }
 
         .yr-nav-fade {
             opacity: 1;
-            .fade-loop(5, 200ms, 100ms);
+            .fade-loop(5, 300ms, 100ms);
         }
     }
 }

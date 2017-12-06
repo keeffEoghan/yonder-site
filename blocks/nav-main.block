@@ -1,8 +1,14 @@
 <section class="yr-nav">
-    <div class="yr-nav-toggle yr-nav-toggle-open"></div>
-    <input class="yr-nav-toggler" type="checkbox">
+    <a class="yr-nav-home yr-nav-button" href="/"
+        title="Go home" aria-label="Go home"></a>
+
+    <div class="yr-nav-toggle yr-nav-toggle-open yr-nav-button"></div>
+
+    <input class="yr-nav-toggler" type="checkbox"
+        title="Toggle navigation menu" aria-label="Toggle navigation menu">
+
     <nav class="yr-nav-panel" data-content-field="navigation-nav-main">
-        <div class="yr-nav-toggle yr-nav-toggle-close yr-nav-fade"></div>
+        <div class="yr-nav-toggle yr-nav-toggle-close yr-nav-button yr-nav-fade"></div>
 
         {.section website}
             <header class="yr-nav-header yr-nav-fade">
@@ -60,9 +66,10 @@
         </div>
 
         <squarespace:block-field id="nav-footer-block" class="yr-nav-footer yr-nav-fade" columns="12"/>
+        {shareButtons|social-button}
 
         {##BEGIN}
-            {shareButtonOptions|social-button}
+            {socialAccounts|social-button}
             <div class="social-links" data-content-field="connected-accounts"></div>
         {END##}
     </nav>

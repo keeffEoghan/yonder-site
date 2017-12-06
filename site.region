@@ -1,7 +1,5 @@
 <!doctype html>
-<html
-    id="{squarespace.page-id}" class="{squarespace.page-classes}"
-    data-controller="site-loader"
+<htmlv data-controller="site-loader"
     {.if authenticatedAccount}data-authenticated-account{.end}
     >
     <head>
@@ -10,14 +8,10 @@
 
         {squarespace-headers}
     </head>
-    <body>
+    <body id="{squarespace.page-id}" class="{squarespace.page-classes}">
         <div class="yr-loader"></div>
-        <!-- Little `Y` home button -->
-        <!-- Side nav -->
-        <!-- Main content -->
-        <!-- (Footer) -->
 
-        <squarespace:navigation navigationId="nav" template="nav-main" />
+        <squarespace:navigation navigationId="nav-main" template="nav-main" />
 
         <main role="main" data-content-field="main-content">
             {squarespace.main-content}
