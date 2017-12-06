@@ -66,9 +66,9 @@
         </div>
 
         <squarespace:block-field id="nav-footer-block" class="yr-nav-footer yr-nav-fade" columns="12"/>
-        {shareButtons|social-button}
 
         {##BEGIN}
+            {shareButtons|social-button}
             {socialAccounts|social-button}
             <div class="social-links" data-content-field="connected-accounts"></div>
         {END##}
