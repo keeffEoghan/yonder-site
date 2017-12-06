@@ -2,8 +2,11 @@
 
 - Block out main zones and animations
 - Decide how to configure the landing page holds
-    - Navigation?
-    - Categories?
+    - Secondary navigation links
+Document some of the Squarespace workarounds you're using
+    - [Navigation links](https://support.squarespace.com/hc/en-us/articles/205814758-Using-links-in-your-navigation)
+    - [Arbitrary files (e.g: SVG)](https://support.squarespace.com/hc/en-us/articles/205813928)
+    - Info in odd places (e.g: [business info](https://support.squarespace.com/hc/en-us/articles/212872328))
 - Finish AJAX loading
     - Animation
 - Design

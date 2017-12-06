@@ -1,7 +1,7 @@
-<div class="yr-nav">
+<section class="yr-nav">
     <div class="yr-nav-toggle yr-nav-toggle-open"></div>
     <input class="yr-nav-toggler" type="checkbox">
-    <nav class="yr-nav-panel" data-content-field="navigation-primary-nav">
+    <nav class="yr-nav-panel" data-content-field="navigation-nav-main">
         <div class="yr-nav-toggle yr-nav-toggle-close yr-nav-fade"></div>
 
         {.section website}
@@ -9,7 +9,9 @@
                 <h1 class="yr-site-title">
                     <a class="yr-site-title-link" href="/" data-content-field="site-title">
                         {.section logoImageUrl}
-                            <img src="{logoImageUrl}?format=original" alt="{siteTitle}" title="{siteTitle}" />
+                            <img src="{logoImageUrl}?format=original"
+                                alt="{siteTitle}" title="{siteTitle}"
+                                class="yr-site-logo" />
                         {.or}
                             {siteTitle}
                         {.end}
@@ -64,4 +66,4 @@
             <div class="social-links" data-content-field="connected-accounts"></div>
         {END##}
     </nav>
-</div>
+</section>

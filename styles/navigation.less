@@ -1,28 +1,47 @@
 .yr-nav {
+    @toggler-size: @tweak-yr-nav-toggle-size;
+
+    .toggler-size() when (@yr-hit-min-size > @tweak-yr-nav-toggle-size) {
+        @toggler-size: @yr-hit-min-size;
+    }
+    .toggler-size;
+
     .yr-nav-toggle,
     .yr-nav-toggler {
         position: fixed;
-        top: 0;
-        width: 30px;
-        height: 30px;
-        margin: 2rem;
-        right: 0;
+        top: @tweak-yr-nav-toggle-offset;
+        right: @tweak-yr-nav-toggle-offset;
 
         .tweak-yr-nav-align-left & {
-            left: 0;
+            left: @tweak-yr-nav-toggle-offset;
             right: auto;
         }
     }
 
     .yr-nav-toggle {
-        background-color: red;
+        width: @tweak-yr-nav-toggle-size;
+        height: @tweak-yr-nav-toggle-size;
+        margin: (@toggler-size - @tweak-yr-nav-toggle-size) * 0.5;
         z-index: @yr-z-nav-toggle;
     }
 
     .yr-nav-toggler {
+        width: @toggler-size;
+        height: @toggler-size;
         z-index: @yr-z-nav-toggler;
         opacity: 0;
         cursor: pointer;
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+
+    .yr-nav-toggle-open {
+        .tweak-yr-nav-toggle-image-open;
+    }
+
+    .yr-nav-toggle-close {
+        .tweak-yr-nav-toggle-image-close;
     }
 
     .yr-nav-panel {
@@ -55,7 +74,7 @@
     }
 
     .yr-site-title-link {
-        display: inline-block;
+        display: block;
     }
 
     .yr-nav-links {

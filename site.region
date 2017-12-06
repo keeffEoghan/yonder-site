@@ -17,7 +17,7 @@
         <!-- Main content -->
         <!-- (Footer) -->
 
-        <squarespace:navigation navigationId="primary-nav" template="navigation" />
+        <squarespace:navigation navigationId="nav" template="nav-main" />
 
         <main role="main" data-content-field="main-content">
             {squarespace.main-content}
