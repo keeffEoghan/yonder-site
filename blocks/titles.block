@@ -1,0 +1,20 @@
+{.section website}
+    <h1 class="yr-site-title">
+        <a class="yr-site-title-a" href="/" data-content-field="site-title">
+            {.section logoImageUrl}
+                <img src="{logoImageUrl}?format=original"
+                    alt="{siteTitle}" title="{siteTitle}" aria-label="{siteTitle}"
+                    class="yr-site-logo"/>
+            {.or}
+                {siteTitle}
+            {.end}
+        </a>
+    </h1>
+
+    {.section siteTagLine}
+        <h2 class="yr-site-tagline yr-a" data-content-field="site-title">
+            {@}
+        </h2>
+    {.end}
+    {.section siteDescription}<h3 class="yr-site-description yr-a">{@}</h3>{.end}
+{.end}

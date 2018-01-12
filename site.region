@@ -1,5 +1,5 @@
 <!doctype html>
-<htmlv data-controller="site-loader"
+<html data-controller="site-loader"
     {.if authenticatedAccount}data-authenticated-account{.end}
     >
     <head>
@@ -23,6 +23,6 @@
 
         {squarespace-footers}
 
-        <script type="text/debug">{@|json-pretty|html}</script>
+        <script type="text/javascript">console.log({@|json-pretty|html});</script>
     </body>
 </html>

@@ -1,50 +1,41 @@
 <section class="yr-nav">
-    <a class="yr-nav-home yr-nav-button" href="/"
-        title="Go home" aria-label="Go home"></a>
+    <a class="yr-nav-home-a yr-nav-button" href="/"
+        title="Go home" aria-label="Go home">
+        {@|apply nav/home.svg.block}
+    </a>
 
-    <div class="yr-nav-toggle yr-nav-toggle-open yr-nav-button"></div>
+    <div class="yr-nav-toggle yr-nav-toggle-open yr-nav-button">
+        {@|apply nav/open.svg.block}
+    </div>
 
     <input class="yr-nav-toggler" type="checkbox"
         title="Toggle navigation menu" aria-label="Toggle navigation menu">
 
     <nav class="yr-nav-panel" data-content-field="navigation-nav-main">
-        <div class="yr-nav-toggle yr-nav-toggle-close yr-nav-button yr-nav-fade"></div>
+        <div class="yr-nav-toggle yr-nav-toggle-close yr-nav-button yr-nav-fade">
+            {@|apply nav/close.svg.block}
+        </div>
 
-        {.section website}
-            <header class="yr-nav-header yr-nav-fade">
-                <h1 class="yr-site-title">
-                    <a class="yr-site-title-link" href="/" data-content-field="site-title">
-                        {.section logoImageUrl}
-                            <img src="{logoImageUrl}?format=original"
-                                alt="{siteTitle}" title="{siteTitle}"
-                                class="yr-site-logo" />
-                        {.or}
-                            {siteTitle}
-                        {.end}
-                    </a>
-                </h1>
+        <header class="yr-nav-header yr-nav-fade">
+            {@|apply titles.block}
+            <squarespace:block-field id="nav-header-block" class="yr-nav-header-block" columns="12"/>
+        </header>
 
-                {.section siteTagLine}<h2 class="yr-site-title">{@}</h2>{.end}
-                {.section siteDescription}<h3 class="yr-site-title">{@}</h3>{.end}
-                <squarespace:block-field id="nav-header-block" columns="12"/>
-            </header>
-        {.end}
-
-        <div class="yr-nav-links yr-nav-fade">
+        <div class="yr-nav-links yr-nav-fade yr-a">
             {.repeated section items}
                 {.folder?}
-                    <a class="yr-nav-link yr-nav-folder-link" href="{collection.fullUrl}">{collection.navigationTitle}</a>
+                    <a class="yr-nav-a yr-nav-folder-a" href="{collection.fullUrl}">{collection.navigationTitle}</a>
 
                     <div class="yr-nav-folder-links">
                         {.repeated section items}
                             {.section collection}
-                                <a class="yr-nav-link yr-nav-collection-link"
+                                <a class="yr-nav-a yr-nav-collection-a"
                                     href="{collection.fullUrl}">
                                     {collection.navigationTitle}
                                 </a>
                             {.end}
                             {.section externalLink}
-                                <a class="yr-nav-link yr-nav-out-link" href="{url}"
+                                <a class="yr-nav-a yr-nav-out-a" href="{url}"
                                     {.section newWindow} target="_blank"{.end}>
                                     {title}
                                 </a>
@@ -53,10 +44,10 @@
                     </div>
                 {.or}
                     {.section collection}
-                        <a class="yr-nav-link yr-nav-collection-link" href="{fullUrl}">{navigationTitle}</a>
+                        <a class="yr-nav-a yr-nav-collection-a" href="{fullUrl}">{navigationTitle}</a>
                     {.end}
                     {.section externalLink}
-                        <a class="yr-nav-link yr-nav-out-link" href="{url}"
+                        <a class="yr-nav-a yr-nav-out-a" href="{url}"
                             {.section newWindow} target="_blank"{.end}>
                             {title}
                         </a>
@@ -65,12 +56,8 @@
             {.end}
         </div>
 
-        <squarespace:block-field id="nav-footer-block" class="yr-nav-footer yr-nav-fade" columns="12"/>
-
-        {##BEGIN}
-            {shareButtons|social-button}
-            {socialAccounts|social-button}
-            <div class="social-links" data-content-field="connected-accounts"></div>
-        {END##}
+        <squarespace:block-field id="nav-footer-block"
+            class="yr-nav-footer-block yr-nav-fade" columns="12"
+            data-content-field="connected-accounts"/>
     </nav>
 </section>

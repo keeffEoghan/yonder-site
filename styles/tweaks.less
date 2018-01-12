@@ -21,46 +21,121 @@
 
 
 /**
- * Navigation
+ * Main Navigation
  */
 
-// tweak: { "category": "Navigation", "label": "Navigation Position", "title": "tweak-yr-nav-align", "type": "dropdown", "options": ["regular", "switch"], "default": "regular", target: ".yr-nav-toggler" }
+// tweak: { "category": "Main Navigation", "label": "Navigation Position", "title": "tweak-yr-nav-align", "type": "dropdown", "options": ["regular", "switch"], "default": "regular", target: ".yr-nav-toggler, .yr-nav-button" }
 
-// tweak: { "category": "Navigation", "label": "Text", "title": "tweak-yr-nav-text-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-panel" }
+// tweak: { "category": "Main Navigation", "label": "Text", "title": "tweak-yr-nav-text-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-panel" }
 @tweak-yr-nav-text-color: #f7efe4;
 
-// tweak: { "category": "Navigation", "label": "Background", "title": "tweak-yr-nav-background-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-panel" }
+// tweak: { "category": "Main Navigation", "label": "Background", "title": "tweak-yr-nav-background-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-panel" }
 @tweak-yr-nav-background-color: #367b73;
 
-// tweak: { "category": "Navigation / Buttons", "label": "Button Size", "title": "tweak-yr-nav-button-size", "type": "value", "min" : 10, "max" : 100, "step" : 1, target: ".yr-nav-button" }
+
+/**
+ * Main Navigation / Header
+ */
+
+// tweak: { "category": "Main Navigation / Header", "label": "Show Site Title in Main Navigation", "title": "tweak-yr-nav-main-site-title-show", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header" }
+// tweak: { "category": "Main Navigation / Header", "label": "Show Site Tagline in Main Navigation", "title": "tweak-yr-nav-main-site-tagline-show", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header" }
+// tweak: { "category": "Main Navigation / Header", "label": "Show Site Description in Main Navigation", "title": "tweak-yr-nav-main-site-description-show", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header" }
+
+
+/**
+ * Main Navigation / Buttons
+ */
+
+// tweak: { "category": "Main Navigation / Buttons", "label": "Toggle Button Size", "title": "tweak-yr-nav-button-size", "type": "value", "min" : 10, "max" : 100, "step" : 1, target: ".yr-nav-toggler" }
 @tweak-yr-nav-button-size: 20px;
 
-// tweak: { "category": "Navigation / Buttons", "label": "Button Offset", "title": "tweak-yr-nav-button-offset", "type": "value", "min" : 0, "max" : 100, "step" : 1, target: ".yr-nav-button" }
+// tweak: { "category": "Main Navigation / Buttons", "label": "Toggle Button Offset", "title": "tweak-yr-nav-button-offset", "type": "value", "min" : 0, "max" : 100, "step" : 1, target: ".yr-nav-toggler" }
 @tweak-yr-nav-button-offset: 2rem;
 
-// tweak: { "category": "Navigation / Buttons", "label": "Home Button Image", "title": "tweak-yr-nav-home-image", "type": "image", target: ".yr-nav-home" }
+// tweak: { "category": "Main Navigation / Buttons", "label": "Home Button Size", "title": "tweak-yr-nav-home-size", "type": "value", "min" : 10, "max" : 100, "step" : 1, target: ".yr-nav-home-a" }
+@tweak-yr-nav-home-size: 30px;
+
+// tweak: { "category": "Main Navigation / Buttons", "label": "Home Button Offset", "title": "tweak-yr-nav-home-offset", "type": "value", "min" : 0, "max" : 100, "step" : 1, target: ".yr-nav-home-a" }
+@tweak-yr-nav-home-offset: 1.5rem;
+
+/**
+ * Can override this easily with custom header injection.
+ */
+
+// tweak: { "category": "Main Navigation / Buttons", "label": "Button Default Colour", "title": "tweak-yr-nav-button-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-button, .yr-nav-toggler" }
+@tweak-yr-nav-button-color: #1c443e;
+
+// tweak: { "category": "Main Navigation / Buttons", "label": "Button Default Colour (Close)", "title": "tweak-yr-nav-button-close-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-button, .yr-nav-toggler" }
+@tweak-yr-nav-button-close-color: #fff;
+
+/**
+ * SVGs here can't be uploaded through Squarespace UI directly, but there's [a workaround](https://support.squarespace.com/hc/en-us/articles/205813928).
+ * (Get a file link, then set the custom URL through custom code/CSS.)
+ */
+
+// tweak: { "category": "Main Navigation / Buttons", "label": "Custom Home Button", "title": "tweak-yr-nav-home-custom", "type": "checkbox", "active": false }
+// tweak: { "category": "Main Navigation / Buttons", "label": "Home Button Image", "title": "tweak-yr-nav-home-image", "type": "image", target: ".yr-nav-home-a", "showOnlyWhenPresent": ".tweak-yr-nav-home-custom" }
 .tweak-yr-nav-home-image {
     background-image: url('/assets/nav/home.svg');
     background-position: center center;
     background-repeat: no-repeat;
 }
 
-// tweak: { "category": "Navigation / Buttons", "label": "Toggle Open Image", "title": "tweak-yr-nav-toggle-image-open", "type": "image", target: ".yr-nav-toggler" }
+// tweak: { "category": "Main Navigation / Buttons", "label": "Custom Toggle (Open)", "title": "tweak-yr-nav-toggle-open-custom", "type": "checkbox", "active": false }
+// tweak: { "category": "Main Navigation / Buttons", "label": "Toggle Image (Open)", "title": "tweak-yr-nav-toggle-image-open", "type": "image", target: ".yr-nav-toggler", showOnlyWhenPresent: ".tweak-yr-nav-toggle-open-custom" }
 .tweak-yr-nav-toggle-image-open {
     background-image: url('/assets/nav/open.svg');
     background-position: center center;
     background-repeat: no-repeat;
 }
 
-// tweak: { "category": "Navigation / Buttons", "label": "Toggle Close Image", "title": "tweak-yr-nav-toggle-image-close", "type": "image", target: ".yr-nav-toggler" }
+// tweak: { "category": "Main Navigation / Buttons", "label": "Custom Toggle (Close)", "title": "tweak-yr-nav-toggle-close-custom", "type": "checkbox", "active": false }
+// tweak: { "category": "Main Navigation / Buttons", "label": "Toggle Image (Close)", "title": "tweak-yr-nav-toggle-image-close", "type": "image", target: ".yr-nav-toggler", showOnlyWhenPresent: ".tweak-yr-nav-toggle-close-custom" }
 .tweak-yr-nav-toggle-image-close {
     background-image: url('/assets/nav/close.svg');
     background-position: center center;
     background-repeat: no-repeat;
 }
 
-// tweak: { "category": "Navigation / Folders", "label": "Folder Divide Color", "title": "tweak-yr-nav-folder-divide-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-folder-link, .yr-nav-folder-links" }
+
+/**
+ * Main Navigation / Folders
+ */
+
+// tweak: { "category": "Main Navigation / Folders", "label": "Folder Divide Color", "title": "tweak-yr-nav-folder-divide-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-folder-a, .yr-nav-folder-links" }
 @tweak-yr-nav-folder-divide-color: rgba(255, 255, 255, 0.2);
+
+
+/**
+ * Holds Navigation
+ */
+
+// tweak: { "category": "Holds Navigation / Colors", "label": "Text Color", "title": "tweak-yr-nav-holds-text-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-hold-a" }
+@tweak-yr-nav-holds-text-color: #f8f0e3;
+
+// tweak: { "category": "Holds Navigation / Colors", "label": "Hold 1 Color", "title": "tweak-yr-nav-holds-hold-1-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-hold-a" }
+@tweak-yr-nav-holds-hold-1-color: #ff7d3b;
+
+// tweak: { "category": "Holds Navigation / Colors", "label": "Hold 2 Color", "title": "tweak-yr-nav-holds-hold-2-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-hold-a" }
+@tweak-yr-nav-holds-hold-2-color: #08938f;
+
+// tweak: { "category": "Holds Navigation / Colors", "label": "Hold 3 Color", "title": "tweak-yr-nav-holds-hold-3-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-hold-a" }
+@tweak-yr-nav-holds-hold-3-color: #930a49;
+
+// tweak: { "category": "Holds Navigation / Colors", "label": "Hold 4 Color", "title": "tweak-yr-nav-holds-hold-4-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-hold-a" }
+@tweak-yr-nav-holds-hold-4-color: #ebaeca;
+
+// tweak: { "category": "Holds Navigation / Colors", "label": "Hold 5 Color", "title": "tweak-yr-nav-holds-hold-5-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-hold-a" }
+@tweak-yr-nav-holds-hold-5-color: #7f5546;
+
+
+/**
+ * Holds Navigation / Header
+ */
+
+// tweak: { "category": "Holds Navigation / Header", "label": "Show Site Title in Holds Navigation", "title": "tweak-yr-nav-holds-site-title-show", "type": "checkbox", "active": true, "target": "yr-nav-holds .yr-nav-holds-header" }
+// tweak: { "category": "Holds Navigation / Header", "label": "Show Site Tagline in Holds Navigation", "title": "tweak-yr-nav-holds-site-tagline-show", "type": "checkbox", "active": true, "target": "yr-nav-holds .yr-nav-holds-header" }
+// tweak: { "category": "Holds Navigation / Header", "label": "Show Site Description in Holds Navigation", "title": "tweak-yr-nav-holds-site-description-show", "type": "checkbox", "active": true, "target": "yr-nav-holds .yr-nav-holds-header" }
 
 
 /**
@@ -170,8 +245,8 @@
 // tweak: { "category": "Colors", "label": "Heading 6", "title": "tweak-yr-h6-color", "type": "color", "target": "h6", "showOnlyWhenPresent": ".sqs-layout h3, h3.comment-count" }
 @tweak-yr-h6-color: #000000;
 
-// tweak: { "category": "Colors", "label": "Links", "title": "tweak-yr-link-color", "type": "color", "target": "a", "showOnlyWhenPresent": ".sqs-layout p a, .sqs-layout ol a, .sqs-layout ul a" }
-@tweak-yr-link-color: #00aeef;
+// tweak: { "category": "Colors", "label": "Links", "title": "tweak-yr-a-color", "type": "color", "target": "a", "showOnlyWhenPresent": ".sqs-layout p a, .sqs-layout ol a, .sqs-layout ul a" }
+@tweak-yr-a-color: #000000;
 
 
 /**

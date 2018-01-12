@@ -34,22 +34,55 @@
     }
 
     .yr-nav-button {
-        width: @tweak-yr-nav-button-size;
-        height: @tweak-yr-nav-button-size;
+        display: inline-flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
         min-width: @yr-hit-min-size;
         min-height: @yr-hit-min-size;
+        width: @tweak-yr-nav-button-size;
+        height: @tweak-yr-nav-button-size;
         background-size: @tweak-yr-nav-button-size;
         transition: opacity 300ms @ease-fade;
+        color: @tweak-yr-nav-button-color;
+
+        &.yr-nav-toggle-close {
+            color: @tweak-yr-nav-button-close-color;
+        }
+
+        .yr-inline-svg {
+            width: @tweak-yr-nav-button-size;
+            height: @tweak-yr-nav-button-size;
+        }
     }
 
-    .yr-nav-home {
+    .yr-nav-home-a {
         z-index: @yr-z-nav-home;
-        .tweak-yr-nav-home-image;
-        .align-nav(left, @tweak-yr-nav-button-offset);
+        width: @tweak-yr-nav-home-size;
+        height: @tweak-yr-nav-home-size;
+        background-size: @tweak-yr-nav-home-size;
+
+        .align-nav(left, @tweak-yr-nav-home-offset);
 
         .homepage & {
             opacity: 0;
             pointer-events: none;
+        }
+
+        .yr-inline-svg {
+            width: @tweak-yr-nav-home-size;
+            height: @tweak-yr-nav-home-size;
+        }
+
+        /**
+         * Whether to show a custom background image, or the default embedded SVG.
+         */
+        .tweak-yr-nav-home-custom & {
+            .tweak-yr-nav-home-image;
+
+            .yr-inline-svg {
+                display: none;
+            }
         }
     }
 
@@ -87,11 +120,29 @@
     }
 
     .yr-nav-toggle-open {
-        .tweak-yr-nav-toggle-image-open;
+        /**
+         * Whether to show a custom background image, or the default embedded SVG.
+         */
+        .tweak-yr-nav-toggle-open-custom & {
+            .tweak-yr-nav-toggle-image-open;
+
+            .yr-inline-svg {
+                display: none;
+            }
+        }
     }
 
     .yr-nav-toggle-close {
-        .tweak-yr-nav-toggle-image-close;
+        /**
+         * Whether to show a custom background image, or the default embedded SVG.
+         */
+        .tweak-yr-nav-toggle-close-custom & {
+            .tweak-yr-nav-toggle-image-close;
+
+            .yr-inline-svg {
+                display: none;
+            }
+        }
     }
 
 
@@ -116,38 +167,73 @@
         text-align: center;
         overflow: hidden;
         transition: transform 300ms @ease-slide 200ms;
-        
+
         .align-nav(left, 100%);
     }
 
     .yr-nav-header {
+        width: 100%;
         margin-bottom: 2em;
     }
 
-    .yr-site-title-link {
+    .yr-site-title {
+        display: none;
+
+        .tweak-yr-nav-main-site-title-show & {
+            display: block;
+        }
+    }
+
+    .yr-site-tagline {
+        display: none;
+        font-weight: normal;
+
+        .tweak-yr-nav-main-site-tagline-show & {
+            display: block;
+        }
+    }
+
+    .yr-site-description {
+        display: none;
+        font-weight: normal;
+
+        .tweak-yr-nav-main-site-description-show & {
+            display: block;
+        }
+    }
+
+    .yr-site-title-a {
         display: block;
+        text-decoration: none;
     }
 
     .yr-nav-links {
+        font-size: 1.1em;
         flex: 0 1 auto;
         width: 100%;
+        min-height: 2em;
         margin: auto;
         overflow-y: auto;
-    }
-
-    .yr-nav-folder-link {
-        border-bottom: 2px dashed @tweak-yr-nav-folder-divide-color;
+        font-weight: bolder;
     }
 
     .yr-nav-folder-links {
         background-color: @tweak-yr-nav-folder-divide-color;
     }
 
-    .yr-nav-link {
-        display: block;
+    .yr-nav-folder-a {
+        border-bottom: 2px dashed @tweak-yr-nav-folder-divide-color;
     }
 
-    .yr-nav-footer {
+    .yr-nav-a {
+        display: block;
+
+        &::after {
+            display: none;
+        }
+    }
+
+    .yr-nav-footer-block {
         margin-top: 2em;
         font-size: 0.8em;
     }
