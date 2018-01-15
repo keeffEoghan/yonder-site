@@ -9,6 +9,7 @@
 /**
  * Z-Indexes
  */
+
 @yr-z-loader: 1000;
 @yr-z-nav-toggler: 103;
 @yr-z-nav-home: 102;
@@ -19,12 +20,42 @@
 /**
  * Sizes
  */
-@yr-hit-min-size: 30px;
+
+@yr-size-mq-s: 400px;
+@yr-size-mq-m: 700px;
+@yr-size-mq-m1: 900px;
+@yr-size-mq-l: 1000px;
+@yr-size-mq-l1: 1200px;
+@yr-size-mq-l2: 1500px;
+
+@yr-size-wrap-col-6: 400px;
+@yr-size-hit-min: 30px;
+
+
+/**
+ * Media queries
+ *
+ * @example `@m: ~'only screen and @{yr-mq-s-up}'; @media @m {...}`
+ */
+
+@yr-mq-pre: 'only screen';
+
+@yr-mq-s-dn: %('(max-width: %s)', @yr-size-mq-s + 1px);
+@yr-mq-s-up: ~'(min-width: @{yr-size-mq-s})';
+
+@yr-mq-m-dn: %('(max-width: %s)', @yr-size-mq-m + 1px);
+@yr-mq-m-up: ~'(min-width: @{yr-size-mq-m})';
+@yr-mq-s-m: ~'@{yr-mq-s-up} and @{yr-mq-m-dn}';
+
+@yr-mq-l-dn: %('(max-width: %s)', @yr-size-mq-l + 1px);
+@yr-mq-l-up: ~'(min-width: @{yr-size-mq-l})';
+@yr-mq-m-l: ~'@{yr-mq-m-up} and @{yr-mq-l-dn}';
 
 
 /**
  * Eases
  */
+
 @ease-slide: ease-in-out;
 @ease-fade: ease-in-out;
 @ease-fade-in: ease-in;

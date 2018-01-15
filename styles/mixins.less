@@ -1,0 +1,31 @@
+/**
+ * WIP.
+ * A for-loop implementation - seems to work for number ranges but not lists.
+ *
+ * @see https://github.com/seven-phases-max/less.curious/blob/master/src/for.less
+ */
+
+.yr-for-(@i, @n) {
+    .-each(@i);
+}
+
+.yr-for-(@n) when (isnumber(@n)) {
+    .yr-for-(1, @n);
+}
+
+.yr-for-(@i, @n) when not (@i = @n)  {
+    .yr-for-((@i + (@n - @i) / abs(@n - @i)), @n);
+}
+
+
+/**
+ * A way to use the media query selectors.
+ *
+ * @example `.yr-m-(~'only screen and @{yr-mq-s-m}'); .-q() {...}`
+ */
+
+.yr-m-(@query) {
+    @media @query {
+        .-q();
+    }
+}

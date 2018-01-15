@@ -38,8 +38,8 @@
         flex-flow: row nowrap;
         justify-content: center;
         align-items: center;
-        min-width: @yr-hit-min-size;
-        min-height: @yr-hit-min-size;
+        min-width: @yr-size-hit-min;
+        min-height: @yr-size-hit-min;
         width: @tweak-yr-nav-button-size;
         height: @tweak-yr-nav-button-size;
         background-size: @tweak-yr-nav-button-size;
@@ -99,8 +99,8 @@
          */
         @button-size: @tweak-yr-nav-button-size;
 
-        .button-size() when (@yr-hit-min-size > @tweak-yr-nav-button-size) {
-            @button-size: @yr-hit-min-size;
+        .button-size() when (@yr-size-hit-min > @tweak-yr-nav-button-size) {
+            @button-size: @yr-size-hit-min;
         }
         .button-size;
 
@@ -208,8 +208,12 @@
     }
 
     .yr-nav-links {
-        font-size: 1.1em;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
         flex: 0 1 auto;
+        font-size: 1.1em;
         width: 100%;
         min-height: 2em;
         margin: auto;
@@ -226,10 +230,23 @@
     }
 
     .yr-nav-a {
-        display: block;
+        margin: 0.3em 0;
 
         &::after {
-            display: none;
+            color: @tweak-yr-a-border-color-2;
+        }
+
+        &,
+        &:visited,
+        &:hover,
+        &:active {
+            &::after {
+                transform: scaleY(0);
+            }
+        }
+
+        &.yr-on::after {
+            transform: scaleY(1);
         }
     }
 

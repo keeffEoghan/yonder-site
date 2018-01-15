@@ -64,7 +64,7 @@ a.yr-a,
         left: 0;
         right: 0;
         bottom: 0;
-        height: 2px;
+        height: 1px;
         background-color: currentColor;
         transition: transform 200ms ease-out,
             opacity 200ms ease-out;
@@ -75,11 +75,11 @@ a.yr-a,
     }
 
     &:hover::after {
-        transform: scaleY(0.5);
+        transform: scaleY(2);
     }
 
     &:active::after {
-        transform: scaleY(3);
+        transform: scaleY(4);
         opacity: 0;
     }
 }
@@ -95,8 +95,6 @@ small {
 img,
 .yr-inline-svg {
     display: inline-block;
-    max-width: 100%;
-    max-height: 100%;
 }
 
 
