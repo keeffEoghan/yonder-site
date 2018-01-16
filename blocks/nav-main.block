@@ -60,4 +60,6 @@
             class="yr-nav-footer-block yr-nav-fade" columns="12"
             data-content-field="connected-accounts"/>
     </nav>
+
+    <script type="text/javascript">console.log('nav-main', {@|json-pretty|html});</script>
 </section>

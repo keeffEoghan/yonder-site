@@ -6,9 +6,21 @@
     align-items: center;
     min-height: 100%;
 
+    @mq-circle-up: ~'only screen and @{yr-mq-hold-circle-up}';
+
     .yr-nav-holds-header {
         flex: 0 0 auto;
+        padding: 2em;
         text-align: center;
+
+        @media @mq-circle-up {
+            position: absolute;
+            z-index: 1;
+            max-width: 30vmin;
+            max-height: 30vmin;
+            overflow: auto;
+            padding: 0;
+        }
     }
 
     .yr-nav-holds-menu {
@@ -18,6 +30,7 @@
         height: 100%;
         max-width: 1300px;
         max-height: 1300px;
+        padding: 0 2em 2em;
     }
 
     .yr-site-title {
@@ -50,42 +63,62 @@
     }
 
     .yr-nav-hold-a {
+        position: relative;
+        flex: 0 0 auto;
         display: flex;
         flex-flow: row wrap;
         justify-content: center;
         align-items: center;
-        position: absolute;
-        top: 50%;
-        left: 50%;
         padding: 5%;
-        min-width: 150px;
-        min-height: 150px;
+        padding: 5vmin;
+        min-width: 140px;
+        min-height: 140px;
         max-width: 250px;
         max-height: 250px;
         text-decoration: none;
         color: @tweak-yr-nav-holds-text-color;
         font-weight: 500;
+        margin: 1em 0 1em auto;
+
+        &:nth-child(odd) {
+            margin: 1em auto 1em 0;
+        }
+
+        @media @mq-circle-up {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            .loop-hold-links(@n, @i: 1) when (@i <= @n) {
+                &:nth-child((~'@{n}n+@{i}')) {
+                    @r: (@i - 1) * 360deg / @n;
+
+                    transform:
+                        /* Center */
+                        translate(-50%, -50%)
+                        /* Angle in circle */
+                        rotate(@r)
+                        /* Move up onto circle circumference */
+                        translateY(-47vmin)
+                        /* Move back inside bounds of circle */
+                        translateY(50%)
+                        /* Move back a little margin */
+                        translateY(10%)
+                        /* Straighten */
+                        rotate(-@r);
+                }
+
+                .loop-hold-links(@n, (@i + 1));
+            }
+
+            .loop-hold-links(5);
+        }
     }
 
     .yr-nav-hold-text {
         position: relative;
         z-index: 1;
     }
-
-    .loop-hold-links(@n, @i: 1) when (@i <= @n) {
-        .yr-nav-hold-a:nth-child(5n+@{i}) {
-            @r: (@i - 1) * 360deg / @n;
-
-            transform: translate(-50%, -50%)
-                rotate(@r)
-                translateY(-30vmin)
-                rotate(-@r);
-        }
-
-        .loop-hold-links(@n, (@i + 1));
-    }
-
-    .loop-hold-links(5);
 
     .yr-nav-hold-view {
         position: absolute;

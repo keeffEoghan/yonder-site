@@ -1,3 +1,6 @@
+@yr-sqs-cols-max: 12;
+
+
 /**
  * Selectors
  */
@@ -22,13 +25,15 @@
  */
 
 @yr-size-mq-s: 400px;
+@yr-size-mq-s1: 500px;
 @yr-size-mq-m: 700px;
 @yr-size-mq-m1: 900px;
 @yr-size-mq-l: 1000px;
 @yr-size-mq-l1: 1200px;
 @yr-size-mq-l2: 1500px;
 
-@yr-size-wrap-col-6: 400px;
+@yr-size-mq-wrap-col-6: @yr-size-mq-s;
+
 @yr-size-hit-min: 30px;
 
 
@@ -43,6 +48,9 @@
 @yr-mq-s-dn: %('(max-width: %s)', @yr-size-mq-s + 1px);
 @yr-mq-s-up: ~'(min-width: @{yr-size-mq-s})';
 
+@yr-mq-s1-dn: %('(max-width: %s)', @yr-size-mq-s1 + 1px);
+@yr-mq-s1-up: ~'(min-width: @{yr-size-mq-s1})';
+
 @yr-mq-m-dn: %('(max-width: %s)', @yr-size-mq-m + 1px);
 @yr-mq-m-up: ~'(min-width: @{yr-size-mq-m})';
 @yr-mq-s-m: ~'@{yr-mq-s-up} and @{yr-mq-m-dn}';
@@ -50,6 +58,8 @@
 @yr-mq-l-dn: %('(max-width: %s)', @yr-size-mq-l + 1px);
 @yr-mq-l-up: ~'(min-width: @{yr-size-mq-l})';
 @yr-mq-m-l: ~'@{yr-mq-m-up} and @{yr-mq-l-dn}';
+
+@yr-mq-hold-circle-up: ~'(min-width: @{yr-size-mq-s1}) and (min-height: @{yr-size-mq-s1})';
 
 
 /**

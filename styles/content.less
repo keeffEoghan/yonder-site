@@ -1,4 +1,11 @@
+.sqs-col-6 {
+    width: 100%;
 
+    @m: ~'only screen and @{yr-mq-s-up}';
+    @media @m {
+        width: 50%;
+    }
+}
 
 [class*=sqs-col] .sqs-block-image {
     padding: 0;

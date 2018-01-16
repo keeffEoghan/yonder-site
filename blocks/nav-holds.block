@@ -28,4 +28,6 @@
             </a>
         {.end}
     </section>
+
+    <script type="text/javascript">console.log('nav-holds', {@|json-pretty|html});</script>
 </nav>
