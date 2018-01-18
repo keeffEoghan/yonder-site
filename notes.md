@@ -1,9 +1,27 @@
+# SquareSpace
+
+- If you're limited by the style editor, you can often use a `code block`...
+
 # To-do
 
 - SVG holds
     - Centered and scaled SVGs (remove current `transform` workaround)
     - Strokes
+    - Multiple themes in style editor... clunky but needed?
+    - Later
+        - Configurable by CMS?
+            - Hold SVG inline images (`code block`)
+            - Number of holds (consider color themes too)
+                - Hacky... can tweak values create new tweaks? Like have a value tweak for number of holds, and generate enough corresponding tweaks in LESS...?
+- Content
+    - Responsive wrapping columns, but only for full-width rows...?
+- Main navigation
+    - Switch from background image tweak to open block field...
+    - Dark/light colors - switch based on what's beneath (not always clear), or have floating header bar appear?
 - Block out main zones and animations
+- Squarespace setup
+    - Transfer template, domain to live
+    - Events calendars endpoint
 - Document some of the Squarespace workarounds you're using
     - [Navigation links](https://support.squarespace.com/hc/en-us/articles/205814758-Using-links-in-your-navigation)
     - Arbitrary files (e.g: SVG):
@@ -17,7 +35,10 @@
 - Design
     - Contact page
     - Event detail page
-    - New hold SVG assets (centered within 200x200 canvas, with all borders present)
+    - New hold SVG assets
+        - Centered within 200x200 canvas
+        - All borders present
+    - Dark/light colors - switch based on what's beneath (not always clear), or have floating header bar appear?
 - Set up [Webpack](https://github.com/webpack-contrib/extract-text-webpack-plugin/blob/webpack-1/README.md) with [Autoprefixer](https://github.com/postcss/autoprefixer#webpack) and [LESS](https://github.com/webpack-contrib/less-loader)?
     - Currently working with Squarespace's weird divergent LESS implementation; prefixes etc are tricky.
     - Parking for now, as prefixing isn't as big an issue as it once was (for our current needs at least).

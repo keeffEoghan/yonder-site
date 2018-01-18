@@ -1,4 +1,15 @@
 .yr-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    // height:  (@tweak-yr-nav-button-offset * 2);
+    z-index: @yr-z-nav;
+
+    .homepage & {
+        height: 0;
+    }
+
     /**
      * Switch which side of the view the nav is on.
      *
