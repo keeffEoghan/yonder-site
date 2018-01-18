@@ -1,13 +1,44 @@
 .yr-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    // height:  (@tweak-yr-nav-button-offset * 2);
-    z-index: @yr-z-nav;
+    position: relative;
+    flex: 0 0 auto;
+
+    /**
+     * The bar and its floating background.
+     * Setting it up as a detached backdrop element allows the nav bar itself to stay in
+     * document flow and push any following elements down by the appropriate amount naturally,
+     * While this pseudo-element scrolls fixed to the window outside of document flow.
+     */
+    &,
+    &::before {
+        box-sizing: content-box;
+        width: 100%;
+        height: @tweak-yr-nav-button-size;
+        min-height: @yr-size-hit-min;
+        padding: @tweak-yr-nav-button-offset 0;
+        z-index: @yr-z-nav;
+    }
+
+    &::before {
+        content: '';
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: red;
+        transform-origin: top center;
+        transition: opacity 300ms ease-in;
+    }
 
     .homepage & {
+        min-height: 0;
         height: 0;
+        padding: 0;
+
+        &::before {
+            opacity: 0;
+            pointer-events: none;
+        }
     }
 
     /**
@@ -171,7 +202,7 @@
         bottom: 0;
         width: 100%;
         max-width: 40em;
-        z-index: @yr-z-nav;
+        z-index: @yr-z-nav-panel;
         padding: 3em;
         color: @tweak-yr-nav-text-color;
         background-color: @tweak-yr-nav-background-color;

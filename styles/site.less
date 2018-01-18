@@ -14,12 +14,16 @@ html {
 }
 
 body {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
     .tweak-yr-body-font;
     margin: 0 auto;
 }
 
-main {
-    min-height: 100%;
+.yr-main {
+    flex: 1 0 auto;
 }
 
 h1 {

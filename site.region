@@ -13,7 +13,7 @@
 
         <squarespace:navigation navigationId="nav-main" template="nav-main" />
 
-        <main role="main" data-content-field="main-content">
+        <main class="yr-main" role="main" data-content-field="main-content">
             {squarespace.main-content}
         </main>
 
