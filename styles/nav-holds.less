@@ -26,6 +26,8 @@
 
     .yr-nav-holds-menu {
         position: relative;
+        display: flex;
+        flex-flow: column nowrap;
         flex: 1 1 auto;
         width: 100%;
         height: 100%;
@@ -59,22 +61,9 @@
         }
     }
 
-    .yr-nav-hold-a {
+    .yr-nav-hold {
+        display: inline-block;
         position: relative;
-        flex: 0 0 auto;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: center;
-        align-items: center;
-        padding: 5%;
-        padding: 5vmin;
-        min-width: 140px;
-        min-height: 140px;
-        max-width: 250px;
-        max-height: 250px;
-        text-decoration: none;
-        color: @tweak-yr-nav-holds-text-color;
-        font-weight: 500;
         margin: 1em 0 1em auto;
 
         &:nth-child(odd) {
@@ -86,7 +75,7 @@
             top: 50%;
             left: 50%;
 
-            .loop-hold-links(@n, @i: 1) when (@i <= @n) {
+            .loop-holds(@n, @i: 1) when (@i <= @n) {
                 &:nth-child((~'@{n}n+@{i}')) {
                     @r: (@i - 1) * 360deg / @n;
 
@@ -105,15 +94,27 @@
                         rotate(-@r);
                 }
 
-                .loop-hold-links(@n, (@i + 1));
+                .loop-holds(@n, (@i + 1));
             }
 
-            .loop-hold-links(5);
+            .loop-holds(5);
         }
     }
 
-    .yr-nav-hold-text {
+    .yr-nav-hold-a {
         position: relative;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 5%;
+        min-width: 140px;
+        min-height: 140px;
+        max-width: 250px;
+        max-height: 250px;
+        text-decoration: none;
+        color: @tweak-yr-nav-holds-text-color;
+        font-weight: 500;
         z-index: 2;
     }
 
@@ -129,25 +130,12 @@
     }
 
     .yr-nav-holds-shape-block {
-        .on() {
-            & ~ .yr-nav-hold-view {
-                display: none;
-            }
-        }
-        .off() {
-            & ~ .yr-nav-hold-view {
-                display: block;
-            }
+        &@{yr-select-sqs-block-on} ~ .yr-nav-hold-view {
+            display: none;
         }
 
-        .off();
-
-        &@{yr-select-sqs-block-on} {
-            .on();
-        }
-
-        &@{yr-select-sqs-block-empty} {
-            .off();
+        &@{yr-select-sqs-block-empty} ~ .yr-nav-hold-view {
+            display: block;
         }
     }
 
@@ -163,28 +151,30 @@
         transition: stroke 300ms ease-out;
     }
 
-    .yr-nav-hold-a:hover .yr-use-hold-shape {
+    .yr-nav-hold:hover .yr-use-hold-shape {
         stroke: currentColor;
     }
 
-    .yr-nav-hold-a:nth-child(5n+1) .yr-use-hold-shape {
-        color: @tweak-yr-color-theme-1-main;
-    }
+    .yr-nav-hold {
+        &:nth-child(5n+1) .yr-use-hold-shape {
+            color: @tweak-yr-color-theme-1-main;
+        }
 
-    .yr-nav-hold-a:nth-child(5n+2) .yr-use-hold-shape {
-        color: @tweak-yr-color-theme-2-main;
-    }
+        &:nth-child(5n+2) .yr-use-hold-shape {
+            color: @tweak-yr-color-theme-2-main;
+        }
 
-    .yr-nav-hold-a:nth-child(5n+3) .yr-use-hold-shape {
-        color: @tweak-yr-color-theme-3-main;
-    }
+        &:nth-child(5n+3) .yr-use-hold-shape {
+            color: @tweak-yr-color-theme-3-main;
+        }
 
-    .yr-nav-hold-a:nth-child(5n+4) .yr-use-hold-shape {
-        color: @tweak-yr-color-theme-4-main;
-    }
+        &:nth-child(5n+4) .yr-use-hold-shape {
+            color: @tweak-yr-color-theme-4-main;
+        }
 
-    .yr-nav-hold-a:nth-child(5n+5) .yr-use-hold-shape {
-        color: @tweak-yr-color-theme-5-main;
+        &:nth-child(5n+5) .yr-use-hold-shape {
+            color: @tweak-yr-color-theme-5-main;
+        }
     }
 
     .yr-nav-holds-defs {

@@ -4,25 +4,26 @@
         <squarespace:block-field id="nav-holds-titles-block" class="yr-nav-holds-titles-block yr-a" columns="12"></squarespace:block-field>
     </header>
 
-    <section class="yr-nav-holds-menu">
+    <ul class="yr-nav-holds-menu">
         {.repeated section items}
-            {.section collection}
-                <a class="yr-nav-hold-a yr-nav-collection-a" href="{fullUrl}">
-                    <span class="yr-nav-hold-text">{navigationTitle}</span>
-            {.end}
-            {.section externalLink}
-                <a class="yr-nav-hold-a yr-nav-out-a" href="{url}"
-                    {.section newWindow} target="_blank"{.end}>
-                    <span class="yr-nav-hold-text">{title}</span>
-            {.end}
+            <li class="yr-nav-hold">
+                {.section collection}
+                    <a class="yr-nav-hold-a yr-nav-collection-a" href="{fullUrl}">{navigationTitle}</a>
+                {.end}
+                {.section externalLink}
+                    <a class="yr-nav-hold-a yr-nav-out-a" href="{url}"
+                        {.section newWindow} target="_blank"{.end}>
+                        {title}
+                    </a>
+                {.end}
                 <!-- For overriding the default SVG hold shapes -->
                 <squarespace:block-field id="nav-holds-shape-block-{@index}" class="yr-nav-holds-shape-block" columns="1"></squarespace:block-field>
                 <svg class="yr-nav-hold-view" width="100%" height="100%">
                     <use class="yr-use-hold-shape" href="#yr-hold-shape-{@index}"></use>
                 </svg>
-            </a>
+            </li>
         {.end}
-    </section>
+    </ul>
     <!-- Default SVG hold shapes -->
     <svg class="yr-nav-holds-defs">
         {@|apply holds/1.svg.block}

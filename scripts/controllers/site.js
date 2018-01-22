@@ -5,11 +5,11 @@ import Mercury from '@squarespace/mercury';
 
 import { authenticated, debug } from '../constants';
 
-function site(element) {
+function site() {
     loader();
 
     // Prevent link events reaching `body` when `a` descendents are being edited in CMS.
-    $(element).find('body > *').on('click', 'a .sqs-editing', false);
+    $('body > *').on('click', 'a .sqs-editing', false);
 }
 
 // Exceptions: external links, hash links
