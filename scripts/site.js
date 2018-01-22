@@ -8,16 +8,16 @@
 import core from '@squarespace/core';
 import controller from '@squarespace/controller';
 
-import siteLoader from './controllers/site-loader';
+import site from './controllers/site';
+import navHolds from './controllers/nav-holds';
 
-controller.register('site-loader', siteLoader);
+controller.register('yr-site', site);
+controller.register('yr-nav-holds', navHolds);
 
 window.addEventListener('DOMContentLoaded', function() {
     var images = document.querySelectorAll('img[data-src]');
 
     for(var i = 0; i < images.length; i++) {
-        core.ImageLoader.load(images[i], {
-            load: true
-        });
+        core.ImageLoader.load(images[i], { load: true });
     }
 });

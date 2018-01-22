@@ -63,6 +63,10 @@
             right: auto;
         }
     }
+        display: inline-flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
 
 
     /**
@@ -76,15 +80,12 @@
     }
 
     .yr-nav-button {
-        display: inline-flex;
-        flex-flow: row nowrap;
-        justify-content: center;
-        align-items: center;
         min-width: @yr-size-hit-min;
         min-height: @yr-size-hit-min;
         width: @tweak-yr-nav-button-size;
         height: @tweak-yr-nav-button-size;
         background-size: @tweak-yr-nav-button-size;
+        background-position: center;
         transition: opacity 300ms @ease-fade;
         color: @tweak-yr-nav-button-color;
 
@@ -96,6 +97,37 @@
             width: @tweak-yr-nav-button-size;
             height: @tweak-yr-nav-button-size;
         }
+    }
+
+    .yr-nav-button-icon-block,
+    .yr-nav-button-icon {
+        width: 100%;
+        height: 100%;
+    }
+
+    .yr-nav-button-icon-block {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        &@{yr-select-sqs-block-on} {
+            & ~ .yr-nav-button-icon {
+                display: none;
+            }
+        }
+
+        &@{yr-select-sqs-block-empty} {
+            & ~ .yr-nav-button-icon {
+                display: block;
+            }
+        }
+    }
+
+    .yr-nav-button-icon {
+        display: inline-flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
     }
 
     .yr-nav-home-a {
@@ -114,17 +146,6 @@
         .yr-inline-svg {
             width: @tweak-yr-nav-home-size;
             height: @tweak-yr-nav-home-size;
-        }
-
-        /**
-         * Whether to show a custom background image, or the default embedded SVG.
-         */
-        .tweak-yr-nav-home-custom & {
-            .tweak-yr-nav-home-image;
-
-            .yr-inline-svg {
-                display: none;
-            }
         }
     }
 
@@ -161,32 +182,6 @@
         z-index: @yr-z-nav-toggle;
     }
 
-    .yr-nav-toggle-open {
-        /**
-         * Whether to show a custom background image, or the default embedded SVG.
-         */
-        .tweak-yr-nav-toggle-open-custom & {
-            .tweak-yr-nav-toggle-image-open;
-
-            .yr-inline-svg {
-                display: none;
-            }
-        }
-    }
-
-    .yr-nav-toggle-close {
-        /**
-         * Whether to show a custom background image, or the default embedded SVG.
-         */
-        .tweak-yr-nav-toggle-close-custom & {
-            .tweak-yr-nav-toggle-image-close;
-
-            .yr-inline-svg {
-                display: none;
-            }
-        }
-    }
-
 
     /**
      * Nav menu
@@ -208,7 +203,6 @@
         background-color: @tweak-yr-nav-background-color;
         text-align: center;
         overflow: hidden;
-        transition: transform 300ms @ease-slide 200ms;
 
         .align-nav(left, 100%);
     }
@@ -301,6 +295,12 @@
      * Animation
      */
 
+    @fades: 5;
+    
+    .yr-nav-panel {
+        transition: transform 300ms @ease-slide (@fades * 70ms);
+    }
+
     .fade-loop(@n, @start, @gap) when (@n > 0) {
         .fade-loop((@n - 1), @start, @gap);
 
@@ -312,7 +312,7 @@
     .yr-nav-fade {
         opacity: 0;
         transition: opacity 200ms @ease-fade;
-        .fade-loop(5, 0ms, 100ms);
+        .fade-loop(@fades, 0ms, 100ms);
     }
 
 

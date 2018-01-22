@@ -114,25 +114,45 @@
 
     .yr-nav-hold-text {
         position: relative;
-        z-index: 1;
+        z-index: 2;
     }
 
     .yr-nav-holds-shape-block,
     .yr-nav-hold-view {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         width: 100%;
         height: 100%;
     }
 
-    .yr-nav-hold-view {
-        display: none;
+    .yr-nav-holds-shape-block {
+        .on() {
+            & ~ .yr-nav-hold-view {
+                display: none;
+            }
+        }
+        .off() {
+            & ~ .yr-nav-hold-view {
+                display: block;
+            }
+        }
+
+        .off();
+
+        &@{yr-select-sqs-block-on} {
+            .on();
+        }
+
+        &@{yr-select-sqs-block-empty} {
+            .off();
+        }
     }
 
-    .yr-nav-holds-shape-block.empty ~ .yr-nav-hold-view {
-        display: block;
+    .yr-nav-hold-view {
+        z-index: 1;
     }
 
     .yr-use-hold-shape {

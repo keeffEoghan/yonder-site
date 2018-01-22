@@ -1,7 +1,7 @@
-<nav class="yr-nav-holds" data-content-field="navigation-nav-holds">
+<nav class="yr-nav-holds" data-controller="nav-holds" data-content-field="navigation-nav-holds">
     <header class="yr-nav-holds-header">
         {@|apply titles.block}
-        <squarespace:block-field id="nav-holds-titles-block" class="yr-nav-holds-titles-block yr-a" columns="12"/>
+        <squarespace:block-field id="nav-holds-titles-block" class="yr-nav-holds-titles-block yr-a" columns="12"></squarespace:block-field>
     </header>
 
     <section class="yr-nav-holds-menu">
@@ -16,7 +16,7 @@
                     <span class="yr-nav-hold-text">{title}</span>
             {.end}
                 <!-- For overriding the default SVG hold shapes -->
-                <squarespace:block-field id="nav-holds-shape-block-{@index}" class="yr-nav-holds-shape-block" columns="1"/>
+                <squarespace:block-field id="nav-holds-shape-block-{@index}" class="yr-nav-holds-shape-block" columns="1"></squarespace:block-field>
                 <svg class="yr-nav-hold-view" width="100%" height="100%">
                     <use class="yr-use-hold-shape" href="#yr-hold-shape-{@index}"></use>
                 </svg>

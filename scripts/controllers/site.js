@@ -1,17 +1,23 @@
+import $ from 'zepto';
 import { refresh } from '@squarespace/controller';
 import { Lifecycle, Tweak } from '@squarespace/core';
 import Mercury from '@squarespace/mercury';
+
 import { authenticated, debug } from '../constants';
 
+function site(element) {
+    loader();
+
+    // Prevent link events reaching `body` when `a` descendents are being edited in CMS.
+    $(element).find('body > *').on('click', 'a .sqs-editing', false);
+}
+
 // Exceptions: external links, hash links
-const onClickExceptions = [
-    '[data-no-ajax]'
-];
+const onClickExceptions = ['[data-no-ajax]'];
 
 // Exceptions after making the request. Does a string match for any of these
 // in the responseText
-const onRequestExceptions = [
-];
+const onRequestExceptions = [];
 
 // updateMatrix indicates which elements need to be updated on load. You can
 // choose whether to update attributes, replace HTML, or both.
@@ -46,7 +52,7 @@ const updateMatrix = [
 /**
  * Instantiates a mercury loader for the site in unauthenticated sessions.
  */
-function siteLoader() {
+function loader() {
     const ajaxEnabled = Tweak.getValue('tweak-yr-site-ajax-loading-enable') === 'true';
 
     // Don't use ajax in authenticated session or when tweak option is disabled.
@@ -56,24 +62,21 @@ function siteLoader() {
 
     const mercury = new Mercury({
         enableCache: true,
-        updateMatrix: updateMatrix,
-        onClickExceptions: onClickExceptions,
-        onRequestExceptions: onRequestExceptions,
+        updateMatrix,
+        onClickExceptions,
+        onRequestExceptions,
         timeout: 10000
     });
 
     // Squarespace init and destroy
-    window.addEventListener('mercury:load', function() {
+    window.addEventListener('mercury:load', () => {
         Lifecycle.init();
         document.documentElement.setAttribute('data-mercury-loading', 'done');
 
-        setTimeout(function() {
-                document.documentElement.removeAttribute('data-mercury-loading');
-            },
-            500);
+        setTimeout(() => document.documentElement.removeAttribute('data-mercury-loading'), 500);
     });
 
-    window.addEventListener('mercury:unload', function() {
+    window.addEventListener('mercury:unload', () => {
         Lifecycle.destroy();
         document.documentElement.setAttribute('data-mercury-loading', '');
     });
@@ -82,4 +85,4 @@ function siteLoader() {
     window.addEventListener('mercury:load', refresh);
 }
 
-export default siteLoader;
+export default site;

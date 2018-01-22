@@ -1,11 +1,17 @@
 <section class="yr-nav">
     <a class="yr-nav-home-a yr-nav-button" href="/"
         title="Go home" aria-label="Go home">
-        {@|apply nav/home.svg.block}
+        <squarespace:block-field id="yr-nav-main-home-icon"
+            class="yr-nav-button-icon-block" columns="1">
+        </squarespace:block-field>
+        <div class="yr-nav-button-icon">{@|apply nav/home.svg.block}</div>
     </a>
 
     <div class="yr-nav-toggle yr-nav-toggle-open yr-nav-button">
-        {@|apply nav/open.svg.block}
+        <squarespace:block-field id="yr-nav-main-toggle-open-icon"
+            class="yr-nav-button-icon-block" columns="1">
+        </squarespace:block-field>
+        <div class="yr-nav-button-icon">{@|apply nav/open.svg.block}</div>
     </div>
 
     <input class="yr-nav-toggler" type="checkbox"
@@ -13,12 +19,17 @@
 
     <nav class="yr-nav-panel" data-content-field="navigation-nav-main">
         <div class="yr-nav-toggle yr-nav-toggle-close yr-nav-button yr-nav-fade">
-            {@|apply nav/close.svg.block}
+            <squarespace:block-field id="yr-nav-main-toggle-close-icon"
+                class="yr-nav-button-icon-block" columns="1">
+            </squarespace:block-field>
+            <div class="yr-nav-button-icon">{@|apply nav/close.svg.block}</div>
         </div>
 
         <header class="yr-nav-header yr-nav-fade">
             {@|apply titles.block}
-            <squarespace:block-field id="nav-header-block" class="yr-nav-header-block" columns="12"/>
+            <squarespace:block-field id="nav-header-block"
+                class="yr-nav-header-block" columns="12">
+            </squarespace:block-field>
         </header>
 
         <div class="yr-nav-links yr-nav-fade yr-a">
@@ -58,7 +69,8 @@
 
         <squarespace:block-field id="nav-footer-block"
             class="yr-nav-footer-block yr-nav-fade" columns="12"
-            data-content-field="connected-accounts"/>
+            data-content-field="connected-accounts">
+        </squarespace:block-field>
     </nav>
 
     <script type="text/javascript">console.log('nav-main', {@|json-pretty|html});</script>

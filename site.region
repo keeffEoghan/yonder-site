@@ -1,5 +1,5 @@
 <!doctype html>
-<html data-controller="site-loader"
+<html data-controller="yr-site"
     {.if authenticatedAccount}data-authenticated-account{.end}
     >
     <head>
@@ -11,7 +11,7 @@
     <body id="{squarespace.page-id}" class="{squarespace.page-classes}">
         <div class="yr-loader"></div>
 
-        <squarespace:navigation navigationId="nav-main" template="nav-main" />
+        <squarespace:navigation navigationId="nav-main" template="nav-main"></squarespace:navigation>
 
         <main class="yr-main" role="main" data-content-field="main-content">
             {squarespace.main-content}
@@ -19,7 +19,7 @@
 
         {@|apply footer.block}
 
-        <squarespace:script src="site-bundle.js" combo="false" />
+        <squarespace:script src="site-bundle.js" combo="false"></squarespace:script>
 
         {squarespace-footers}
 
