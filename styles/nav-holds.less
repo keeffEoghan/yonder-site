@@ -75,26 +75,31 @@
             top: 50%;
             left: 50%;
 
-            .loop-holds(@n, @i: 1) when (@i <= @n) {
-                &:nth-child((~'@{n}n+@{i}')) {
-                    @r: (@i - 1) * 360deg / @n;
+            .loop-holds(@l, @i: 0) when (@i < @l) {
+                & {
+                    // This needs to be scoped like this to iterate properly for some reason...
+                    @n: @i + 1;
 
-                    transform:
-                        /* Center */
-                        translate(-50%, -50%)
-                        /* Angle in circle */
-                        rotate(@r)
-                        /* Move up onto circle circumference */
-                        translateY(-47vmin)
-                        /* Move back inside bounds of circle */
-                        translateY(50%)
-                        /* Move back a little margin */
-                        translateY(10%)
-                        /* Straighten */
-                        rotate(-@r);
+                    &:nth-child((~'@{l}n+@{n}')) {
+                        @r: @i * 360deg / @l;
+
+                        transform:
+                            /* Center */
+                            translate(-50%, -50%)
+                            /* Angle in circle */
+                            rotate(@r)
+                            /* Move up onto circle circumference */
+                            translateY(-47vmin)
+                            /* Move back inside bounds of circle */
+                            translateY(50%)
+                            /* Move back a little margin */
+                            translateY(10%)
+                            /* Straighten */
+                            rotate(-@r);
+                    }
                 }
 
-                .loop-holds(@n, (@i + 1));
+                .loop-holds(@l, @i + 1);
             }
 
             .loop-holds(5);
