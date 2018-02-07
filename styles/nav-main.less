@@ -1,4 +1,8 @@
 .yr-nav {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
     position: relative;
     flex: 0 0 auto;
 
@@ -12,10 +16,27 @@
     &::before {
         box-sizing: content-box;
         width: 100%;
-        height: @tweak-yr-nav-button-size;
         min-height: @yr-size-hit-min;
-        padding: @tweak-yr-nav-button-offset 0;
         z-index: @yr-z-nav;
+
+        /**
+         * Lay out the bar to cover the largest button (size + offset).
+         */
+
+        @button: max(@tweak-yr-nav-button-size, @yr-size-hit-min) + @tweak-yr-nav-button-offset;
+        @home: max(@tweak-yr-nav-home-size, @yr-size-hit-min) + @tweak-yr-nav-home-offset;
+
+        @height: @tweak-yr-nav-button-size;
+        @offset: @tweak-yr-nav-button-offset;
+
+        .layout-bar() when (@home > @button) {
+            @height: @tweak-yr-nav-home-size;
+            @offset: @tweak-yr-nav-home-offset;
+        }
+        .layout-bar();
+
+        height: @height;
+        padding: @offset 0;
     }
 
     &::before {
@@ -25,7 +46,7 @@
         top: 0;
         left: 0;
         right: 0;
-        background-color: red;
+        background-color: @tweak-yr-nav-bar-color;
         transform-origin: top center;
         transition: opacity 300ms ease-in;
     }
@@ -63,10 +84,6 @@
             right: auto;
         }
     }
-        display: inline-flex;
-        flex-flow: row nowrap;
-        justify-content: center;
-        align-items: center;
 
 
     /**
@@ -76,33 +93,85 @@
     .yr-nav-button,
     .yr-nav-toggler {
         position: fixed;
-        top: @tweak-yr-nav-button-offset;
+    }
+
+    .size-nav(@size) {
+        width: @size;
+        height: @size;
+        background-size: @size;
+
+        .yr-inline-svg {
+            width: @size;
+            height: @size;
+        }
     }
 
     .yr-nav-button {
         min-width: @yr-size-hit-min;
         min-height: @yr-size-hit-min;
-        width: @tweak-yr-nav-button-size;
-        height: @tweak-yr-nav-button-size;
-        background-size: @tweak-yr-nav-button-size;
         background-position: center;
         transition: opacity 300ms @ease-fade;
         color: @tweak-yr-nav-button-color;
+        .size-nav(@tweak-yr-nav-button-size);
+    }
 
-        &.yr-nav-toggle-close {
-            color: @tweak-yr-nav-button-close-color;
-        }
+    .yr-nav-home-a {
+        z-index: @yr-z-nav-home;
+        top: @tweak-yr-nav-home-offset;
+        .align-nav(left, @tweak-yr-nav-home-offset);
+        .size-nav(@tweak-yr-nav-home-size);
 
-        .yr-inline-svg {
-            width: @tweak-yr-nav-button-size;
-            height: @tweak-yr-nav-button-size;
+        .homepage & {
+            opacity: 0;
+            pointer-events: none;
         }
     }
 
-    .yr-nav-button-icon-block,
-    .yr-nav-button-icon {
+    .yr-nav-toggler,
+    .yr-nav-toggle {
+        top: @tweak-yr-nav-button-offset;
+        .align-nav(right, @tweak-yr-nav-button-offset);
+    }
+
+    .yr-nav-toggler {
+        /**
+         * Need to do the `max` size this way, because `<input>` doesn't
+         * respect `min-width`/`min-height` properly.
+         */
+        @button-size: max(@yr-size-hit-min, @tweak-yr-nav-button-size);
+
+        width: @button-size;
+        height: @button-size;
+
+        z-index: @yr-z-nav-toggler;
+        opacity: 0;
+        cursor: pointer;
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+
+    .yr-nav-toggle {
+        z-index: @yr-z-nav-toggle;
+    }
+
+    .yr-nav-toggle-close {
+        color: @tweak-yr-nav-button-close-color;
+    }
+
+    .yr-nav-button-icon,
+    .yr-nav-button-icon-block {
         width: 100%;
         height: 100%;
+    }
+
+    @yr-nav-button-icon-display: inline-flex;
+
+    .yr-nav-button-icon {
+        display: @yr-nav-button-icon-display;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
     }
 
     .yr-nav-button-icon-block {
@@ -118,68 +187,9 @@
 
         &@{yr-select-sqs-block-empty} {
             & ~ .yr-nav-button-icon {
-                display: block;
+                display: @yr-nav-button-icon-display;
             }
         }
-    }
-
-    .yr-nav-button-icon {
-        display: inline-flex;
-        flex-flow: row nowrap;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .yr-nav-home-a {
-        z-index: @yr-z-nav-home;
-        width: @tweak-yr-nav-home-size;
-        height: @tweak-yr-nav-home-size;
-        background-size: @tweak-yr-nav-home-size;
-
-        .align-nav(left, @tweak-yr-nav-home-offset);
-
-        .homepage & {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .yr-inline-svg {
-            width: @tweak-yr-nav-home-size;
-            height: @tweak-yr-nav-home-size;
-        }
-    }
-
-    .yr-nav-toggler,
-    .yr-nav-toggle {
-        .align-nav(right, @tweak-yr-nav-button-offset);
-    }
-
-    .yr-nav-toggler {
-        /**
-         * Need to do the `max` size this way, because `<input>` doesn't
-         * respect `min-width`/`min-height` properly.
-         * (Can't believe this is a LESS `if`/`else`...)
-         */
-        @button-size: @tweak-yr-nav-button-size;
-
-        .button-size() when (@yr-size-hit-min > @tweak-yr-nav-button-size) {
-            @button-size: @yr-size-hit-min;
-        }
-        .button-size;
-
-        width: @button-size;
-        height: @button-size;
-
-        z-index: @yr-z-nav-toggler;
-        opacity: 0;
-        cursor: pointer;
-        margin: 0;
-        padding: 0;
-        border: none;
-    }
-
-    .yr-nav-toggle {
-        z-index: @yr-z-nav-toggle;
     }
 
 
@@ -200,7 +210,7 @@
         z-index: @yr-z-nav-panel;
         padding: 3em;
         color: @tweak-yr-nav-text-color;
-        background-color: @tweak-yr-nav-background-color;
+        background-color: @tweak-yr-nav-panel-color;
         text-align: center;
         overflow: hidden;
 

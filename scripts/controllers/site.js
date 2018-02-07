@@ -68,7 +68,12 @@ function loader() {
         timeout: 10000
     });
 
+    window.addEventListener('mercury:navigate', () => {
+        document.documentElement.setAttribute('data-mercury-loading', 'start');
+    });
+
     // Squarespace init and destroy
+
     window.addEventListener('mercury:load', () => {
         Lifecycle.init();
         document.documentElement.setAttribute('data-mercury-loading', 'done');
@@ -78,7 +83,7 @@ function loader() {
 
     window.addEventListener('mercury:unload', () => {
         Lifecycle.destroy();
-        document.documentElement.setAttribute('data-mercury-loading', '');
+        document.documentElement.setAttribute('data-mercury-loading', 'swap');
     });
 
     // Sync controllers on AJAX load

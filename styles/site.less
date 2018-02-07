@@ -120,16 +120,24 @@ img,
     pointer-events: none;
 
     background-color: transparent;
-    .transition(background-color 0.3s ease-out, transform 0s 0.3s linear;);
+    .transition(background-color 300ms ease-out, transform 300ms ease-out 300ms;);
 
     [data-mercury-loading] & {
         background-color: @tweak-yr-site-ajax-loading-bar-color;
-        .transition(transform 0.3s cubic-bezier(0, 0, 0, 0.618));
-        .transform(translatex(60%));
+        .transition(background-color 300ms ease-out, transform 300ms ease-out;);
+    }
+
+    [data-mercury-loading='start'] & {
+        .transform(translateX(33%));
+        .transition(transform 300ms ease-out;);
+    }
+
+    [data-mercury-loading='swap'] & {
+        .transform(translateX(66%));
     }
 
     [data-mercury-loading='done'] & {
-        .transform(translatex(100%));
+        .transform(translateX(100%));
     }
 
     // Show
