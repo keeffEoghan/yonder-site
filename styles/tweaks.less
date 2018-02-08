@@ -2,9 +2,6 @@
  * Site
  */
 
-// tweak: { "category": "Site", "label": "Background", "title": "tweak-yr-site-body-background-color", "type": "color", "disableTransparency": "true" }
-@tweak-yr-site-body-background-color: #f9efe3;
-
 /**
  * AJAX Loading
  */
@@ -16,24 +13,12 @@
 // tweak: { "category": "Site / Loading", "label": "Size", "title": "tweak-yr-site-ajax-loading-bar-size", "type": "value", "step": 1, "min": 1, "max": 120, "showOnlyWhenPresent": ".tweak-yr-site-ajax-loading-enable.tweak-yr-site-ajax-loading-bar-show" }
 @tweak-yr-site-ajax-loading-bar-size: 3px;
 
-// tweak: { "category": "Site / Loading", "label": "Color", "title": "tweak-yr-site-ajax-loading-bar-color", "type": "color", "showOnlyWhenPresent": ".tweak-yr-site-ajax-loading-enable.tweak-yr-site-ajax-loading-bar-show" }
-@tweak-yr-site-ajax-loading-bar-color: rgba(0, 0, 0, 0.7);
-
 
 /**
  * Main Navigation
  */
 
 // tweak: { "category": "Main Navigation", "label": "Navigation Position", "title": "tweak-yr-nav-align", "type": "dropdown", "options": ["regular", "switch"], "default": "regular", target: ".yr-nav-toggler, .yr-nav-button" }
-
-// tweak: { "category": "Main Navigation", "label": "Text", "title": "tweak-yr-nav-text-color", "type": "color", "disableTransparency": "false", target: ".yr-nav" }
-@tweak-yr-nav-text-color: #f7efe4;
-
-// tweak: { "category": "Main Navigation", "label": "Panel Color", "title": "tweak-yr-nav-background-color", "type": "color", "disableTransparency": "false", target: ".yr-nav" }
-@tweak-yr-nav-panel-color: #367b73;
-
-// tweak: { "category": "Main Navigation", "label": "Bar Color", "title": "tweak-yr-nav-bar-color", "type": "color", "disableTransparency": "false", target: ".yr-nav" }
-@tweak-yr-nav-bar-color: #ef834c;
 
 
 /**
@@ -61,31 +46,10 @@
 // tweak: { "category": "Main Navigation / Buttons", "label": "Home Button Offset", "title": "tweak-yr-nav-home-offset", "type": "value", "min" : 0, "max" : 100, "step" : 1, target: ".yr-nav-home-a" }
 @tweak-yr-nav-home-offset: 1.5rem;
 
-/**
- * Can override this easily with custom header injection.
- */
-
-// tweak: { "category": "Main Navigation / Buttons", "label": "Button Default Colour", "title": "tweak-yr-nav-button-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-button, .yr-nav-toggler" }
-@tweak-yr-nav-button-color: #1c443e;
-
-// tweak: { "category": "Main Navigation / Buttons", "label": "Button Default Colour (Close)", "title": "tweak-yr-nav-button-close-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-button, .yr-nav-toggler" }
-@tweak-yr-nav-button-close-color: #fff;
-
-
-/**
- * Main Navigation / Folders
- */
-
-// tweak: { "category": "Main Navigation / Folders", "label": "Folder Divide Color", "title": "tweak-yr-nav-folder-divide-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-folder-a, .yr-nav-folder-links" }
-@tweak-yr-nav-folder-divide-color: rgba(255, 255, 255, 0.2);
-
 
 /**
  * Holds Navigation
  */
-
-// tweak: { "category": "Holds Navigation", "label": "Text Color", "title": "tweak-yr-nav-holds-text-color", "type": "color", "disableTransparency": "false", target: ".yr-nav-hold-a" }
-@tweak-yr-nav-holds-text-color: #f8f0e3;
 
 
 /**
@@ -183,123 +147,154 @@
  * Colors
  */
 
-// (disable) tweak: { "category": "Colors", "label": "Body Text", "title": "tweak-yr-body-text-color", "type": "color", "target": "p" }
-@tweak-yr-body-text-color: #000000;
 
-// (disable) tweak: { "category": "Colors", "label": "Heading 1", "title": "tweak-yr-h1-color", "type": "color", "target": "h1" }
-@tweak-yr-h1-color: #000000;
+/**
+ * Colors / Base
+ */
 
-// (disable) tweak: { "category": "Colors", "label": "Heading 2", "title": "tweak-yr-h2-color", "type": "color", "target": "h2" }
-@tweak-yr-h2-color: #000000;
+// tweak: { "category": "Colors / Base", "label": "Tone 1", "title": "tweak-yr-color-base-tone-1", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-base-tone-1: #f8e2c9;
 
-// (disable) tweak: { "category": "Colors", "label": "Heading 3", "title": "tweak-yr-h3-color", "type": "color", "target": "h3" }
-@tweak-yr-h3-color: #000000;
+// tweak: { "category": "Colors / Base", "label": "Tone 2", "title": "tweak-yr-color-base-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav-panel, .yr-nav-a, .yr-nav-button, .yr-nav-hold-a" }
+@tweak-yr-color-base-tone-2: #f9efe0;
 
-// (disable) tweak: { "category": "Colors", "label": "Heading 4", "title": "tweak-yr-h4-color", "type": "color", "target": "h4" }
-@tweak-yr-h4-color: #000000;
+// tweak: { "category": "Colors / Base", "label": "Tone 3", "title": "tweak-yr-color-base-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-footer" }
+@tweak-yr-color-base-tone-3: #fff9f2;
 
-// (disable) tweak: { "category": "Colors", "label": "Heading 5", "title": "tweak-yr-h5-color", "type": "color", "target": "h5" }
-@tweak-yr-h5-color: #000000;
 
-// (disable) tweak: { "category": "Colors", "label": "Heading 6", "title": "tweak-yr-h6-color", "type": "color", "target": "h6" }
-@tweak-yr-h6-color: #000000;
+/**
+ * Colors / Dark
+ */
 
-// (disable) tweak: { "category": "Colors", "label": "Links", "title": "tweak-yr-a-color", "type": "color", "target": "a" }
-@tweak-yr-a-color: #000000;
+// tweak: { "category": "Colors / Dark", "label": "Tone 1", "title": "tweak-yr-color-dark-tone-1", "type": "color", "disableTransparency": "false", "target": "h1, h2" }
+@tweak-yr-color-dark-tone-1: #000000;
 
-// (disable) tweak: { "category": "Colors", "label": "Link Underline 1", "title": "tweak-yr-a-border-color-1", "type": "color", "target": "a" }
-@tweak-yr-a-border-color-1: #000000;
+// tweak: { "category": "Colors / Dark", "label": "Tone 2", "title": "tweak-yr-color-dark-tone-2", "type": "color", "disableTransparency": "false", "target": "h3, h4, p" }
+@tweak-yr-color-dark-tone-2: #161614;
 
-// (disable) tweak: { "category": "Colors", "label": "Link Underline 2", "title": "tweak-yr-a-border-color-2", "type": "color", "target": "a" }
-@tweak-yr-a-border-color-2: #ee844d;
+// tweak: { "category": "Colors / Dark", "label": "Tone 3", "title": "tweak-yr-color-dark-tone-3", "type": "color", "disableTransparency": "false", "target": "h5, h6, .yr-footer" }
+@tweak-yr-color-dark-tone-3: #323232;
 
-// (disable) tweak: { "category": "Colors", "label": "Link Underline 3", "title": "tweak-yr-a-border-color-3", "type": "color", "target": "a" }
-@tweak-yr-a-border-color-3: rgba(0, 0, 0, 0.2);
+
+/**
+ * Colors / Light
+ */
+
+// tweak: { "category": "Colors / Light", "label": "Tone 1", "title": "tweak-yr-color-light-tone-1", "type": "color", "disableTransparency": "false", "target": ".yr-nav-panel" }
+@tweak-yr-color-light-tone-1: rgba(255, 255, 255, 0.2);
+
+// tweak: { "category": "Colors / Light", "label": "Tone 2", "title": "tweak-yr-color-light-tone-2", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-light-tone-2: #fff;
+
+// tweak: { "category": "Colors / Light", "label": "Tone 3", "title": "tweak-yr-color-light-tone-3", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-light-tone-3: rgba(255, 255, 255, 0.8);
+
+
+/**
+ * Colors / Accent 1
+ */
+
+// tweak: { "category": "Colors / Accent 1", "label": "Tone 1", "title": "tweak-yr-color-accent-1-tone-1", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-accent-1-tone-1: #05443d;
+
+// tweak: { "category": "Colors / Accent 1", "label": "Tone 2", "title": "tweak-yr-color-accent-1-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav-button" }
+@tweak-yr-color-accent-1-tone-2: #075e56;
+
+// tweak: { "category": "Colors / Accent 1", "label": "Tone 3", "title": "tweak-yr-color-accent-1-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-nav-panel" }
+@tweak-yr-color-accent-1-tone-3: #0f7a6d;
+
+
+/**
+ * Colors / Accent 2
+ */
+
+// tweak: { "category": "Colors / Accent 2", "label": "Tone 1", "title": "tweak-yr-color-accent-2-tone-1", "type": "color", "disableTransparency": "false", "target": ".yr-nav-a" }
+@tweak-yr-color-accent-2-tone-1: #f96b2b;;
+
+// tweak: { "category": "Colors / Accent 2", "label": "Tone 2", "title": "tweak-yr-color-accent-2-tone-2", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-accent-2-tone-2: #ff7c3a;;
+
+// tweak: { "category": "Colors / Accent 2", "label": "Tone 3", "title": "tweak-yr-color-accent-2-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-loader" }
+@tweak-yr-color-accent-2-tone-3: #ff965e;;
 
 
 /**
  * Colors / Theme 1
  */
 
-// tweak: { "category": "Colors / Theme 1", "label": "Main Color", "title": "tweak-yr-color-theme-1-main", "type": "color", "disableTransparency": "false", target: ".yr-holds-nav .yr-nav-hold-a" }
-@tweak-yr-color-theme-1-main: #ff7d3b;
+// tweak: { "category": "Colors / Theme 1", "label": "Tone 1", "title": "tweak-yr-color-theme-1-tone-1", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-theme-1-tone-1: #f96b2b;
 
-// tweak: { "category": "Colors / Theme 1", "label": "Accent Color 1", "title": "tweak-yr-color-theme-1-accent-1", "type": "color", "disableTransparency": "false" }
-@tweak-yr-color-theme-1-accent-1: #222132;
+// tweak: { "category": "Colors / Theme 1", "label": "Tone 2", "title": "tweak-yr-color-theme-1-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav-holds, .yr-nav-hold-a" }
+@tweak-yr-color-theme-1-tone-2: #ff7c3a;
 
-// tweak: { "category": "Colors / Theme 1", "label": "Accent Color 2", "title": "tweak-yr-color-theme-1-accent-2", "type": "color", "disableTransparency": "false" }
-@tweak-yr-color-theme-1-accent-2: #f9f1e2;
+// tweak: { "category": "Colors / Theme 1", "label": "Tone 3", "title": "tweak-yr-color-theme-1-tone-3", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-theme-1-tone-3: #ff965e;
 
 
 /**
  * Colors / Theme 2
  */
 
-// tweak: { "category": "Colors / Theme 2", "label": "Main Color", "title": "tweak-yr-color-theme-2-main", "type": "color", "disableTransparency": "false", target: ".yr-holds-nav .yr-nav-hold-a" }
-@tweak-yr-color-theme-2-main: #08938f;
+// tweak: { "category": "Colors / Theme 2", "label": "Tone 1", "title": "tweak-yr-color-theme-2-tone-1", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-theme-2-tone-1: #057c72;
 
-// tweak: { "category": "Colors / Theme 2", "label": "Accent Color 1", "title": "tweak-yr-color-theme-2-accent-1", "type": "color", "disableTransparency": "false" }
-@tweak-yr-color-theme-2-accent-1: #222132;
+// tweak: { "category": "Colors / Theme 2", "label": "Tone 2", "title": "tweak-yr-color-theme-2-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav-hold .yr-use-hold-shape" }
+@tweak-yr-color-theme-2-tone-2: #07938e;
 
-// tweak: { "category": "Colors / Theme 2", "label": "Accent Color 2", "title": "tweak-yr-color-theme-2-accent-2", "type": "color", "disableTransparency": "false" }
-@tweak-yr-color-theme-2-accent-2: #f9f1e2;
+// tweak: { "category": "Colors / Theme 2", "label": "Tone 3", "title": "tweak-yr-color-theme-2-tone-3", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-theme-2-tone-3: #0caa9e;
 
 
 /**
  * Colors / Theme 3
  */
 
-// tweak: { "category": "Colors / Theme 3", "label": "Main Color", "title": "tweak-yr-color-theme-3-main", "type": "color", "disableTransparency": "false", target: ".yr-holds-nav .yr-nav-hold-a" }
-@tweak-yr-color-theme-3-main: #930a49;
+// tweak: { "category": "Colors / Theme 3", "label": "Tone 1", "title": "tweak-yr-color-theme-3-tone-1", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-theme-3-tone-1: #630228;
 
-// tweak: { "category": "Colors / Theme 3", "label": "Accent Color 1", "title": "tweak-yr-color-theme-3-accent-1", "type": "color", "disableTransparency": "false" }
-@tweak-yr-color-theme-3-accent-1: #222132;
+// tweak: { "category": "Colors / Theme 3", "label": "Tone 2", "title": "tweak-yr-color-theme-3-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav-hold .yr-use-hold-shape" }
+@tweak-yr-color-theme-3-tone-2: #7f0030;
 
-// tweak: { "category": "Colors / Theme 3", "label": "Accent Color 2", "title": "tweak-yr-color-theme-3-accent-2", "type": "color", "disableTransparency": "false" }
-@tweak-yr-color-theme-3-accent-2: #f9f1e2;
+// tweak: { "category": "Colors / Theme 3", "label": "Tone 3", "title": "tweak-yr-color-theme-3-tone-3", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-theme-3-tone-3: #9e0542;
 
 
 /**
  * Colors / Theme 4
  */
 
-// tweak: { "category": "Colors / Theme 4", "label": "Main Color", "title": "tweak-yr-color-theme-4-main", "type": "color", "disableTransparency": "false", target: ".yr-holds-nav .yr-nav-hold-a" }
-@tweak-yr-color-theme-4-main: #ebaeca;
+// tweak: { "category": "Colors / Theme 4", "label": "Tone 1", "title": "tweak-yr-color-theme-4-tone-1", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-theme-4-tone-1: #db992e;
 
-// tweak: { "category": "Colors / Theme 4", "label": "Accent Color 1", "title": "tweak-yr-color-theme-4-accent-1", "type": "color", "disableTransparency": "false" }
-@tweak-yr-color-theme-4-accent-1: #222132;
+// tweak: { "category": "Colors / Theme 4", "label": "Tone 2", "title": "tweak-yr-color-theme-4-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav-hold .yr-use-hold-shape" }
+@tweak-yr-color-theme-4-tone-2: #e5ac45;
 
-// tweak: { "category": "Colors / Theme 4", "label": "Accent Color 2", "title": "tweak-yr-color-theme-4-accent-2", "type": "color", "disableTransparency": "false" }
-@tweak-yr-color-theme-4-accent-2: #f9f1e2;
+// tweak: { "category": "Colors / Theme 4", "label": "Tone 3", "title": "tweak-yr-color-theme-4-tone-3", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-theme-4-tone-3: #f7b955;
 
 
 /**
  * Colors / Theme 5
  */
 
-// tweak: { "category": "Colors / Theme 5", "label": "Main Color", "title": "tweak-yr-color-theme-5-main", "type": "color", "disableTransparency": "false", target: ".yr-holds-nav .yr-nav-hold-a" }
-@tweak-yr-color-theme-5-main: #7f5546;
+// tweak: { "category": "Colors / Theme 5", "label": "Tone 1", "title": "tweak-yr-color-theme-5-tone-1", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-theme-5-tone-1: #f28781;
 
-// tweak: { "category": "Colors / Theme 5", "label": "Accent Color 1", "title": "tweak-yr-color-theme-5-accent-1", "type": "color", "disableTransparency": "false" }
-@tweak-yr-color-theme-5-accent-1: #222132;
+// tweak: { "category": "Colors / Theme 5", "label": "Tone 2", "title": "tweak-yr-color-theme-5-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav-hold .yr-use-hold-shape" }
+@tweak-yr-color-theme-5-tone-2: #ffa69d;
 
-// tweak: { "category": "Colors / Theme 5", "label": "Accent Color 2", "title": "tweak-yr-color-theme-5-accent-2", "type": "color", "disableTransparency": "false" }
-@tweak-yr-color-theme-5-accent-2: #f9f1e2;
+// tweak: { "category": "Colors / Theme 5", "label": "Tone 3", "title": "tweak-yr-color-theme-5-tone-3", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-theme-5-tone-3: #ffb5b3;
 
 
 /**
  * Footer
  */
 
-// tweak: { "category" : "Footer", "label" : "Show Footer", "title" : "tweak-yr-footer-show", "type" : "checkbox", "active" : true, "target" : ".yr-footer" }
+// tweak: { "category" : "Footer", "label" : "Show Footer", "title" : "tweak-yr-footer-show", "type" : "checkbox", "active" : true, "target": ".yr-footer" }
 
-// tweak: { "category": "Footer", "label": "Background Color", "title" : "tweak-yr-footer-color", "type" : "color", "target" : ".yr-footer", "showOnlyWhenPresent": ".tweak-yr-footer-show" }
-@tweak-yr-footer-color: rgba(255, 255, 255, 0.6);
-
-// tweak: { "category": "Footer", "label": "Text Color", "title" : "tweak-yr-footer-text-color", "type" : "color", "target" : ".yr-footer", "showOnlyWhenPresent": ".tweak-yr-footer-show" }
-@tweak-yr-footer-text-color: #333;
-
-// tweak: { "category" : "Footer / Contact", "label" : "Show Contact Info", "title" : "tweak-yr-footer-contact-show", "type" : "checkbox", "active" : false, "target" : ".yr-footer", "showOnlyWhenPresent": ".tweak-yr-footer-show" }
+// tweak: { "category" : "Footer / Contact", "label" : "Show Contact Info", "title" : "tweak-yr-footer-contact-show", "type" : "checkbox", "active" : false, "target": ".yr-footer", "showOnlyWhenPresent": ".tweak-yr-footer-show" }
 
 
 /**

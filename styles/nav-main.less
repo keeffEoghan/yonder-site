@@ -46,7 +46,7 @@
         top: 0;
         left: 0;
         right: 0;
-        background-color: @tweak-yr-nav-bar-color;
+        background-color: @tweak-yr-color-accent-1-tone-2;
         transform-origin: top center;
         transition: opacity 300ms ease-in;
     }
@@ -59,6 +59,10 @@
         &::before {
             opacity: 0;
             pointer-events: none;
+        }
+
+        > .yr-nav-button {
+            color: @tweak-yr-color-accent-1-tone-1;
         }
     }
 
@@ -110,8 +114,10 @@
         min-width: @yr-size-hit-min;
         min-height: @yr-size-hit-min;
         background-position: center;
-        transition: opacity 300ms @ease-fade;
-        color: @tweak-yr-nav-button-color;
+        color: @tweak-yr-color-light-tone-2;
+        transition: opacity 300ms @ease-fade,
+            color 300ms @ease-fade;
+
         .size-nav(@tweak-yr-nav-button-size);
     }
 
@@ -156,7 +162,7 @@
     }
 
     .yr-nav-toggle-close {
-        color: @tweak-yr-nav-button-close-color;
+        color: @tweak-yr-color-base-tone-2;
     }
 
     .yr-nav-button-icon,
@@ -209,8 +215,8 @@
         max-width: 40em;
         z-index: @yr-z-nav-panel;
         padding: 3em;
-        color: @tweak-yr-nav-text-color;
-        background-color: @tweak-yr-nav-panel-color;
+        color: @tweak-yr-color-base-tone-2;
+        background-color: @tweak-yr-color-accent-1-tone-3;
         text-align: center;
         overflow: hidden;
 
@@ -268,18 +274,18 @@
     }
 
     .yr-nav-folder-links {
-        background-color: @tweak-yr-nav-folder-divide-color;
+        background-color: @tweak-yr-color-light-tone-1;
     }
 
     .yr-nav-folder-a {
-        border-bottom: 2px dashed @tweak-yr-nav-folder-divide-color;
+        border-bottom: 2px dashed @tweak-yr-color-light-tone-1;
     }
 
     .yr-nav-a {
         margin: 0.3em 0;
 
         &::after {
-            color: @tweak-yr-a-border-color-2;
+            color: @tweak-yr-color-accent-2-tone-1;
         }
 
         &,
