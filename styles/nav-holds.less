@@ -76,6 +76,8 @@
             left: 50%;
 
             .loop-holds(@l, @i: 0) when (@i < @l) {
+                .loop-holds(@l, @i + 1);
+
                 & {
                     // This needs to be scoped like this to iterate properly for some reason...
                     @n: @i + 1;
@@ -98,10 +100,7 @@
                             rotate(-@r);
                     }
                 }
-
-                .loop-holds(@l, @i + 1);
             }
-
             .loop-holds(5);
         }
     }

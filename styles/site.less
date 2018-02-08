@@ -123,12 +123,17 @@ img,
     top: 0;
     left: -100%;
     width: 100%;
-    height: @tweak-yr-site-ajax-loading-bar-size;
+    height: @tweak-yr-loader-size;
     z-index: @yr-z-loader;
     pointer-events: none;
 
     background-color: transparent;
     .transition(background-color 300ms ease-out, transform 300ms ease-out 300ms;);
+
+    .tweak-yr-loader-align-down-low & {
+        top: auto;
+        bottom: 0;
+    }
 
     [data-mercury-loading] & {
         background-color: @tweak-yr-color-accent-2-tone-3;
@@ -151,7 +156,7 @@ img,
     // Show
     display: none;
 
-    .tweak-yr-site-ajax-loading-enable.tweak-yr-site-ajax-loading-bar-show & {
+    .tweak-yr-ajax-enable.tweak-yr-loader-show & {
         display: block;
     }
 }

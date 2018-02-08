@@ -14,29 +14,10 @@
      */
     &,
     &::before {
-        box-sizing: content-box;
         width: 100%;
-        min-height: @yr-size-hit-min;
+        height: max(@tweak-yr-nav-button-size, @tweak-yr-nav-home-size, @yr-size-hit-min) * 0.5;
+        padding: @tweak-yr-nav-button-offset 0;
         z-index: @yr-z-nav;
-
-        /**
-         * Lay out the bar to cover the largest button (size + offset).
-         */
-
-        @button: max(@tweak-yr-nav-button-size, @yr-size-hit-min) + @tweak-yr-nav-button-offset;
-        @home: max(@tweak-yr-nav-home-size, @yr-size-hit-min) + @tweak-yr-nav-home-offset;
-
-        @height: @tweak-yr-nav-button-size;
-        @offset: @tweak-yr-nav-button-offset;
-
-        .layout-bar() when (@home > @button) {
-            @height: @tweak-yr-nav-home-size;
-            @offset: @tweak-yr-nav-home-offset;
-        }
-        .layout-bar();
-
-        height: @height;
-        padding: @offset 0;
     }
 
     &::before {
@@ -103,6 +84,7 @@
         width: @size;
         height: @size;
         background-size: @size;
+        .transform(translate(-50%, -50%));
 
         .yr-inline-svg {
             width: @size;
@@ -110,21 +92,23 @@
         }
     }
 
+    .yr-nav-button,
+    .yr-nav-toggler {
+        top: @tweak-yr-nav-button-offset;
+    }
+
     .yr-nav-button {
         min-width: @yr-size-hit-min;
         min-height: @yr-size-hit-min;
         background-position: center;
-        color: @tweak-yr-color-light-tone-2;
+        color: @tweak-yr-color-base-tone-2;
         transition: opacity 300ms @ease-fade,
             color 300ms @ease-fade;
-
-        .size-nav(@tweak-yr-nav-button-size);
     }
 
     .yr-nav-home-a {
         z-index: @yr-z-nav-home;
-        top: @tweak-yr-nav-home-offset;
-        .align-nav(left, @tweak-yr-nav-home-offset);
+        .align-nav(left, @tweak-yr-nav-button-offset);
         .size-nav(@tweak-yr-nav-home-size);
 
         .homepage & {
@@ -135,8 +119,8 @@
 
     .yr-nav-toggler,
     .yr-nav-toggle {
-        top: @tweak-yr-nav-button-offset;
         .align-nav(right, @tweak-yr-nav-button-offset);
+        .size-nav(@tweak-yr-nav-button-size);
     }
 
     .yr-nav-toggler {
