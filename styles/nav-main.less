@@ -15,8 +15,9 @@
     &,
     &::before {
         width: 100%;
-        height: max(@tweak-yr-nav-button-size, @tweak-yr-nav-home-size, @yr-size-hit-min) * 0.5;
-        padding: @tweak-yr-nav-button-offset 0;
+        height: @tweak-yr-nav-button-size;
+        min-height: @tweak-yr-nav-home-size;
+        padding: @tweak-yr-nav-button-offset;
         z-index: @yr-z-nav;
     }
 
@@ -47,13 +48,13 @@
         }
     }
 
+
     /**
      * Switch which side of the view the nav is on.
      *
-     * @param side {String}
      * @param size {Length}
      */
-    .align-nav(@side, @size) when (@side = left) {
+    .align-nav-left(@size) {
         left: @size;
 
         .tweak-yr-nav-align-switch & {
@@ -61,12 +62,34 @@
             left: auto;
         }
     }
-    .align-nav(@side, @size) when (@side = right) {
+    .align-nav-right(@size) {
         right: @size;
 
         .tweak-yr-nav-align-switch & {
             left: @size;
             right: auto;
+        }
+    }
+
+    /**
+     * Same as `.align-view`, but for center-anchored elements.
+     *
+     * @param size {Length}
+     */
+    .align-nav-left-mid(@size) {
+        .align-nav-left(@size);
+        .transform(translate(-50%, -50%));
+
+        .tweak-yr-nav-align-switch & {
+            .transform(translate(50%, -50%));
+        }
+    }
+    .align-nav-right-mid(@size) {
+        .align-nav-right(@size);
+        .transform(translate(50%, -50%));
+
+        .tweak-yr-nav-align-switch & {
+            .transform(translate(-50%, -50%));
         }
     }
 
@@ -78,23 +101,18 @@
     .yr-nav-button,
     .yr-nav-toggler {
         position: fixed;
+        top: @tweak-yr-nav-button-offset;
     }
 
     .size-nav(@size) {
         width: @size;
         height: @size;
         background-size: @size;
-        .transform(translate(-50%, -50%));
 
         .yr-inline-svg {
             width: @size;
             height: @size;
         }
-    }
-
-    .yr-nav-button,
-    .yr-nav-toggler {
-        top: @tweak-yr-nav-button-offset;
     }
 
     .yr-nav-button {
@@ -108,7 +126,7 @@
 
     .yr-nav-home-a {
         z-index: @yr-z-nav-home;
-        .align-nav(left, @tweak-yr-nav-button-offset);
+        .align-nav-left-mid(@tweak-yr-nav-button-offset);
         .size-nav(@tweak-yr-nav-home-size);
 
         .homepage & {
@@ -119,7 +137,7 @@
 
     .yr-nav-toggler,
     .yr-nav-toggle {
-        .align-nav(right, @tweak-yr-nav-button-offset);
+        .align-nav-right-mid(@tweak-yr-nav-button-offset);
         .size-nav(@tweak-yr-nav-button-size);
     }
 
@@ -204,7 +222,7 @@
         text-align: center;
         overflow: hidden;
 
-        .align-nav(left, 100%);
+        .align-nav-left(100%);
     }
 
     .yr-nav-header {
