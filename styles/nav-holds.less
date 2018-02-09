@@ -149,14 +149,36 @@
 
     .yr-use-hold-shape {
         fill: currentColor;
-        stroke: transparent;
-        stroke-width: 10;
-        stroke-opacity: 0.4;
-        transition: stroke 300ms ease-out;
+        stroke: currentColor;
+        fill-opacity: 0;
+        stroke-opacity: 0;
+        transition: fill-opacity 300ms ease-out,
+            stroke-opacity 300ms ease-out;
     }
 
     .yr-nav-hold:hover .yr-use-hold-shape {
-        stroke: currentColor;
+        fill-opacity: 1;
+        stroke-opacity: 0.1;
+    }
+
+    .yr-nav-holds-defs {
+        display: none;
+
+        path:nth-child(1) {
+            fill-opacity: 1;
+        }
+
+        path:nth-child(2) {
+            fill: @tweak-yr-color-light-tone-2;
+            opacity: 0.2;
+        }
+
+        path:nth-child(3) {
+            stroke: @tweak-yr-color-dark-tone-1;
+            fill: none;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+        }
     }
 
     .yr-nav-hold {
@@ -179,9 +201,5 @@
         &:nth-child(5n+5) .yr-use-hold-shape {
             color: @tweak-yr-color-theme-5-tone-2;
         }
-    }
-
-    .yr-nav-holds-defs {
-        display: none;
     }
 }
