@@ -64,10 +64,10 @@
     .yr-nav-hold {
         display: inline-block;
         position: relative;
-        margin: 1em 0 1em auto;
+        margin: 0 0 0 auto;
 
         &:nth-child(odd) {
-            margin: 1em auto 1em 0;
+            margin: 0 auto 0 0;
         }
 
         @media @mq-circle-up {
@@ -111,11 +111,11 @@
         flex-flow: row wrap;
         justify-content: center;
         align-items: center;
-        padding: 5%;
-        min-width: 140px;
-        min-height: 140px;
-        max-width: 250px;
-        max-height: 250px;
+        padding: 7vmin;
+        min-width: 160px;
+        min-height: 160px;
+        max-width: 300px;
+        max-height: 300px;
         text-decoration: none;
         color: @tweak-yr-color-base-tone-2;
         font-weight: 500;
@@ -125,12 +125,12 @@
     .yr-nav-holds-shape-block,
     .yr-nav-hold-view {
         position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        top: -10%;
+        right: -10%;
+        bottom: -10%;
+        left: -10%;
+        width: 120%;
+        height: 120%;
     }
 
     .yr-nav-holds-shape-block {
@@ -152,13 +152,16 @@
         stroke: currentColor;
         fill-opacity: 0;
         stroke-opacity: 0;
+        stroke-width: 0;
         transition: fill-opacity 300ms ease-out,
-            stroke-opacity 300ms ease-out;
+            stroke-opacity 300ms ease-out,
+            stroke-width 300ms ease-out;
     }
 
     .yr-nav-hold:hover .yr-use-hold-shape {
         fill-opacity: 1;
-        stroke-opacity: 0.1;
+        stroke-opacity: 0.05;
+        stroke-width: 10px;
     }
 
     .yr-nav-holds-defs {
@@ -166,18 +169,20 @@
 
         path:nth-child(1) {
             fill-opacity: 1;
+            stroke-opacity: 1;
         }
 
         path:nth-child(2) {
             fill: @tweak-yr-color-light-tone-2;
             opacity: 0.2;
+            stroke-width: 0;
         }
 
         path:nth-child(3) {
             stroke: @tweak-yr-color-dark-tone-1;
             fill: none;
-            stroke-width: 2;
-            stroke-miterlimit: 10;
+            stroke-width: 2px;
+            stroke-miterlimit: 10px;
         }
     }
 

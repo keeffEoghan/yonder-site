@@ -4,6 +4,14 @@
         <squarespace:block-field id="nav-holds-titles-block" class="yr-nav-holds-titles-block yr-a" columns="12"></squarespace:block-field>
     </header>
 
+    <!-- Default SVG hold shapes -->
+    <svg class="yr-nav-holds-defs">
+        {@|apply holds/1.svg.block}
+        {@|apply holds/2.svg.block}
+        {@|apply holds/3.svg.block}
+        {@|apply holds/4.svg.block}
+        {@|apply holds/5.svg.block}
+    </svg>
     <ul class="yr-nav-holds-menu">
         {.repeated section items}
             <li class="yr-nav-hold">
@@ -24,14 +32,6 @@
             </li>
         {.end}
     </ul>
-    <!-- Default SVG hold shapes -->
-    <svg class="yr-nav-holds-defs">
-        {@|apply holds/1.svg.block}
-        {@|apply holds/2.svg.block}
-        {@|apply holds/3.svg.block}
-        {@|apply holds/4.svg.block}
-        {@|apply holds/5.svg.block}
-    </svg>
 
     <script type="text/javascript">console.log('nav-holds', {@|json-pretty|html});</script>
 </nav>
