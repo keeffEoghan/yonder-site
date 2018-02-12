@@ -35,13 +35,13 @@
  */
 
 // tweak: { "category": "Main Navigation / Buttons", "label": "Button Offset", "title": "tweak-yr-nav-button-offset", "type": "value", "min" : 0, "max" : 100, "step" : 1, target: ".yr-nav-button, .yr-nav-toggler" }
-@tweak-yr-nav-button-offset: 2rem;
+@tweak-yr-nav-button-offset: 2.7rem;
 
 // tweak: { "category": "Main Navigation / Buttons", "label": "Button Size", "title": "tweak-yr-nav-button-size", "type": "value", "min" : 10, "max" : 100, "step" : 1, target: ".yr-nav-toggler" }
-@tweak-yr-nav-button-size: 20px;
+@tweak-yr-nav-button-size: 22px;
 
 // tweak: { "category": "Main Navigation / Buttons", "label": "Home Button Size", "title": "tweak-yr-nav-home-size", "type": "value", "min" : 10, "max" : 100, "step" : 1, target: ".yr-nav-home-a" }
-@tweak-yr-nav-home-size: 30px;
+@tweak-yr-nav-home-size: 38px;
 
 
 /**
@@ -62,7 +62,7 @@
  * Fonts
  */
 
-// tweak: { "category": "Fonts", "label": "Body Text", "title": "tweak-yr-body-font", "type": "font", "loadAllVariants": true }
+// tweak: { "category": "Fonts", "label": "Body Text", "title": "tweak-yr-body-font", "type": "font", "loadAllVariants": true, "target": "p" }
 .tweak-yr-body-font {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 16px;
@@ -73,18 +73,18 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Fonts", "label": "Heading 1", "title": "tweak-yr-h1-font", "type": "font", "loadAllVariants": true }
+// tweak: { "category": "Fonts", "label": "Heading 1", "title": "tweak-yr-h1-font", "type": "font", "loadAllVariants": true, "target": "h1" }
 .tweak-yr-h1-font {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     font-style: normal;
-    font-size: 32px;
+    font-size: 12vw;
     letter-spacing: 0em;
-    line-height: 1.0em;
+    line-height: 1.2em;
     text-transform: none;
 }
 
-// tweak: { "category": "Fonts", "label": "Heading 2", "title": "tweak-yr-h2-font", "type": "font", "loadAllVariants": true }
+// tweak: { "category": "Fonts", "label": "Heading 2", "title": "tweak-yr-h2-font", "type": "font", "loadAllVariants": true, "target": "h2" }
 .tweak-yr-h2-font {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
@@ -95,7 +95,7 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Fonts", "label": "Heading 3", "title": "tweak-yr-h3-font", "type": "font", "loadAllVariants": true }
+// tweak: { "category": "Fonts", "label": "Heading 3", "title": "tweak-yr-h3-font", "type": "font", "loadAllVariants": true, "target": "h3" }
 .tweak-yr-h3-font {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
@@ -106,7 +106,7 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Fonts", "label": "Heading 4", "title": "tweak-yr-h4-font", "type": "font", "loadAllVariants": true }
+// tweak: { "category": "Fonts", "label": "Heading 4", "title": "tweak-yr-h4-font", "type": "font", "loadAllVariants": true, "target": "h4" }
 .tweak-yr-h4-font {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
@@ -117,7 +117,7 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Fonts", "label": "Heading 5", "title": "tweak-yr-h5-font", "type": "font", "loadAllVariants": true }
+// tweak: { "category": "Fonts", "label": "Heading 5", "title": "tweak-yr-h5-font", "type": "font", "loadAllVariants": true, "target": "h5" }
 .tweak-yr-h5-font {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
@@ -128,7 +128,7 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Fonts", "label": "Heading 6", "title": "tweak-yr-h6-font", "type": "font", "loadAllVariants": true }
+// tweak: { "category": "Fonts", "label": "Heading 6", "title": "tweak-yr-h6-font", "type": "font", "loadAllVariants": true, "target": "h6" }
 .tweak-yr-h6-font {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
@@ -138,6 +138,32 @@
     line-height: 1.2em;
     text-transform: none;
 }
+
+
+/**
+ * Spacing
+ */
+
+// tweak: { "category": "Spacing", "label": "Paragraph Margin", "title": "tweak-yr-p-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "p" }
+@tweak-yr-p-margin: 1em;
+
+// tweak: { "category": "Spacing", "label": "Heading 1 Margin", "title": "tweak-yr-h1-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h1" }
+@tweak-yr-h1-margin: 2em;
+
+// tweak: { "category": "Spacing", "label": "Heading 2 Margin", "title": "tweak-yr-h2-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h2" }
+@tweak-yr-h2-margin: 1em;
+
+// tweak: { "category": "Spacing", "label": "Heading 3 Margin", "title": "tweak-yr-h3-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h3" }
+@tweak-yr-h3-margin: 1em;
+
+// tweak: { "category": "Spacing", "label": "Heading 4 Margin", "title": "tweak-yr-h4-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h4" }
+@tweak-yr-h4-margin: 1em;
+
+// tweak: { "category": "Spacing", "label": "Heading 5 Margin", "title": "tweak-yr-h5-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h5" }
+@tweak-yr-h5-margin: 1em;
+
+// tweak: { "category": "Spacing", "label": "Heading 6 Margin", "title": "tweak-yr-h6-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h6" }
+@tweak-yr-h6-margin: 1em;
 
 
 /**
@@ -177,7 +203,7 @@
  * Colors / Light
  */
 
-// tweak: { "category": "Colors / Light", "label": "Tone 1", "title": "tweak-yr-color-light-tone-1", "type": "color", "disableTransparency": "false", "target": ".yr-nav-panel" }
+// tweak: { "category": "Colors / Light", "label": "Tone 1", "title": "tweak-yr-color-light-tone-1", "type": "color", "disableTransparency": "false", "target": ".yr-nav, .yr-nav-panel" }
 @tweak-yr-color-light-tone-1: rgba(255, 255, 255, 0.2);
 
 // tweak: { "category": "Colors / Light", "label": "Tone 2", "title": "tweak-yr-color-light-tone-2", "type": "color", "disableTransparency": "false" }
@@ -194,10 +220,10 @@
 // tweak: { "category": "Colors / Accent 1", "label": "Tone 1", "title": "tweak-yr-color-accent-1-tone-1", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-accent-1-tone-1: #05443d;
 
-// tweak: { "category": "Colors / Accent 1", "label": "Tone 2", "title": "tweak-yr-color-accent-1-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav-button" }
+// tweak: { "category": "Colors / Accent 1", "label": "Tone 2", "title": "tweak-yr-color-accent-1-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav" }
 @tweak-yr-color-accent-1-tone-2: #075e56;
 
-// tweak: { "category": "Colors / Accent 1", "label": "Tone 3", "title": "tweak-yr-color-accent-1-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-nav-panel" }
+// tweak: { "category": "Colors / Accent 1", "label": "Tone 3", "title": "tweak-yr-color-accent-1-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-nav, .yr-nav-panel" }
 @tweak-yr-color-accent-1-tone-3: #0f7a6d;
 
 
