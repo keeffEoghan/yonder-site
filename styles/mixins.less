@@ -29,3 +29,41 @@
         .-q();
     }
 }
+
+
+/**
+ * Link styling.
+ */
+
+.yr-a() {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+
+    &::after {
+        content: '';
+        position: absolute;
+        display: block;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1px;
+        background-color: currentColor;
+        transition: transform 300ms ease-out,
+            opacity 300ms ease-out;
+    }
+
+    &:visited::after {
+        opacity: 0.7;
+    }
+
+    &:hover::after {
+        transform: scaleY(2);
+        opacity: 0.8;
+    }
+
+    &:active::after {
+        transform: scaleY(4);
+        opacity: 0;
+    }
+}

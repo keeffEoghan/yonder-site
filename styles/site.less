@@ -20,7 +20,12 @@ body {
     align-items: stretch;
     margin: 0 auto;
     color: @tweak-yr-color-dark-tone-2;
-    .tweak-yr-body-font;
+    .tweak-yr-font-base;
+
+    @m: ~'only screen and @{yr-mq-m-up}';
+    @media @m {
+        font-size: @tweak-yr-font-base-size-2;
+    }
 }
 
 .yr-main {
@@ -29,41 +34,45 @@ body {
 
 p {
     margin: @tweak-yr-p-margin 0;
+    .tweak-yr-font-p;
 }
 
 h1 {
+    /**
+     * Has some special exceptions to the rest of the typography.
+     */
     /* color: @tweak-yr-color-dark-tone-1; */
-    .tweak-yr-h1-font;
+    .tweak-yr-font-h1;
     padding: @tweak-yr-h1-margin 0;
 }
 
 h2 {
     /* color: @tweak-yr-color-dark-tone-1; */
-    .tweak-yr-h2-font;
+    .tweak-yr-font-h2;
     margin: @tweak-yr-h2-margin 0;
 }
 
 h3 {
     /* color: @tweak-yr-color-dark-tone-2; */
-    .tweak-yr-h3-font;
+    .tweak-yr-font-h3;
     margin: @tweak-yr-h3-margin 0;
 }
 
 h4 {
     /* color: @tweak-yr-color-dark-tone-2; */
-    .tweak-yr-h4-font;
+    .tweak-yr-font-h4;
     margin: @tweak-yr-h4-margin 0;
 }
 
 h5 {
     /* color: @tweak-yr-color-dark-tone-3; */
-    .tweak-yr-h5-font;
+    .tweak-yr-font-h5;
     margin: @tweak-yr-h5-margin 0;
 }
 
 h6 {
     /* color: @tweak-yr-color-dark-tone-3; */
-    .tweak-yr-h6-font;
+    .tweak-yr-font-h6;
     margin: @tweak-yr-h6-margin 0;
 }
 
@@ -75,39 +84,15 @@ a {
 
 a.yr-a,
 .yr-a a {
-    position: relative;
-    display: inline-block;
-    text-decoration: none;
-
-    &::after {
-        content: '';
-        position: absolute;
-        display: block;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 1px;
-        background-color: currentColor;
-        transition: transform 400ms ease-out,
-            opacity 400ms ease-out;
-    }
-
-    &:visited::after {
-        opacity: 0.7;
-    }
-
-    &:hover::after {
-        transform: scaleY(2);
-    }
-
-    &:active::after {
-        transform: scaleY(4);
-        opacity: 0;
-    }
+    .yr-a();
 }
 
 strong {
-    font-weight: bold;
+    font-weight: 900;
+}
+
+em {
+    font-style: italic;
 }
 
 small {
@@ -117,6 +102,7 @@ small {
 img,
 .yr-inline-svg {
     display: inline-block;
+    vertical-align: middle;
 }
 
 
@@ -138,7 +124,7 @@ img,
     pointer-events: none;
 
     background-color: transparent;
-    .transition(background-color 300ms ease-out, transform 300ms ease-out 300ms;);
+    .transition(background-color 500ms ease-out, transform 500ms ease-out 500ms;);
 
     .tweak-yr-loader-align-down-low & {
         top: auto;
@@ -147,12 +133,12 @@ img,
 
     [data-mercury-loading] & {
         background-color: @tweak-yr-color-accent-2-tone-3;
-        .transition(background-color 300ms ease-out, transform 300ms ease-out;);
+        .transition(background-color 500ms ease-out, transform 500ms ease-out;);
     }
 
     [data-mercury-loading='start'] & {
         .transform(translateX(33%));
-        .transition(transform 300ms ease-out;);
+        .transition(transform 500ms ease-out;);
     }
 
     [data-mercury-loading='swap'] & {

@@ -5,6 +5,8 @@
 # To-do
 
 - Fonts and typography
+    - [Buy](https://www.myfonts.com/cart/432948577)
+    - Sort out the sidebar etc styles again.
 - Content
     - Responsive wrapping columns, but only for full-width rows...?
     - Custom overrides for certain interior blocks

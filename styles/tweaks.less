@@ -8,7 +8,7 @@
 
 // tweak: { "category": "Site / Loading", "label": "Enable AJAX Loading", "title": "tweak-yr-ajax-enable", "type": "checkbox", "active": true, "js": "true" }
 // tweak: { "category": "Site / Loading", "label": "Show Loading Bar", "title": "tweak-yr-loader-show", "type": "checkbox", "active": true, "showOnlyWhenPresent": ".tweak-yr-ajax-enable" }
-// tweak: { "category": "Site / Loading", "label": "Loading Bar Position", "title": "tweak-yr-loader-align", "type": "dropdown", "options": ["up high", "down low"], "default": "up high", target: ".yr-loader", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-show" }
+// tweak: { "category": "Site / Loading", "label": "Loading Bar Position", "title": "tweak-yr-loader-align", "type": "dropdown", "options": ["Up High", "Down Low"], "default": "Up High", target: ".yr-loader", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-show" }
 
 // tweak: { "category": "Site / Loading", "label": "Loading Bar Size", "title": "tweak-yr-loader-size", "type": "value", "step": 1, "min": 1, "max": 120, target: ".yr-loader", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-show" }
 @tweak-yr-loader-size: 3px;
@@ -19,6 +19,19 @@
  */
 
 // tweak: { "category": "Main Navigation", "label": "Navigation Position", "title": "tweak-yr-nav-align", "type": "dropdown", "options": ["regular", "switch"], "default": "regular", target: ".yr-nav-toggler, .yr-nav-button" }
+
+// tweak: { "category": "Main Navigation", "label": "Links Font", "title": "tweak-yr-font-nav-a", "type": "font", "loadAllVariants": true, "target": ".yr-nav-a" }
+.tweak-yr-font-nav-a {
+    // Doesn't display well in `Style Editor`...
+    // font-family: @yr-font-sans;
+    font-family: 'Centrale Sans Medium', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1em;
+    letter-spacing: 0em;
+    line-height: 1.2em;
+    text-transform: none;
+}
 
 
 /**
@@ -48,6 +61,22 @@
  * Holds Navigation
  */
 
+// tweak: { "category": "Holds Navigation", "label": "Holds Font", "title": "tweak-yr-font-nav-holds", "type": "font", "loadAllVariants": true, "target": ".yr-nav-hold-a" }
+.tweak-yr-font-nav-holds {
+    // Doesn't display well in `Style Editor`...
+    // font-family: @yr-font-sans;
+    font-family: 'Centrale Sans Medium', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1em;
+    letter-spacing: 0em;
+    line-height: 1.2em;
+    text-transform: none;
+}
+
+// tweak: { "category": "Holds Navigation", "label": "Holds Padding", "title": "tweak-yr-nav-holds-pad", "type": "value", "min": -50, "max": 100, "step": 1, "target": "p" }
+@tweak-yr-nav-holds-pad: 8vmin;
+
 
 /**
  * Holds Navigation / Header
@@ -59,83 +88,115 @@
 
 
 /**
- * Fonts
+ * Typography
  */
 
-// tweak: { "category": "Fonts", "label": "Body Text", "title": "tweak-yr-body-font", "type": "font", "loadAllVariants": true, "target": "p" }
-.tweak-yr-body-font {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.6em;
-    font-weight: 400;
+// tweak: { "category": "Typography", "label": "Big Screen Font Size", "title": "tweak-yr-font-base-size-2", "type": "value", "min": 0, "max": 100, "step": 1, "target": "body" }
+@tweak-yr-font-base-size-2: 17pt;
+
+// tweak: { "category": "Typography", "label": "Base", "title": "tweak-yr-font-base", "type": "font", "loadAllVariants": true, "target": "body" }
+.tweak-yr-font-base {
+    // Doesn't display well in `Style Editor`...
+    // font-family: @yr-font-serif;
+    font-family: 'Andulka Book Pro', 'Merriweather', 'Palatino', 'Georgia', serif;
+    font-size: 15pt;
+    line-height: 1.4em;
+    font-weight: 100;
     font-style: normal;
     letter-spacing: 0em;
     text-transform: none;
 }
 
-// tweak: { "category": "Fonts", "label": "Heading 1", "title": "tweak-yr-h1-font", "type": "font", "loadAllVariants": true, "target": "h1" }
-.tweak-yr-h1-font {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 700;
+// tweak: { "category": "Typography", "label": "Paragraph", "title": "tweak-yr-font-p", "type": "font", "loadAllVariants": true, "target": "p" }
+.tweak-yr-font-p {
+    // Doesn't display well in `Style Editor`...
+    // font-family: @yr-font-serif;
+    font-family: 'Andulka Book Pro', 'Merriweather', 'Palatino', 'Georgia', serif;
+    font-size: 1em;
+    line-height: 1.4em;
+    font-weight: 100;
     font-style: normal;
-    font-size: 12vw;
+    letter-spacing: 0em;
+    text-transform: none;
+}
+
+// tweak: { "category": "Typography", "label": "Heading 1", "title": "tweak-yr-font-h1", "type": "font", "loadAllVariants": true, "target": "h1" }
+.tweak-yr-font-h1 {
+    // Doesn't display well in `Style Editor`...
+    // font-family: @yr-font-sans-bold;
+    font-family: 'Centrale Sans Bold', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 11vw;
     letter-spacing: 0em;
     line-height: 1.2em;
     text-transform: none;
 }
 
-// tweak: { "category": "Fonts", "label": "Heading 2", "title": "tweak-yr-h2-font", "type": "font", "loadAllVariants": true, "target": "h2" }
-.tweak-yr-h2-font {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 700;
+// tweak: { "category": "Typography", "label": "Heading 2", "title": "tweak-yr-font-h2", "type": "font", "loadAllVariants": true, "target": "h2" }
+.tweak-yr-font-h2 {
+    // Doesn't display well in `Style Editor`...
+    // font-family: @yr-font-sans-bold;
+    font-family: 'Centrale Sans Bold', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 500;
     font-style: normal;
-    font-size: 24px;
+    font-size: 1.5em;
     letter-spacing: 0em;
     line-height: 1.2em;
     text-transform: none;
 }
 
-// tweak: { "category": "Fonts", "label": "Heading 3", "title": "tweak-yr-h3-font", "type": "font", "loadAllVariants": true, "target": "h3" }
-.tweak-yr-h3-font {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 700;
+// tweak: { "category": "Typography", "label": "Heading 3", "title": "tweak-yr-font-h3", "type": "font", "loadAllVariants": true, "target": "h3" }
+.tweak-yr-font-h3 {
+    // Doesn't display well in `Style Editor`...
+    // font-family: @yr-font-serif;
+    font-family: 'Andulka Book Pro', 'Merriweather', 'Palatino', 'Georgia', serif;
+    font-size: 1.3em;
+    line-height: 1.4em;
+    font-weight: 100;
     font-style: normal;
-    font-size: 18px;
+    letter-spacing: 0em;
+    text-transform: none;
+}
+
+/* @note `Style Editor` WYSIWYG only shows first 3 heading sizes. */
+
+// tweak: { "category": "Typography", "label": "Heading 4", "title": "tweak-yr-font-h4", "type": "font", "loadAllVariants": true, "target": "h4" }
+.tweak-yr-font-h4 {
+    // Doesn't display well in `Style Editor`...
+    // font-family: @yr-font-sans-bold;
+    font-family: 'Centrale Sans Bold', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 11vw;
     letter-spacing: 0em;
     line-height: 1.2em;
     text-transform: none;
 }
 
-// tweak: { "category": "Fonts", "label": "Heading 4", "title": "tweak-yr-h4-font", "type": "font", "loadAllVariants": true, "target": "h4" }
-.tweak-yr-h4-font {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 700;
+// tweak: { "category": "Typography", "label": "Heading 5", "title": "tweak-yr-font-h5", "type": "font", "loadAllVariants": true, "target": "h5" }
+.tweak-yr-font-h5 {
+    // Doesn't display well in `Style Editor`...
+    // font-family: @yr-font-sans-bold;
+    font-family: 'Centrale Sans Bold', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 500;
     font-style: normal;
-    font-size: 18px;
+    font-size: 1.6em;
     letter-spacing: 0em;
     line-height: 1.2em;
     text-transform: none;
 }
 
-// tweak: { "category": "Fonts", "label": "Heading 5", "title": "tweak-yr-h5-font", "type": "font", "loadAllVariants": true, "target": "h5" }
-.tweak-yr-h5-font {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 700;
+// tweak: { "category": "Typography", "label": "Heading 6", "title": "tweak-yr-font-h6", "type": "font", "loadAllVariants": true, "target": "h6" }
+.tweak-yr-font-h6 {
+    // Doesn't display well in `Style Editor`...
+    // font-family: @yr-font-serif;
+    font-family: 'Andulka Book Pro', 'Merriweather', 'Palatino', 'Georgia', serif;
+    font-size: 1.3em;
+    line-height: 1.4em;
+    font-weight: 100;
     font-style: normal;
-    font-size: 18px;
     letter-spacing: 0em;
-    line-height: 1.2em;
-    text-transform: none;
-}
-
-// tweak: { "category": "Fonts", "label": "Heading 6", "title": "tweak-yr-h6-font", "type": "font", "loadAllVariants": true, "target": "h6" }
-.tweak-yr-h6-font {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 18px;
-    letter-spacing: 0em;
-    line-height: 1.2em;
     text-transform: none;
 }
 
@@ -145,25 +206,25 @@
  */
 
 // tweak: { "category": "Spacing", "label": "Paragraph Margin", "title": "tweak-yr-p-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "p" }
-@tweak-yr-p-margin: 1em;
+@tweak-yr-p-margin: 0.5em;
 
 // tweak: { "category": "Spacing", "label": "Heading 1 Margin", "title": "tweak-yr-h1-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h1" }
-@tweak-yr-h1-margin: 2em;
+@tweak-yr-h1-margin: 10vh;
 
 // tweak: { "category": "Spacing", "label": "Heading 2 Margin", "title": "tweak-yr-h2-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h2" }
 @tweak-yr-h2-margin: 1em;
 
 // tweak: { "category": "Spacing", "label": "Heading 3 Margin", "title": "tweak-yr-h3-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h3" }
-@tweak-yr-h3-margin: 1em;
+@tweak-yr-h3-margin: 0.5em;
 
 // tweak: { "category": "Spacing", "label": "Heading 4 Margin", "title": "tweak-yr-h4-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h4" }
-@tweak-yr-h4-margin: 1em;
+@tweak-yr-h4-margin: 1.6em;
 
 // tweak: { "category": "Spacing", "label": "Heading 5 Margin", "title": "tweak-yr-h5-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h5" }
 @tweak-yr-h5-margin: 1em;
 
 // tweak: { "category": "Spacing", "label": "Heading 6 Margin", "title": "tweak-yr-h6-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h6" }
-@tweak-yr-h6-margin: 1em;
+@tweak-yr-h6-margin: 0.5em;
 
 
 /**
@@ -324,15 +385,34 @@
  */
 
 
+/**
+ * Content Overrides
+ */
+
+
+/**
+ * Image Block: Custom
+ */
+
+// tweak: { "category": "Image Block: Custom", "label": "Use Site Fonts", "title": "tweak-yr-sqs-image-block-use-site-fonts", "type": "checkbox", "active": true, target: ".sqs-layout .sqs-block-image" }
+// tweak: { "category": "Image Block: Custom", "label": "Fixed Font Size", "title": "tweak-yr-sqs-image-block-fixed-font-size", "type": "checkbox", "active": true, target: ".sqs-layout .sqs-block-image" }
+
+
+/**
+ * Image Block: Poster
+ */
+
+// tweak: { "category": "Image Block: Poster", "label": "Subtitle Alignment", "title": "tweak-yr-sqs-image-block-poster-anchor-sub", "type": "dropdown", "options": ["Up High", "In The Middle", "Down Low"], "default": "Down Low", target: ".sqs-layout .design-layout-poster" }
+
 
 /**
  * This fixes the following bug:
  *     site.css:1      .Share {
  *     site.css:1          &-buttons {
  *     site.css:1              &-item {
- *     site.css:10019              padding: 0 (.5 * (@tweak-yr-share-buttons-size - @tweak-yr-share-buttons-label-font-font-size))
+ *     site.css:10019              padding: 0 (.5 * (@tweak-yr-font-font-share-buttons-size - @tweak-yr-share-buttons-label-size))
  *
- *     ExecuteError VAR_UNDEFINED: Failed to locate a definition for the variable @tweak-yr-share-buttons-label-font-font-size in current scope
+ *     ExecuteError VAR_UNDEFINED: Failed to locate a definition for the variable @tweak-yr-font-font-share-buttons-label-size in current scope
  */
 // (bugfix) tweak: { "category": "Fonts", "label": "Share Buttons Label Font Size", "title": "tweak-share-buttons-label-font-font-size", "type": "value" }
 @tweak-share-buttons-label-font-font-size: 16px;
