@@ -36,7 +36,6 @@
 // tweak: { "category": "Main Navigation", "label": "Maximum Size", "title": "tweak-yr-nav-main-size-max", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-panel" }
 @tweak-yr-nav-main-size-max: 32em;
 
-
 /**
  * Main Navigation / Header
  */
@@ -44,6 +43,24 @@
 // tweak: { "category": "Main Navigation / Header", "label": "Show Site Title in Main Navigation", "title": "tweak-yr-nav-main-site-title-show", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header" }
 // tweak: { "category": "Main Navigation / Header", "label": "Show Site Tagline in Main Navigation", "title": "tweak-yr-nav-main-site-tagline-show", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header" }
 // tweak: { "category": "Main Navigation / Header", "label": "Show Site Description in Main Navigation", "title": "tweak-yr-nav-main-site-description-show", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header" }
+
+
+/**
+ * Main Navigation / Footer
+ */
+
+// tweak: { "category": "Main Navigation / Footer", "label": "Font", "title": "tweak-yr-font-nav-footer", "type": "font", "loadAllVariants": true, "target": ".yr-nav-footer-block" }
+.tweak-yr-font-nav-footer {
+    // Doesn't display well in `Style Editor`...
+    // font-family: @yr-font-sans-bold;
+    font-family: 'Centrale Sans Medium', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.8em;
+    letter-spacing: 0em;
+    line-height: 1em;
+    text-transform: none;
+}
 
 
 /**

@@ -230,7 +230,7 @@
 
     .yr-nav-header {
         width: 100%;
-        margin-bottom: 2em;
+        margin-bottom: 1em;
     }
 
     .yr-site-title {
@@ -320,13 +320,23 @@
         &:active,
         &.yr-active {
             border-color: @tweak-yr-color-accent-1-tone-1;
-            
+
             &::after {
                 opacity: 1;
             }
 
             + .yr-nav-folder-links {
                 background-color: @tweak-yr-color-accent-1-tone-1;
+            }
+        }
+
+        [data-mercury-loading] & {
+            &::after {
+                opacity: 0;
+            }
+
+            + .yr-nav-folder-links {
+                background-color: transparent;
             }
         }
     }
@@ -340,7 +350,11 @@
 
     .yr-nav-footer-block {
         margin-top: 2em;
-        font-size: 0.8em;
+
+        &,
+        & p {
+            .tweak-yr-font-nav-footer;
+        }
     }
 
     /**
