@@ -1,15 +1,15 @@
 .yr-nav-holds {
     position: relative;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
+    .display(flex);
+    .flex-flow(column nowrap);
+    .justify-content(center);
+    .align-items(center);
     min-height: 100%;
 
     @mq-circle-up: ~'only screen and @{yr-mq-hold-circle-up}';
 
     .yr-nav-holds-header {
-        flex: 0 0 auto;
+        .flex(0 0 auto);
         width: 100%;
         padding: 2em;
         text-align: center;
@@ -26,14 +26,14 @@
 
     .yr-nav-holds-menu {
         position: relative;
-        display: flex;
-        flex-flow: column nowrap;
-        flex: 1 1 auto;
+        .display(flex);
+        .flex-flow(column nowrap);
+        .flex(1 1 auto);
         width: 100%;
         height: 100%;
         max-width: 1300px;
         max-height: 1300px;
-        padding: 0 2em 2em;
+        padding: 2em;
     }
 
     .yr-site-title {
@@ -64,16 +64,23 @@
     .yr-nav-hold {
         display: inline-block;
         position: relative;
-        margin: 0 0 0 auto;
+
+        @margin: 10%;
+        margin: 0 @margin 0 auto;
 
         &:nth-child(odd) {
-            margin: 0 auto 0 0;
+            margin: 0 auto 0 @margin;
         }
 
         @media @mq-circle-up {
             position: absolute;
             top: 50%;
             left: 50%;
+
+            &,
+            &:nth-child(odd) {
+                margin: 0;
+            }
 
             .loop-holds(@l, @i: 0) when (@i < @l) {
                 .loop-holds(@l, @i + 1);
@@ -85,7 +92,7 @@
                     &:nth-child((~'@{l}n+@{n}')) {
                         @r: @i * 360deg / @l;
 
-                        transform:
+                        @transform:
                             /* Center */
                             translate(-50%, -50%)
                             /* Angle in circle */
@@ -95,9 +102,10 @@
                             /* Move back inside bounds of circle */
                             translateY(50%)
                             /* Move back a little margin */
-                            translateY(10%)
+                            translateY(2em)
                             /* Straighten */
                             rotate(-@r);
+                        .transform(@transform);
                     }
                 }
             }
@@ -107,15 +115,15 @@
 
     .yr-nav-hold-a {
         position: relative;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: center;
-        align-items: center;
+        .display(flex);
+        .flex-flow(row wrap);
+        .justify-content(center);
+        .align-items(center);
+        min-width: @tweak-yr-nav-holds-size-min;
+        min-height: @tweak-yr-nav-holds-size-min;
+        max-width: @tweak-yr-nav-holds-size-max;
+        max-height: @tweak-yr-nav-holds-size-max;
         padding: @tweak-yr-nav-holds-pad;
-        min-width: 160px;
-        min-height: 160px;
-        max-width: 300px;
-        max-height: 300px;
         text-decoration: none;
         color: @tweak-yr-color-base-tone-2;
         z-index: 2;
@@ -125,6 +133,7 @@
     .yr-nav-holds-shape-block,
     .yr-nav-hold-view {
         position: absolute;
+        pointer-events: none;
         top: -10%;
         right: -10%;
         bottom: -10%;
@@ -143,25 +152,48 @@
         }
     }
 
+    .yr-nav-holds-shape-block,
     .yr-nav-hold-view {
-        z-index: 1;
-    }
-
-    .yr-use-hold-shape {
         fill: currentColor;
         stroke: currentColor;
         fill-opacity: 0;
         stroke-opacity: 0;
         stroke-width: 0;
-        transition: fill-opacity 300ms ease-out,
+        @transition: fill-opacity 400ms ease-in-out,
             stroke-opacity 300ms ease-out,
-            stroke-width 300ms ease-out;
+            stroke-width 200ms ease-out;
+        .transition(@transition);
     }
 
-    .yr-nav-hold:hover .yr-use-hold-shape {
-        fill-opacity: 1;
-        stroke-opacity: 0.05;
-        stroke-width: 10px;
+    .yr-nav-hold-view {
+        z-index: 1;
+    }
+
+    .yr-nav-hold-a {
+        &.yr-active,
+        &:hover {
+            ~ .yr-nav-holds-shape-block,
+            ~ .yr-nav-hold-view {
+                fill-opacity: 1;
+                stroke-width: 10px;
+            }
+        }
+
+        &:active,
+        &.yr-active {
+            ~ .yr-nav-holds-shape-block,
+            ~ .yr-nav-hold-view {
+                stroke-opacity: 0.05;
+            }
+        }
+
+        &.yr-active:hover {
+            ~ .yr-nav-holds-shape-block,
+            ~ .yr-nav-hold-view {
+                fill-opacity: 0;
+                stroke-width: 0;
+            }
+        }
     }
 
     .yr-nav-holds-defs {

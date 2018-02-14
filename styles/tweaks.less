@@ -23,15 +23,18 @@
 // tweak: { "category": "Main Navigation", "label": "Links Font", "title": "tweak-yr-font-nav-a", "type": "font", "loadAllVariants": true, "target": ".yr-nav-a" }
 .tweak-yr-font-nav-a {
     // Doesn't display well in `Style Editor`...
-    // font-family: @yr-font-sans;
-    font-family: 'Centrale Sans Medium', 'Helvetica', 'Arial', sans-serif;
-    font-weight: 400;
+    // font-family: @yr-font-sans-bold;
+    font-family: 'Centrale Sans Bold', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 500;
     font-style: normal;
-    font-size: 1em;
+    font-size: 1.1em;
     letter-spacing: 0em;
     line-height: 1.2em;
     text-transform: none;
 }
+
+// tweak: { "category": "Main Navigation", "label": "Maximum Size", "title": "tweak-yr-nav-main-size-max", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-panel" }
+@tweak-yr-nav-main-size-max: 32em;
 
 
 /**
@@ -61,7 +64,7 @@
  * Holds Navigation
  */
 
-// tweak: { "category": "Holds Navigation", "label": "Holds Font", "title": "tweak-yr-font-nav-holds", "type": "font", "loadAllVariants": true, "target": ".yr-nav-hold-a" }
+// tweak: { "category": "Holds Navigation", "label": "Font", "title": "tweak-yr-font-nav-holds", "type": "font", "loadAllVariants": true, "target": ".yr-nav-hold-a" }
 .tweak-yr-font-nav-holds {
     // Doesn't display well in `Style Editor`...
     // font-family: @yr-font-sans;
@@ -74,7 +77,16 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Holds Navigation", "label": "Holds Padding", "title": "tweak-yr-nav-holds-pad", "type": "value", "min": -50, "max": 100, "step": 1, "target": "p" }
+// tweak: { "category": "Holds Navigation", "label": "Minimum Size", "title": "tweak-yr-nav-holds-size-min", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
+@tweak-yr-nav-holds-size-min: 9em;
+
+// tweak: { "category": "Holds Navigation", "label": "Maximum Size", "title": "tweak-yr-nav-holds-size-max", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
+@tweak-yr-nav-holds-size-max: 18em;
+
+// tweak: { "category": "Holds Navigation", "label": "Switch to Circle Size", "title": "tweak-yr-mq-hold-circle-up", "type": "value", "min": 0, "max": 2000, "step": 1, "target": ".yr-nav-holds" }
+@tweak-yr-mq-hold-circle-up: 500px;
+
+// tweak: { "category": "Holds Navigation", "label": "Padding", "title": "tweak-yr-nav-holds-pad", "type": "value", "min": -50, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
 @tweak-yr-nav-holds-pad: 8vmin;
 
 
@@ -92,28 +104,28 @@
  */
 
 // tweak: { "category": "Typography", "label": "Big Screen Font Size", "title": "tweak-yr-font-base-size-2", "type": "value", "min": 0, "max": 100, "step": 1, "target": "body" }
-@tweak-yr-font-base-size-2: 17pt;
+@tweak-yr-font-base-size-2: 15pt;
 
 // tweak: { "category": "Typography", "label": "Base", "title": "tweak-yr-font-base", "type": "font", "loadAllVariants": true, "target": "body" }
 .tweak-yr-font-base {
     // Doesn't display well in `Style Editor`...
     // font-family: @yr-font-serif;
     font-family: 'Andulka Book Pro', 'Merriweather', 'Palatino', 'Georgia', serif;
-    font-size: 15pt;
-    line-height: 1.4em;
+    font-size: 13pt;
+    line-height: 1.6em;
     font-weight: 100;
     font-style: normal;
     letter-spacing: 0em;
     text-transform: none;
 }
 
-// tweak: { "category": "Typography", "label": "Paragraph", "title": "tweak-yr-font-p", "type": "font", "loadAllVariants": true, "target": "p" }
+// tweak: { "category": "Typography", "label": "Paragraph", "title": "tweak-yr-font-p", "type": "font", "loadAllVariants": true, "target": "p, .tweak-yr-sqs-image-block-use-site-fonts .sqs-block-image" }
 .tweak-yr-font-p {
     // Doesn't display well in `Style Editor`...
     // font-family: @yr-font-serif;
     font-family: 'Andulka Book Pro', 'Merriweather', 'Palatino', 'Georgia', serif;
     font-size: 1em;
-    line-height: 1.4em;
+    line-height: 1.6em;
     font-weight: 100;
     font-style: normal;
     letter-spacing: 0em;
@@ -161,14 +173,14 @@
 
 /* @note `Style Editor` WYSIWYG only shows first 3 heading sizes. */
 
-// tweak: { "category": "Typography", "label": "Heading 4", "title": "tweak-yr-font-h4", "type": "font", "loadAllVariants": true, "target": "h4" }
+// tweak: { "category": "Typography", "label": "Heading 4", "title": "tweak-yr-font-h4", "type": "font", "loadAllVariants": true, "target": "h4, .tweak-yr-sqs-image-block-use-site-fonts .sqs-block-image" }
 .tweak-yr-font-h4 {
     // Doesn't display well in `Style Editor`...
     // font-family: @yr-font-sans-bold;
     font-family: 'Centrale Sans Bold', 'Helvetica', 'Arial', sans-serif;
     font-weight: 500;
     font-style: normal;
-    font-size: 11vw;
+    font-size: 6em;
     letter-spacing: 0em;
     line-height: 1.2em;
     text-transform: none;
@@ -187,7 +199,7 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Typography", "label": "Heading 6", "title": "tweak-yr-font-h6", "type": "font", "loadAllVariants": true, "target": "h6" }
+// tweak: { "category": "Typography", "label": "Heading 6", "title": "tweak-yr-font-h6", "type": "font", "loadAllVariants": true, "target": "h6, .tweak-yr-sqs-image-block-use-site-fonts .sqs-block-image" }
 .tweak-yr-font-h6 {
     // Doesn't display well in `Style Editor`...
     // font-family: @yr-font-serif;
@@ -264,7 +276,7 @@
  * Colors / Light
  */
 
-// tweak: { "category": "Colors / Light", "label": "Tone 1", "title": "tweak-yr-color-light-tone-1", "type": "color", "disableTransparency": "false", "target": ".yr-nav, .yr-nav-panel" }
+// tweak: { "category": "Colors / Light", "label": "Tone 1", "title": "tweak-yr-color-light-tone-1", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-light-tone-1: rgba(255, 255, 255, 0.2);
 
 // tweak: { "category": "Colors / Light", "label": "Tone 2", "title": "tweak-yr-color-light-tone-2", "type": "color", "disableTransparency": "false" }
@@ -278,10 +290,10 @@
  * Colors / Accent 1
  */
 
-// tweak: { "category": "Colors / Accent 1", "label": "Tone 1", "title": "tweak-yr-color-accent-1-tone-1", "type": "color", "disableTransparency": "false" }
+// tweak: { "category": "Colors / Accent 1", "label": "Tone 1", "title": "tweak-yr-color-accent-1-tone-1", "type": "color", "disableTransparency": "false", "target": ".yr-nav-panel" }
 @tweak-yr-color-accent-1-tone-1: #05443d;
 
-// tweak: { "category": "Colors / Accent 1", "label": "Tone 2", "title": "tweak-yr-color-accent-1-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav" }
+// tweak: { "category": "Colors / Accent 1", "label": "Tone 2", "title": "tweak-yr-color-accent-1-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav, .yr-nav, .yr-nav-panel" }
 @tweak-yr-color-accent-1-tone-2: #075e56;
 
 // tweak: { "category": "Colors / Accent 1", "label": "Tone 3", "title": "tweak-yr-color-accent-1-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-nav, .yr-nav-panel" }
@@ -298,7 +310,7 @@
 // tweak: { "category": "Colors / Accent 2", "label": "Tone 2", "title": "tweak-yr-color-accent-2-tone-2", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-accent-2-tone-2: #ff7c3a;;
 
-// tweak: { "category": "Colors / Accent 2", "label": "Tone 3", "title": "tweak-yr-color-accent-2-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-loader" }
+// tweak: { "category": "Colors / Accent 2", "label": "Tone 3", "title": "tweak-yr-color-accent-2-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-loader, .yr-nav-panel" }
 @tweak-yr-color-accent-2-tone-3: #ff965e;;
 
 

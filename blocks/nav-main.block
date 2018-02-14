@@ -35,12 +35,12 @@
         <div class="yr-nav-links yr-nav-fade yr-a">
             {.repeated section items}
                 {.folder?}
-                    <a class="yr-nav-a yr-nav-folder-a" href="{collection.fullUrl}">{collection.navigationTitle}</a>
+                    <a class="yr-nav-a{.equal? active true} yr-active{.end} yr-nav-folder-a" href="{collection.fullUrl}">{collection.navigationTitle}</a>
 
                     <div class="yr-nav-folder-links">
                         {.repeated section items}
                             {.section collection}
-                                <a class="yr-nav-a yr-nav-collection-a"
+                                <a class="yr-nav-a{.equal? active true} yr-active{.end} yr-nav-collection-a"
                                     href="{collection.fullUrl}">
                                     {collection.navigationTitle}
                                 </a>
@@ -55,10 +55,10 @@
                     </div>
                 {.or}
                     {.section collection}
-                        <a class="yr-nav-a yr-nav-collection-a" href="{fullUrl}">{navigationTitle}</a>
+                        <a class="yr-nav-a{.equal? active true} yr-active{.end} yr-nav-collection-a" href="{fullUrl}">{navigationTitle}</a>
                     {.end}
                     {.section externalLink}
-                        <a class="yr-nav-a yr-nav-out-a" href="{url}"
+                        <a class="yr-nav-a{.equal? active true} yr-active{.end} yr-nav-out-a" href="{url}"
                             {.section newWindow} target="_blank"{.end}>
                             {title}
                         </a>

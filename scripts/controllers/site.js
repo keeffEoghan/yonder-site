@@ -46,7 +46,8 @@ const updateMatrix = [
     { selector: 'link[rel="image_src"]', updateAttrs: true },
     { selector: 'link[rel="alternate"]', updateAttrs: true },
     { selector: 'body', updateAttrs: true },
-    { selector: 'main', updateHTML: true }
+    { selector: 'main', updateHTML: true },
+    { selector: '.yr-nav .yr-nav-links', updateHTML: true }
 ];
 
 /**

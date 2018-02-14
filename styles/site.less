@@ -87,10 +87,12 @@ a.yr-a,
     .yr-a();
 }
 
+b,
 strong {
     font-weight: 900;
 }
 
+i,
 em {
     font-style: italic;
 }
@@ -124,7 +126,9 @@ img,
     pointer-events: none;
 
     background-color: transparent;
-    .transition(background-color 500ms ease-out, transform 500ms ease-out 500ms;);
+    will-change: background-color, transform;
+    .transition(background-color 500ms ease-out,
+        transform 500ms ease-out 500ms;);
 
     .tweak-yr-loader-align-down-low & {
         top: auto;
@@ -133,12 +137,13 @@ img,
 
     [data-mercury-loading] & {
         background-color: @tweak-yr-color-accent-2-tone-3;
-        .transition(background-color 500ms ease-out, transform 500ms ease-out;);
+        .transition(background-color 500ms ease-out,
+            transform 500ms ease-out;);
     }
 
     [data-mercury-loading='start'] & {
         .transform(translateX(33%));
-        .transition(transform 500ms ease-out;);
+        .transition(transform 500ms ease-out);
     }
 
     [data-mercury-loading='swap'] & {

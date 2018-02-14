@@ -5,10 +5,8 @@
 # To-do
 
 - Fonts and typography
-    - [Buy](https://www.myfonts.com/cart/432948577)
     - Sort out the sidebar etc styles again.
 - Content
-    - Responsive wrapping columns, but only for full-width rows...?
     - Custom overrides for certain interior blocks
         - Pick certain existing blocks to custom decorate?
         - Use `code blocks` with given code if really needed...
@@ -33,6 +31,7 @@
 - Finish AJAX loading
     - Animation
 - Design
+    - Not clear you can scroll the nav menu on small screens...?
     - Contact page
     - Event detail page
     - SVG asset notes:
@@ -45,6 +44,10 @@
 
 # Done
 
+- Fonts and typography
+    - [Buy](https://www.myfonts.com/cart/432948577)
+- Content
+    - Responsive wrapping columns, but only for full-width rows...?
 - SVG holds
     - Centered and scaled SVGs (remove current `transform` workaround)
     - Strokes

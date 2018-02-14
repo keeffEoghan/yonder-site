@@ -16,5 +16,5 @@
             {@}
         </h2>
     {.end}
-    {.section siteDescription}<h3 class="yr-site-description yr-a">{@}</h3>{.end}
+    {.section siteDescription}<div class="yr-site-description yr-a">{@}</div>{.end}
 {.end}
