@@ -120,9 +120,14 @@
         min-height: @yr-size-hit-min;
         background-position: center;
         color: @tweak-yr-color-base-tone-2;
+        will-change: opacity, color;
         @transition: opacity 300ms @ease-fade,
             color 300ms @ease-fade;
         .transition(@transition);
+
+        &:hover {
+            color: @tweak-yr-color-base-tone-3;
+        }
     }
 
     .yr-nav-home-a {
@@ -166,6 +171,25 @@
 
     .yr-nav-toggle-close {
         color: @tweak-yr-color-base-tone-2;
+    }
+
+    @nav-overlay-time: 600ms;
+
+    .yr-nav-overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: @yr-z-nav-overlay;
+        background-color: @tweak-yr-nav-main-overlay-color;
+        cursor: pointer;
+        visibility: hidden;
+        opacity: 0;
+        will-change: opacity, visibility;
+        @transition: opacity @nav-overlay-time ease-out,
+            visibility 0ms linear @nav-overlay-time;
+        .transition(@transition);
     }
 
     .yr-nav-button-icon,
@@ -223,7 +247,7 @@
         color: @tweak-yr-color-base-tone-2;
         background-color: @tweak-yr-color-accent-1-tone-3;
         text-align: center;
-        overflow: hidden;
+        overflow-y: auto;
 
         .align-nav-left(100%);
     }
@@ -280,12 +304,12 @@
     .yr-nav-links {
         .flex(0 1 auto);
         overflow-y: auto;
+        .tweak-yr-font-nav-a;
     }
 
     .yr-nav-a {
         display: block;
         margin: 0.3em 0;
-        .tweak-yr-font-nav-a;
         border-color: @tweak-yr-color-accent-2-tone-1;
 
         &::after {
@@ -306,7 +330,7 @@
 
     .yr-nav-folder-a {
         width: 100%;
-        border-style: dashed;
+        border-style: dotted;
         border-color: @tweak-yr-color-accent-1-tone-2;
         margin-bottom: 0;
         will-change: border-color;
@@ -388,17 +412,37 @@
      * Toggle state
      */
 
-    .yr-nav-toggler:checked + .yr-nav-panel {
-        .transform(translateX(-100%));
-        .transition-delay(0ms);
+    .yr-nav-toggler {
+        &:checked {
+            ~ .yr-nav-panel {
+                .transform(translateX(-100%));
+                .transition-delay(0ms);
 
-        .tweak-yr-nav-align-switch & {
-            .transform(translateX(100%));
+                .tweak-yr-nav-align-switch & {
+                    .transform(translateX(100%));
+                }
+
+                .yr-nav-fade {
+                    opacity: 1;
+                    .fade-loop(5, 300ms, 100ms);
+                }
+            }
+
+            ~ .yr-nav-overlay {
+                opacity: 1;
+                visibility: visible;
+
+                @transition: opacity @nav-overlay-time ease-out,
+                    visibility 0ms linear 0ms;
+                .transition(@transition);
+            }
         }
 
-        .yr-nav-fade {
-            opacity: 1;
-            .fade-loop(5, 300ms, 100ms);
+        &:hover {
+            ~ .yr-nav-toggle,
+            ~ .yr-nav-panel .yr-nav-toggle {
+                color: @tweak-yr-color-base-tone-3;
+            }
         }
     }
 }
