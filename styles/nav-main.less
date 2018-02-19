@@ -42,10 +42,6 @@
             opacity: 0;
             pointer-events: none;
         }
-
-        > .yr-nav-button {
-            color: @tweak-yr-color-accent-1-tone-1;
-        }
     }
 
 
@@ -119,15 +115,28 @@
         min-width: @yr-size-hit-min;
         min-height: @yr-size-hit-min;
         background-position: center;
-        color: @tweak-yr-color-base-tone-2;
-        will-change: opacity, color;
-        @transition: opacity 300ms @ease-fade,
-            color 300ms @ease-fade;
+        color: @tweak-yr-color-accent-3-tone-2;
+        will-change: opacity;
+        @transition: opacity 300ms @ease-fade;
         .transition(@transition);
 
         &:hover {
-            color: @tweak-yr-color-base-tone-3;
+            color: @tweak-yr-color-light-tone-3;
         }
+    }
+
+    .homepage & > .yr-nav-button {
+        color: @tweak-yr-color-accent-1-tone-1;
+
+        &:hover {
+            color: @tweak-yr-color-accent-1-tone-3;
+        }
+    }
+
+    .yr-svg-shape{
+        fill: currentColor;
+        @transition: color 300ms @ease-fade;
+        .transition(@transition);
     }
 
     .yr-nav-home-a {
@@ -163,6 +172,17 @@
         margin: 0;
         padding: 0;
         border: none;
+
+        &:hover {
+            ~ .yr-nav-toggle,
+            ~ .yr-nav-panel .yr-nav-toggle {
+                color: @tweak-yr-color-light-tone-3;
+            }
+
+            .homepage & ~ .yr-nav-toggle {
+                color: @tweak-yr-color-accent-1-tone-3;
+            }
+        }
     }
 
     .yr-nav-toggle {
@@ -170,7 +190,7 @@
     }
 
     .yr-nav-toggle-close {
-        color: @tweak-yr-color-base-tone-2;
+        color: @tweak-yr-color-accent-3-tone-2;
     }
 
     @nav-overlay-time: 600ms;
@@ -179,16 +199,15 @@
         position: fixed;
         top: 0;
         right: 0;
-        bottom: 0;
         left: 0;
+        bottom: 100%;
         z-index: @yr-z-nav-overlay;
         background-color: @tweak-yr-nav-main-overlay-color;
         cursor: pointer;
-        visibility: hidden;
         opacity: 0;
-        will-change: opacity, visibility;
+        will-change: opacity, bottom;
         @transition: opacity @nav-overlay-time ease-out,
-            visibility 0ms linear @nav-overlay-time;
+            bottom 0ms linear @nav-overlay-time;
         .transition(@transition);
     }
 
@@ -246,7 +265,7 @@
         max-width: @tweak-yr-nav-main-size-max;
         z-index: @yr-z-nav-panel;
         padding: @nav-gap;
-        color: @tweak-yr-color-base-tone-2;
+        color: @tweak-yr-color-accent-3-tone-2;
         background-color: @tweak-yr-color-accent-1-tone-3;
         text-align: center;
         overflow-y: auto;
@@ -442,18 +461,11 @@
 
             ~ .yr-nav-overlay {
                 opacity: 1;
-                visibility: visible;
+                bottom: 0;
 
                 @transition: opacity @nav-overlay-time ease-out,
-                    visibility 0ms linear 0ms;
+                    bottom 0ms linear 0ms;
                 .transition(@transition);
-            }
-        }
-
-        &:hover {
-            ~ .yr-nav-toggle,
-            ~ .yr-nav-panel .yr-nav-toggle {
-                color: @tweak-yr-color-base-tone-3;
             }
         }
     }

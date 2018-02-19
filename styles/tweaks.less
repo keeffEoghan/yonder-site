@@ -192,22 +192,28 @@
     text-transform: none;
 }
 
-/* @note `Style Editor` WYSIWYG only shows first 3 heading sizes. */
 
-// tweak: { "category": "Typography", "label": "Heading 4", "title": "tweak-yr-font-h4", "type": "font", "loadAllVariants": true, "target": "h4, .tweak-yr-sqs-image-block-use-site-fonts .sqs-block-image" }
+/**
+ * Typography / More
+ *
+ * @note `Style Editor` WYSIWYG only shows first 3 heading sizes, so will use these for
+ *       Squarespace content block overrides.
+ */
+
+// tweak: { "category": "Typography / More", "label": "Heading 4", "title": "tweak-yr-font-h4", "type": "font", "loadAllVariants": true, "target": "h4, .tweak-yr-sqs-image-block-use-site-fonts .sqs-block-image" }
 .tweak-yr-font-h4 {
     // Doesn't display well in `Style Editor`...
     // font-family: @yr-font-sans-bold;
     font-family: 'Centrale Sans Bold', 'Helvetica', 'Arial', sans-serif;
     font-weight: 500;
     font-style: normal;
-    font-size: 6em;
+    font-size: 11vw;
     letter-spacing: 0em;
     line-height: 1.2em;
     text-transform: none;
 }
 
-// tweak: { "category": "Typography", "label": "Heading 5", "title": "tweak-yr-font-h5", "type": "font", "loadAllVariants": true, "target": "h5" }
+// tweak: { "category": "Typography / More", "label": "Heading 5", "title": "tweak-yr-font-h5", "type": "font", "loadAllVariants": true, "target": "h5" }
 .tweak-yr-font-h5 {
     // Doesn't display well in `Style Editor`...
     // font-family: @yr-font-sans-bold;
@@ -220,13 +226,26 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Typography", "label": "Heading 6", "title": "tweak-yr-font-h6", "type": "font", "loadAllVariants": true, "target": "h6, .tweak-yr-sqs-image-block-use-site-fonts .sqs-block-image" }
+// tweak: { "category": "Typography / More", "label": "Heading 6", "title": "tweak-yr-font-h6", "type": "font", "loadAllVariants": true, "target": "h6" }
 .tweak-yr-font-h6 {
     // Doesn't display well in `Style Editor`...
     // font-family: @yr-font-serif;
     font-family: 'Andulka Book Pro', 'Merriweather', 'Palatino', 'Georgia', serif;
     font-size: 1.3em;
     line-height: 1.4em;
+    font-weight: 100;
+    font-style: normal;
+    letter-spacing: 0em;
+    text-transform: none;
+}
+
+// tweak: { "category": "Typography / More", "label": "Paragraph", "title": "tweak-yr-font-p2", "type": "font", "loadAllVariants": true, "target": "p, .tweak-yr-sqs-image-block-use-site-fonts .sqs-block-image" }
+.tweak-yr-font-p2 {
+    // Doesn't display well in `Style Editor`...
+    // font-family: @yr-font-serif;
+    font-family: 'Andulka Book Pro', 'Merriweather', 'Palatino', 'Georgia', serif;
+    font-size: 1em;
+    line-height: 1.6em;
     font-weight: 100;
     font-style: normal;
     letter-spacing: 0em;
@@ -272,10 +291,10 @@
 // tweak: { "category": "Colors / Base", "label": "Tone 1", "title": "tweak-yr-color-base-tone-1", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-base-tone-1: #f8e2c9;
 
-// tweak: { "category": "Colors / Base", "label": "Tone 2", "title": "tweak-yr-color-base-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav-panel, .yr-nav-a, .yr-nav-button, .yr-nav-hold-a" }
+// tweak: { "category": "Colors / Base", "label": "Tone 2", "title": "tweak-yr-color-base-tone-2", "type": "color", "disableTransparency": "false", "target": "html" }
 @tweak-yr-color-base-tone-2: #f9efe0;
 
-// tweak: { "category": "Colors / Base", "label": "Tone 3", "title": "tweak-yr-color-base-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-footer, .yr-nav-button" }
+// tweak: { "category": "Colors / Base", "label": "Tone 3", "title": "tweak-yr-color-base-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-footer" }
 @tweak-yr-color-base-tone-3: #fff9f2;
 
 
@@ -303,7 +322,7 @@
 // tweak: { "category": "Colors / Light", "label": "Tone 2", "title": "tweak-yr-color-light-tone-2", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-light-tone-2: #fff;
 
-// tweak: { "category": "Colors / Light", "label": "Tone 3", "title": "tweak-yr-color-light-tone-3", "type": "color", "disableTransparency": "false" }
+// tweak: { "category": "Colors / Light", "label": "Tone 3", "title": "tweak-yr-color-light-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-nav-button, .yr-nav-toggler" }
 @tweak-yr-color-light-tone-3: rgba(255, 255, 255, 0.8);
 
 
@@ -311,13 +330,13 @@
  * Colors / Accent 1
  */
 
-// tweak: { "category": "Colors / Accent 1", "label": "Tone 1", "title": "tweak-yr-color-accent-1-tone-1", "type": "color", "disableTransparency": "false", "target": ".yr-nav-panel" }
+// tweak: { "category": "Colors / Accent 1", "label": "Tone 1", "title": "tweak-yr-color-accent-1-tone-1", "type": "color", "disableTransparency": "false", "target": ".yr-nav-panel, .homepage .yr-nav-button" }
 @tweak-yr-color-accent-1-tone-1: #05443d;
 
 // tweak: { "category": "Colors / Accent 1", "label": "Tone 2", "title": "tweak-yr-color-accent-1-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav, .yr-nav, .yr-nav-panel" }
 @tweak-yr-color-accent-1-tone-2: #075e56;
 
-// tweak: { "category": "Colors / Accent 1", "label": "Tone 3", "title": "tweak-yr-color-accent-1-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-nav, .yr-nav-panel" }
+// tweak: { "category": "Colors / Accent 1", "label": "Tone 3", "title": "tweak-yr-color-accent-1-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-nav, .yr-nav-panel, .homepage .yr-nav-button" }
 @tweak-yr-color-accent-1-tone-3: #0f7a6d;
 
 
@@ -326,13 +345,27 @@
  */
 
 // tweak: { "category": "Colors / Accent 2", "label": "Tone 1", "title": "tweak-yr-color-accent-2-tone-1", "type": "color", "disableTransparency": "false", "target": ".yr-nav-a" }
-@tweak-yr-color-accent-2-tone-1: #f96b2b;;
+@tweak-yr-color-accent-2-tone-1: #f96b2b;
 
 // tweak: { "category": "Colors / Accent 2", "label": "Tone 2", "title": "tweak-yr-color-accent-2-tone-2", "type": "color", "disableTransparency": "false" }
-@tweak-yr-color-accent-2-tone-2: #ff7c3a;;
+@tweak-yr-color-accent-2-tone-2: #ff7c3a;
 
 // tweak: { "category": "Colors / Accent 2", "label": "Tone 3", "title": "tweak-yr-color-accent-2-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-loader, .yr-nav-panel" }
-@tweak-yr-color-accent-2-tone-3: #ff965e;;
+@tweak-yr-color-accent-2-tone-3: #ff965e;
+
+
+/**
+ * Colors / Accent 3
+ */
+
+// tweak: { "category": "Colors / Accent 3", "label": "Tone 1", "title": "tweak-yr-color-accent-3-tone-1", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-accent-3-tone-1: #f8e2c9;
+
+// tweak: { "category": "Colors / Accent 3", "label": "Tone 2", "title": "tweak-yr-color-accent-3-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav-panel, .yr-nav-a, .yr-nav-button, .yr-nav-hold-a, h1, h2, h3, h4, h5, h6" }
+@tweak-yr-color-accent-3-tone-2: #f9efe0;
+
+// tweak: { "category": "Colors / Accent 3", "label": "Tone 3", "title": "tweak-yr-color-accent-3-tone-3", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-accent-3-tone-3: #fff9f2;
 
 
 /**
@@ -436,6 +469,9 @@
  */
 
 // tweak: { "category": "Image Block: Poster", "label": "Subtitle Alignment", "title": "tweak-yr-sqs-image-block-poster-anchor-sub", "type": "dropdown", "options": ["Up High", "In The Middle", "Down Low"], "default": "Down Low", target: ".sqs-layout .design-layout-poster" }
+
+// tweak: { "category": "Image Block: Poster", "label": "Subtitle Alignment Spacing", "title": "tweak-yr-sqs-image-block-poster-gap-sub", "type": "value", "min": -50, "max": 100, "step": 1, "showOnlyWhenPresent": ".tweak-yr-sqs-image-block-poster-anchor-sub-up-high, .tweak-yr-sqs-image-block-poster-anchor-sub-down-low", "target": ".sqs-layout .design-layout-poster" }
+@tweak-yr-sqs-image-block-poster-gap-sub: 0.5em;
 
 
 /**

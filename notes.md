@@ -7,10 +7,11 @@
 - Fonts and typography
     - Sort out the sidebar etc styles again.
 - Content
+    - Colors per section
+    - Fix weird image positioning bug
     - Custom overrides for certain interior blocks
         - Pick certain existing blocks to custom decorate?
         - Use `code blocks` with given code if really needed...
-    - Colors per section
 - SVG holds
     - Multiple themes in style editor... clunky but needed?
     - Later
@@ -21,6 +22,9 @@
 - Squarespace setup
     - Transfer template, domain to live
 - Document some of the Squarespace workarounds you're using
+    - 2 Ways of doing the header banners:
+        - With the Squarespace image poster layout and correct font settings (defaults)
+        - With a `text-block`, `h1`, and header code injected `style` or `code-block` to give it a background image: `.yr-main > .sqs-layout:first-child > .sqs-row:first-child > .col:first-child > .sqs-block-html { /* ... */ }`
     - [Navigation links](https://support.squarespace.com/hc/en-us/articles/205814758-Using-links-in-your-navigation)
     - Arbitrary files (e.g: SVG):
         - [As file links](https://support.squarespace.com/hc/en-us/articles/205813928)
@@ -29,7 +33,7 @@
     - Passing info per-page, for global menu color (where there's no categories/tags):
         - Header code injection - `<style>.yr-nav-button { color: #1D443D; }</style>`
 - Finish AJAX loading
-    - Animation
+    - Page animations
 - Design
     - Not clear you can scroll the nav menu on small screens...?
     - Contact page
