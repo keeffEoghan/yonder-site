@@ -62,7 +62,8 @@
                         <a class="yr-nav-a{.equal? active true} yr-active{.end} yr-nav-collection-a" href="{fullUrl}">{navigationTitle}</a>
                     {.end}
                     {.section externalLink}
-                        <a class="yr-nav-a{.equal? active true} yr-active{.end} yr-nav-out-a" href="{url}"
+                        <a class="yr-nav-a{.equal? active true} yr-active{.end} yr-nav-out-a"
+                            href="{url}"
                             {.section newWindow} target="_blank"{.end}>
                             {title}
                         </a>

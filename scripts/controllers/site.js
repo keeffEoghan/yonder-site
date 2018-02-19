@@ -22,6 +22,12 @@ const onRequestExceptions = [];
 // updateMatrix indicates which elements need to be updated on load. You can
 // choose whether to update attributes, replace HTML, or both.
 const updateMatrix = [
+    // This would be nice, but won;t work as Mercury only queries for the first selector
+    // { selector: '[data-ajax-update~=html]', updateHTML: true },
+    // { selector: '[data-ajax-update~=attrs]', updateAttrs: true },
+    // { selector: '[data-ajax-update~=script]', updateScript: true },
+
+    { selector: 'html', updateAttrs: true },
     { selector: 'title', updateHTML: true },
     { selector: 'meta[property="og:title"]', updateAttrs: true },
     { selector: 'meta[property="og:latitude"]', updateAttrs: true },
@@ -46,8 +52,8 @@ const updateMatrix = [
     { selector: 'link[rel="image_src"]', updateAttrs: true },
     { selector: 'link[rel="alternate"]', updateAttrs: true },
     { selector: 'body', updateAttrs: true },
-    { selector: 'main', updateHTML: true },
-    { selector: '.yr-nav .yr-nav-links', updateHTML: true }
+    { selector: 'main', updateAttrs: true, updateHTML: true },
+    { selector: '.yr-nav .yr-nav-links', updateAttrs: true, updateHTML: true }
 ];
 
 /**
@@ -70,21 +76,21 @@ function loader() {
     });
 
     window.addEventListener('mercury:navigate', () => {
-        document.documentElement.setAttribute('data-mercury-loading', 'start');
+        document.documentElement.setAttribute('data-ajax-loading', 'start');
     });
 
     // Squarespace init and destroy
 
-    window.addEventListener('mercury:load', () => {
-        Lifecycle.init();
-        document.documentElement.setAttribute('data-mercury-loading', 'done');
-
-        setTimeout(() => document.documentElement.removeAttribute('data-mercury-loading'), 500);
-    });
-
     window.addEventListener('mercury:unload', () => {
         Lifecycle.destroy();
-        document.documentElement.setAttribute('data-mercury-loading', 'swap');
+        document.documentElement.setAttribute('data-ajax-loading', 'swap');
+    });
+
+    window.addEventListener('mercury:load', () => {
+        Lifecycle.init();
+        document.documentElement.setAttribute('data-ajax-loading', 'done');
+
+        setTimeout(() => document.documentElement.removeAttribute('data-ajax-loading'), 500);
     });
 
     // Sync controllers on AJAX load

@@ -1,10 +1,5 @@
 .yr-nav {
-    .display(inline-flex);
-    .flex-flow(row nowrap);
-    .justify-content(center);
-    .align-items(center);
     position: relative;
-    .flex(0 0 auto);
 
     /**
      * The bar and its floating background.
@@ -31,6 +26,26 @@
         background-color: @tweak-yr-color-accent-1-tone-2;
         .transform-origin(top center);
         .transition(opacity 300ms ease-in);
+
+        .yr-color-theme-1 & {
+            background-color: @tweak-yr-color-theme-1-tone-2;
+        }
+
+        .yr-color-theme-2 & {
+            background-color: @tweak-yr-color-theme-2-tone-2;
+        }
+
+        .yr-color-theme-3 & {
+            background-color: @tweak-yr-color-theme-3-tone-2;
+        }
+
+        .yr-color-theme-4 & {
+            background-color: @tweak-yr-color-theme-4-tone-2;
+        }
+
+        .yr-color-theme-5 & {
+            background-color: @tweak-yr-color-theme-5-tone-2;
+        }
     }
 
     .homepage & {
@@ -256,7 +271,7 @@
     .yr-nav-panel {
         .display(flex);
         .flex-flow(column nowrap);
-        .justify-content(center);
+        .justify-content(flex-start);
         .align-items(center);
         position: fixed;
         top: 0;

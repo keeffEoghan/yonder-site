@@ -4,16 +4,16 @@
 
 # To-do
 
-- Fonts and typography
-    - Sort out the sidebar etc styles again.
 - Content
-    - Colors per section
     - Fix weird image positioning bug
     - Custom overrides for certain interior blocks
         - Pick certain existing blocks to custom decorate?
         - Use `code blocks` with given code if really needed...
+    - Ensure colors per section work where CSS variables don't (JS fallback)
+- Fonts and typography
+    - Go through content variations
 - SVG holds
-    - Multiple themes in style editor... clunky but needed?
+    - Multiple themes in style editor... clunky but needed? Improve with JS rather than JSON-T / Style Editor
     - Later
         - Configurable by CMS?
             - Number of holds (consider color themes too)
@@ -48,10 +48,12 @@
 
 # Done
 
+- Content
+    - Colors per section
+    - Responsive wrapping columns, but only for full-width rows...?
 - Fonts and typography
     - [Buy](https://www.myfonts.com/cart/432948577)
-- Content
-    - Responsive wrapping columns, but only for full-width rows...?
+    - Sort out the sidebar etc styles again.
 - SVG holds
     - Centered and scaled SVGs (remove current `transform` workaround)
     - Strokes

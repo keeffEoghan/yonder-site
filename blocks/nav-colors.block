@@ -1,0 +1,14 @@
+{##BEGIN} Define the theme colours according to the position in `nav-holds` {END##}
+<style type="text/css">
+    {.repeated section items}
+        .yr-color-theme-{@index},
+        .yr-color-theme-{externalLink.url|slugify}{collection.urlId|slugify},
+        .yr-color-theme-{@index} .yr-nav::before,
+        .yr-color-theme-{externalLink.url|slugify}{collection.urlId|slugify} .yr-nav::before {
+            background-color: var(--tweak-yr-color-theme-{@index}-tone-2);
+        }
+    {.end}
+</style>
+<script class="yr-nav-color" data-content-field="navigation-nav-holds" type="text/javascript">
+    console.log('nav-colors', {@|json-pretty|html});
+</script>
