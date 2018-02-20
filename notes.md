@@ -8,7 +8,7 @@
     - Custom overrides for certain interior blocks
         - Pick certain existing blocks to custom decorate?
         - Use `code blocks` with given code if really needed...
-    - Ensure colors per section work where CSS variables don't (JS fallback)
+    - Ensure colors per section work where native CSS variables don't (JS fallback, setting theme number?)
 - Fonts and typography
     - Go through content variations
 - SVG holds
@@ -17,7 +17,8 @@
         - Configurable by CMS?
             - Number of holds (consider color themes too)
                 - Hacky... can tweak values create new tweaks? Like have a value tweak for number of holds, and generate enough corresponding tweaks in LESS...?
-- Block out main zones and animations
+- Finish AJAX loading
+    - Page animations
 - Squarespace setup
     - Transfer template, domain to live
 - Document some of the Squarespace workarounds you're using
@@ -31,8 +32,6 @@
     - Info in odd places (e.g: [business info](https://support.squarespace.com/hc/en-us/articles/212872328))
     - Passing info per-page, for global menu color (where there's no categories/tags):
         - Header code injection - `<style>.yr-nav-button { color: #1D443D; }</style>`
-- Finish AJAX loading
-    - Page animations
 - Design
     - Not clear you can scroll the nav menu on small screens...?
     - Contact page
@@ -47,6 +46,7 @@
 
 # Done
 
+- Block out main zones and animations
 - Content
     - Fix weird image positioning bug
     - Colors per section
