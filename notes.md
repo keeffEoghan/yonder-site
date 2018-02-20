@@ -5,7 +5,6 @@
 # To-do
 
 - Content
-    - Fix weird image positioning bug
     - Custom overrides for certain interior blocks
         - Pick certain existing blocks to custom decorate?
         - Use `code blocks` with given code if really needed...
@@ -49,6 +48,7 @@
 # Done
 
 - Content
+    - Fix weird image positioning bug
     - Colors per section
     - Responsive wrapping columns, but only for full-width rows...?
 - Fonts and typography

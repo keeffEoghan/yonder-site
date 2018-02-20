@@ -4,11 +4,30 @@
  */
 
 .sqs-layout {
-    [class*=sqs-col] {
-        @m: ~'only screen and @{yr-mq-m-dn}';
-        @media @m {
-            float: none !important;
-            width: auto !important;
+    .sqs-row {
+        .display(flex);
+        .flex-flow(row wrap);
+        .justify-content(center);
+        .align-items(center);
+
+        .tweak-yr-sqs-row-align-up-high & {
+            .justify-content(flex-start);
+        }
+
+        .tweak-yr-sqs-row-align-down-low & {
+            .justify-content(flex-end);
+        }
+    }
+
+    @m: ~'only screen and @{yr-mq-m-dn}';
+    @media @m {
+        .sqs-row {
+            display: block;
+        }
+
+        [class*=sqs-col] {
+            float: none;
+            width: auto;
         }
     }
 
