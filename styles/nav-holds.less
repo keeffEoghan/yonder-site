@@ -125,9 +125,48 @@
         max-height: @tweak-yr-nav-holds-size-max;
         padding: @tweak-yr-nav-holds-pad;
         text-decoration: none;
-        color: @tweak-yr-color-accent-3-tone-2;
+        color: @tweak-yr-color-light-1-tone-3;
         z-index: 2;
         .tweak-yr-font-nav-holds;
+
+        &:hover,
+        &:active {
+            ~ .yr-nav-holds-shape-block,
+            ~ .yr-nav-hold-view {
+                .transition(fill-opacity 300ms ease-in-out,
+                    stroke-opacity 150ms ease-out,
+                    stroke-width 200ms ease-out;);
+            }
+        }
+
+        &.yr-active,
+        &:hover,
+        &:focus {
+            ~ .yr-nav-holds-shape-block,
+            ~ .yr-nav-hold-view {
+                fill-opacity: 1;
+                stroke-width: 10px;
+            }
+        }
+
+        &:active,
+        &.yr-active {
+            ~ .yr-nav-holds-shape-block,
+            ~ .yr-nav-hold-view {
+                stroke-opacity: 0.05;
+            }
+        }
+
+        &.yr-active {
+            &:hover,
+            &:focus {
+                ~ .yr-nav-holds-shape-block,
+                ~ .yr-nav-hold-view {
+                    fill-opacity: 0;
+                    stroke-width: 0;
+                }
+            }
+        }
     }
 
     .yr-nav-holds-shape-block,
@@ -159,41 +198,13 @@
         fill-opacity: 0;
         stroke-opacity: 0;
         stroke-width: 0;
-        @transition: fill-opacity 400ms ease-in-out,
-            stroke-opacity 300ms ease-out,
-            stroke-width 200ms ease-out;
-        .transition(@transition);
+        .transition(fill-opacity 600ms ease-in-out,
+            stroke-opacity 500ms ease-out,
+            stroke-width 400ms ease-out;);
     }
 
     .yr-nav-hold-view {
         z-index: 1;
-    }
-
-    .yr-nav-hold-a {
-        &.yr-active,
-        &:hover {
-            ~ .yr-nav-holds-shape-block,
-            ~ .yr-nav-hold-view {
-                fill-opacity: 1;
-                stroke-width: 10px;
-            }
-        }
-
-        &:active,
-        &.yr-active {
-            ~ .yr-nav-holds-shape-block,
-            ~ .yr-nav-hold-view {
-                stroke-opacity: 0.05;
-            }
-        }
-
-        &.yr-active:hover {
-            ~ .yr-nav-holds-shape-block,
-            ~ .yr-nav-hold-view {
-                fill-opacity: 0;
-                stroke-width: 0;
-            }
-        }
     }
 
     .yr-nav-holds-defs {
@@ -205,13 +216,13 @@
         }
 
         path:nth-child(2) {
-            fill: @tweak-yr-color-light-tone-2;
+            fill: @tweak-yr-color-light-2-tone-2;
             opacity: 0.2;
             stroke-width: 0;
         }
 
         path:nth-child(3) {
-            stroke: @tweak-yr-color-dark-tone-1;
+            stroke: @tweak-yr-color-dark-1-tone-1;
             fill: none;
             stroke-width: 2px;
             stroke-miterlimit: 10px;

@@ -55,18 +55,29 @@
         pointer-events: none;
         .transform-origin(bottom);
         will-change: transform, opacity;
-        @transition: transform 300ms ease-out,
-            opacity 500ms ease-out;
-        .transition(@transition);
+        .transition(transform 500ms ease-out,
+            opacity 500ms ease-out;);
     }
 
     &:visited::after {
         opacity: 0.4;
     }
 
-    &:hover::after {
-        .transform(scaleY(2));
-        opacity: 0.4;
+    &:hover,
+    &:focus,
+    &:active {
+        &::after {
+            .transition(transform 200ms ease-out,
+                opacity 300ms ease-out;);
+        }
+    }
+
+    &:hover,
+    &:focus {
+        &::after {
+            .transform(scaleY(2));
+            opacity: 0.4;
+        }
     }
 
     &:active::after {

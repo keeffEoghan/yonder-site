@@ -37,7 +37,7 @@
 @tweak-yr-nav-main-size-max: 32em;
 
 // tweak: { "category": "Main Navigation", "label": "Overlay Color", "title": "tweak-yr-nav-main-overlay-color", "type": "color", "disableTransparency": "false", "target": ".yr-nav, .yr-nav-panel, .yr-nav-overlay" }
-@tweak-yr-nav-main-overlay-color: rgba(0, 0, 0, 0.2);
+@tweak-yr-nav-main-overlay-color: rgba(255, 255, 255, 0.33);
 
 
 /**
@@ -270,7 +270,7 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Typography / More", "label": "Paragraph", "title": "tweak-yr-font-p2", "type": "font", "loadAllVariants": true, "target": "p, .tweak-yr-sqs-image-block-use-site-fonts .sqs-block-image" }
+// tweak: { "category": "Typography / More", "label": "Paragraph", "title": "tweak-yr-font-p2", "type": "font", "loadAllVariants": true, "target": ".tweak-yr-sqs-image-block-use-site-fonts .sqs-block-image" }
 .tweak-yr-font-p2 {
     // Doesn't display well in `Style Editor`...
     // font-family: @yr-font-serif;
@@ -322,7 +322,7 @@
 // tweak: { "category": "Colors / Base", "label": "Tone 1", "title": "tweak-yr-color-base-tone-1", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-base-tone-1: #f8e2c9;
 
-// tweak: { "category": "Colors / Base", "label": "Tone 2", "title": "tweak-yr-color-base-tone-2", "type": "color", "disableTransparency": "false", "target": "html" }
+// tweak: { "category": "Colors / Base", "label": "Tone 2", "title": "tweak-yr-color-base-tone-2", "type": "color", "disableTransparency": "false", "target": ".homepage" }
 @tweak-yr-color-base-tone-2: #f9efe0;
 
 // tweak: { "category": "Colors / Base", "label": "Tone 3", "title": "tweak-yr-color-base-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-footer" }
@@ -330,31 +330,59 @@
 
 
 /**
- * Colors / Dark
+ * Colors / Dark 1
  */
 
-// tweak: { "category": "Colors / Dark", "label": "Tone 1", "title": "tweak-yr-color-dark-tone-1", "type": "color", "disableTransparency": "false", "target": "h1, h2" }
-@tweak-yr-color-dark-tone-1: #000000;
+// tweak: { "category": "Colors / Dark 1", "label": "Tone 1", "title": "tweak-yr-color-dark-1-tone-1", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-dark-1-tone-1: #000000;
 
-// tweak: { "category": "Colors / Dark", "label": "Tone 2", "title": "tweak-yr-color-dark-tone-2", "type": "color", "disableTransparency": "false", "target": "h3, h4, p" }
-@tweak-yr-color-dark-tone-2: #161614;
+// tweak: { "category": "Colors / Dark 1", "label": "Tone 2", "title": "tweak-yr-color-dark-1-tone-2", "type": "color", "disableTransparency": "false", "target": ".homepage" }
+@tweak-yr-color-dark-1-tone-2: #161614;
 
-// tweak: { "category": "Colors / Dark", "label": "Tone 3", "title": "tweak-yr-color-dark-tone-3", "type": "color", "disableTransparency": "false", "target": "h5, h6, .yr-footer" }
-@tweak-yr-color-dark-tone-3: #323232;
+// tweak: { "category": "Colors / Dark 1", "label": "Tone 3", "title": "tweak-yr-color-dark-1-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-footer" }
+@tweak-yr-color-dark-1-tone-3: #323232;
 
 
 /**
- * Colors / Light
+ * Colors / Dark 2
  */
 
-// tweak: { "category": "Colors / Light", "label": "Tone 1", "title": "tweak-yr-color-light-tone-1", "type": "color", "disableTransparency": "false" }
-@tweak-yr-color-light-tone-1: rgba(255, 255, 255, 0.2);
+// tweak: { "category": "Colors / Dark 2", "label": "Tone 1", "title": "tweak-yr-color-dark-2-tone-1", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-dark-2-tone-1: #2c252c;
 
-// tweak: { "category": "Colors / Light", "label": "Tone 2", "title": "tweak-yr-color-light-tone-2", "type": "color", "disableTransparency": "false" }
-@tweak-yr-color-light-tone-2: #fff;
+// tweak: { "category": "Colors / Dark 2", "label": "Tone 2", "title": "tweak-yr-color-dark-2-tone-2", "type": "color", "disableTransparency": "false", "target": "body" }
+@tweak-yr-color-dark-2-tone-2: #212031;
 
-// tweak: { "category": "Colors / Light", "label": "Tone 3", "title": "tweak-yr-color-light-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-nav-button, .yr-nav-toggler" }
-@tweak-yr-color-light-tone-3: rgba(255, 255, 255, 0.8);
+// tweak: { "category": "Colors / Dark 2", "label": "Tone 3", "title": "tweak-yr-color-dark-2-tone-3", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-dark-2-tone-3: #2b2a3b;
+
+
+/**
+ * Colors / Light 1
+ */
+
+// tweak: { "category": "Colors / Light 1", "label": "Tone 1", "title": "tweak-yr-color-light-1-tone-1", "type": "color", "disableTransparency": "false", "target": ".yr-nav-button, .yr-nav-hold-a, .yr-nav-toggler" }
+@tweak-yr-color-light-1-tone-1: #f8e2c9;
+
+// tweak: { "category": "Colors / Light 1", "label": "Tone 2", "title": "tweak-yr-color-light-1-tone-2", "type": "color", "disableTransparency": "false", "target": "body" }
+@tweak-yr-color-light-1-tone-2: #f9efe0;
+
+// tweak: { "category": "Colors / Light 1", "label": "Tone 3", "title": "tweak-yr-color-light-1-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-nav-panel, .yr-nav-a, .yr-nav-button, .yr-nav-hold-a" }
+@tweak-yr-color-light-1-tone-3: #fff9f2;
+
+
+/**
+ * Colors / Light 2
+ */
+
+// tweak: { "category": "Colors / Light 2", "label": "Tone 1", "title": "tweak-yr-color-light-2-tone-1", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-light-2-tone-1: rgba(255, 255, 255, 0.33);
+
+// tweak: { "category": "Colors / Light 2", "label": "Tone 2", "title": "tweak-yr-color-light-2-tone-2", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-light-2-tone-2: #fff;
+
+// tweak: { "category": "Colors / Light 2", "label": "Tone 3", "title": "tweak-yr-color-light-2-tone-3", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-light-2-tone-3: rgba(255, 255, 255, 0.66);
 
 
 /**
@@ -364,7 +392,7 @@
 // tweak: { "category": "Colors / Accent 1", "label": "Tone 1", "title": "tweak-yr-color-accent-1-tone-1", "type": "color", "disableTransparency": "false", "target": ".yr-nav-panel, .homepage .yr-nav-button" }
 @tweak-yr-color-accent-1-tone-1: #05443d;
 
-// tweak: { "category": "Colors / Accent 1", "label": "Tone 2", "title": "tweak-yr-color-accent-1-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav, .yr-nav, .yr-nav-panel" }
+// tweak: { "category": "Colors / Accent 1", "label": "Tone 2", "title": "tweak-yr-color-accent-1-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav, .yr-nav, .yr-nav-panel, .yr-nav-folder-a" }
 @tweak-yr-color-accent-1-tone-2: #075e56;
 
 // tweak: { "category": "Colors / Accent 1", "label": "Tone 3", "title": "tweak-yr-color-accent-1-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-nav, .yr-nav-panel, .homepage .yr-nav-button" }
@@ -383,20 +411,6 @@
 
 // tweak: { "category": "Colors / Accent 2", "label": "Tone 3", "title": "tweak-yr-color-accent-2-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-loader, .yr-nav-panel" }
 @tweak-yr-color-accent-2-tone-3: #ff965e;
-
-
-/**
- * Colors / Accent 3
- */
-
-// tweak: { "category": "Colors / Accent 3", "label": "Tone 1", "title": "tweak-yr-color-accent-3-tone-1", "type": "color", "disableTransparency": "false" }
-@tweak-yr-color-accent-3-tone-1: #f8e2c9;
-
-// tweak: { "category": "Colors / Accent 3", "label": "Tone 2", "title": "tweak-yr-color-accent-3-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav-panel, .yr-nav-a, .yr-nav-button, .yr-nav-hold-a, h1, h2, h3, h4, h5, h6" }
-@tweak-yr-color-accent-3-tone-2: #f9efe0;
-
-// tweak: { "category": "Colors / Accent 3", "label": "Tone 3", "title": "tweak-yr-color-accent-3-tone-3", "type": "color", "disableTransparency": "false" }
-@tweak-yr-color-accent-3-tone-3: #fff9f2;
 
 
 /**

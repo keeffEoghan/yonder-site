@@ -130,27 +130,31 @@
         min-width: @yr-size-hit-min;
         min-height: @yr-size-hit-min;
         background-position: center;
-        color: @tweak-yr-color-accent-3-tone-2;
+        color: @tweak-yr-color-light-1-tone-3;
         will-change: opacity;
-        @transition: opacity 300ms @ease-fade;
+        @transition: opacity 300ms @yr-ease-fade;
         .transition(@transition);
 
-        &:hover {
-            color: @tweak-yr-color-light-tone-3;
+        &:hover,
+        &:focus {
+            color: @tweak-yr-color-light-1-tone-1;
+            @transition: opacity 100ms @yr-ease-fade;
+            .transition(@transition);
         }
     }
 
     .homepage & > .yr-nav-button {
         color: @tweak-yr-color-accent-1-tone-1;
 
-        &:hover {
+        &:hover,
+        &:focus {
             color: @tweak-yr-color-accent-1-tone-3;
         }
     }
 
     .yr-svg-shape{
         fill: currentColor;
-        @transition: color 300ms @ease-fade;
+        @transition: color 300ms @yr-ease-fade;
         .transition(@transition);
     }
 
@@ -188,10 +192,11 @@
         padding: 0;
         border: none;
 
-        &:hover {
+        &:hover,
+        &:focus {
             ~ .yr-nav-toggle,
             ~ .yr-nav-panel .yr-nav-toggle {
-                color: @tweak-yr-color-light-tone-3;
+                color: @tweak-yr-color-light-1-tone-1;
             }
 
             .homepage & ~ .yr-nav-toggle {
@@ -205,7 +210,7 @@
     }
 
     .yr-nav-toggle-close {
-        color: @tweak-yr-color-accent-3-tone-2;
+        color: @tweak-yr-color-light-1-tone-3;
     }
 
     @nav-overlay-time: 600ms;
@@ -220,6 +225,7 @@
         background-color: @tweak-yr-nav-main-overlay-color;
         cursor: pointer;
         opacity: 0;
+        pointer-events: none;
         will-change: opacity, bottom;
         @transition: opacity @nav-overlay-time ease-out,
             bottom 0ms linear @nav-overlay-time;
@@ -280,7 +286,7 @@
         max-width: @tweak-yr-nav-main-size-max;
         z-index: @yr-z-nav-panel;
         padding: @nav-gap;
-        color: @tweak-yr-color-accent-3-tone-2;
+        color: @tweak-yr-color-light-1-tone-3;
         background-color: @tweak-yr-color-accent-1-tone-3;
         text-align: center;
         overflow-y: auto;
@@ -396,16 +402,19 @@
         }
 
         &:hover,
+        &:focus,
         &:active,
         &.yr-active {
-            border-color: @tweak-yr-color-accent-1-tone-1;
+            border-color: @tweak-yr-color-accent-2-tone-1;
+            .transition(border-color 200ms ease-out);
 
             &::after {
                 opacity: 1;
             }
 
             + .yr-nav-folder-links {
-                background-color: @tweak-yr-color-accent-1-tone-1;
+                background-color: @tweak-yr-color-accent-2-tone-1;
+                .transition(background-color 200ms ease-out);
             }
         }
 
@@ -435,7 +444,7 @@
     
     .yr-nav-panel {
         will-change: transform;
-        .transition(transform 300ms @ease-slide (@fades * 70ms));
+        .transition(transform 300ms @yr-ease-slide (@fades * 70ms));
     }
 
     .fade-loop(@n, @start, @gap) when (@n > 0) {
@@ -449,7 +458,7 @@
     .yr-nav-fade {
         opacity: 0;
         will-change: opacity;
-        .transition(opacity 200ms @ease-fade);
+        .transition(opacity 200ms @yr-ease-fade);
         .fade-loop(@fades, 0ms, 100ms);
     }
 
@@ -477,6 +486,7 @@
             ~ .yr-nav-overlay {
                 opacity: 1;
                 bottom: 0;
+                pointer-events: all;
 
                 @transition: opacity @nav-overlay-time ease-out,
                     bottom 0ms linear 0ms;
