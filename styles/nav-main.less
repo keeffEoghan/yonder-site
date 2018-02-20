@@ -1,3 +1,86 @@
+/**
+ * Common mixins and variables...
+ */
+
+/**
+ * Switch which side of the view the nav is on.
+ *
+ * @param size {Length}
+ */
+.align-nav-left(@size) {
+    left: @size;
+
+    .tweak-yr-nav-align-switch & {
+        right: @size;
+        left: auto;
+    }
+}
+.align-nav-right(@size) {
+    right: @size;
+
+    .tweak-yr-nav-align-switch & {
+        left: @size;
+        right: auto;
+    }
+}
+
+/**
+ * Same as `.align-view`, but for center-anchored elements.
+ *
+ * @param size {Length}
+ */
+.align-nav-left-mid(@size) {
+    .align-nav-left(@size);
+    .transform(translate(-50%, -50%));
+
+    .tweak-yr-nav-align-switch & {
+        .transform(translate(50%, -50%));
+    }
+}
+.align-nav-right-mid(@size) {
+    .align-nav-right(@size);
+    .transform(translate(50%, -50%));
+
+    .tweak-yr-nav-align-switch & {
+        .transform(translate(-50%, -50%));
+    }
+}
+
+.size-nav(@size) {
+    width: @size;
+    height: @size;
+    background-size: @size;
+
+    .yr-inline-svg {
+        width: @size;
+        height: @size;
+    }
+}
+
+@nav-overlay-time: 600ms;
+
+
+/**
+ * Common styles
+ */
+
+.yr-nav-toggler,
+.yr-nav .yr-nav-button {
+    position: fixed;
+    top: @tweak-yr-nav-button-offset;
+}
+
+.yr-nav-toggler,
+.yr-nav .yr-nav-toggle {
+    .align-nav-right-mid(@tweak-yr-nav-button-offset);
+    .size-nav(@tweak-yr-nav-button-size);
+}
+
+
+/**
+ * Nav styles
+ */
+
 .yr-nav {
     position: relative;
 
@@ -25,7 +108,8 @@
         right: 0;
         background-color: @tweak-yr-color-accent-1-tone-2;
         .transform-origin(top center);
-        .transition(opacity 300ms ease-in);
+        will-change: background-color;
+        .transition(background-color 500ms ease-out;);
 
         .yr-color-theme-1 & {
             background-color: @tweak-yr-color-theme-1-tone-2;
@@ -54,53 +138,8 @@
         padding: 0;
 
         &::before {
-            opacity: 0;
+            background-color: transparent;
             pointer-events: none;
-        }
-    }
-
-
-    /**
-     * Switch which side of the view the nav is on.
-     *
-     * @param size {Length}
-     */
-    .align-nav-left(@size) {
-        left: @size;
-
-        .tweak-yr-nav-align-switch & {
-            right: @size;
-            left: auto;
-        }
-    }
-    .align-nav-right(@size) {
-        right: @size;
-
-        .tweak-yr-nav-align-switch & {
-            left: @size;
-            right: auto;
-        }
-    }
-
-    /**
-     * Same as `.align-view`, but for center-anchored elements.
-     *
-     * @param size {Length}
-     */
-    .align-nav-left-mid(@size) {
-        .align-nav-left(@size);
-        .transform(translate(-50%, -50%));
-
-        .tweak-yr-nav-align-switch & {
-            .transform(translate(50%, -50%));
-        }
-    }
-    .align-nav-right-mid(@size) {
-        .align-nav-right(@size);
-        .transform(translate(50%, -50%));
-
-        .tweak-yr-nav-align-switch & {
-            .transform(translate(-50%, -50%));
         }
     }
 
@@ -109,47 +148,36 @@
      * Nav buttons
      */
 
-    .yr-nav-button,
-    .yr-nav-toggler {
-        position: fixed;
-        top: @tweak-yr-nav-button-offset;
-    }
-
-    .size-nav(@size) {
-        width: @size;
-        height: @size;
-        background-size: @size;
-
-        .yr-inline-svg {
-            width: @size;
-            height: @size;
-        }
-    }
-
     .yr-nav-button {
         min-width: @yr-size-hit-min;
         min-height: @yr-size-hit-min;
         background-position: center;
         color: @tweak-yr-color-light-1-tone-3;
-        will-change: opacity;
-        @transition: opacity 300ms @yr-ease-fade;
+        will-change: opacity, color;
+        @transition: opacity 300ms @yr-ease-fade,
+            color 300ms @yr-ease-fade;
         .transition(@transition);
+    }
 
-        &:hover,
-        &:focus {
-            color: @tweak-yr-color-light-1-tone-1;
-            @transition: opacity 100ms @yr-ease-fade;
-            .transition(@transition);
-        }
+    .yr-nav-button:hover,
+    .yr-nav-button:focus,
+    .yr-nav-toggler:hover + & .yr-nav-toggle,
+    .yr-nav-toggler:focus + & .yr-nav-toggle {
+        color: @tweak-yr-color-light-1-tone-1;
+        @transition: opacity 100ms @yr-ease-fade,
+            color 100ms @yr-ease-fade;
+        .transition(@transition);
     }
 
     .homepage & > .yr-nav-button {
         color: @tweak-yr-color-accent-1-tone-1;
+    }
 
-        &:hover,
-        &:focus {
-            color: @tweak-yr-color-accent-1-tone-3;
-        }
+    .homepage & > .yr-nav-button:hover,
+    .homepage & > .yr-nav-button:focus,
+    .homepage .yr-nav-toggler:hover + & > .yr-nav-toggle,
+    .homepage .yr-nav-toggler:focus + & > .yr-nav-toggle {
+        color: @tweak-yr-color-accent-1-tone-3;
     }
 
     .yr-svg-shape{
@@ -169,51 +197,22 @@
         }
     }
 
-    .yr-nav-toggler,
-    .yr-nav-toggle {
-        .align-nav-right-mid(@tweak-yr-nav-button-offset);
-        .size-nav(@tweak-yr-nav-button-size);
-    }
-
-    .yr-nav-toggler {
-        /**
-         * Need to do the `max` size this way, because `<input>` doesn't
-         * respect `min-width`/`min-height` properly.
-         */
-        @button-size: max(@yr-size-hit-min, @tweak-yr-nav-button-size);
-
-        width: @button-size;
-        height: @button-size;
-
-        z-index: @yr-z-nav-toggler;
-        opacity: 0;
-        cursor: pointer;
-        margin: 0;
-        padding: 0;
-        border: none;
-
-        &:hover,
-        &:focus {
-            ~ .yr-nav-toggle,
-            ~ .yr-nav-panel .yr-nav-toggle {
-                color: @tweak-yr-color-light-1-tone-1;
-            }
-
-            .homepage & ~ .yr-nav-toggle {
-                color: @tweak-yr-color-accent-1-tone-3;
-            }
-        }
-    }
-
     .yr-nav-toggle {
         z-index: @yr-z-nav-toggle;
+    }
+
+    .yr-nav-toggler:hover + &.yr-nav-toggle,
+    .yr-nav-toggler:focus + &.yr-nav-toggle {
+        color: @tweak-yr-color-light-1-tone-1;
+
+        .homepage & {
+            color: @tweak-yr-color-accent-1-tone-3;
+        }
     }
 
     .yr-nav-toggle-close {
         color: @tweak-yr-color-light-1-tone-3;
     }
-
-    @nav-overlay-time: 600ms;
 
     .yr-nav-overlay {
         position: fixed;
@@ -222,14 +221,29 @@
         left: 0;
         bottom: 100%;
         z-index: @yr-z-nav-overlay;
-        background-color: @tweak-yr-nav-main-overlay-color;
         cursor: pointer;
         opacity: 0;
         pointer-events: none;
-        will-change: opacity, bottom;
-        @transition: opacity @nav-overlay-time ease-out,
-            bottom 0ms linear @nav-overlay-time;
-        .transition(@transition);
+
+        .tweak-yr-nav-overlay-simple & {
+            background-color: @tweak-yr-nav-main-overlay-color;
+            will-change: opacity, bottom;
+            @transition: opacity @nav-overlay-time ease-out,
+                bottom 0ms linear @nav-overlay-time;
+            .transition(@transition);
+        }
+
+        .yr-nav-toggler:checked + & {
+            opacity: 1;
+            bottom: 0;
+            pointer-events: all;
+
+            .tweak-yr-nav-overlay-simple & {
+                @transition: opacity @nav-overlay-time ease-out,
+                    bottom 0ms linear 0ms;
+                .transition(@transition);
+            }
+        }
     }
 
     .yr-nav-button-icon,
@@ -290,8 +304,23 @@
         background-color: @tweak-yr-color-accent-1-tone-3;
         text-align: center;
         overflow-y: auto;
-
+        will-change: transform;
+        .transition(transform 300ms @yr-ease-slide (@fades * 70ms));
         .align-nav-left(100%);
+
+        .yr-nav-toggler:checked + & {
+            .transform(translateX(-100%));
+            .transition-delay(0ms);
+
+            .tweak-yr-nav-align-switch & {
+                .transform(translateX(100%));
+            }
+
+            .yr-nav-fade {
+                opacity: 1;
+                .fade-loop(@fades, 300ms, 100ms);
+            }
+        }
     }
 
     .yr-nav-header,
@@ -371,60 +400,66 @@
     .yr-nav-a {
         display: block;
         margin: 0.3em 0;
-        border-color: @tweak-yr-color-accent-2-tone-1;
 
-        &::after {
-            border-bottom-width: 2px;
-            .transform(scaleY(0));
-        }
+        .tweak-yr-fancy-links & {
+            border-color: @tweak-yr-color-accent-2-tone-1;
 
-        &.yr-active {
             &::after {
-                .transform(scaleY(1));
+                border-bottom-width: 2px;
+                .transform(scaleY(0));
             }
-        }
 
-        [data-mercury-loading] &::after {
-            .transform(scaleY(0));
+            &.yr-active {
+                &::after {
+                    .transform(scaleY(1));
+                }
+            }
+
+            [data-mercury-loading] &::after {
+                .transform(scaleY(0));
+            }
         }
     }
 
     .yr-nav-folder-a {
         width: 100%;
-        border-style: dotted;
-        border-color: @tweak-yr-color-accent-1-tone-2;
         margin-bottom: 0;
-        will-change: border-color;
-        .transition(border-color 500ms ease-out);
 
-        &::after {
-            .transform(none);
-        }
-
-        &:hover,
-        &:focus,
-        &:active,
-        &.yr-active {
-            border-color: @tweak-yr-color-accent-2-tone-1;
-            .transition(border-color 200ms ease-out);
+        .tweak-yr-fancy-links & {
+            border-style: dotted;
+            border-color: @tweak-yr-color-accent-1-tone-2;
+            will-change: border-color;
+            .transition(border-color 500ms ease-out);
 
             &::after {
-                opacity: 1;
+                .transform(none);
             }
 
-            + .yr-nav-folder-links {
-                background-color: @tweak-yr-color-accent-2-tone-1;
-                .transition(background-color 200ms ease-out);
-            }
-        }
+            &:hover,
+            &:focus,
+            &:active,
+            &.yr-active {
+                border-color: @tweak-yr-color-accent-2-tone-1;
+                .transition(border-color 200ms ease-out);
 
-        [data-mercury-loading] & {
-            &::after {
-                opacity: 0;
+                &::after {
+                    opacity: 1;
+                }
+
+                + .yr-nav-folder-links {
+                    background-color: @tweak-yr-color-accent-2-tone-1;
+                    .transition(background-color 200ms ease-out);
+                }
             }
 
-            + .yr-nav-folder-links {
-                background-color: transparent;
+            [data-mercury-loading] & {
+                &::after {
+                    opacity: 0;
+                }
+
+                + .yr-nav-folder-links {
+                    background-color: transparent;
+                }
             }
         }
     }
@@ -441,11 +476,6 @@
      */
 
     @fades: 5;
-    
-    .yr-nav-panel {
-        will-change: transform;
-        .transition(transform 300ms @yr-ease-slide (@fades * 70ms));
-    }
 
     .fade-loop(@n, @start, @gap) when (@n > 0) {
         .fade-loop((@n - 1), @start, @gap);
@@ -461,36 +491,42 @@
         .transition(opacity 200ms @yr-ease-fade);
         .fade-loop(@fades, 0ms, 100ms);
     }
+}
 
 
+/**
+ * Toggler styles
+ */
+
+.yr-nav-toggler {
     /**
-     * Toggle state
+     * Need to do the `max` size this way, because `<input>` doesn't
+     * respect `min-width`/`min-height` properly.
      */
+    @button-size: max(@yr-size-hit-min, @tweak-yr-nav-button-size);
 
-    .yr-nav-toggler {
+    width: @button-size;
+    height: @button-size;
+
+    z-index: @yr-z-nav-toggler;
+    opacity: 0;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: none;
+
+    .tweak-yr-nav-overlay-fancy & {
+        ~ .yr-main,
+        ~ .yr-footer {
+            will-change: filter;
+            @transition: filter @nav-overlay-time ease-out;
+            .transition(@transition);
+        }
+
         &:checked {
-            ~ .yr-nav-panel {
-                .transform(translateX(-100%));
-                .transition-delay(0ms);
-
-                .tweak-yr-nav-align-switch & {
-                    .transform(translateX(100%));
-                }
-
-                .yr-nav-fade {
-                    opacity: 1;
-                    .fade-loop(5, 300ms, 100ms);
-                }
-            }
-
-            ~ .yr-nav-overlay {
-                opacity: 1;
-                bottom: 0;
-                pointer-events: all;
-
-                @transition: opacity @nav-overlay-time ease-out,
-                    bottom 0ms linear 0ms;
-                .transition(@transition);
+            ~ .yr-main,
+            ~ .yr-footer {
+                filter: ~'saturate(20%)' blur(3px);
             }
         }
     }

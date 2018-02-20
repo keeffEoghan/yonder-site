@@ -19,19 +19,42 @@ body {
     color: @tweak-yr-color-light-1-tone-3;
     .tweak-yr-font-base;
 
+    @m: ~'only screen and @{yr-mq-m-up}';
+    @media @m {
+        font-size: @tweak-yr-font-base-size-2;
+    }
+
     &.homepage {
         background-color: @tweak-yr-color-base-tone-2;
         color: @tweak-yr-color-dark-1-tone-2;
     }
 
-    @m: ~'only screen and @{yr-mq-m-up}';
-    @media @m {
-        font-size: @tweak-yr-font-base-size-2;
+    &.yr-color-theme-1 {
+        background-color: @tweak-yr-color-theme-1-tone-2;
+    }
+
+    &.yr-color-theme-2 {
+        background-color: @tweak-yr-color-theme-2-tone-2;
+    }
+
+    &.yr-color-theme-3 {
+        background-color: @tweak-yr-color-theme-3-tone-2;
+    }
+
+    &.yr-color-theme-4 {
+        background-color: @tweak-yr-color-theme-4-tone-2;
+    }
+
+    &.yr-color-theme-5 {
+        background-color: @tweak-yr-color-theme-5-tone-2;
     }
 }
 
 .yr-main {
     flex: 1 0 auto;
+    background-color: inherit;
+    will-change: background-color;
+    .transition(background-color 300ms ease-out);
 }
 
 p {
@@ -97,6 +120,20 @@ strong {
 i,
 em {
     font-style: italic;
+}
+
+q,
+blockquote {
+    font-style: italic;
+    quotes: "“" "”" "‘" "’";
+
+    &::before {
+        content: open-quote;
+    }
+
+    &::after {
+        content: close-quote;
+    }
 }
 
 small {

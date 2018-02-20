@@ -36,52 +36,54 @@
  */
 
 .yr-a() {
-    position: relative;
-    display: inline-block;
-    text-decoration: none;
-    border: 0 solid currentColor;
+    .tweak-yr-fancy-links & {
+        position: relative;
+        display: inline-block;
+        border: 0 solid currentColor;
+        text-decoration: none;
 
-    &::after {
-        content: '';
-        position: absolute;
-        display: block;
-        border: inherit;
-
-        @x: -2px;
-        left: @x;
-        right: @x;
-        bottom: 0;
-        border-bottom-width: 1px;
-        pointer-events: none;
-        .transform-origin(bottom);
-        will-change: transform, opacity;
-        .transition(transform 500ms ease-out,
-            opacity 500ms ease-out;);
-    }
-
-    &:visited::after {
-        opacity: 0.4;
-    }
-
-    &:hover,
-    &:focus,
-    &:active {
         &::after {
-            .transition(transform 200ms ease-out,
-                opacity 300ms ease-out;);
+            content: '';
+            position: absolute;
+            display: block;
+            border: inherit;
+
+            @x: -2px;
+            left: @x;
+            right: @x;
+            bottom: 0;
+            border-bottom-width: 1px;
+            pointer-events: none;
+            .transform-origin(bottom);
+            will-change: transform, opacity;
+            .transition(transform 500ms ease-out,
+                opacity 500ms ease-out;);
         }
-    }
 
-    &:hover,
-    &:focus {
-        &::after {
-            .transform(scaleY(2));
+        &:visited::after {
             opacity: 0.4;
         }
-    }
 
-    &:active::after {
-        .transform(scaleY(0));
+        &:hover,
+        &:focus,
+        &:active {
+            &::after {
+                .transition(transform 200ms ease-out,
+                    opacity 300ms ease-out;);
+            }
+        }
+
+        &:hover,
+        &:focus {
+            &::after {
+                .transform(scaleY(2));
+                opacity: 0.4;
+            }
+        }
+
+        &:active::after {
+            .transform(scaleY(0));
+        }
     }
 }
 

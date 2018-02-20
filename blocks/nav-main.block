@@ -1,3 +1,7 @@
+{##BEGIN} Controls many things in/around the nav, DOM position important {END##}
+<input id="yr-nav-toggler" class="yr-nav-toggler" type="checkbox"
+    title="Toggle navigation menu" aria-label="Toggle navigation menu">
+
 <section class="yr-nav">
     <a class="yr-nav-home-a yr-nav-button" href="/"
         title="Go home" aria-label="Go home">
@@ -6,9 +10,6 @@
         </squarespace:block-field>
         <div class="yr-nav-button-icon">{@|apply nav/home.svg.block}</div>
     </a>
-
-    <input id="yr-nav-toggler" class="yr-nav-toggler" type="checkbox"
-        title="Toggle navigation menu" aria-label="Toggle navigation menu">
 
     {##BEGIN} Controlled by `.yr-nav-toggler`, DOM position important {END##}
     <label class="yr-nav-overlay" for="yr-nav-toggler"></label>

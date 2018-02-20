@@ -47,7 +47,7 @@
             }
 
             .image-subtitle p {
-                .tweak-yr-font-p2 !important;
+                .tweak-yr-font-p !important;
             }
 
             .image-caption p {
@@ -66,8 +66,12 @@
         .design-layout-poster {
             .image-title,
             .image-subtitle {
-                a:hover {
-                    opacity: 1;
+                a {
+                    .yr-a();
+
+                    &:hover {
+                        opacity: 1;
+                    }
                 }
             }
 
