@@ -6,7 +6,8 @@ import Mercury from '@squarespace/mercury';
 import { authenticated, debug } from '../constants';
 
 function site() {
-    loader();
+    loadAJAX();
+    loadImages();
 
     // Prevent link events reaching `body` when `a` descendents are being edited in CMS.
     $('body > *').on('click', 'a .sqs-editing', false);
@@ -59,7 +60,7 @@ const updateMatrix = [
 /**
  * Instantiates a mercury loader for the site in unauthenticated sessions.
  */
-function loader() {
+function loadAJAX() {
     const ajaxEnabled = Tweak.getValue('tweak-yr-ajax-enable') === 'true';
 
     // Don't use ajax in authenticated session or when tweak option is disabled.
@@ -95,6 +96,16 @@ function loader() {
 
     // Sync controllers on AJAX load
     window.addEventListener('mercury:load', refresh);
+}
+
+function loadImages() {
+    window.addEventListener('load', function() {
+        var images = document.querySelectorAll('img[data-src]:not(.loaded)');
+
+        for(var i = 0; i < images.length; i++) {
+            console.log('Loading image', core.ImageLoader.load(images[i], { load: true }));
+        }
+    });
 }
 
 export default site;

@@ -13,11 +13,3 @@ import navHolds from './controllers/nav-holds';
 
 controller.register('yr-site', site);
 controller.register('yr-nav-holds', navHolds);
-
-window.addEventListener('DOMContentLoaded', function() {
-    var images = document.querySelectorAll('img[data-src]');
-
-    for(var i = 0; i < images.length; i++) {
-        console.log('Loading image', core.ImageLoader.load(images[i], { load: true }));
-    }
-});
