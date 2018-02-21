@@ -84,55 +84,58 @@
 .yr-nav {
     position: relative;
 
-    /**
-     * The bar and its floating background.
-     * Setting it up as a detached backdrop element allows the nav bar itself to stay in
-     * document flow and push any following elements down by the appropriate amount naturally,
-     * While this pseudo-element scrolls fixed to the window outside of document flow.
-     */
-    &,
-    &::before {
-        width: 100%;
-        height: @tweak-yr-nav-button-size;
-        min-height: @tweak-yr-nav-home-size;
-        padding: @tweak-yr-nav-button-offset;
-        z-index: @yr-z-nav;
+    .tweak-yr-nav-main-show-bar & {
+        /**
+         * The bar and its floating background.
+         * Setting it up as a detached backdrop element allows the nav bar itself to stay in
+         * document flow and push any following elements down by the appropriate amount naturally,
+         * While this pseudo-element scrolls fixed to the window outside of document flow.
+         */
+        &,
+        &::before {
+            width: 100%;
+            height: @tweak-yr-nav-button-size;
+            min-height: @tweak-yr-nav-home-size;
+            padding: @tweak-yr-nav-button-offset;
+            z-index: @yr-z-nav;
+        }
+
+        &::before {
+            content: '';
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: @tweak-yr-color-accent-1-tone-2;
+            .transform-origin(top center);
+            will-change: background-color, transform;
+            .transition(background-color 500ms ease-out,
+                transform 500ms ease-in-out;);
+
+            .yr-color-theme-1 & {
+                background-color: @tweak-yr-color-theme-1-tone-2;
+            }
+
+            .yr-color-theme-2 & {
+                background-color: @tweak-yr-color-theme-2-tone-2;
+            }
+
+            .yr-color-theme-3 & {
+                background-color: @tweak-yr-color-theme-3-tone-2;
+            }
+
+            .yr-color-theme-4 & {
+                background-color: @tweak-yr-color-theme-4-tone-2;
+            }
+
+            .yr-color-theme-5 & {
+                background-color: @tweak-yr-color-theme-5-tone-2;
+            }
+        }
     }
 
-    &::before {
-        content: '';
-        display: block;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        background-color: @tweak-yr-color-accent-1-tone-2;
-        .transform-origin(top center);
-        will-change: background-color;
-        .transition(background-color 500ms ease-out;);
-
-        .yr-color-theme-1 & {
-            background-color: @tweak-yr-color-theme-1-tone-2;
-        }
-
-        .yr-color-theme-2 & {
-            background-color: @tweak-yr-color-theme-2-tone-2;
-        }
-
-        .yr-color-theme-3 & {
-            background-color: @tweak-yr-color-theme-3-tone-2;
-        }
-
-        .yr-color-theme-4 & {
-            background-color: @tweak-yr-color-theme-4-tone-2;
-        }
-
-        .yr-color-theme-5 & {
-            background-color: @tweak-yr-color-theme-5-tone-2;
-        }
-    }
-
-    .homepage & {
+    .tweak-yr-nav-main-show-bar.homepage & {
         min-height: 0;
         height: 0;
         padding: 0;
@@ -140,6 +143,7 @@
         &::before {
             background-color: transparent;
             pointer-events: none;
+            .transform(translateY(-100%));
         }
     }
 

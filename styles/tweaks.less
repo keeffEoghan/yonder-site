@@ -369,54 +369,12 @@
  */
 
 // tweak: { "category": "Main Navigation", "label": "Navigation Position", "title": "tweak-yr-nav-align", "type": "dropdown", "options": ["Regular", "Switch"], "default": "Regular", target: ".yr-nav-toggler, .yr-nav-button" }
-
-// tweak: { "category": "Main Navigation", "label": "Links Font", "title": "tweak-yr-font-nav-a", "type": "font", "loadAllVariants": true, "target": ".yr-nav-a" }
-.tweak-yr-font-nav-a {
-    // Doesn't display well in `Style Editor`...
-    // font-family: @yr-font-sans-bold;
-    font-family: 'Centrale Sans Bold', 'Helvetica', 'Arial', sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 1.1em;
-    letter-spacing: 0em;
-    line-height: 1.2em;
-    text-transform: none;
-}
-
-// tweak: { "category": "Main Navigation", "label": "Maximum Size", "title": "tweak-yr-nav-main-size-max", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-panel" }
-@tweak-yr-nav-main-size-max: 32em;
-
 // tweak: { "category": "Main Navigation", "label": "Overlay", "title": "tweak-yr-nav-overlay", "type": "dropdown", "options": ["None", "Simple", "Fancy"], "default": "Fancy", target: ".yr-nav, .yr-nav-panel, .yr-nav-overlay" }
 
 // tweak: { "category": "Main Navigation", "label": "Overlay Color", "title": "tweak-yr-nav-main-overlay-color", "type": "color", "disableTransparency": "false", "target": ".yr-nav, .yr-nav-panel, .yr-nav-overlay", "showOnlyWhenPresent": ".tweak-yr-nav-overlay-simple" }
 @tweak-yr-nav-main-overlay-color: rgba(255, 255, 255, 0.33);
 
-
-/**
- * Main Navigation / Header
- */
-
-// tweak: { "category": "Main Navigation / Header", "label": "Show Site Title in Main Navigation", "title": "tweak-yr-nav-main-site-title-show", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header" }
-// tweak: { "category": "Main Navigation / Header", "label": "Show Site Tagline in Main Navigation", "title": "tweak-yr-nav-main-site-tagline-show", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header" }
-// tweak: { "category": "Main Navigation / Header", "label": "Show Site Description in Main Navigation", "title": "tweak-yr-nav-main-site-description-show", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header" }
-
-
-/**
- * Main Navigation / Footer
- */
-
-// tweak: { "category": "Main Navigation / Footer", "label": "Font", "title": "tweak-yr-font-nav-footer", "type": "font", "loadAllVariants": true, "target": ".yr-nav-footer-block" }
-.tweak-yr-font-nav-footer {
-    // Doesn't display well in `Style Editor`...
-    // font-family: @yr-font-sans;
-    font-family: 'Centrale Sans Medium', 'Helvetica', 'Arial', sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 0.8em;
-    letter-spacing: 0em;
-    line-height: 1em;
-    text-transform: none;
-}
+// tweak: { "category": "Main Navigation", "label": "Show Floating Bar", "title": "tweak-yr-nav-main-show-bar", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header" }
 
 
 /**
@@ -431,6 +389,44 @@
 
 // tweak: { "category": "Main Navigation / Buttons", "label": "Home Button Size", "title": "tweak-yr-nav-home-size", "type": "value", "min" : 10, "max" : 100, "step" : 1, target: ".yr-nav-home-a" }
 @tweak-yr-nav-home-size: 38px;
+
+
+/**
+ * Main Navigation / Panel
+ */
+
+// tweak: { "category": "Main Navigation / Panel", "label": "Maximum Size", "title": "tweak-yr-nav-main-size-max", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-panel" }
+@tweak-yr-nav-main-size-max: 32em;
+
+// tweak: { "category": "Main Navigation / Panel", "label": "Show Site Title", "title": "tweak-yr-nav-main-site-title-show", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header" }
+// tweak: { "category": "Main Navigation / Panel", "label": "Show Site Tagline", "title": "tweak-yr-nav-main-site-tagline-show", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header" }
+// tweak: { "category": "Main Navigation / Panel", "label": "Show Site Description", "title": "tweak-yr-nav-main-site-description-show", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header" }
+
+// tweak: { "category": "Main Navigation / Panel", "label": "Links Font", "title": "tweak-yr-font-nav-a", "type": "font", "loadAllVariants": true, "target": ".yr-nav-a" }
+.tweak-yr-font-nav-a {
+    // Doesn't display well in `Style Editor`...
+    // font-family: @yr-font-sans-bold;
+    font-family: 'Centrale Sans Bold', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.1em;
+    letter-spacing: 0em;
+    line-height: 1.2em;
+    text-transform: none;
+}
+
+// tweak: { "category": "Main Navigation / Panel", "label": "Footer Font", "title": "tweak-yr-font-nav-footer", "type": "font", "loadAllVariants": true, "target": ".yr-nav-footer-block" }
+.tweak-yr-font-nav-footer {
+    // Doesn't display well in `Style Editor`...
+    // font-family: @yr-font-sans;
+    font-family: 'Centrale Sans Medium', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.8em;
+    letter-spacing: 0em;
+    line-height: 1em;
+    text-transform: none;
+}
 
 
 /**
@@ -489,7 +485,7 @@
  * Content
  */
 
-// tweak: { "category": "Content", "label": "Row Alignment", "title": "tweak-yr-sqs-row-align", "type": "dropdown", "options": ["Up High", "Middle", "Down Low"], "default": "Middle", target: ".sqs-layout .sqs-row" }
+// tweak: { "category": "Content", "label": "Row Vertical Alignment", "title": "tweak-yr-sqs-row-align", "type": "dropdown", "options": ["Up High", "Middle", "Down Low"], "default": "Middle", target: ".sqs-layout .sqs-row" }
 
 
 /**
