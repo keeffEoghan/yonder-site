@@ -8,6 +8,12 @@ html {
     height: 100%;
 }
 
+body,
+.yr-main {
+    will-change: background-color;
+    .transition(background-color 500ms ease-out);
+}
+
 body {
     display: flex;
     flex-flow: column nowrap;
@@ -53,8 +59,6 @@ body {
 .yr-main {
     flex: 1 0 auto;
     background-color: inherit;
-    will-change: background-color;
-    .transition(background-color 300ms ease-out);
 }
 
 p {
