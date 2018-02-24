@@ -138,26 +138,29 @@
  * Spacing
  */
 
-// tweak: { "category": "Spacing", "label": "Paragraph", "title": "tweak-yr-p-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "p" }
-@tweak-yr-p-margin: 0.5em;
+// tweak: { "category": "Spacing", "label": "Paragraph", "title": "tweak-yr-p-space", "type": "value", "min": -50, "max": 100, "step": 1, "target": "p" }
+@tweak-yr-p-space: 0.5em;
 
-// tweak: { "category": "Spacing", "label": "Heading 1", "title": "tweak-yr-h1-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h1" }
-@tweak-yr-h1-margin: 10vh;
+// tweak: { "category": "Spacing", "label": "Heading 1", "title": "tweak-yr-h1-space", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h1" }
+@tweak-yr-h1-space: 10vh;
 
-// tweak: { "category": "Spacing", "label": "Heading 2", "title": "tweak-yr-h2-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h2" }
-@tweak-yr-h2-margin: 1em;
+// tweak: { "category": "Spacing", "label": "Heading 2", "title": "tweak-yr-h2-space", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h2" }
+@tweak-yr-h2-space: 1em;
 
-// tweak: { "category": "Spacing", "label": "Heading 3", "title": "tweak-yr-h3-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h3" }
-@tweak-yr-h3-margin: 0.5em;
+// tweak: { "category": "Spacing", "label": "Heading 3", "title": "tweak-yr-h3-space", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h3" }
+@tweak-yr-h3-space: 0.5em;
 
-// tweak: { "category": "Spacing", "label": "Heading 4", "title": "tweak-yr-h4-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h4" }
-@tweak-yr-h4-margin: 1.6em;
+// tweak: { "category": "Spacing", "label": "Heading 4", "title": "tweak-yr-h4-space", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h4" }
+@tweak-yr-h4-space: 1.6em;
 
-// tweak: { "category": "Spacing", "label": "Heading 5", "title": "tweak-yr-h5-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h5" }
-@tweak-yr-h5-margin: 1em;
+// tweak: { "category": "Spacing", "label": "Heading 5", "title": "tweak-yr-h5-space", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h5" }
+@tweak-yr-h5-space: 1em;
 
-// tweak: { "category": "Spacing", "label": "Heading 6", "title": "tweak-yr-h6-margin", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h6" }
-@tweak-yr-h6-margin: 0.5em;
+// tweak: { "category": "Spacing", "label": "Heading 6", "title": "tweak-yr-h6-space", "type": "value", "min": -50, "max": 100, "step": 1, "target": "h6" }
+@tweak-yr-h6-space: 0.5em;
+
+// tweak: { "category": "Spacing", "label": "Content", "title": "tweak-yr-sqs-content-space", "type": "value", "min": -50, "max": 100, "step": 1, "target": ".yr-main .html-block .sqs-block-content, .sqs-layout .design-layout-poster" }
+@tweak-yr-sqs-content-space: 2em;
 
 
 /**
@@ -381,13 +384,13 @@
  * Main Navigation / Buttons
  */
 
-// tweak: { "category": "Main Navigation / Buttons", "label": "Button Offset", "title": "tweak-yr-nav-button-offset", "type": "value", "min" : 0, "max" : 100, "step" : 1, target: ".yr-nav-button, .yr-nav-toggler" }
+// tweak: { "category": "Main Navigation / Buttons", "label": "Button Offset", "title": "tweak-yr-nav-button-offset", "type": "value", "min": 0, "max": 100, "step": 1, target: ".yr-nav-button, .yr-nav-toggler" }
 @tweak-yr-nav-button-offset: 2.7rem;
 
-// tweak: { "category": "Main Navigation / Buttons", "label": "Button Size", "title": "tweak-yr-nav-button-size", "type": "value", "min" : 10, "max" : 100, "step" : 1, target: ".yr-nav-toggler" }
+// tweak: { "category": "Main Navigation / Buttons", "label": "Button Size", "title": "tweak-yr-nav-button-size", "type": "value", "min": 10, "max": 100, "step": 1, target: ".yr-nav-toggler" }
 @tweak-yr-nav-button-size: 22px;
 
-// tweak: { "category": "Main Navigation / Buttons", "label": "Home Button Size", "title": "tweak-yr-nav-home-size", "type": "value", "min" : 10, "max" : 100, "step" : 1, target: ".yr-nav-home-a" }
+// tweak: { "category": "Main Navigation / Buttons", "label": "Home Button Size", "title": "tweak-yr-nav-home-size", "type": "value", "min": 10, "max": 100, "step": 1, target: ".yr-nav-home-a" }
 @tweak-yr-nav-home-size: 38px;
 
 
@@ -472,8 +475,8 @@
  * Footer
  */
 
-// tweak: { "category" : "Footer", "label" : "Show Footer", "title" : "tweak-yr-footer-show", "type" : "checkbox", "active" : true, "target": ".yr-footer" }
-// tweak: { "category" : "Footer / Contact", "label" : "Show Contact Info", "title" : "tweak-yr-footer-contact-show", "type" : "checkbox", "active" : false, "target": ".yr-footer", "showOnlyWhenPresent": ".tweak-yr-footer-show" }
+// tweak: { "category": "Footer", "label": "Show Footer", "title": "tweak-yr-footer-show", "type": "checkbox", "active": true, "target": ".yr-footer" }
+// tweak: { "category": "Footer / Contact", "label": "Show Contact Info", "title": "tweak-yr-footer-contact-show", "type": "checkbox", "active": false, "target": ".yr-footer", "showOnlyWhenPresent": ".tweak-yr-footer-show" }
 
 
 /**
@@ -485,7 +488,13 @@
  * Content
  */
 
-// tweak: { "category": "Content", "label": "Row Vertical Alignment", "title": "tweak-yr-sqs-row-align", "type": "dropdown", "options": ["Up High", "Middle", "Down Low"], "default": "Middle", target: ".sqs-layout .sqs-row" }
+// tweak: { "category": "Content", "label": "Full-Bleed", "title": "tweak-yr-sqs-content-full-bleed", "type": "checkbox", "active": true, "target": ".sqs-layout .sqs-block-image" }
+
+// tweak: { "category": "Content", "label": "Use Custom Grid", "title": "tweak-yr-sqs-alt-grid", "type": "checkbox", "active": true, "target": ".yr-main .sqs-layout" }
+// tweak: { "category": "Content", "label": "Row Vertical Alignment", "title": "tweak-yr-sqs-row-align", "type": "dropdown", "options": ["Up High", "Middle", "Down Low"], "default": "Middle", target: ".sqs-layout .sqs-row", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid" }
+// tweak: { "category": "Content", "label": "Show Alternating Overlay", "title": "tweak-yr-sqs-cell-alt-show", "type": "checkbox", "active": true, "target": ".yr-main .sqs-layout", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid" }
+// tweak: { "category": "Content", "label": "Alternating Overlay Color", "title": "tweak-yr-sqs-cell-alt-color", "type": "color", "disableTransparency": "false", "target": ".yr-main .sqs-layout", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid.tweak-yr-sqs-cell-alt-show" }
+@tweak-yr-sqs-cell-alt-color: rgba(0, 0, 0, 0.2);
 
 
 /**
@@ -502,12 +511,9 @@
 
 // tweak: { "category": "Image Block: Poster", "label": "Subtitle Alignment", "title": "tweak-yr-sqs-image-block-poster-anchor-sub", "type": "dropdown", "options": ["Up High", "Middle", "Down Low"], "default": "Down Low", target: ".sqs-layout .design-layout-poster" }
 
-// tweak: { "category": "Image Block: Poster", "label": "Subtitle Alignment Spacing", "title": "tweak-yr-sqs-image-block-poster-gap-sub", "type": "value", "min": -50, "max": 100, "step": 1, "showOnlyWhenPresent": ".tweak-yr-sqs-image-block-poster-anchor-sub-up-high, .tweak-yr-sqs-image-block-poster-anchor-sub-down-low", "target": ".sqs-layout .design-layout-poster" }
-@tweak-yr-sqs-image-block-poster-gap-sub: 2em;
-
 
 /**
- * This fixes the following bug:
+ * @bugfix This fixes the following bug:
  *     site.css:1      .Share {
  *     site.css:1          &-buttons {
  *     site.css:1              &-item {
@@ -515,5 +521,4 @@
  *
  *     ExecuteError VAR_UNDEFINED: Failed to locate a definition for the variable @tweak-yr-font-font-share-buttons-label-size in current scope
  */
-// (bugfix) tweak: { "category": "Fonts", "label": "Share Buttons Label Font Size", "title": "tweak-share-buttons-label-font-font-size", "type": "value" }
-@tweak-share-buttons-label-font-font-size: 16px;
+@tweak-share-buttons-label-font-font-size: 1em;

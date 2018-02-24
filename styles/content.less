@@ -3,19 +3,58 @@
  * Probably volatile, dependent on third party updates.
  */
 
-.sqs-layout {
-    .sqs-row {
-        .display(flex);
-        .flex-flow(row wrap);
-        .justify-content(center);
-        .align-items(center);
-
-        .tweak-yr-sqs-row-align-up-high & {
-            .justify-content(flex-start);
+.yr-main .sqs-layout {
+    .tweak-yr-sqs-alt-grid & {
+        .sqs-row,
+        .col,
+        .sqs-block {
+            .display(flex);
         }
 
-        .tweak-yr-sqs-row-align-down-low & {
-            .justify-content(flex-end);
+        .sqs-row {
+            .flex-flow(row wrap);
+            .justify-content(stretch);
+            .align-items(stretch);
+        }
+
+        .col {
+            .flex-flow(column nowrap);
+            .justify-content(stretch);
+            .align-items(stretch);
+        }
+
+        .sqs-block {
+            .flex-flow(row wrap);
+            .justify-content(stretch);
+            .align-items(center);
+
+            .tweak-yr-sqs-row-align-up-high & {
+                .align-items(flex-start);
+            }
+
+            .tweak-yr-sqs-row-align-down-low & {
+                .align-items(flex-end);
+            }
+        }
+
+        .col,
+        .sqs-block {
+            flex: 1 0 auto;
+        }
+
+        .sqs-block-content {
+            flex: 1 1 auto;
+        }
+    }
+
+    /**
+     * Alternating cell colors - kinda works...
+     */
+    .tweak-yr-sqs-cell-alt-show.tweak-yr-sqs-alt-grid & {
+        .sqs-row:nth-child(odd) > [class*="sqs-col"]:nth-child(odd) > .sqs-block:nth-child(even),
+        .sqs-row:nth-child(odd) > [class*="sqs-col"]:nth-child(even) > .sqs-block:nth-child(odd),
+        .sqs-row:nth-child(even) > [class*="sqs-col"]:nth-child(odd) > .sqs-block:nth-child(odd) {
+            background-color: @tweak-yr-sqs-cell-alt-color;
         }
     }
 
@@ -31,16 +70,17 @@
         }
     }
 
-    .sqs-block-image,
-    .html-block {
+    .sqs-block {
         a {
             .yr-a();
+        }
+
+        .tweak-yr-sqs-content-full-bleed & {
+            padding: 0 !important;
         }
     }
 
     .sqs-block-image {
-        padding: 0 !important;
-
         .tweak-yr-sqs-image-block-use-site-fonts & {
             .image-title p {
                 .tweak-yr-font-h4 !important;
@@ -52,6 +92,7 @@
 
             .image-caption p {
                 .tweak-yr-font-p !important;
+                margin: @tweak-yr-sqs-content-space 0;
             }
         }
 
@@ -83,23 +124,19 @@
                 }
 
                 .tweak-yr-sqs-image-block-poster-anchor-sub-up-high & {
-                    top: @tweak-yr-sqs-image-block-poster-gap-sub;
+                    top: @tweak-yr-sqs-content-space;
                 }
 
                 .tweak-yr-sqs-image-block-poster-anchor-sub-down-low & {
-                    bottom: @tweak-yr-sqs-image-block-poster-gap-sub;
+                    bottom: @tweak-yr-sqs-content-space;
                 }
             }
         }
     }
-}
 
-.yr-main {
-    .sqs-layout {
-        .html-block {
-            .sqs-block-content {
-                padding: 2em;
-            }
+    .html-block {
+        .sqs-block-content {
+            padding: @tweak-yr-sqs-content-space;
         }
     }
 }

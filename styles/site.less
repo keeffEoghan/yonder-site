@@ -6,6 +6,12 @@
 
 html {
     height: 100%;
+    .tweak-yr-font-base;
+
+    @m: ~'only screen and @{yr-mq-m-up}';
+    @media @m {
+        font-size: @tweak-yr-font-base-size-2;
+    }
 }
 
 body,
@@ -23,12 +29,6 @@ body {
     margin: 0 auto;
     background-color: @tweak-yr-color-dark-2-tone-2;
     color: @tweak-yr-color-light-1-tone-3;
-    .tweak-yr-font-base;
-
-    @m: ~'only screen and @{yr-mq-m-up}';
-    @media @m {
-        font-size: @tweak-yr-font-base-size-2;
-    }
 
     &.homepage {
         background-color: @tweak-yr-color-base-tone-2;
@@ -62,7 +62,7 @@ body {
 }
 
 p {
-    margin: @tweak-yr-p-margin 0;
+    margin: @tweak-yr-p-space 0;
     .tweak-yr-font-p;
 }
 
@@ -72,37 +72,37 @@ h1 {
      */
     /* color: @tweak-yr-color-dark-1-tone-1; */
     .tweak-yr-font-h1;
-    padding: @tweak-yr-h1-margin 0;
+    padding: @tweak-yr-h1-space 0;
 }
 
 h2 {
     /* color: @tweak-yr-color-dark-1-tone-1; */
     .tweak-yr-font-h2;
-    margin: @tweak-yr-h2-margin 0;
+    margin: @tweak-yr-h2-space 0;
 }
 
 h3 {
     /* color: @tweak-yr-color-dark-1-tone-2; */
     .tweak-yr-font-h3;
-    margin: @tweak-yr-h3-margin 0;
+    margin: @tweak-yr-h3-space 0;
 }
 
 h4 {
     /* color: @tweak-yr-color-dark-1-tone-2; */
     .tweak-yr-font-h4;
-    margin: @tweak-yr-h4-margin 0;
+    margin: @tweak-yr-h4-space 0;
 }
 
 h5 {
     /* color: @tweak-yr-color-dark-1-tone-3; */
     .tweak-yr-font-h5;
-    margin: @tweak-yr-h5-margin 0;
+    margin: @tweak-yr-h5-space 0;
 }
 
 h6 {
     /* color: @tweak-yr-color-dark-1-tone-3; */
     .tweak-yr-font-h6;
-    margin: @tweak-yr-h6-margin 0;
+    margin: @tweak-yr-h6-space 0;
 }
 
 a {
