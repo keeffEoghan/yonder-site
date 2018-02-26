@@ -51,9 +51,9 @@
      * Alternating cell colors - kinda works...
      */
     .tweak-yr-sqs-cell-alt-show.tweak-yr-sqs-alt-grid & {
-        .sqs-row:nth-child(odd) > [class*="sqs-col"]:nth-child(odd) > .sqs-block:nth-child(even),
+        .sqs-row:nth-child(even) > [class*="sqs-col"]:nth-child(odd) > .sqs-block:nth-child(odd),
         .sqs-row:nth-child(odd) > [class*="sqs-col"]:nth-child(even) > .sqs-block:nth-child(odd),
-        .sqs-row:nth-child(even) > [class*="sqs-col"]:nth-child(odd) > .sqs-block:nth-child(odd) {
+        .sqs-row:nth-child(odd) > [class*="sqs-col"]:nth-child(odd) > .sqs-block:nth-child(even) {
             background-color: @tweak-yr-sqs-cell-alt-color;
         }
     }
@@ -92,7 +92,7 @@
 
             .image-caption p {
                 .tweak-yr-font-p !important;
-                margin: @tweak-yr-sqs-content-space 0;
+                margin: @tweak-yr-sqs-content-space @tweak-yr-pad-space;
             }
         }
 
@@ -134,9 +134,54 @@
         }
     }
 
-    .html-block {
+    .html-block,
+    .sqs-block-markdown {
         .sqs-block-content {
             padding: @tweak-yr-sqs-content-space;
         }
+    }
+
+    .sqs-block-quote {
+        blockquote {
+            /**
+             * Squarespace adds actual quote-mark elements...
+             * We're already handling this with pseudo-elements, so get rid...
+             */
+            span {
+                &:first-of-type,
+                &:last-of-type {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .sqs-block-markdown,
+    .sqs-block-horizontalrule {
+        hr {
+            width: auto;
+            color: inherit;
+            border-bottom: 1px solid currentColor;
+            margin: @tweak-yr-p-space 0;
+            background: transparent;
+        }
+    }
+
+    blockquote {
+        background-color: @tweak-yr-color-overlays-tone-1;
+        border-radius: 2px;
+    }
+
+    pre,
+    code {
+        color: @tweak-yr-color-accent-2-tone-3;
+        background-color: @tweak-yr-color-dark-2-tone-2;
+        border-radius: 2px;
+    }
+
+    figure {
+        padding: 2px;
+        border-radius: 2px;
+        background-color: @tweak-yr-color-overlays-tone-1;
     }
 }

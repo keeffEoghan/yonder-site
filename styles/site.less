@@ -62,7 +62,7 @@ body {
 }
 
 p {
-    margin: @tweak-yr-p-space 0;
+    margin: @tweak-yr-p-space auto;
     .tweak-yr-font-p;
 }
 
@@ -72,37 +72,37 @@ h1 {
      */
     /* color: @tweak-yr-color-dark-1-tone-1; */
     .tweak-yr-font-h1;
-    padding: @tweak-yr-h1-space 0;
+    padding: @tweak-yr-h1-space auto;
 }
 
 h2 {
     /* color: @tweak-yr-color-dark-1-tone-1; */
     .tweak-yr-font-h2;
-    margin: @tweak-yr-h2-space 0;
+    margin: @tweak-yr-h2-space auto;
 }
 
 h3 {
     /* color: @tweak-yr-color-dark-1-tone-2; */
     .tweak-yr-font-h3;
-    margin: @tweak-yr-h3-space 0;
+    margin: @tweak-yr-h3-space auto;
 }
 
 h4 {
     /* color: @tweak-yr-color-dark-1-tone-2; */
     .tweak-yr-font-h4;
-    margin: @tweak-yr-h4-space 0;
+    margin: @tweak-yr-h4-space auto;
 }
 
 h5 {
     /* color: @tweak-yr-color-dark-1-tone-3; */
     .tweak-yr-font-h5;
-    margin: @tweak-yr-h5-space 0;
+    margin: @tweak-yr-h5-space auto;
 }
 
 h6 {
     /* color: @tweak-yr-color-dark-1-tone-3; */
     .tweak-yr-font-h6;
-    margin: @tweak-yr-h6-space 0;
+    margin: @tweak-yr-h6-space auto;
 }
 
 a {
@@ -140,6 +140,58 @@ blockquote {
     }
 }
 
+blockquote {
+    margin: @tweak-yr-p-space auto;
+    padding: @tweak-yr-pad-space;
+}
+
+pre,
+code {
+    .tweak-yr-font-mono;
+}
+
+pre {
+    margin: @tweak-yr-p-space auto;
+    padding: @tweak-yr-pad-space;
+    white-space: pre-wrap;
+}
+
+ol,
+ul {
+    list-style-position: outside;
+    padding-left: @tweak-yr-pad-space * 2;
+    margin: @tweak-yr-p-space auto;
+
+    &:dir(rtl) {
+        padding-left: 0;
+        padding-right: @tweak-yr-pad-space * 2;
+    }
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+ul {
+    list-style-type: disc;
+}
+
+li {}
+
+figure {
+    margin: @tweak-yr-pad-space auto;
+}
+
+figcaption {
+    padding: @tweak-yr-pad-space;
+}
+
+hr {
+    border: none;
+    border-bottom: 1px solid currentColor;
+    margin: @tweak-yr-p-space auto;
+}
+
 small {
     font-size: 0.8em;
 }
@@ -148,6 +200,10 @@ img,
 .yr-inline-svg {
     display: inline-block;
     vertical-align: middle;
+}
+
+::selection {
+    background: @tweak-yr-color-selection;
 }
 
 

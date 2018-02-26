@@ -50,6 +50,19 @@
     text-transform: none;
 }
 
+// tweak: { "category": "Typography", "label": "Paragraph", "title": "tweak-yr-font-mono", "type": "font", "loadAllVariants": true, "target": "pre, code" }
+.tweak-yr-font-mono {
+    // Doesn't display well in `Style Editor`...
+    // font-family: @yr-font-mono;
+    font-family: 'Courier New', monospace;
+    font-size: 1em;
+    line-height: 1.6em;
+    letter-spacing: 0em;
+    font-weight: normal;
+    font-style: normal;
+    text-transform: none;
+}
+
 // tweak: { "category": "Typography", "label": "Heading 1", "title": "tweak-yr-font-h1", "type": "font", "loadAllVariants": true, "target": "h1" }
 .tweak-yr-font-h1 {
     // Doesn't display well in `Style Editor`...
@@ -138,6 +151,9 @@
  * Spacing
  */
 
+// tweak: { "category": "Spacing", "label": "Pad", "title": "tweak-yr-pad-space", "type": "value", "min": -50, "max": 100, "step": 1, "target": "p" }
+@tweak-yr-pad-space: 1em;
+
 // tweak: { "category": "Spacing", "label": "Paragraph", "title": "tweak-yr-p-space", "type": "value", "min": -50, "max": 100, "step": 1, "target": "p" }
 @tweak-yr-p-space: 0.5em;
 
@@ -166,6 +182,9 @@
 /**
  * Colors
  */
+
+// tweak: { "category": "Colors", "label": "Selection", "title": "tweak-yr-color-selection", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-selection: #0caa9e;
 
 
 /**
@@ -264,6 +283,29 @@
 
 // tweak: { "category": "Colors / Accent 2", "label": "Tone 3", "title": "tweak-yr-color-accent-2-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-loader, .yr-nav-panel" }
 @tweak-yr-color-accent-2-tone-3: #ff965e;
+
+
+/**
+ * Colors / Overlays
+ */
+
+// tweak: { "category": "Colors / Overlays", "label": "Tone 1", "title": "tweak-yr-color-overlays-tone-1", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-overlays-tone-1: rgba(0, 0, 0, 0.11);
+
+// tweak: { "category": "Colors / Overlays", "label": "Tone 2", "title": "tweak-yr-color-overlays-tone-2", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-overlays-tone-2: rgba(0, 0, 0, 0.33);
+
+// tweak: { "category": "Colors / Overlays", "label": "Tone 3", "title": "tweak-yr-color-overlays-tone-3", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-overlays-tone-3: rgba(0, 0, 0, 0.66);
+
+// tweak: { "category": "Colors / Overlays", "label": "Tone 4", "title": "tweak-yr-color-overlays-tone-4", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-overlays-tone-4: rgba(255, 255, 255, 0.11);
+
+// tweak: { "category": "Colors / Overlays", "label": "Tone 5", "title": "tweak-yr-color-overlays-tone-5", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-overlays-tone-5: rgba(255, 255, 255, 0.33);
+
+// tweak: { "category": "Colors / Overlays", "label": "Tone 6", "title": "tweak-yr-color-overlays-tone-6", "type": "color", "disableTransparency": "false" }
+@tweak-yr-color-overlays-tone-6: rgba(255, 255, 255, 0.66);
 
 
 /**
@@ -492,9 +534,9 @@
 
 // tweak: { "category": "Content", "label": "Use Custom Grid", "title": "tweak-yr-sqs-alt-grid", "type": "checkbox", "active": true, "target": ".yr-main .sqs-layout" }
 // tweak: { "category": "Content", "label": "Row Vertical Alignment", "title": "tweak-yr-sqs-row-align", "type": "dropdown", "options": ["Up High", "Middle", "Down Low"], "default": "Middle", target: ".sqs-layout .sqs-row", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid" }
-// tweak: { "category": "Content", "label": "Show Alternating Overlay", "title": "tweak-yr-sqs-cell-alt-show", "type": "checkbox", "active": true, "target": ".yr-main .sqs-layout", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid" }
-// tweak: { "category": "Content", "label": "Alternating Overlay Color", "title": "tweak-yr-sqs-cell-alt-color", "type": "color", "disableTransparency": "false", "target": ".yr-main .sqs-layout", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid.tweak-yr-sqs-cell-alt-show" }
-@tweak-yr-sqs-cell-alt-color: rgba(0, 0, 0, 0.2);
+// tweak: { "category": "Content", "label": "Show Alternating Cell", "title": "tweak-yr-sqs-cell-alt-show", "type": "checkbox", "active": true, "target": ".yr-main .sqs-layout", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid" }
+// tweak: { "category": "Content", "label": "Alternating Cell Color", "title": "tweak-yr-sqs-cell-alt-color", "type": "color", "disableTransparency": "false", "target": ".yr-main .sqs-layout", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid.tweak-yr-sqs-cell-alt-show" }
+@tweak-yr-sqs-cell-alt-color: rgba(0, 0, 0, 0.1);
 
 
 /**
