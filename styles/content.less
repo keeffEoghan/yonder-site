@@ -4,11 +4,17 @@
  */
 
 .yr-main .sqs-layout {
+    @mq-collapse: ~'only screen and @{yr-mq-m-dn}';
+
     .tweak-yr-sqs-alt-grid & {
         .sqs-row,
         .col,
         .sqs-block {
             .display(flex);
+
+            @media @mq-collapse {
+                display: block;
+            }
         }
 
         .sqs-row {
@@ -58,12 +64,7 @@
         }
     }
 
-    @m: ~'only screen and @{yr-mq-m-dn}';
-    @media @m {
-        .sqs-row {
-            display: block;
-        }
-
+    @media @mq-collapse {
         [class*=sqs-col] {
             float: none;
             width: auto;

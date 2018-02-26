@@ -51,6 +51,7 @@
             position: absolute;
             display: block;
             border: inherit;
+            z-index: -1;
 
             @x: -2px;
             left: @x;
@@ -81,7 +82,7 @@
         &:focus {
             &::after {
                 .transform(scaleY(4));
-                opacity: 0.33;
+                opacity: 0.2;
             }
         }
 
