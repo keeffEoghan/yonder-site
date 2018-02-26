@@ -71,8 +71,8 @@
         }
     }
 
-    .sqs-block {
-        a:not(.sqs-block-button-element) {
+    .sqs-block a {
+        &:not(.sqs-block-button-element):not([role="button"]):not(.archive-group-name-link) {
             .yr-a();
         }
     }
@@ -191,5 +191,9 @@
         padding: 4px;
         border-radius: 2px;
         background-color: @tweak-yr-color-overlays-tone-1;
+    }
+
+    .button-block {
+        margin: @tweak-yr-p-space;
     }
 }
