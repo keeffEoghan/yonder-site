@@ -61,8 +61,20 @@ body {
     background-color: inherit;
 }
 
-p {
+p,
+blockquote,
+pre,
+ol,
+ul,
+figure {
     margin: @tweak-yr-p-space auto;
+}
+
+p,
+blockquote,
+ol,
+ul,
+figure {
     .tweak-yr-font-p;
 }
 
@@ -141,7 +153,6 @@ blockquote {
 }
 
 blockquote {
-    margin: @tweak-yr-p-space auto;
     padding: @tweak-yr-pad-space;
 }
 
@@ -151,7 +162,6 @@ code {
 }
 
 pre {
-    margin: @tweak-yr-p-space auto;
     padding: @tweak-yr-pad-space;
     white-space: pre-wrap;
 }

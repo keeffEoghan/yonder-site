@@ -50,7 +50,7 @@
     /**
      * Alternating cell colors - kinda works...
      */
-    .tweak-yr-sqs-cell-alt-show.tweak-yr-sqs-alt-grid & {
+    .tweak-yr-sqs-alt-grid.tweak-yr-sqs-cell-alt-show & {
         .sqs-row:nth-child(even) > [class*="sqs-col"]:nth-child(odd) > .sqs-block:nth-child(odd),
         .sqs-row:nth-child(odd) > [class*="sqs-col"]:nth-child(even) > .sqs-block:nth-child(odd),
         .sqs-row:nth-child(odd) > [class*="sqs-col"]:nth-child(odd) > .sqs-block:nth-child(even) {
@@ -71,12 +71,19 @@
     }
 
     .sqs-block {
-        a {
+        a:not(.sqs-block-button-element) {
             .yr-a();
         }
+    }
 
-        .tweak-yr-sqs-content-full-bleed & {
+    .tweak-yr-sqs-content-full-bleed & {
+        .sqs-block {
             padding: 0 !important;
+        }
+
+        > .sqs-row {
+            margin-left: auto;
+            margin-right: auto;
         }
     }
 
@@ -180,7 +187,7 @@
     }
 
     figure {
-        padding: 2px;
+        padding: 4px;
         border-radius: 2px;
         background-color: @tweak-yr-color-overlays-tone-1;
     }
