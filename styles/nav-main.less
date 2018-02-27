@@ -412,18 +412,18 @@
         .tweak-yr-fancy-links & {
             border-color: @tweak-yr-color-accent-2-tone-1;
 
-            &::after {
+            &::before {
                 border-bottom-width: 2px;
                 .transform(scaleY(0));
             }
 
             &.yr-active {
-                &::after {
+                &::before {
                     .transform(scaleY(1));
                 }
             }
 
-            [data-mercury-loading] &::after {
+            [data-mercury-loading] &::before {
                 .transform(scaleY(0));
             }
         }
@@ -436,10 +436,8 @@
         .tweak-yr-fancy-links & {
             border-style: dotted;
             border-color: @tweak-yr-color-accent-1-tone-2;
-            will-change: border-color;
-            .transition(border-color 500ms ease-out);
 
-            &::after {
+            &::before {
                 .transform(none);
             }
 
@@ -448,20 +446,15 @@
             &:active,
             &.yr-active {
                 border-color: @tweak-yr-color-accent-2-tone-1;
-                .transition(border-color 200ms ease-out);
-
-                &::after {
-                    opacity: 1;
-                }
 
                 + .yr-nav-folder-links {
-                    background-color: @tweak-yr-color-accent-2-tone-1;
-                    .transition(background-color 200ms ease-out);
+                    background-color: fade(@tweak-yr-color-accent-2-tone-1, 33%);
+                    .transition(background-color 300ms ease-out;);
                 }
             }
 
             [data-mercury-loading] & {
-                &::after {
+                &::before {
                     opacity: 0;
                 }
 
@@ -476,7 +469,7 @@
         .flex(0 0 auto);
         background-color: @tweak-yr-color-accent-1-tone-2;
         will-change: background-color;
-        .transition(background-color 500ms ease-out);
+        .transition(background-color 500ms ease-out;);
     }
 
     /**

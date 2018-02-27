@@ -41,12 +41,13 @@
         display: inline-block;
         border: 0 solid currentColor;
         text-decoration: none;
+        z-index: 1;
 
         &[target="_blank"] {
             border-style: dashed;
         }
 
-        &::after {
+        &::before {
             content: '';
             position: absolute;
             display: block;
@@ -60,34 +61,41 @@
             border-bottom-width: 1px;
             pointer-events: none;
             .transform-origin(bottom);
-            will-change: transform, opacity;
+            will-change: transform, opacity, border-color;
             .transition(transform 500ms ease-out,
-                opacity 500ms ease-out;);
+                opacity 500ms ease-out,
+                border-color 500ms ease-out;);
         }
 
-        &:visited::after {
-            opacity: 0.4;
+        &:visited::before {
+            opacity: 0.33;
         }
 
         &:hover,
         &:focus,
         &:active {
-            &::after {
+            &::before {
                 .transition(transform 200ms ease-out,
-                    opacity 300ms ease-out;);
+                    opacity 300ms ease-out,
+                    border-color 300ms ease-out;);
             }
         }
 
         &:hover,
         &:focus {
-            &::after {
+            &::before {
                 .transform(scaleY(4));
-                opacity: 0.2;
+                opacity: 0.33;
             }
         }
 
-        &:active::after {
+        &:active::before {
             .transform(scaleY(0));
+        }
+
+        &:empty::before {
+            left: 0;
+            right: 0;
         }
     }
 }

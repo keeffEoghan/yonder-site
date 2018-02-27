@@ -6,6 +6,7 @@
 
 html {
     height: 100%;
+    overflow-x: hidden;
     .tweak-yr-font-base;
 
     @m: ~'only screen and @{yr-mq-m-up}';
@@ -154,11 +155,16 @@ blockquote {
 
 blockquote {
     padding: @tweak-yr-pad-space;
+    background-color: @tweak-yr-color-overlays-tone-1;
+    border-radius: 2px;
 }
 
 pre,
 code {
     .tweak-yr-font-mono;
+    color: @tweak-yr-color-accent-2-tone-3;
+    background-color: @tweak-yr-color-dark-2-tone-2;
+    border-radius: 2px;
 }
 
 pre {
@@ -190,6 +196,9 @@ li {}
 
 figure {
     margin: @tweak-yr-pad-space auto;
+    padding: 4px;
+    border-radius: 2px;
+    background-color: @tweak-yr-color-overlays-tone-1;
 }
 
 figcaption {
@@ -212,8 +221,23 @@ img,
     vertical-align: middle;
 }
 
+label {
+    cursor: pointer;
+}
+
+/*input,
+textarea {
+    font-family: inherit;
+    border: none;
+}*/
+
 ::selection {
     background: @tweak-yr-color-selection;
+}
+
+::placeholder {
+    color: inherit;
+    opacity: 0.66;
 }
 
 

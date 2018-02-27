@@ -3,6 +3,10 @@
  * Probably volatile, dependent on third party updates.
  */
 
+.sqs-layout {
+    overflow: hidden;
+}
+
 .yr-main .sqs-layout {
     @mq-collapse: ~'only screen and @{yr-mq-m-dn}';
 
@@ -62,6 +66,10 @@
         .sqs-row:nth-child(odd) > [class*="sqs-col"]:nth-child(odd) > .sqs-block:nth-child(even) {
             background-color: @tweak-yr-sqs-cell-alt-color;
         }
+
+        .newsletter-block .newsletter-form-wrapper {
+            background-color: transparent;
+        }
     }
 
     @media @mq-collapse {
@@ -71,10 +79,75 @@
         }
     }
 
-    .sqs-block a {
-        &:not(.sqs-block-button-element):not([role="button"]):not(.archive-group-name-link) {
+    .html-block,
+    .sqs-block-markdown,
+    .sqs-block-quote,
+    .sqs-block-archive,
+    .sqs-block-summary, [class*="sqs-block-summary"],
+    .sqs-block-tagcloud,
+    .sqs-block-menu,
+    .sqs-block-search,
+    .sqs-block-form {
+        .sqs-block-content {
+            padding: @tweak-yr-sqs-content-space;
+        }
+
+        a:not([role="button"]) {
             .yr-a();
         }
+    }
+
+    .sqs-block-collectionlink {
+        position: relative;
+        background: #fff;
+
+        &::before,
+        &::after {
+            content: '';
+            display: block;
+            position: absolute;
+        }
+
+        .fill(@pad: 0) {
+            top: @pad;
+            right: @pad;
+            left: @pad;
+            bottom: @pad;
+        }
+
+        &::before {
+            @c1: #000;
+            @c2: transparent;
+            @w: 7px;
+            background-image: repeating-linear-gradient(-45deg,
+                    @c1 0,
+                    @c1 @w,
+                    @c2 @w,
+                    @c2 (@w * 2));
+            z-index: 1;
+            .fill(0);
+        }
+
+        &::after {
+            z-index: 2;
+            background-color: inherit;
+            .fill(@tweak-yr-sqs-content-space * 0.5);
+        }
+
+        .sqs-block-content {
+        // .collectionlink-content {
+            position: relative;
+            padding: @tweak-yr-sqs-content-space;
+            z-index: 3;
+        }
+
+        a:not(.content-fill) {
+            .yr-a();
+        }
+    }
+
+    .sqs-block-gallery .meta a:not([role="button"]) {
+        .yr-a();
     }
 
     .tweak-yr-sqs-content-full-bleed & {
@@ -142,13 +215,6 @@
         }
     }
 
-    .html-block,
-    .sqs-block-markdown {
-        .sqs-block-content {
-            padding: @tweak-yr-sqs-content-space;
-        }
-    }
-
     .sqs-block-quote {
         blockquote {
             /**
@@ -175,25 +241,62 @@
         }
     }
 
-    blockquote {
-        background-color: @tweak-yr-color-overlays-tone-1;
-        border-radius: 2px;
-    }
-
-    pre,
-    code {
-        color: @tweak-yr-color-accent-2-tone-3;
-        background-color: @tweak-yr-color-dark-2-tone-2;
-        border-radius: 2px;
-    }
-
-    figure {
-        padding: 4px;
-        border-radius: 2px;
-        background-color: @tweak-yr-color-overlays-tone-1;
-    }
-
     .button-block {
         margin: @tweak-yr-p-space;
+    }
+
+    .sqs-gallery {
+        .meta {
+            padding: 0 @tweak-yr-pad-space;
+        }
+    }
+
+    .sqs-gallery-block-grid img {
+        max-width: none;
+    }
+
+    .sqs-gallery-design-strip-slide {
+        opacity: 0.75;
+        filter: ~'saturate(33%)';
+        will-change: opacity, filter;
+        .transition(opacity 500ms ease-out,
+            filter 500ms ease-out;);
+
+        &:hover,
+        &:focus,
+        &.sqs-active-slide {
+            opacity: 1;
+            filter: none;
+            .transition(opacity 200ms ease-out,
+                filter 200ms ease-out;);
+        }
+    }
+
+    .newsletter-block .newsletter-form-field-element,
+    .sqs-block-search .search-input,
+    .form-wrapper .field-list .field .field-element {
+        // font-family: inherit;
+        background-color: @tweak-yr-color-light-1-tone-2;
+        border-color: @tweak-yr-color-light-2-tone-1;
+
+        &:focus {
+            background-color: @tweak-yr-color-light-2-tone-2;
+        }
+    }
+
+    .form-wrapper .field-list .section.underline {
+        border: 1px solid @tweak-yr-color-light-2-tone-1;
+    }
+
+    .menu-block .menu-selector label {
+        opacity: 0.66;
+        will-change: opacity;
+        .transition(opacity 500ms ease-out);
+
+        &.menu-select-labels--active {
+            text-decoration: none;
+            opacity: 1;
+            .transition(opacity 200ms ease-out);
+        }
     }
 }
