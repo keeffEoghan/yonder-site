@@ -10,6 +10,14 @@
 .yr-main .sqs-layout {
     @mq-collapse: ~'only screen and @{yr-mq-m-dn}';
 
+    .sqs-block {
+        // For obeying float properly.
+        overflow: hidden;
+    }
+
+    /**
+     * Alternatgrid system - kinda works...
+     */
     .tweak-yr-sqs-alt-grid & {
         .sqs-row,
         .col,
@@ -56,6 +64,15 @@
             flex: 1 1 auto;
             max-width: 100%;
         }
+
+        /**
+         * Need to work around the default float-grid setup.
+         * This doesn't work fully, as floats can't happen in a flex setup,
+         * and can't switch flex direction (column -> row) in the same flex container.
+         */
+        .sqs-block[class*=float-right] {
+            align-self: flex-end;
+        }
     }
 
     /**
@@ -77,6 +94,18 @@
         [class*=sqs-col] {
             float: none;
             width: auto;
+        }
+    }
+
+    .tweak-yr-sqs-content-full-bleed & {
+        .sqs-block {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        > .sqs-row {
+            margin-left: auto;
+            margin-right: auto;
         }
     }
 
@@ -103,13 +132,11 @@
      */
     .sqs-block-collectionlink {
         position: relative;
-        color: @tweak-yr-color-dark-1-tone-2;
-        // @todo Set this to be the _other_ element's theme color.
-        color: var(--tweak-yr-color-theme-on-tone-2);
         background-color: @tweak-yr-color-base-tone-2;
 
         .tweak-yr-sqs-content-link-border & {
             background-color: transparent;
+            color: @tweak-yr-sqs-content-link-border-color;
 
             &::before,
             &::after {
@@ -127,8 +154,7 @@
 
             &::before {
                 @c1: @tweak-yr-color-base-tone-2;
-                // @todo Set this to be the _other_ element's theme color.
-                @c2: transparent;
+                @c2: currentColor;
                 @w: 7px;
                 background-image: repeating-linear-gradient(-45deg,
                         @c1 0,
@@ -142,7 +168,7 @@
             &::after {
                 z-index: 2;
                 background-color: @tweak-yr-color-base-tone-2;
-                .fill(@tweak-yr-sqs-content-space * @tweak-yr-sqs-content-link-border-cover);
+                .fill(@tweak-yr-sqs-content-space * @tweak-yr-sqs-content-link-border-scale);
             }
 
             .sqs-block-content {
@@ -155,6 +181,9 @@
         .sqs-block-content {
         // .collectionlink-content {
             padding: @tweak-yr-sqs-content-space;
+            color: @tweak-yr-color-dark-1-tone-2;
+            // @todo Set this to be the _other_ element's theme color.
+            color: var(--tweak-yr-color-theme-on-tone-2);
         }
 
         .collectionlink-thumbnail {
@@ -168,17 +197,6 @@
 
     .sqs-block-gallery .meta a:not([role="button"]) {
         .yr-a();
-    }
-
-    .tweak-yr-sqs-content-full-bleed & {
-        .sqs-block {
-            padding: 0 !important;
-        }
-
-        > .sqs-row {
-            margin-left: auto;
-            margin-right: auto;
-        }
     }
 
     .sqs-block-image {

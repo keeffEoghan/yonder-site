@@ -9,7 +9,6 @@
         - Pick certain existing blocks to custom decorate?
         - Use `code blocks` with given code if really needed...
         - Header code injection, add a `style` and target the `#block-xxx` IDs
-    - Alternating background color overlay
     - Ensure colors per section work where native CSS variables don't (JS fallback, setting theme number?)
 - Fonts and typography
     - Go through content variations
@@ -50,6 +49,7 @@
 
 - Block out main zones and animations
 - Content
+    - Alternating background color overlay
     - Fix weird image positioning bug
     - Colors per section
     - Responsive wrapping columns, but only for full-width rows...?
