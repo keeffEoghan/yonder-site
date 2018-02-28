@@ -124,69 +124,100 @@
         }
     }
 
-    /**
-     * These will have the cross-colour border style - content crossing between pages.
-     * To change the border color, you can simply change `color` of `.sqs-block-collectionlink`.
-     */
-    .sqs-block-archive,
-    .sqs-block-summary, [class*="sqs-block-summary"],
-    .sqs-block-calendar,
-    // .sqs-block-tagcloud,
-    .sqs-block-collectionlink {
+    .flip-theme() {
         background-color: @tweak-yr-color-base-tone-2;
-
-        .tweak-yr-sqs-content-link-border & {
-            position: relative;
-            background-color: transparent;
-            color: @tweak-yr-sqs-content-link-border-color;
-
-            &::before,
-            &::after {
-                content: '';
-                display: block;
-                position: absolute;
-            }
-
-            .fill(@pad: 0) {
-                top: @pad;
-                right: @pad;
-                left: @pad;
-                bottom: @pad;
-            }
-
-            &::before {
-                @c1: @tweak-yr-color-base-tone-2;
-                @c2: currentColor;
-                @w: @tweak-yr-sqs-content-link-border-width;
-                background-image: repeating-linear-gradient(-45deg,
-                        @c1 0,
-                        @c1 @w,
-                        @c2 @w,
-                        @c2 (@w * 2));
-                z-index: 1;
-                .fill(0);
-            }
-
-            &::after {
-                z-index: 2;
-                background-color: @tweak-yr-color-base-tone-2;
-                .fill(@tweak-yr-sqs-content-link-border-space);
-            }
-
-            .sqs-block-content {
-                position: relative;
-                z-index: 3;
-            }
-        }
-
-        .tweak-yr-sqs-content-link-border.tweak-yr-sqs-content-link-border-sticky &::before {
-            background-attachment: fixed;
-        }
 
         .sqs-block-content {
             color: @tweak-yr-color-dark-1-tone-2;
             // @todo Set this to be the _other_ element's theme color.
             color: var(--tweak-yr-color-theme-on-tone-2);
+        }
+    }
+
+    /**
+     * The cross-colour border style - content crossing between pages.
+     * To change the border color, you can simply change `color` of `.sqs-block-collectionlink`.
+     */
+    .stripey-border() {
+        position: relative;
+        background-color: transparent;
+        color: @tweak-yr-sqs-content-link-border-color;
+
+        &::before,
+        &::after {
+            content: '';
+            display: block;
+            position: absolute;
+        }
+
+        .fill(@pad: 0) {
+            top: @pad;
+            right: @pad;
+            left: @pad;
+            bottom: @pad;
+        }
+
+        &::before {
+            @c1: @tweak-yr-color-base-tone-2;
+            @c2: currentColor;
+            @w: @tweak-yr-sqs-content-link-border-width;
+            background-image: repeating-linear-gradient(-45deg,
+                    @c1 0,
+                    @c1 @w,
+                    @c2 @w,
+                    @c2 (@w * 2));
+            z-index: 1;
+            .fill(0);
+        }
+
+        &::after {
+            z-index: 2;
+            background-color: @tweak-yr-color-base-tone-2;
+            .fill(@tweak-yr-sqs-content-link-border-space);
+        }
+
+        .sqs-block-content {
+            position: relative;
+            z-index: 3;
+        }
+    }
+
+    .stripey-border-sticky() {
+        &::before {
+            background-attachment: fixed;
+        }
+    }
+
+    .sqs-block-archive,
+    .sqs-block-summary, [class*="sqs-block-summary"],
+    .sqs-block-calendar,
+    // .sqs-block-tagcloud,
+    .sqs-block-collectionlink {
+        .tweak-yr-sqs-content-link-border & {
+            .flip-theme();
+            .stripey-border();
+        }
+
+        .tweak-yr-sqs-content-link-border.tweak-yr-sqs-content-link-border-sticky & {
+            .stripey-border-sticky();
+        }
+    }
+
+    .sqs-block-newsletter {
+        a:not([role="button"]) {
+            .yr-a();
+        }
+
+        .tweak-yr-sqs-newsletter-border & {
+            .sqs-block-content {
+                padding: @tweak-yr-sqs-content-space;
+            }
+
+            .stripey-border();
+        }
+
+        .tweak-yr-sqs-newsletter-border.tweak-yr-sqs-content-link-border-sticky & {
+            .stripey-border-sticky();
         }
     }
 
