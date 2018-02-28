@@ -84,10 +84,6 @@
         .sqs-row:nth-child(odd) > [class*="sqs-col"]:nth-child(odd) > .sqs-block:nth-child(even) {
             background-color: @tweak-yr-sqs-cell-alt-color;
         }
-
-        .newsletter-block .newsletter-form-wrapper {
-            background-color: transparent;
-        }
     }
 
     @media @mq-collapse {
@@ -114,6 +110,7 @@
     .sqs-block-quote,
     .sqs-block-archive,
     .sqs-block-summary, [class*="sqs-block-summary"],
+    .sqs-block-calendar,
     .sqs-block-tagcloud,
     .sqs-block-menu,
     .sqs-block-search,
@@ -128,13 +125,18 @@
     }
 
     /**
-     * These will have the cross-colour border style - crossing between sections.
+     * These will have the cross-colour border style - content crossing between pages.
+     * To change the border color, you can simply change `color` of `.sqs-block-collectionlink`.
      */
+    .sqs-block-archive,
+    .sqs-block-summary, [class*="sqs-block-summary"],
+    .sqs-block-calendar,
+    // .sqs-block-tagcloud,
     .sqs-block-collectionlink {
-        position: relative;
         background-color: @tweak-yr-color-base-tone-2;
 
         .tweak-yr-sqs-content-link-border & {
+            position: relative;
             background-color: transparent;
             color: @tweak-yr-sqs-content-link-border-color;
 
@@ -155,7 +157,7 @@
             &::before {
                 @c1: @tweak-yr-color-base-tone-2;
                 @c2: currentColor;
-                @w: 7px;
+                @w: @tweak-yr-sqs-content-link-border-width;
                 background-image: repeating-linear-gradient(-45deg,
                         @c1 0,
                         @c1 @w,
@@ -168,22 +170,29 @@
             &::after {
                 z-index: 2;
                 background-color: @tweak-yr-color-base-tone-2;
-                .fill(@tweak-yr-sqs-content-space * @tweak-yr-sqs-content-link-border-scale);
+                .fill(@tweak-yr-sqs-content-link-border-space);
             }
 
             .sqs-block-content {
-            // .collectionlink-content {
                 position: relative;
                 z-index: 3;
             }
         }
 
+        .tweak-yr-sqs-content-link-border.tweak-yr-sqs-content-link-border-sticky &::before {
+            background-attachment: fixed;
+        }
+
         .sqs-block-content {
-        // .collectionlink-content {
-            padding: @tweak-yr-sqs-content-space;
             color: @tweak-yr-color-dark-1-tone-2;
             // @todo Set this to be the _other_ element's theme color.
             color: var(--tweak-yr-color-theme-on-tone-2);
+        }
+    }
+
+    .sqs-block-collectionlink {
+        .sqs-block-content {
+            padding: @tweak-yr-sqs-content-space;
         }
 
         .collectionlink-thumbnail {
@@ -294,36 +303,40 @@
     }
 
     .sqs-gallery-design-strip-slide {
-        opacity: 0.75;
-        filter: ~'saturate(33%)';
-        will-change: opacity, filter;
-        .transition(opacity 500ms ease-out,
-            filter 500ms ease-out;);
+        opacity: 0.66;
+        will-change: opacity;
+        .transition(opacity 500ms ease-out);
 
         &:hover,
         &:focus,
         &.sqs-active-slide {
             opacity: 1;
-            filter: none;
-            .transition(opacity 200ms ease-out,
-                filter 200ms ease-out;);
+            .transition(opacity 200ms ease-out);
         }
     }
 
     .newsletter-block .newsletter-form-field-element,
-    .sqs-block-search .search-input,
     .form-wrapper .field-list .field .field-element {
         // font-family: inherit;
-        background-color: @tweak-yr-color-light-1-tone-2;
         border-color: @tweak-yr-color-light-2-tone-1;
+        background-color: @tweak-yr-color-light-1-tone-2;
+        color: @tweak-yr-color-dark-1-tone-1;
 
         &:focus {
             background-color: @tweak-yr-color-light-2-tone-2;
         }
     }
 
+    .sqs-block-search {
+        border-color: @tweak-yr-color-light-2-tone-1;
+
+        .color-dark .search-input {
+            border-color: @tweak-yr-color-dark-2-tone-1;
+        }
+    }
+
     .form-wrapper .field-list .section.underline {
-        border: 1px solid @tweak-yr-color-light-2-tone-1;
+        border-color: @tweak-yr-color-light-2-tone-1;
     }
 
     .menu-block .menu-selector label {
@@ -331,10 +344,29 @@
         will-change: opacity;
         .transition(opacity 500ms ease-out);
 
+        &:hover,
+        &:focus,
         &.menu-select-labels--active {
             text-decoration: none;
             opacity: 1;
             .transition(opacity 200ms ease-out);
         }
     }
+
+    .sqs-block-archive .archive-block-wrapper {
+        margin: auto;
+
+        .tweak-yr-sqs-archive-block-align-left & {
+            margin-right: auto;
+        }
+
+        .tweak-yr-sqs-archive-block-align-right & {
+            margin-left: auto;
+        }
+    }
+}
+
+// This is placed at root level...
+.sqs-search-preview-ui {
+    color: @tweak-yr-color-dark-1-tone-2;
 }

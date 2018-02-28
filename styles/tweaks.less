@@ -544,27 +544,44 @@
  * Content
  */
 
-// tweak: { "category": "Content", "label": "Full-Bleed", "title": "tweak-yr-sqs-content-full-bleed", "type": "checkbox", "active": true, "target": ".sqs-layout .sqs-block-image" }
 
-// tweak: { "category": "Content", "label": "Use Custom Grid", "title": "tweak-yr-sqs-alt-grid", "type": "checkbox", "active": true, "target": ".yr-main .sqs-layout" }
-// tweak: { "category": "Content", "label": "Row Vertical Alignment", "title": "tweak-yr-sqs-row-align", "type": "dropdown", "options": ["Up High", "Middle", "Down Low"], "default": "Middle", target: ".sqs-layout .sqs-row", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid" }
-// tweak: { "category": "Content", "label": "Show Alternating Cell", "title": "tweak-yr-sqs-cell-alt-show", "type": "checkbox", "active": true, "target": ".yr-main .sqs-layout", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid" }
-// tweak: { "category": "Content", "label": "Alternating Cell Color", "title": "tweak-yr-sqs-cell-alt-color", "type": "color", "disableTransparency": "false", "target": ".yr-main .sqs-layout", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid.tweak-yr-sqs-cell-alt-show" }
+/**
+ * Content / Grid
+ */
+
+// tweak: { "category": "Content / Grid", "label": "Full-Bleed", "title": "tweak-yr-sqs-content-full-bleed", "type": "checkbox", "active": true, "target": ".sqs-layout .sqs-block-image" }
+
+// tweak: { "category": "Content / Grid", "label": "Use Custom Grid (Experimental)", "title": "tweak-yr-sqs-alt-grid", "type": "checkbox", "active": true, "target": ".yr-main .sqs-layout" }
+// tweak: { "category": "Content / Grid", "label": "Row Vertical Alignment", "title": "tweak-yr-sqs-row-align", "type": "dropdown", "options": ["Up High", "Middle", "Down Low"], "default": "Middle", target: ".sqs-layout .sqs-row", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid" }
+// tweak: { "category": "Content / Grid", "label": "Show Alternating Cell", "title": "tweak-yr-sqs-cell-alt-show", "type": "checkbox", "active": true, "target": ".yr-main .sqs-layout", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid" }
+// tweak: { "category": "Content / Grid", "label": "Alternating Cell Color", "title": "tweak-yr-sqs-cell-alt-color", "type": "color", "disableTransparency": "false", "target": ".yr-main .sqs-layout", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid.tweak-yr-sqs-cell-alt-show" }
 @tweak-yr-sqs-cell-alt-color: rgba(0, 0, 0, 0.11);
 
 
 
 /**
- * Content / Content Link
+ * Content / Content Links
  */
 
-// tweak: { "category": "Content / Content Link", "label": "Use Stripey Border", "title": "tweak-yr-sqs-content-link-border", "type": "checkbox", "active": true, target: ".sqs-layout .sqs-block-collectionlink" }
+// tweak: { "category": "Content / Content Links", "label": "Use Stripey Border", "title": "tweak-yr-sqs-content-link-border", "type": "checkbox", "active": true, target: ".sqs-layout .sqs-block-collectionlink" }
 
-// tweak: { "category": "Content / Content Link", "label": "Stripey Border Color", "title": "tweak-yr-sqs-content-link-border-color", "type": "color", "disableTransparency": "false", "target": ".sqs-layout .sqs-block-collectionlink", "showOnlyWhenPresent": ".tweak-yr-sqs-content-link-border" }
+// tweak: { "category": "Content / Content Links", "label": "Stripey Border Color", "title": "tweak-yr-sqs-content-link-border-color", "type": "color", "disableTransparency": "false", "target": ".sqs-layout .sqs-block-collectionlink", "showOnlyWhenPresent": ".tweak-yr-sqs-content-link-border" }
 @tweak-yr-sqs-content-link-border-color: rgba(0, 0, 0, 0);
 
-// tweak: { "category": "Content / Content Link", "label": "Stripey Border Scale", "title": "tweak sqs-content-link-border-scale", "type": "value", "min": -1, "max": 1, "step": 0.01, "target": ".sqs-layout .sqs-block-collectionlink", "showOnlyWhenPresent": ".tweak-yr-sqs-content-link-border" }
-@tweak-yr-sqs-content-link-border-scale: 0.5;
+// tweak: { "category": "Content / Content Links", "label": "Stripey Border Space", "title": "tweak sqs-content-link-border-space", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".sqs-layout .sqs-block-collectionlink", "showOnlyWhenPresent": ".tweak-yr-sqs-content-link-border" }
+@tweak-yr-sqs-content-link-border-space: 1em;
+
+// tweak: { "category": "Content / Content Links", "label": "Stripey Border Width", "title": "tweak sqs-content-link-border-width", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".sqs-layout .sqs-block-collectionlink", "showOnlyWhenPresent": ".tweak-yr-sqs-content-link-border" }
+@tweak-yr-sqs-content-link-border-width: 6px;
+
+// tweak: { "category": "Content / Content Links", "label": "Stripey Border Sticky", "title": "tweak-yr-sqs-content-link-border-sticky", "type": "checkbox", "active": true, target: ".sqs-layout .sqs-block-collectionlink", "showOnlyWhenPresent": ".tweak-yr-sqs-content-link-border" }
+
+
+/**
+ * Content / Archive Block
+ */
+
+// tweak: { "category": "Content / Archive Block", "label": "Alignment", "title": "tweak-yr-sqs-archive-block-align", "type": "dropdown", "options": ["Left", "Middle", "Right"], "default": "Middle", target: ".sqs-layout .sqs-block-archive" }
 
 
 /**
