@@ -54,6 +54,7 @@
 
         .sqs-block-content {
             flex: 1 1 auto;
+            max-width: 100%;
         }
     }
 
@@ -97,48 +98,65 @@
         }
     }
 
+    /**
+     * These will have the cross-colour border style - crossing between sections.
+     */
     .sqs-block-collectionlink {
         position: relative;
-        background: #fff;
+        color: @tweak-yr-color-dark-1-tone-2;
+        color: var(--tweak-yr-color-theme-on-tone-2);
+        background-color: @tweak-yr-color-base-tone-2;
 
-        &::before,
-        &::after {
-            content: '';
-            display: block;
-            position: absolute;
-        }
+        .tweak-yr-sqs-content-link-border & {
+            background-color: transparent;
 
-        .fill(@pad: 0) {
-            top: @pad;
-            right: @pad;
-            left: @pad;
-            bottom: @pad;
-        }
+            &::before,
+            &::after {
+                content: '';
+                display: block;
+                position: absolute;
+            }
 
-        &::before {
-            @c1: #000;
-            @c2: transparent;
-            @w: 7px;
-            background-image: repeating-linear-gradient(-45deg,
-                    @c1 0,
-                    @c1 @w,
-                    @c2 @w,
-                    @c2 (@w * 2));
-            z-index: 1;
-            .fill(0);
-        }
+            .fill(@pad: 0) {
+                top: @pad;
+                right: @pad;
+                left: @pad;
+                bottom: @pad;
+            }
 
-        &::after {
-            z-index: 2;
-            background-color: inherit;
-            .fill(@tweak-yr-sqs-content-space * 0.5);
+            &::before {
+                @c1: @tweak-yr-color-base-tone-2;
+                @c2: transparent;
+                @w: 7px;
+                background-image: repeating-linear-gradient(-45deg,
+                        @c1 0,
+                        @c1 @w,
+                        @c2 @w,
+                        @c2 (@w * 2));
+                z-index: 1;
+                .fill(0);
+            }
+
+            &::after {
+                z-index: 2;
+                background-color: @tweak-yr-color-base-tone-2;
+                .fill(@tweak-yr-sqs-content-space * @tweak-yr-sqs-content-link-border-cover);
+            }
+
+            .sqs-block-content {
+            // .collectionlink-content {
+                position: relative;
+                z-index: 3;
+            }
         }
 
         .sqs-block-content {
         // .collectionlink-content {
-            position: relative;
             padding: @tweak-yr-sqs-content-space;
-            z-index: 3;
+        }
+
+        .collectionlink-thumbnail {
+            width: 100%;
         }
 
         a:not(.content-fill) {

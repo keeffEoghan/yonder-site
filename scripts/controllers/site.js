@@ -1,6 +1,6 @@
 import $ from 'zepto';
 import { refresh } from '@squarespace/controller';
-import { Lifecycle, Tweak } from '@squarespace/core';
+import { Lifecycle, Tweak, ImageLoader } from '@squarespace/core';
 import Mercury from '@squarespace/mercury';
 
 import { authenticated, debug } from '../constants';
@@ -103,7 +103,7 @@ function loadImages() {
         var images = document.querySelectorAll('img[data-src]:not(.loaded)');
 
         for(var i = 0; i < images.length; i++) {
-            console.log('Loading image', core.ImageLoader.load(images[i], { load: true }));
+            console.log('Loading image', ImageLoader.load(images[i], { load: true }));
         }
     });
 }
