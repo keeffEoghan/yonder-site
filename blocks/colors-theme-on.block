@@ -1,0 +1,10 @@
+{##BEGIN} Define the active theme colours according to the current page {END##}
+<style type="text/css">
+    :root {
+        {.var @n0 externalLink.url|slugify}
+        {.var @n1 collection.urlId|slugify}
+        --tweak-yr-color-theme-on-tone-1: var(--tweak-yr-color-theme-{@n0}{@n1}-tone-1);
+        --tweak-yr-color-theme-on-tone-2: var(--tweak-yr-color-theme-{@n0}{@n1}-tone-2);
+        --tweak-yr-color-theme-on-tone-3: var(--tweak-yr-color-theme-{@n0}{@n1}-tone-3);
+    }
+</style>
