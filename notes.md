@@ -5,8 +5,6 @@
 # To-do
 
 - Content
-    - Custom overrides for certain interior blocks
-        - Give a simple `class`-based way for editors to enable the more complex tweak-based overrides on an individual basis (say, JS class switching in header-code-injection).
     - Ensure colors per section work where native CSS variables don't (JS fallback, setting theme number?)
 - Fonts and typography
     - Go through content variations
@@ -48,6 +46,7 @@
 - Block out main zones and animations
 - Content
     - Custom overrides for certain interior blocks
+        - Give a simple `class`-based way for editors to enable the more complex tweak-based overrides on an individual basis (say, JS class switching in header-code-injection).
         - Pick certain existing blocks to custom decorate?
         - Use `code blocks` with given code if really needed...
         - Header code injection, add a `style` and target the `#block-xxx` IDs
