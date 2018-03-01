@@ -325,7 +325,7 @@
      * Often used as a header banner.
      */
     .sqs-block-image {
-        .tweak-yr-sqs-image-block-use-site-fonts & {
+        & { .yr-on-(~'.tweak-yr-sqs-image-block-use-site-fonts'); .-do() {
             .image-title p {
                 .tweak-yr-font-h4 !important;
             }
@@ -338,15 +338,15 @@
                 .tweak-yr-font-p !important;
                 margin: @tweak-yr-sqs-content-space @tweak-yr-pad-space;
             }
-        }
+        }}
 
-        .tweak-yr-sqs-image-block-fixed-font-size & {
+        & { .yr-on-(~'.tweak-yr-sqs-image-block-fixed-font-size'); .-do() {
             .sqs-dynamic-text,
             .image-title-wrapper,
             .image-subtitle-wrapper {
                 font-size: 1em !important;
             }
-        }
+        }}
 
         .design-layout-poster {
             .image-title,
@@ -361,19 +361,17 @@
             }
 
             .image-subtitle-wrapper {
-                .tweak-yr-sqs-image-block-poster-anchor-sub-up-high &,
-                .tweak-yr-sqs-image-block-poster-anchor-sub-down-low & {
+                & { .yr-on-(~'.tweak-yr-sqs-image-block-poster-anchor-sub-up-high'); .-do() {
                     position: absolute;
                     width: inherit;
-                }
-
-                .tweak-yr-sqs-image-block-poster-anchor-sub-up-high & {
                     top: @tweak-yr-sqs-content-space;
-                }
+                }}
 
-                .tweak-yr-sqs-image-block-poster-anchor-sub-down-low & {
+                & { .yr-on-(~'.tweak-yr-sqs-image-block-poster-anchor-sub-down-low'); .-do() {
+                    position: absolute;
+                    width: inherit;
                     bottom: @tweak-yr-sqs-content-space;
-                }
+                }}
             }
         }
     }
@@ -473,14 +471,10 @@
 
     .sqs-block-archive .archive-block-wrapper {
         margin: auto;
+    }
 
-        .tweak-yr-sqs-archive-block-align-left & {
-            margin-right: auto;
-        }
-
-        .tweak-yr-sqs-archive-block-align-right & {
-            margin-left: auto;
-        }
+    .sqs-block-tagcloud .sqs-tagcloud {
+        text-align: center;
     }
 }
 
