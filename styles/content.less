@@ -143,10 +143,6 @@
     }
 
     .sqs-block-collectionlink {
-        .sqs-block-content {
-            padding: @tweak-yr-sqs-space-content;
-        }
-
         .collectionlink-thumbnail {
             width: 100%;
         }
@@ -157,14 +153,14 @@
     }
 
     .sqs-block-newsletter {
-        .yr-on-(~'.tweak-yr-sqs-block-newsletter-style-stripes'); .-do() {
-            .sqs-block-content {
-                padding: @tweak-yr-sqs-space-content;
-            }
-        }
-
         a:not([role="button"]) {
             .yr-a();
+        }
+    }
+
+    .sqs-block-button {
+        .sqs-block-content {
+            padding: @tweak-yr-sqs-space-content;
         }
     }
 
@@ -231,6 +227,7 @@
 
         .sqs-block-content {
             color: @tweak-yr-color-dark-1-tone-2;
+            padding: @tweak-yr-sqs-space-content;
         }
     }
 
@@ -289,6 +286,10 @@
         }}
     }
 
+    /**
+     * Block types whose styles can be configured.
+     * @see The corresponding tweaks - `tweak-yr-@{block}-style-@{base|color}`
+     */
     @blocks: ~'sqs-block',
         ~'sqs-block-html',
         ~'sqs-block-markdown',
@@ -301,7 +302,15 @@
         ~'sqs-block-menu',
         ~'sqs-block-search',
         ~'sqs-block-form',
-        ~'sqs-block-collectionlink';
+        ~'sqs-block-collectionlink',
+        ~'sqs-block-gallery',
+        ~'sqs-block-button',
+        ~'sqs-block-horizontalrule',
+        ~'sqs-block-chart',
+        ~'sqs-block-image',
+        ~'sqs-block-video',
+        ~'sqs-block-audio',
+        ~'sqs-block-embed';
 
     .yr-for-(length(@blocks)); .-each(@i) {
         @block: extract(@blocks, @i);
@@ -339,7 +348,7 @@
             .image-caption p {
                 .tweak-yr-font-p !important;
                 display: inline-block !important;
-                padding: @tweak-yr-sqs-space-content @tweak-yr-pad-space;
+                padding: @tweak-yr-sqs-space-content @tweak-yr-space-pad;
             }
         }}
 
@@ -414,11 +423,11 @@
     }
 
     .sqs-gallery .meta {
-        padding: 0 @tweak-yr-pad-space;
+        padding: 0 @tweak-yr-space-pad;
     }
 
     .sqs-gallery-block-grid {
-        padding: @tweak-yr-pad-space;
+        padding: @tweak-yr-space-pad;
 
         img {
             max-width: none;
