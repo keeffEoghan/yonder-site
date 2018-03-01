@@ -32,11 +32,32 @@
 
 
 /**
+ * Convenience for toggling a global or local flag.
+ *
+ * This will enable the contents when `.flag` is present at or above the element scope:
+ * `.yr-on-(~'.flag'); .-do() {...}`
+ * Becomes:
+ * `&.flag, .flag & {...}`
+ * 
+ * @note The scoping's a little funny here, to closure the mixin callback scope:
+ *       `& { .yr-on-(...); .-do() {...}}` keeps `.-do` in a closure.
+ *       `.yr-on-(...); .-do() {...}` leaves `.-do` out in local scope.
+ */
+
+.yr-on-(@flag) {
+    &@{flag},
+    @{flag} & {
+        .-do();
+    }
+}
+
+
+/**
  * Link styling.
  */
 
 .yr-a() {
-    .tweak-yr-fancy-links & {
+    .yr-on-(~'.tweak-yr-fancy-links'); .-do() {
         position: relative;
         display: inline-block;
         border: 0 solid currentColor;

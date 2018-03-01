@@ -132,11 +132,10 @@ a {
     /* color: @tweak-yr-color-dark-1-tone-1; */
     color: inherit;
     cursor: pointer;
-}
 
-a.yr-a,
-.yr-a a {
-    .yr-a();
+    .yr-on-(~'.yr-a'); .-do() {
+        .yr-a();
+    }
 }
 
 b,
@@ -173,7 +172,7 @@ pre,
 code {
     .tweak-yr-font-mono;
     color: @tweak-yr-color-accent-2-tone-3;
-    background-color: @tweak-yr-color-dark-2-tone-2;
+    background-color: @tweak-yr-color-dark-1-tone-2;
     border-radius: 2px;
 }
 
@@ -237,6 +236,7 @@ label {
 
 input,
 textarea {
+    color: inherit;
     .tweak-yr-font-input;
 }
 

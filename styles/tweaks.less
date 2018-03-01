@@ -106,7 +106,7 @@
     letter-spacing: 0em;
     font-weight: 500;
     font-style: normal;
-    text-transform: uppercase;
+    text-transform: none;
 }
 
 // tweak: { "category": "Typography", "label": "Heading 3", "title": "tweak-yr-font-h3", "type": "font", "loadAllVariants": true, "target": "h3" }
@@ -150,7 +150,7 @@
     letter-spacing: 0em;
     font-weight: 500;
     font-style: normal;
-    text-transform: uppercase;
+    text-transform: none;
 }
 
 // tweak: { "category": "Typography", "label": "Heading 6", "title": "tweak-yr-font-h6", "type": "font", "loadAllVariants": true, "target": "h6" }
@@ -566,35 +566,79 @@
 
 
 /**
+ * Content / Block Styles
+ */
+
+// tweak: { "category": "Content / Block Styles", "label": "Default Base", "title": "tweak-yr-sqs-block-style-base", "type": "dropdown", "options": ["Normal", "Dark", "Light", "Stripes"], "default": "Normal", target: ".sqs-layout .sqs-block" }
+// tweak: { "category": "Content / Block Styles", "label": "Default Color", "title": "tweak-yr-sqs-block-style-color", "type": "dropdown", "options": ["Normal", "Theme"], "default": "Normal", target: ".sqs-layout .sqs-block" }
+
+// tweak: { "category": "Content / Block Styles", "label": "Text Base", "title": "tweak-yr-sqs-block-html-style-base", "type": "dropdown", "options": ["Normal", "Dark", "Light", "Stripes"], "default": "Normal", target: ".sqs-layout .sqs-block-html" }
+// tweak: { "category": "Content / Block Styles", "label": "Text Color", "title": "tweak-yr-sqs-block-html-style-color", "type": "dropdown", "options": ["Normal", "Theme"], "default": "Normal", target: ".sqs-layout .sqs-block-html" }
+
+// tweak: { "category": "Content / Block Styles", "label": "Markdown Base", "title": "tweak-yr-sqs-block-markdown-style-base", "type": "dropdown", "options": ["Normal", "Dark", "Light", "Stripes"], "default": "Dark", target: ".sqs-layout .sqs-block-markdown" }
+// tweak: { "category": "Content / Block Styles", "label": "Markdown Color", "title": "tweak-yr-sqs-block-markdown-style-color", "type": "dropdown", "options": ["Normal", "Theme"], "default": "Normal", target: ".sqs-layout .sqs-block-markdown" }
+
+// tweak: { "category": "Content / Block Styles", "label": "Quote Base", "title": "tweak-yr-sqs-block-quote-style-base", "type": "dropdown", "options": ["Normal", "Dark", "Light", "Stripes"], "default": "Light", target: ".sqs-layout .sqs-block-quote" }
+// tweak: { "category": "Content / Block Styles", "label": "Quote Color", "title": "tweak-yr-sqs-block-quote-style-color", "type": "dropdown", "options": ["Normal", "Theme"], "default": "Normal", target: ".sqs-layout .sqs-block-quote" }
+
+// tweak: { "category": "Content / Block Styles", "label": "Newsletter Base", "title": "tweak-yr-sqs-block-newsletter-style-base", "type": "dropdown", "options": ["Normal", "Dark", "Light", "Stripes"], "default": "Normal", target: ".sqs-layout .sqs-block-newsletter" }
+// tweak: { "category": "Content / Block Styles", "label": "Newsletter Color", "title": "tweak-yr-sqs-block-newsletter-style-color", "type": "dropdown", "options": ["Normal", "Theme"], "default": "Normal", target: ".sqs-layout .sqs-block-newsletter" }
+
+// tweak: { "category": "Content / Block Styles", "label": "Menu Base", "title": "tweak-yr-sqs-block-menu-style-base", "type": "dropdown", "options": ["Normal", "Dark", "Light", "Stripes"], "default": "Light", target: ".sqs-layout .sqs-block-menu" }
+// tweak: { "category": "Content / Block Styles", "label": "Menu Color", "title": "tweak-yr-sqs-block-menu-style-color", "type": "dropdown", "options": ["Normal", "Theme"], "default": "Normal", target: ".sqs-layout .sqs-block-menu" }
+
+// tweak: { "category": "Content / Block Styles", "label": "Search Base", "title": "tweak-yr-sqs-block-search-style-base", "type": "dropdown", "options": ["Normal", "Dark", "Light", "Stripes"], "default": "Normal", target: ".sqs-layout .sqs-block-search" }
+// tweak: { "category": "Content / Block Styles", "label": "Search Color", "title": "tweak-yr-sqs-block-search-style-color", "type": "dropdown", "options": ["Normal", "Theme"], "default": "Normal", target: ".sqs-layout .sqs-block-search" }
+
+// tweak: { "category": "Content / Block Styles", "label": "Form Base", "title": "tweak-yr-sqs-block-form-style-base", "type": "dropdown", "options": ["Normal", "Dark", "Light", "Stripes"], "default": "Light", target: ".sqs-layout .sqs-block-form" }
+// tweak: { "category": "Content / Block Styles", "label": "Form Color", "title": "tweak-yr-sqs-block-form-style-color", "type": "dropdown", "options": ["Normal", "Theme"], "default": "Normal", target: ".sqs-layout .sqs-block-form" }
+
+// tweak: { "category": "Content / Block Styles", "label": "Archive Base", "title": "tweak-yr-sqs-block-archive-style-base", "type": "dropdown", "options": ["Normal", "Dark", "Light", "Stripes"], "default": "Stripes", target: ".sqs-layout .sqs-block-archive" }
+// tweak: { "category": "Content / Block Styles", "label": "Archive Color", "title": "tweak-yr-sqs-block-archive-style-color", "type": "dropdown", "options": ["Normal", "Theme"], "default": "Normal", target: ".sqs-layout .sqs-block-archive" }
+
+// tweak: { "category": "Content / Block Styles", "label": "Summary Base", "title": "tweak-yr-sqs-block-summary-style-base", "type": "dropdown", "options": ["Normal", "Dark", "Light", "Stripes"], "default": "Stripes", target: ".sqs-layout .sqs-block-summary" }
+// tweak: { "category": "Content / Block Styles", "label": "Summary Color", "title": "tweak-yr-sqs-block-summary-style-color", "type": "dropdown", "options": ["Normal", "Theme"], "default": "Normal", target: ".sqs-layout .sqs-block-summary" }
+
+// tweak: { "category": "Content / Block Styles", "label": "Calendar Base", "title": "tweak-yr-sqs-block-calendar-style-base", "type": "dropdown", "options": ["Normal", "Dark", "Light", "Stripes"], "default": "Stripes", target: ".sqs-layout .sqs-block-calendar" }
+// tweak: { "category": "Content / Block Styles", "label": "Calendar Color", "title": "tweak-yr-sqs-block-calendar-style-color", "type": "dropdown", "options": ["Normal", "Theme"], "default": "Theme", target: ".sqs-layout .sqs-block-calendar" }
+
+// tweak: { "category": "Content / Block Styles", "label": "Tag Cloud Base", "title": "tweak-yr-sqs-block-tagcloud-style-base", "type": "dropdown", "options": ["Normal", "Dark", "Light", "Stripes"], "default": "Stripes", target: ".sqs-layout .sqs-block-tagcloud" }
+// tweak: { "category": "Content / Block Styles", "label": "Tag Cloud Color", "title": "tweak-yr-sqs-block-tagcloud-style-color", "type": "dropdown", "options": ["Normal", "Theme"], "default": "Theme", target: ".sqs-layout .sqs-block-tagcloud" }
+
+// tweak: { "category": "Content / Block Styles", "label": "Collection Link Base", "title": "tweak-yr-sqs-block-collectionlink-style-base", "type": "dropdown", "options": ["Normal", "Dark", "Light", "Stripes"], "default": "Stripes", target: ".sqs-layout .sqs-block-collectionlink" }
+// tweak: { "category": "Content / Block Styles", "label": "Collection Link Color", "title": "tweak-yr-sqs-block-collectionlink-style-color", "type": "dropdown", "options": ["Normal", "Theme"], "default": "Normal", target: ".sqs-layout .sqs-block-collectionlink" }
+
+
+/**
+ * Content / Block Styles / Stripes
+ */
+
+// tweak: { "category": "Content / Block Styles / Stripes", "label": "Color 1", "title": "tweak-yr-sqs-block-style-stripes-color-1", "type": "color", "disableTransparency": "false", "target": ".yr-main .sqs-block" }
+@tweak-yr-sqs-block-style-stripes-color-1: #f9efe0;
+
+// tweak: { "category": "Content / Block Styles / Stripes", "label": "Color 2", "title": "tweak-yr-sqs-block-style-stripes-color-2", "type": "color", "disableTransparency": "false", "target": ".yr-main .sqs-block" }
+@tweak-yr-sqs-block-style-stripes-color-2: rgba(0, 0, 0, 0);
+
+// tweak: { "category": "Content / Block Styles / Stripes", "label": "Space", "title": "tweak-yr-sqs-block-style-stripes-space", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main .sqs-block" }
+@tweak-yr-sqs-block-style-stripes-space: 1em;
+
+// tweak: { "category": "Content / Block Styles / Stripes", "label": "Width", "title": "tweak-yr-sqs-block-style-stripes-width", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main .sqs-block" }
+@tweak-yr-sqs-block-style-stripes-width: 6px;
+
+// tweak: { "category": "Content / Block Styles / Stripes", "label": "Sticky", "title": "tweak-yr-sqs-block-style-stripes-sticky", "type": "checkbox", "active": true, target: ".yr-main .sqs-block" }
+
+
+/**
  * Content / Grid
  */
 
 // tweak: { "category": "Content / Grid", "label": "Full-Bleed", "title": "tweak-yr-sqs-content-full-bleed", "type": "checkbox", "active": true, "target": ".sqs-layout .sqs-block-image" }
 
 // tweak: { "category": "Content / Grid", "label": "Use Custom Grid (Experimental)", "title": "tweak-yr-sqs-alt-grid", "type": "checkbox", "active": true, "target": ".yr-main .sqs-layout" }
-// tweak: { "category": "Content / Grid", "label": "Row Vertical Alignment", "title": "tweak-yr-sqs-row-align", "type": "dropdown", "options": ["Up High", "Middle", "Down Low"], "default": "Middle", target: ".sqs-layout .sqs-row", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid" }
-// tweak: { "category": "Content / Grid", "label": "Show Alternating Cell", "title": "tweak-yr-sqs-cell-alt-show", "type": "checkbox", "active": true, "target": ".yr-main .sqs-layout", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid" }
-// tweak: { "category": "Content / Grid", "label": "Alternating Cell Color", "title": "tweak-yr-sqs-cell-alt-color", "type": "color", "disableTransparency": "false", "target": ".yr-main .sqs-layout", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid.tweak-yr-sqs-cell-alt-show" }
-@tweak-yr-sqs-cell-alt-color: rgba(0, 0, 0, 0.11);
-
-
-
-/**
- * Content / Content Links
- */
-
-// tweak: { "category": "Content / Content Links", "label": "Use Stripey Border", "title": "tweak-yr-sqs-content-link-border", "type": "checkbox", "active": true, target: ".sqs-layout .sqs-block-collectionlink" }
-
-// tweak: { "category": "Content / Content Links", "label": "Stripey Border Color", "title": "tweak-yr-sqs-content-link-border-color", "type": "color", "disableTransparency": "false", "target": ".sqs-layout .sqs-block-collectionlink", "showOnlyWhenPresent": ".tweak-yr-sqs-content-link-border" }
-@tweak-yr-sqs-content-link-border-color: rgba(0, 0, 0, 0);
-
-// tweak: { "category": "Content / Content Links", "label": "Stripey Border Space", "title": "tweak sqs-content-link-border-space", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".sqs-layout .sqs-block-collectionlink", "showOnlyWhenPresent": ".tweak-yr-sqs-content-link-border" }
-@tweak-yr-sqs-content-link-border-space: 1em;
-
-// tweak: { "category": "Content / Content Links", "label": "Stripey Border Width", "title": "tweak sqs-content-link-border-width", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".sqs-layout .sqs-block-collectionlink", "showOnlyWhenPresent": ".tweak-yr-sqs-content-link-border" }
-@tweak-yr-sqs-content-link-border-width: 6px;
-
-// tweak: { "category": "Content / Content Links", "label": "Stripey Border Sticky", "title": "tweak-yr-sqs-content-link-border-sticky", "type": "checkbox", "active": true, target: ".sqs-layout .sqs-block-collectionlink", "showOnlyWhenPresent": ".tweak-yr-sqs-content-link-border, .tweak-yr-sqs-newsletter-border" }
+// tweak: { "category": "Content / Grid", "label": "Block Vertical Alignment", "title": "tweak-yr-sqs-block-align", "type": "dropdown", "options": ["Up High", "Middle", "Down Low"], "default": "Middle", target: ".sqs-layout .sqs-row", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid" }
+// tweak: { "category": "Content / Grid", "label": "Show Alternating Block", "title": "tweak-yr-sqs-block-alt-show", "type": "checkbox", "active": true, "target": ".yr-main .sqs-layout", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid" }
+// tweak: { "category": "Content / Grid", "label": "Alternating Block Color", "title": "tweak-yr-sqs-block-alt-color", "type": "color", "disableTransparency": "false", "target": ".yr-main .sqs-layout", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid.tweak-yr-sqs-block-alt-show" }
+@tweak-yr-sqs-block-alt-color: rgba(0, 0, 0, 0.11);
 
 
 /**
@@ -616,7 +660,7 @@
  * Newsletter Block
  */
 
-// tweak: { "category": "Newsletter Block", "label": "Use Stripey Border", "title": "tweak-yr-sqs-newsletter-border", "type": "checkbox", "active": false, target: ".sqs-layout .sqs-block-newsletter" }
+// tweak: { "category": "Newsletter Block", "label": "Use Stripes Border", "title": "tweak-yr-sqs-newsletter-border", "type": "checkbox", "active": false, target: ".sqs-layout .sqs-block-newsletter" }
 
 
 /**
