@@ -67,8 +67,27 @@ blockquote,
 pre,
 ol,
 ul,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+input,
+textarea {
+    max-width: @tweak-yr-space-line-max;
+    margin: auto;
+}
+
+p,
+blockquote,
+pre,
+ol,
+ul,
 figure {
-    margin: @tweak-yr-p-space auto;
+    margin: @tweak-yr-space-p auto;
 }
 
 p,
@@ -78,7 +97,6 @@ ul,
 figure {
     .tweak-yr-font-p;
 }
-
 
 h1,
 h2,
@@ -95,37 +113,37 @@ h1 {
      */
     /* color: @tweak-yr-color-dark-1-tone-1; */
     .tweak-yr-font-h1;
-    padding: @tweak-yr-h1-space auto;
+    padding: @tweak-yr-space-h1 0;
 }
 
 h2 {
     /* color: @tweak-yr-color-dark-1-tone-1; */
     .tweak-yr-font-h2;
-    margin: @tweak-yr-h2-space auto;
+    padding: @tweak-yr-space-h2 0;
 }
 
 h3 {
     /* color: @tweak-yr-color-dark-1-tone-2; */
     .tweak-yr-font-h3;
-    margin: @tweak-yr-h3-space auto;
+    padding: @tweak-yr-space-h3 0;
 }
 
 h4 {
     /* color: @tweak-yr-color-dark-1-tone-2; */
     .tweak-yr-font-h4;
-    margin: @tweak-yr-h4-space auto;
+    padding: @tweak-yr-space-h4 0;
 }
 
 h5 {
     /* color: @tweak-yr-color-dark-1-tone-3; */
     .tweak-yr-font-h5;
-    margin: @tweak-yr-h5-space auto;
+    padding: @tweak-yr-space-h5 0;
 }
 
 h6 {
     /* color: @tweak-yr-color-dark-1-tone-3; */
     .tweak-yr-font-h6;
-    margin: @tweak-yr-h6-space auto;
+    padding: @tweak-yr-space-h6 0;
 }
 
 a {
@@ -163,7 +181,7 @@ blockquote {
 }
 
 blockquote {
-    padding: @tweak-yr-pad-space;
+    padding: @tweak-yr-space-pad;
     background-color: @tweak-yr-color-overlays-tone-1;
     border-radius: 2px;
 }
@@ -177,19 +195,19 @@ code {
 }
 
 pre {
-    padding: @tweak-yr-pad-space;
+    padding: @tweak-yr-space-pad;
     white-space: pre-wrap;
 }
 
 ol,
 ul {
     list-style-position: outside;
-    padding-left: @tweak-yr-pad-space * 2;
-    margin: @tweak-yr-p-space auto;
+    padding-left: @tweak-yr-space-pad * 2;
+    margin: @tweak-yr-space-p auto;
 
     &:dir(rtl) {
         padding-left: 0;
-        padding-right: @tweak-yr-pad-space * 2;
+        padding-right: @tweak-yr-space-pad * 2;
     }
 }
 
@@ -204,20 +222,20 @@ ul {
 li {}
 
 figure {
-    margin: @tweak-yr-pad-space auto;
+    margin: @tweak-yr-space-pad auto;
     padding: 4px;
     border-radius: 2px;
     background-color: @tweak-yr-color-overlays-tone-1;
 }
 
 figcaption {
-    padding: @tweak-yr-pad-space;
+    padding: @tweak-yr-space-pad;
 }
 
 hr {
     border: none;
     border-bottom: 1px solid currentColor;
-    margin: @tweak-yr-p-space auto;
+    margin: @tweak-yr-space-p auto;
 }
 
 small {

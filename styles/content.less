@@ -134,7 +134,7 @@
     .sqs-block-search,
     .sqs-block-form {
         .sqs-block-content {
-            padding: @tweak-yr-sqs-content-space;
+            padding: @tweak-yr-sqs-space-content;
         }
 
         a:not([role="button"]) {
@@ -144,7 +144,7 @@
 
     .sqs-block-collectionlink {
         .sqs-block-content {
-            padding: @tweak-yr-sqs-content-space;
+            padding: @tweak-yr-sqs-space-content;
         }
 
         .collectionlink-thumbnail {
@@ -159,7 +159,7 @@
     .sqs-block-newsletter {
         .yr-on-(~'.tweak-yr-sqs-block-newsletter-style-stripes'); .-do() {
             .sqs-block-content {
-                padding: @tweak-yr-sqs-content-space;
+                padding: @tweak-yr-sqs-space-content;
             }
         }
 
@@ -328,15 +328,18 @@
         & { .yr-on-(~'.tweak-yr-sqs-image-block-use-site-fonts'); .-do() {
             .image-title p {
                 .tweak-yr-font-h4 !important;
+                display: inline-block !important;
             }
 
             .image-subtitle p {
                 .tweak-yr-font-p !important;
+                display: inline-block !important;
             }
 
             .image-caption p {
                 .tweak-yr-font-p !important;
-                margin: @tweak-yr-sqs-content-space @tweak-yr-pad-space;
+                display: inline-block !important;
+                padding: @tweak-yr-sqs-space-content @tweak-yr-pad-space;
             }
         }}
 
@@ -364,19 +367,23 @@
                 & { .yr-on-(~'.tweak-yr-sqs-image-block-poster-anchor-sub-up-high'); .-do() {
                     position: absolute;
                     width: inherit;
-                    top: @tweak-yr-sqs-content-space;
+                    top: @tweak-yr-sqs-space-content;
                 }}
 
                 & { .yr-on-(~'.tweak-yr-sqs-image-block-poster-anchor-sub-down-low'); .-do() {
                     position: absolute;
                     width: inherit;
-                    bottom: @tweak-yr-sqs-content-space;
+                    bottom: @tweak-yr-sqs-space-content;
                 }}
             }
         }
     }
 
     .sqs-block-quote {
+        figure {
+            margin: @tweak-yr-space-p auto;
+        }
+
         blockquote {
             /**
              * Squarespace adds actual quote-mark elements...
@@ -410,8 +417,12 @@
         padding: 0 @tweak-yr-pad-space;
     }
 
-    .sqs-gallery-block-grid img {
-        max-width: none;
+    .sqs-gallery-block-grid {
+        padding: @tweak-yr-pad-space;
+
+        img {
+            max-width: none;
+        }
     }
 
     .sqs-gallery-design-strip-slide {
@@ -439,8 +450,18 @@
         }
     }
 
-    .newsletter-block .submit-wrapper {
-        .tweak-yr-font-button;
+    .newsletter-block {
+        .newsletter-form-header,
+        .newsletter-form-footnote p {
+            max-width: @tweak-yr-space-line-max;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .submit-wrapper {
+            .tweak-yr-font-button;
+        }
+
     }
 
     .sqs-block-search {
@@ -475,6 +496,7 @@
 
     .sqs-block-tagcloud .sqs-tagcloud {
         text-align: center;
+        max-width: none;
     }
 }
 

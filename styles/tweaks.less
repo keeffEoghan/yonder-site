@@ -171,32 +171,35 @@
  * Spacing
  */
 
-// tweak: { "category": "Spacing", "label": "Pad", "title": "tweak-yr-pad-space", "type": "value", "min": -100, "max": 100, "step": 1, "target": "p" }
-@tweak-yr-pad-space: 1em;
+// tweak: { "category": "Spacing", "label": "Maximum Line", "title": "tweak-yr-space-line-max", "type": "value", "min": -100, "max": 100, "step": 1, "target": "body" }
+@tweak-yr-space-line-max: 36em;
 
-// tweak: { "category": "Spacing", "label": "Paragraph", "title": "tweak-yr-p-space", "type": "value", "min": -100, "max": 100, "step": 1, "target": "p" }
-@tweak-yr-p-space: 0.5em;
+// tweak: { "category": "Spacing", "label": "Pad", "title": "tweak-yr-space-pad", "type": "value", "min": -100, "max": 100, "step": 1, "target": "body" }
+@tweak-yr-space-pad: 1em;
 
-// tweak: { "category": "Spacing", "label": "Heading 1", "title": "tweak-yr-h1-space", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h1" }
-@tweak-yr-h1-space: 10vh;
+// tweak: { "category": "Spacing", "label": "Paragraph", "title": "tweak-yr-space-p", "type": "value", "min": -100, "max": 100, "step": 1, "target": "p" }
+@tweak-yr-space-p: 0.5em;
 
-// tweak: { "category": "Spacing", "label": "Heading 2", "title": "tweak-yr-h2-space", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h2" }
-@tweak-yr-h2-space: 1em;
+// tweak: { "category": "Spacing", "label": "Heading 1", "title": "tweak-yr-space-h1", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h1" }
+@tweak-yr-space-h1: 10vh;
 
-// tweak: { "category": "Spacing", "label": "Heading 3", "title": "tweak-yr-h3-space", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h3" }
-@tweak-yr-h3-space: 0.5em;
+// tweak: { "category": "Spacing", "label": "Heading 2", "title": "tweak-yr-space-h2", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h2" }
+@tweak-yr-space-h2: 1em;
 
-// tweak: { "category": "Spacing", "label": "Heading 4", "title": "tweak-yr-h4-space", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h4" }
-@tweak-yr-h4-space: 1.6em;
+// tweak: { "category": "Spacing", "label": "Heading 3", "title": "tweak-yr-space-h3", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h3" }
+@tweak-yr-space-h3: 0.5em;
 
-// tweak: { "category": "Spacing", "label": "Heading 5", "title": "tweak-yr-h5-space", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h5" }
-@tweak-yr-h5-space: 1em;
+// tweak: { "category": "Spacing", "label": "Heading 4", "title": "tweak-yr-space-h4", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h4" }
+@tweak-yr-space-h4: 1.6em;
 
-// tweak: { "category": "Spacing", "label": "Heading 6", "title": "tweak-yr-h6-space", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h6" }
-@tweak-yr-h6-space: 0.5em;
+// tweak: { "category": "Spacing", "label": "Heading 5", "title": "tweak-yr-space-h5", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h5" }
+@tweak-yr-space-h5: 1em;
 
-// tweak: { "category": "Spacing", "label": "Content", "title": "tweak-yr-sqs-content-space", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main .html-block .sqs-block-content, .sqs-layout .design-layout-poster" }
-@tweak-yr-sqs-content-space: 2em;
+// tweak: { "category": "Spacing", "label": "Heading 6", "title": "tweak-yr-space-h6", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h6" }
+@tweak-yr-space-h6: 0.5em;
+
+// tweak: { "category": "Spacing", "label": "Content", "title": "tweak-yr-sqs-space-content", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main .sqs-block" }
+@tweak-yr-sqs-space-content: 2em;
 
 
 /**
@@ -619,8 +622,8 @@
 // tweak: { "category": "Content / Block Styles / Stripes", "label": "Color 2", "title": "tweak-yr-sqs-block-style-stripes-color-2", "type": "color", "disableTransparency": "false", "target": ".yr-main .sqs-block" }
 @tweak-yr-sqs-block-style-stripes-color-2: rgba(0, 0, 0, 0);
 
-// tweak: { "category": "Content / Block Styles / Stripes", "label": "Space", "title": "tweak-yr-sqs-block-style-stripes-space", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main .sqs-block" }
-@tweak-yr-sqs-block-style-stripes-space: 1em;
+// tweak: { "category": "Content / Block Styles / Stripes", "label": "Space", "title": "tweak-yr-space-sqs-block-style-stripes", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main .sqs-block" }
+@tweak-yr-space-sqs-block-style-stripes: 1em;
 
 // tweak: { "category": "Content / Block Styles / Stripes", "label": "Width", "title": "tweak-yr-sqs-block-style-stripes-width", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main .sqs-block" }
 @tweak-yr-sqs-block-style-stripes-width: 6px;
