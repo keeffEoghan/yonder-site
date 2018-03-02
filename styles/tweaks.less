@@ -14,13 +14,16 @@
 // tweak: { "category": "Loading", "label": "Loading Bar Size", "title": "tweak-yr-loader-size", "type": "value", "min": 1, "max": 100, "step": 1, "target": ".yr-loader", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-show" }
 @tweak-yr-loader-size: 3px;
 
-// tweak: { "category": "Loading", "label": "Animate Contents", "title": "tweak-yr-loader-animate-content", "type": "checkbox", "active": true, "target": ".yr-main", "showOnlyWhenPresent": ".tweak-yr-ajax-enable" }
+// @disable tweak: { "category": "Loading", "label": "Animate Contents", "title": "tweak-yr-loader-animate-content", "type": "dropdown", "options": ["Nah", "Simple", "Fancy"], "default": "Fancy", target: ".yr-content", "showOnlyWhenPresent": ".tweak-yr-ajax-enable" }
 
-// tweak: { "category": "Loading", "label": "Animate Contents Distance", "title": "tweak-yr-loader-animate-contents-move", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-animate-content" }
-@tweak-yr-loader-animate-contents-move: 1.5rem;
+// @disable tweak: { "category": "Loading", "label": "Animate Contents Scale", "title": "tweak-yr-loader-animate-content-scale", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-animate-content-simple, .tweak-yr-ajax-enable.tweak-yr-loader-animate-content-fancy" }
+@tweak-yr-loader-animate-content-time: 400ms;
 
-// tweak: { "category": "Loading", "label": "Animate Contents Scale", "title": "tweak-yr-loader-animate-contents-scale", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-animate-content" }
-@tweak-yr-loader-animate-contents-scale: 0.99;
+// @disable tweak: { "category": "Loading", "label": "Animate Contents Distance", "title": "tweak-yr-loader-animate-content-move", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-animate-content-fancy" }
+@tweak-yr-loader-animate-content-move: 1.5rem;
+
+// @disable tweak: { "category": "Loading", "label": "Animate Contents Scale", "title": "tweak-yr-loader-animate-content-scale", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-animate-content-fancy" }
+@tweak-yr-loader-animate-content-scale: 0.99;
 
 
 /**
@@ -30,7 +33,10 @@
 // tweak: { "category": "Typography", "label": "Big Screen Font Size", "title": "tweak-yr-font-base-size-2", "type": "value", "min": 0, "max": 100, "step": 1, "target": "body" }
 @tweak-yr-font-base-size-2: 15pt;
 
-// tweak: { "category": "Typography", "label": "Use Fancy Links", "title": "tweak-yr-fancy-links", "type": "checkbox", "active": true, "target": ".yr-nav-a" }
+// tweak: { "category": "Typography", "label": "Use Fancy Links", "title": "tweak-yr-a-style-fancy", "type": "checkbox", "active": true, "target": "a" }
+
+// tweak: { "category": "Typography", "label": "Fancy Links Expand", "title": "tweak-yr-a-style-fancy-scale", "type": "value", "min": -100, "max": 100, "step": 1, "target": "a", "showOnlyWhenPresent": ".tweak-yr-a-style-fancy" }
+@tweak-yr-a-style-fancy-scale: 5;
 
 // tweak: { "category": "Typography", "label": "Base", "title": "tweak-yr-font-base", "type": "font", "loadAllVariants": true, "target": "body" }
 .tweak-yr-font-base {
@@ -183,7 +189,7 @@
 @tweak-yr-space-line-max: 36em;
 
 // tweak: { "category": "Spacing", "label": "Pad", "title": "tweak-yr-space-pad", "type": "value", "min": -100, "max": 100, "step": 1, "target": "body" }
-@tweak-yr-space-pad: 1em;
+@tweak-yr-space-pad: 1rem;
 
 // tweak: { "category": "Spacing", "label": "Paragraph", "title": "tweak-yr-space-p", "type": "value", "min": -100, "max": 100, "step": 1, "target": "p" }
 @tweak-yr-space-p: 0.5em;
