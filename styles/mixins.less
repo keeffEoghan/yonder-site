@@ -1,6 +1,10 @@
 /**
- * WIP.
+ * Utilities.
+ */
+
+/**
  * A for-loop implementation - seems to work for number ranges but not lists.
+ * WIP.
  *
  * @see https://github.com/seven-phases-max/less.curious/blob/master/src/for.less
  */
@@ -15,6 +19,15 @@
 
 .yr-for-(@i, @n) when not (@i = @n)  {
     .yr-for-((@i + (@n - @i) / abs(@n - @i)), @n);
+}
+
+/**
+ * Simple pseudo-random.
+ */
+
+.yr-rand(@seed: 123456) {
+    @r: sin(@seed) * 123456;
+    @rand: @r - floor(@r);
 }
 
 

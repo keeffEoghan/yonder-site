@@ -16,11 +16,13 @@
 
         <squarespace:navigation navigationId="nav-main" template="nav-main"></squarespace:navigation>
 
-        <main class="yr-main" role="main" data-content-field="main-content">
-            {squarespace.main-content}
-        </main>
+        <section class="yr-content">
+            <main class="yr-main" role="main" data-content-field="main-content">
+                {squarespace.main-content}
+            </main>
 
-        {@|apply footer.block}
+            {@|apply footer.block}
+        </section>
 
         <squarespace:script src="site-bundle.js" combo="false"></squarespace:script>
 

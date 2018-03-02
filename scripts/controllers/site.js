@@ -53,7 +53,7 @@ const updateMatrix = [
     { selector: 'link[rel="image_src"]', updateAttrs: true },
     { selector: 'link[rel="alternate"]', updateAttrs: true },
     { selector: 'body', updateAttrs: true },
-    { selector: 'main', updateAttrs: true, updateHTML: true },
+    { selector: '.yr-main', updateAttrs: true, updateHTML: true },
     { selector: '.yr-nav .yr-nav-links', updateAttrs: true, updateHTML: true }
 ];
 
@@ -83,13 +83,13 @@ function loadAJAX() {
     // Squarespace init and destroy
 
     window.addEventListener('mercury:unload', () => {
-        Lifecycle.destroy();
         document.documentElement.setAttribute('data-ajax-loading', 'swap');
+        Lifecycle.destroy();
     });
 
     window.addEventListener('mercury:load', () => {
-        Lifecycle.init();
         document.documentElement.setAttribute('data-ajax-loading', 'done');
+        Lifecycle.init();
 
         setTimeout(() => document.documentElement.removeAttribute('data-ajax-loading'), 500);
     });
@@ -99,7 +99,7 @@ function loadAJAX() {
 }
 
 function loadImages() {
-    window.addEventListener('load', function() {
+    $(() => {
         var images = document.querySelectorAll('img[data-src]:not(.loaded)');
 
         for(var i = 0; i < images.length; i++) {

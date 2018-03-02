@@ -72,6 +72,22 @@
             margin: 0 auto 0 @margin;
         }
 
+        & {
+            @themes: @tweak-yr-color-theme-1-tone-2,
+                @tweak-yr-color-theme-2-tone-2,
+                @tweak-yr-color-theme-3-tone-2,
+                @tweak-yr-color-theme-4-tone-2,
+                @tweak-yr-color-theme-5-tone-2;
+
+            @n: length(@themes);
+
+            .yr-for-(@n); .-each(@i) {
+                &:nth-child((~'@{n}n+@{i}')) .yr-use-hold-shape {
+                    color: extract(@themes, @i - 1);
+                }
+            }
+        }
+
         @media @mq-circle-up {
             position: absolute;
             top: 50%;
@@ -82,34 +98,28 @@
                 margin: 0;
             }
 
-            .loop-holds(@l, @i: 0) when (@i < @l) {
-                .loop-holds(@l, @i + 1);
+            @n: 5;
 
-                & {
-                    // This needs to be scoped like this to iterate properly for some reason...
-                    @n: @i + 1;
+            .yr-for-(@n); .-each(@i) {
+                &:nth-child((~'@{n}n+@{i}')) {
+                    @r: (@i - 1) * 360deg / @n;
 
-                    &:nth-child((~'@{l}n+@{n}')) {
-                        @r: @i * 360deg / @l;
-
-                        @transform:
-                            /* Center */
-                            translate(-50%, -50%)
-                            /* Angle in circle */
-                            rotate(@r)
-                            /* Move up onto circle circumference */
-                            translateY(-47vmin)
-                            /* Move back inside bounds of circle */
-                            translateY(50%)
-                            /* Move back a little margin */
-                            translateY(2em)
-                            /* Straighten */
-                            rotate(-@r);
-                        .transform(@transform);
-                    }
+                    @transform:
+                        /* Center */
+                        translate(-50%, -50%)
+                        /* Angle in circle */
+                        rotate(@r)
+                        /* Move up onto circle circumference */
+                        translateY(-47vmin)
+                        /* Move back inside bounds of circle */
+                        translateY(50%)
+                        /* Move back a little margin */
+                        translateY(2em)
+                        /* Straighten */
+                        rotate(-@r);
+                    .transform(@transform);
                 }
             }
-            .loop-holds(5);
         }
     }
 
@@ -226,28 +236,6 @@
             fill: none;
             stroke-width: 2px;
             stroke-miterlimit: 10px;
-        }
-    }
-
-    .yr-nav-hold {
-        &:nth-child(5n+1) .yr-use-hold-shape {
-            color: @tweak-yr-color-theme-1-tone-2;
-        }
-
-        &:nth-child(5n+2) .yr-use-hold-shape {
-            color: @tweak-yr-color-theme-2-tone-2;
-        }
-
-        &:nth-child(5n+3) .yr-use-hold-shape {
-            color: @tweak-yr-color-theme-3-tone-2;
-        }
-
-        &:nth-child(5n+4) .yr-use-hold-shape {
-            color: @tweak-yr-color-theme-4-tone-2;
-        }
-
-        &:nth-child(5n+5) .yr-use-hold-shape {
-            color: @tweak-yr-color-theme-5-tone-2;
         }
     }
 }

@@ -21,12 +21,16 @@ body,
     .transition(background-color 500ms ease-out);
 }
 
-body {
+body,
+.yr-content {
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: stretch;
     min-height: 100%;
+}
+
+body {
     margin: 0 auto;
     background-color: @tweak-yr-color-theme-none-tone-2;
     color: @tweak-yr-color-light-1-tone-3;
@@ -57,9 +61,9 @@ body {
     }
 }
 
+.yr-content,
 .yr-main {
     flex: 1 0 auto;
-    background-color: inherit;
 }
 
 p,
@@ -328,5 +332,70 @@ button,
 
     .tweak-yr-ajax-enable.tweak-yr-loader-show & {
         display: block;
+    }
+}
+
+.yr-main,
+.yr-footer {
+    .tweak-yr-loader-animate-content & {
+        @time: 400ms;
+        @delay: @time * 2;
+
+        &,
+        .yr-load-fade,
+        .sqs-row,
+        .sqs-layout .col,
+        .sqs-block {
+            will-change: transform, opacity;
+            @transition: transform @time @yr-ease-far-out,
+                opacity @time @yr-ease-far-out;
+            .transition(@transition);
+
+            [data-ajax-loading='start'] &,
+            [data-ajax-loading='swap'] &,
+            [data-ajax-loading='done'] & {
+                opacity: 0;
+                .transform(translateY(@tweak-yr-loader-animate-contents-move)
+                    scale(@tweak-yr-loader-animate-contents-scale););
+                @transition: transform @time @yr-ease-far-in,
+                    opacity @time @yr-ease-far-in;
+                .transition(@transition);
+            }
+        }
+
+
+        /**
+         * Random-ish timing offsets.
+         */
+
+        // This is how long the child elements have to do their animation.
+        [data-ajax-loading='start'] &,
+        [data-ajax-loading='swap'] & {
+            .transition-delay(@delay);
+        }
+
+        // Make sure we fade in from a blank state.
+        [data-ajax-loading='done'] & {
+            .transition-duration(0ms);
+            .transition-delay(0ms);
+        }
+
+        &,
+        [data-ajax-loading] & {
+            .yr-load-fade,
+            .sqs-row,
+            .sqs-row .col,
+            .sqs-block {
+                @n: 6;
+
+                .yr-for-(@n); .-each(@i) {
+                    .yr-rand(@n + @i);
+
+                    &:nth-child((~'@{n}n+@{i}')) {
+                        .transition-delay(floor(@rand * @time));
+                    }
+                }
+            }
+        }
     }
 }

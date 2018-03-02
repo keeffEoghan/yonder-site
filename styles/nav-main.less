@@ -134,8 +134,9 @@
             right: 0;
             .transform-origin(top center);
             will-change: background-color, transform;
-            .transition(background-color 500ms ease-out,
-                transform 500ms ease-in-out;);
+            .transition(background-color 400ms ease-out,
+                transform 400ms ease-in-out;);
+            .transition-delay(400ms);
         }
     }
 
@@ -148,6 +149,7 @@
             background-color: transparent;
             pointer-events: none;
             .transform(translateY(-100%));
+            .transition-delay(0ms);
         }
     }
 
@@ -518,16 +520,14 @@
     border: none;
 
     .tweak-yr-nav-overlay-fancy & {
-        ~ .yr-main,
-        ~ .yr-footer {
+        ~ .yr-content {
             will-change: filter;
             @transition: filter @nav-overlay-time ease-out;
             .transition(@transition);
         }
 
         &:checked {
-            ~ .yr-main,
-            ~ .yr-footer {
+            ~ .yr-content {
                 filter: ~'saturate(0%)' blur(3px);
             }
         }

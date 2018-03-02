@@ -11,8 +11,16 @@
 // tweak: { "category": "Loading", "label": "Show Loading Bar", "title": "tweak-yr-loader-show", "type": "checkbox", "active": true, "showOnlyWhenPresent": ".tweak-yr-ajax-enable" }
 // tweak: { "category": "Loading", "label": "Loading Bar Position", "title": "tweak-yr-loader-align", "type": "dropdown", "options": ["Up High", "Down Low"], "default": "Up High", target: ".yr-loader", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-show" }
 
-// tweak: { "category": "Loading", "label": "Loading Bar Size", "title": "tweak-yr-loader-size", "type": "value", "step": 1, "min": 1, "max": 120, target: ".yr-loader", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-show" }
+// tweak: { "category": "Loading", "label": "Loading Bar Size", "title": "tweak-yr-loader-size", "type": "value", "min": 1, "max": 100, "step": 1, "target": ".yr-loader", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-show" }
 @tweak-yr-loader-size: 3px;
+
+// tweak: { "category": "Loading", "label": "Animate Contents", "title": "tweak-yr-loader-animate-content", "type": "checkbox", "active": true, "target": ".yr-main", "showOnlyWhenPresent": ".tweak-yr-ajax-enable" }
+
+// tweak: { "category": "Loading", "label": "Animate Contents Distance", "title": "tweak-yr-loader-animate-contents-move", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-animate-content" }
+@tweak-yr-loader-animate-contents-move: 1.5rem;
+
+// tweak: { "category": "Loading", "label": "Animate Contents Scale", "title": "tweak-yr-loader-animate-contents-scale", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-animate-content" }
+@tweak-yr-loader-animate-contents-scale: 0.99;
 
 
 /**

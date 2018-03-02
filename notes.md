@@ -6,16 +6,12 @@
 
 - Content
     - Ensure colors per section work where native CSS variables don't (JS fallback, setting theme number?)
-- Fonts and typography
-    - Go through content variations
 - SVG holds
     - Multiple themes in style editor... clunky but needed? Improve with JS rather than JSON-T / Style Editor
     - Later
         - Configurable by CMS?
             - Number of holds (consider color themes too)
                 - Hacky... can tweak values create new tweaks? Like have a value tweak for number of holds, and generate enough corresponding tweaks in LESS...?
-- Finish AJAX loading
-    - Page animations
 - Squarespace setup
     - Transfer template, domain to live
 - Document some of the Squarespace workarounds you're using
@@ -43,6 +39,8 @@
 
 # Done
 
+- Finish AJAX loading
+    - Page animations
 - Block out main zones and animations
 - Content
     - Custom overrides for certain interior blocks
@@ -55,6 +53,7 @@
     - Colors per section
     - Responsive wrapping columns, but only for full-width rows...?
 - Fonts and typography
+    - Go through content variations
     - [Buy](https://www.myfonts.com/cart/432948577)
     - Sort out the sidebar etc styles again.
 - SVG holds
