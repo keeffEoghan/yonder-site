@@ -1,0 +1,21 @@
+<section class="yr-index">
+    {.section collection}
+        <h1 class="yr-index-title">{title}</h1>
+
+        {.repeated section collections}
+            <section id="index-collection-{urlId}" class="yr-index-collection"
+                data-collection-id="{id}">
+                <h2 class="yr-index-collection-title"><a class="yr-a" href="{url}">{title}</a></h2>
+                <ul class="yr-index-items">
+                    {.repeated section items}
+                        <li class="yr-index-item">
+                            <a class="yr-a" href="{url}">{title}</a>
+                        </li>
+                    {.end}
+                </ul>
+            </section>
+        {.end}
+    {.end}
+
+    <script type="text/javascript">console.log('index', {@|json-pretty|html});</script>
+</section>

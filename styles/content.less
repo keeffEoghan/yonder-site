@@ -7,7 +7,7 @@
     overflow: hidden;
 }
 
-.yr-main .sqs-layout {
+.yr-main > .sqs-layout {
     @mq-collapse: ~'only screen and @{yr-mq-m-dn}';
 
     .sqs-block {
@@ -32,6 +32,9 @@
 
             @media @mq-collapse {
                 display: block;
+                float: none;
+                clear: both;
+                width: 100%;
             }
         }
 
@@ -82,6 +85,7 @@
         }
     }}
 
+
     /**
      * Alternating cell colors - kinda works...
      */
@@ -102,7 +106,8 @@
             }
         }
 
-        .sqs-block-horizontalrule {
+        .sqs-block-horizontalrule,
+        .sqs-block-spacer {
             &::before {
                 visibility: hidden;
             }
@@ -341,19 +346,20 @@
      */
     .sqs-block-image {
         & { .yr-on-(~'.tweak-yr-sqs-image-block-use-site-fonts'); .-do() {
+            p {
+                display: block !important;
+            }
+
             .image-title p {
                 .tweak-yr-font-h4 !important;
-                display: inline-block !important;
             }
 
             .image-subtitle p {
                 .tweak-yr-font-p !important;
-                display: inline-block !important;
             }
 
             .image-caption p {
                 .tweak-yr-font-p !important;
-                display: inline-block !important;
                 padding: @tweak-yr-sqs-space-content @tweak-yr-space-pad;
             }
         }}
@@ -367,6 +373,10 @@
         }}
 
         .design-layout-poster {
+            .image-card {
+                width: auto;
+            }
+
             .image-title,
             .image-subtitle {
                 a {
@@ -381,13 +391,13 @@
             .image-subtitle-wrapper {
                 & { .yr-on-(~'.tweak-yr-sqs-image-block-poster-anchor-sub-up-high'); .-do() {
                     position: absolute;
-                    width: inherit;
+                    width: 100%;
                     top: @tweak-yr-sqs-space-content;
                 }}
 
                 & { .yr-on-(~'.tweak-yr-sqs-image-block-poster-anchor-sub-down-low'); .-do() {
                     position: absolute;
-                    width: inherit;
+                    width: 100%;
                     bottom: @tweak-yr-sqs-space-content;
                 }}
             }
@@ -514,6 +524,94 @@
         max-width: none;
     }
 }
+/*
+.yr-main {
+    .simple-alt-cell() {
+        .yr-on-(~'.tweak-yr-sqs-alt-grid.tweak-yr-sqs-block-alt-show'); .-do() {
+            &:nth-child(even) {
+                background-color: @tweak-yr-sqs-block-alt-color;
+            }
+        }
+    }
+
+    .sqs-events-collection-list {
+        .eventlist-event {
+            margin: 0;
+            .simple-alt-cell();
+        }
+
+        .eventlist-column-info {
+            padding: @tweak-yr-sqs-space-content;
+
+            a {
+                .yr-a();
+            }
+        }
+
+        .eventlist-event:nth-child(even) {
+            .eventlist-column-thumbnail {
+                float: right;
+            }
+
+            .eventlist-column-date {
+                left: auto;
+                right: 0;
+            }
+        }
+    }
+
+    .sqs-events-collection-item {
+        margin: @tweak-yr-sqs-space-content;
+
+        a {
+            .yr-a();
+        }
+
+        .eventitem-content-footer {
+            padding: 0 @tweak-yr-space-pad;
+        }
+    }
+
+    .sqs-audio-playlist {
+        .tracks {
+            max-width: none;
+        }
+
+        .album-title,
+        .album-artist-name,
+        .album-description,
+        .engagement,
+        .track-meta,
+        .track-info {
+            padding: @tweak-yr-space-pad;
+
+            a {
+                .yr-a();
+            }
+        }
+    }
+
+    .sqs-blog-list,
+    .BlogItem,
+    .BlogItem-pagination {
+        margin: @tweak-yr-sqs-space-content;
+    }
+
+    .sqs-blog-list {
+        .BlogList-item {
+            padding: @tweak-yr-space-pad;
+            .simple-alt-cell();
+        }
+    }
+
+    .BlogItem .BlogItem-comments {
+        margin: @tweak-yr-space-p auto;
+    }
+
+    .sqs-system-gallery {
+        margin: auto 0;
+    }
+}*/
 
 // This is placed at root level...
 .sqs-search-preview-ui {

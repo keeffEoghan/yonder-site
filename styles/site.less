@@ -16,18 +16,15 @@ html {
 }
 
 body,
+.yr-content,
 .yr-main {
-    will-change: background-color;
-    .transition(background-color 500ms ease-out);
-}
-
-body,
-.yr-content {
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: stretch;
     min-height: 100%;
+    will-change: background-color;
+    .transition(background-color 500ms ease-out);
 }
 
 body {
@@ -66,6 +63,10 @@ body {
     flex: 1 0 auto;
 }
 
+.yr-content {
+    background-color: inherit;
+}
+
 p,
 blockquote,
 pre,
@@ -82,7 +83,6 @@ label,
 input,
 textarea {
     max-width: @tweak-yr-space-line-max;
-    margin: auto;
 }
 
 p,
@@ -92,6 +92,8 @@ ol,
 ul,
 figure {
     margin: @tweak-yr-space-p auto;
+    padding: 0 @tweak-yr-space-pad;
+    margin: auto;
 }
 
 p,
@@ -108,7 +110,9 @@ h3,
 h4,
 h5,
 h6 {
+    padding: 0 @tweak-yr-space-pad;
     word-break: break-word;
+    margin: auto;
 }
 
 h1 {
@@ -274,128 +278,4 @@ button,
 ::placeholder {
     color: inherit;
     opacity: 0.66;
-}
-
-
-/**
- * AJAX Loading
- */
-
-[data-ajax-loading] * {
-  cursor: progress;
-}
-
-.yr-loader {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: @tweak-yr-loader-size;
-    z-index: @yr-z-loader;
-    pointer-events: none;
-    .border-radius(@tweak-yr-loader-size * 0.5);
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    border-top-width: 0;
-    background-color: @tweak-yr-color-accent-2-tone-3;
-    opacity: 0;
-
-    .tweak-yr-loader-align-down-low & {
-        top: auto;
-        bottom: 0;
-    }
-
-    will-change: opacity, transform;
-    .transition(opacity 500ms ease-out,
-        transform 0ms ease-out 500ms;);
-
-    [data-ajax-loading] & {
-        opacity: 1;
-        .transition(opacity 0ms ease-out,
-            transform 500ms ease-out;);
-    }
-
-    [data-ajax-loading='start'] & {
-        .transform(translateX(33%));
-    }
-
-    [data-ajax-loading='swap'] & {
-        .transform(translateX(66%));
-    }
-
-    [data-ajax-loading='done'] & {
-        .transform(translateX(100%));
-    }
-
-    // Show or hide
-
-    display: none;
-
-    .tweak-yr-ajax-enable.tweak-yr-loader-show & {
-        display: block;
-    }
-}
-
-.yr-main,
-.yr-footer {
-    .tweak-yr-loader-animate-content & {
-        @time: 400ms;
-        @delay: @time * 2;
-
-        &,
-        .yr-load-fade,
-        .sqs-row,
-        .sqs-layout .col,
-        .sqs-block {
-            will-change: transform, opacity;
-            @transition: transform @time @yr-ease-far-out,
-                opacity @time @yr-ease-far-out;
-            .transition(@transition);
-
-            [data-ajax-loading='start'] &,
-            [data-ajax-loading='swap'] &,
-            [data-ajax-loading='done'] & {
-                opacity: 0;
-                .transform(translateY(@tweak-yr-loader-animate-contents-move)
-                    scale(@tweak-yr-loader-animate-contents-scale););
-                @transition: transform @time @yr-ease-far-in,
-                    opacity @time @yr-ease-far-in;
-                .transition(@transition);
-            }
-        }
-
-
-        /**
-         * Random-ish timing offsets.
-         */
-
-        // This is how long the child elements have to do their animation.
-        [data-ajax-loading='start'] &,
-        [data-ajax-loading='swap'] & {
-            .transition-delay(@delay);
-        }
-
-        // Make sure we fade in from a blank state.
-        [data-ajax-loading='done'] & {
-            .transition-duration(0ms);
-            .transition-delay(0ms);
-        }
-
-        &,
-        [data-ajax-loading] & {
-            .yr-load-fade,
-            .sqs-row,
-            .sqs-row .col,
-            .sqs-block {
-                @n: 6;
-
-                .yr-for-(@n); .-each(@i) {
-                    .yr-rand(@n + @i);
-
-                    &:nth-child((~'@{n}n+@{i}')) {
-                        .transition-delay(floor(@rand * @time));
-                    }
-                }
-            }
-        }
-    }
 }

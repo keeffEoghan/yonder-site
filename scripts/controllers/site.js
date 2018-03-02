@@ -7,7 +7,9 @@ import { authenticated, debug } from '../constants';
 
 function site() {
     loadAJAX();
-    loadImages();
+
+    $(loadImages);
+    window.addEventListener('load', loadImages);
 
     // Prevent link events reaching `body` when `a` descendents are being edited in CMS.
     $('body > *').on('click', 'a .sqs-editing', false);
@@ -99,13 +101,11 @@ function loadAJAX() {
 }
 
 function loadImages() {
-    $(() => {
-        var images = document.querySelectorAll('img[data-src]:not(.loaded)');
+    var images = document.querySelectorAll('img[data-src]:not(.loaded)');
 
-        for(var i = 0; i < images.length; i++) {
-            console.log('Loading image', ImageLoader.load(images[i], { load: true }));
-        }
-    });
+    for(var i = 0; i < images.length; i++) {
+        console.log('Loading image', ImageLoader.load(images[i], { load: true }));
+    }
 }
 
 export default site;

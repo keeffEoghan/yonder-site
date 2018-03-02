@@ -1,0 +1,110 @@
+/**
+ * AJAX Loading
+ */
+
+[data-ajax-loading] * {
+    cursor: progress;
+}
+
+
+/**
+ * Loader bar
+ */
+
+.yr-loader {
+    .tweak-yr-ajax-enable.tweak-yr-loader-show & {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: @tweak-yr-loader-size;
+        z-index: @yr-z-loader;
+        pointer-events: none;
+        .border-radius(@tweak-yr-loader-size * 0.5);
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        border-top-width: 0;
+        background-color: @tweak-yr-color-accent-2-tone-3;
+        opacity: 0;
+
+        .tweak-yr-loader-align-down-low & {
+            top: auto;
+            bottom: 0;
+        }
+
+        will-change: opacity, transform;
+        .transition(opacity 500ms ease-out,
+            transform 0ms ease-out 500ms;);
+
+        [data-ajax-loading] & {
+            opacity: 1;
+            .transition(opacity 0ms ease-out,
+                transform 500ms ease-out;);
+        }
+
+        [data-ajax-loading='start'] & {
+            .transform(translateX(33%));
+        }
+
+        [data-ajax-loading='swap'] & {
+            .transform(translateX(66%));
+        }
+
+        [data-ajax-loading='done'] & {
+            .transform(translateX(100%));
+        }
+    }
+}
+
+
+/**
+ * Loader content animation
+ */
+
+/*.yr-main,
+.yr-footer,
+.yr-load-fade {
+    .yr-loader-fade-simple();
+}
+
+.yr-main,
+.yr-footer {
+    .yr-loader-fade-fancy();
+    .yr-loader-fade-fancy-stagger-wrap();
+}
+
+.yr-content {
+    .yr-load-fade,
+
+    .sqs-layout .sqs-row,
+    .sqs-layout .col,
+    .sqs-layout .sqs-block,
+
+    .sqs-system-gallery .slide,
+
+    .sqs-events-collection-list .eventlist-event,
+    .sqs-events-collection-list [class*="eventlist-column"],
+
+    .sqs-events-collection-item .eventitem-backlink,
+    .sqs-events-collection-item [class*="eventitem-column"],
+    .sqs-events-collection-item [class*="eventitem-pager"],
+    
+    .sqs-audio-playlist .track,
+    .sqs-audio-playlist .album-cover-wrapper,
+    .sqs-audio-playlist .album-title,
+    .sqs-audio-playlist .album-artist-name,
+    .sqs-audio-playlist .album-description,
+    .sqs-audio-playlist .engagement,
+    
+    .sqs-blog-list .BlogList-item,
+    .sqs-blog-list .BlogList-filter,
+    
+    .BlogItem .BlogItem-title,
+    .BlogItem .Blog-meta,
+    .BlogItem .BlogItem-share,
+    .BlogItem .BlogItem-pagination-link,
+    
+    .squarespace-comments {
+        .yr-loader-fade-fancy();
+        .yr-loader-fade-fancy-stagger();
+    }
+}*/
