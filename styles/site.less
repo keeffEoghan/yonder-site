@@ -23,14 +23,14 @@ body,
     justify-content: flex-start;
     align-items: stretch;
     min-height: 100%;
-    will-change: background-color;
-    .transition(background-color 500ms ease-out);
 }
 
 body {
     margin: 0 auto;
     background-color: @tweak-yr-color-theme-none-tone-2;
     color: @tweak-yr-color-light-1-tone-3;
+    will-change: background-color;
+    .transition(background-color 500ms ease-out);
 
     &.homepage {
         background-color: @tweak-yr-color-base-tone-2;
@@ -61,10 +61,6 @@ body {
 .yr-content,
 .yr-main {
     flex: 1 0 auto;
-}
-
-.yr-content {
-    background-color: inherit;
 }
 
 p,
@@ -159,7 +155,7 @@ a {
     color: inherit;
     cursor: pointer;
 
-    .yr-on-(~'.yr-a'); .-do() {
+    .yr-on-(~'.yr-a', true); .-do() {
         .yr-a();
     }
 }

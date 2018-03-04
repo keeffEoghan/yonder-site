@@ -8,22 +8,34 @@
  */
 
 // tweak: { "category": "Loading", "label": "Enable AJAX Loading", "title": "tweak-yr-ajax-enable", "type": "checkbox", "active": true, "js": "true" }
-// tweak: { "category": "Loading", "label": "Show Loading Bar", "title": "tweak-yr-loader-show", "type": "checkbox", "active": true, "showOnlyWhenPresent": ".tweak-yr-ajax-enable" }
-// tweak: { "category": "Loading", "label": "Loading Bar Position", "title": "tweak-yr-loader-align", "type": "dropdown", "options": ["Up High", "Down Low"], "default": "Up High", target: ".yr-loader", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-show" }
 
-// tweak: { "category": "Loading", "label": "Loading Bar Size", "title": "tweak-yr-loader-size", "type": "value", "min": 1, "max": 100, "step": 1, "target": ".yr-loader", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-show" }
+
+/**
+ * Loading / Loading Bar
+ */
+
+// tweak: { "category": "Loading / Loading Bar", "label": "Show Loading Bar", "title": "tweak-yr-loader-show", "type": "checkbox", "active": true, "showOnlyWhenPresent": ".tweak-yr-ajax-enable", "js": "true" }
+// tweak: { "category": "Loading / Loading Bar", "label": "Position", "title": "tweak-yr-loader-align", "type": "dropdown", "options": ["Up High", "Down Low"], "default": "Up High", target: ".yr-loader", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-show" }
+
+// tweak: { "category": "Loading / Loading Bar", "label": "Size", "title": "tweak-yr-loader-size", "type": "value", "min": 1, "max": 100, "step": 1, "target": ".yr-loader", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-show" }
 @tweak-yr-loader-size: 3px;
 
-// @disable tweak: { "category": "Loading", "label": "Animate Contents", "title": "tweak-yr-loader-animate-content", "type": "dropdown", "options": ["Nah", "Simple", "Fancy"], "default": "Fancy", target: ".yr-content", "showOnlyWhenPresent": ".tweak-yr-ajax-enable" }
 
-// @disable tweak: { "category": "Loading", "label": "Animate Contents Scale", "title": "tweak-yr-loader-animate-content-scale", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-animate-content-simple, .tweak-yr-ajax-enable.tweak-yr-loader-animate-content-fancy" }
-@tweak-yr-loader-animate-content-time: 400ms;
+/**
+ * Loading / Animate Contents
+ */
 
-// @disable tweak: { "category": "Loading", "label": "Animate Contents Distance", "title": "tweak-yr-loader-animate-content-move", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-animate-content-fancy" }
-@tweak-yr-loader-animate-content-move: 1.5rem;
+// tweak: { "category": "Loading / Animate Contents", "label": "Animate Contents", "title": "tweak-yr-loader-fade-content", "type": "dropdown", "options": ["Nah", "Simple", "Fancy"], "default": "Fancy", target: ".yr-content", "showOnlyWhenPresent": ".tweak-yr-ajax-enable", "js": "true" }
 
-// @disable tweak: { "category": "Loading", "label": "Animate Contents Scale", "title": "tweak-yr-loader-animate-content-scale", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-animate-content-fancy" }
-@tweak-yr-loader-animate-content-scale: 0.99;
+// @note Style Editor doesn't handle time units in value sliders...
+// tweak: { "category": "Loading / Animate Contents", "label": "Time", "title": "tweak-yr-loader-fade-content-time", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-content", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-fade-content-simple, .tweak-yr-ajax-enable.tweak-yr-loader-fade-content-fancy", "js": "true" }
+@tweak-yr-loader-fade-content-time: 400ms;
+
+// tweak: { "category": "Loading / Animate Contents", "label": "Distance", "title": "tweak-yr-loader-fade-content-move", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-content", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-fade-content-fancy" }
+@tweak-yr-loader-fade-content-move: 30px;
+
+// tweak: { "category": "Loading / Animate Contents", "label": "Scale", "title": "tweak-yr-loader-fade-content-scale", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-content", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-fade-content-fancy" }
+@tweak-yr-loader-fade-content-scale: 0.99;
 
 
 /**
@@ -74,7 +86,7 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Typography", "label": "Input", "title": "tweak-yr-font-button", "type": "font", "loadAllVariants": true, "target": "button, [role='button']" }
+// tweak: { "category": "Typography", "label": "Button", "title": "tweak-yr-font-button", "type": "font", "loadAllVariants": true, "target": "button, [role='button']" }
 .tweak-yr-font-button {
     // Doesn't display well in `Style Editor`...
     // font-family: @yr-font-sans-bold;
@@ -84,7 +96,7 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Typography", "label": "Paragraph", "title": "tweak-yr-font-mono", "type": "font", "loadAllVariants": true, "target": "pre, code" }
+// tweak: { "category": "Typography", "label": "Monospace", "title": "tweak-yr-font-mono", "type": "font", "loadAllVariants": true, "target": "pre, code" }
 .tweak-yr-font-mono {
     // Doesn't display well in `Style Editor`...
     // font-family: @yr-font-mono;
@@ -551,6 +563,7 @@
 // tweak: { "category": "Holds Navigation", "label": "Switch to Circle Size", "title": "tweak-yr-mq-hold-circle-up", "type": "value", "min": 0, "max": 2000, "step": 1, "target": ".yr-nav-holds" }
 @tweak-yr-mq-hold-circle-up: 500px;
 
+// @note Style Editor doesn't handle viewport units in value sliders...
 // tweak: { "category": "Holds Navigation", "label": "Padding", "title": "tweak-yr-nav-holds-pad", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
 @tweak-yr-nav-holds-pad: 8vmin;
 

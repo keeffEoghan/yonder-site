@@ -41,16 +41,19 @@
                 transform 500ms ease-out;);
         }
 
-        [data-ajax-loading='start'] & {
+        [data-ajax-loading="navigate"] & {
             .transform(translateX(33%));
         }
 
-        [data-ajax-loading='swap'] & {
+        [data-ajax-loading="unload"] & {
             .transform(translateX(66%));
         }
 
-        [data-ajax-loading='done'] & {
+        [data-ajax-loading="load"] & {
+            opacity: 0;
             .transform(translateX(100%));
+            .transition(opacity 500ms ease-out 500ms,
+                transform 500ms ease-out;);
         }
     }
 }
@@ -60,51 +63,81 @@
  * Loader content animation
  */
 
-/*.yr-main,
+.yr-main,
 .yr-footer,
 .yr-load-fade {
-    .yr-loader-fade-simple();
+    & { .yr-on-(~'.tweak-yr-loader-fade-content-simple'); .-do() {
+        .yr-loader-fade();
+    }}
 }
 
 .yr-main,
 .yr-footer {
-    .yr-loader-fade-fancy();
-    .yr-loader-fade-fancy-stagger-wrap();
+    .yr-on-(~'.tweak-yr-loader-fade-content-fancy'); .-do() {
+        .yr-loader-fade-stagger-outer();
+    }
 }
 
 .yr-content {
-    .yr-load-fade,
+    .yr-on-(~'.tweak-yr-loader-fade-content-fancy'); .-do() {/*
+        * {
+            .yr-loader-fade();
+            .yr-loader-fade-stagger(1, 12);
 
-    .sqs-layout .sqs-row,
-    .sqs-layout .col,
-    .sqs-layout .sqs-block,
+            > :nth-child(even) {
+                .yr-loader-fade-stagger(1, 23);
+            }
 
-    .sqs-system-gallery .slide,
+            > :nth-child(odd) {
+                .yr-loader-fade-stagger(1, 34);
+            }
 
-    .sqs-events-collection-list .eventlist-event,
-    .sqs-events-collection-list [class*="eventlist-column"],
+            &:nth-child(even) {
+                .yr-loader-fade-stagger(1, 45);
 
-    .sqs-events-collection-item .eventitem-backlink,
-    .sqs-events-collection-item [class*="eventitem-column"],
-    .sqs-events-collection-item [class*="eventitem-pager"],
-    
-    .sqs-audio-playlist .track,
-    .sqs-audio-playlist .album-cover-wrapper,
-    .sqs-audio-playlist .album-title,
-    .sqs-audio-playlist .album-artist-name,
-    .sqs-audio-playlist .album-description,
-    .sqs-audio-playlist .engagement,
-    
-    .sqs-blog-list .BlogList-item,
-    .sqs-blog-list .BlogList-filter,
-    
-    .BlogItem .BlogItem-title,
-    .BlogItem .Blog-meta,
-    .BlogItem .BlogItem-share,
-    .BlogItem .BlogItem-pagination-link,
-    
-    .squarespace-comments {
-        .yr-loader-fade-fancy();
-        .yr-loader-fade-fancy-stagger();
+                > :nth-child(even) {
+                    .yr-loader-fade-stagger(1, 56);
+                }
+
+                > :nth-child(odd) {
+                    .yr-loader-fade-stagger(1, 67);
+                }
+            }
+        }
+        */
+
+        .yr-load-fade,
+
+        .sqs-layout .sqs-row,
+        .sqs-layout .col,
+        .sqs-layout .sqs-block,
+
+        .sqs-system-gallery .slide,
+
+        .sqs-events-collection-list .eventlist-event,
+        .sqs-events-collection-list [class*="eventlist-column"],
+
+        .sqs-events-collection-item .eventitem-backlink,
+        .sqs-events-collection-item [class*="eventitem-column"],
+        .sqs-events-collection-item [class*="eventitem-pager"],
+        
+        .sqs-audio-playlist .track,
+        .sqs-audio-playlist .album-cover-wrapper,
+        .sqs-audio-playlist .album-title,
+        .sqs-audio-playlist .album-artist-name,
+        .sqs-audio-playlist .album-description,
+        .sqs-audio-playlist .engagement,
+        
+        .sqs-blog-list .BlogList-item,
+        .sqs-blog-list .BlogList-filter,
+        
+        .BlogItem .BlogItem-title,
+        .BlogItem .Blog-meta,
+        .BlogItem .BlogItem-share,
+        .BlogItem .BlogItem-pagination-link,
+        
+        .squarespace-comments {
+            .yr-loader-fade-stagger-inner(5);
+        }
     }
-}*/
+}

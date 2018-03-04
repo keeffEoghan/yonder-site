@@ -46,6 +46,7 @@
 
 /**
  * Convenience for toggling a global or local flag.
+ * Override controls whether we'll do the long expansion bt default.
  *
  * This will enable the contents when `.flag` is present at or above the element scope:
  * `.yr-on-(~'.flag'); .-do() {...}`
@@ -57,8 +58,15 @@
  *       `.yr-on-(...); .-do() {...}` leaves `.-do` out in local scope.
  */
 
-.yr-on-(@flag) {
+@yr-on-override: false;
+
+.yr-on-(@flag, @override: @yr-on-override) when (@override = true) {
     &@{flag},
+    @{flag} & {
+        .-do();
+    }
+}
+.yr-on-(@flag, @override: @yr-on-override) when (@override = false) {
     @{flag} & {
         .-do();
     }
@@ -70,7 +78,7 @@
  */
 
 .yr-a() {
-    .yr-on-(~'.tweak-yr-a-style-fancy'); .-do() {
+    .tweak-yr-a-style-fancy & {
         position: relative;
         display: inline-block;
         border: 0 solid currentColor;
@@ -136,84 +144,75 @@
 
 
 /**
- * Simple loading animation styling.
+ * Loader animation styling.
  */
-/*
-.yr-loader-fade-simple() {
-    .yr-on-(~'.tweak-yr-loader-animate-content-simple'); .-do() {
-        will-change: opacity;
-        @transition: opacity @tweak-yr-loader-animate-content-time @yr-ease-far-out;
-        .transition(@transition);
 
-        [data-ajax-loading='start'] &,
-        [data-ajax-loading='swap'] &,
-        [data-ajax-loading='done'] & {
-            opacity: 0;
-            @transition: opacity @tweak-yr-loader-animate-content-time @yr-ease-far-in;
-            .transition(@transition);
-        }
-    }
-}*/
+// @yr-loader-fade-time: @tweak-yr-loader-fade-content-time;
+@yr-loader-fade-time: 400ms;
 
-
-/**
- * Fancy loading animation styling.
- */
-/*
-.yr-loader-fade-fancy() {
-    .yr-on-(~'.tweak-yr-loader-animate-content-fancy'); .-do() {
+.yr-loader-fade() {
+    [data-ajax-loading] & {
         will-change: transform, opacity;
-        @transition: transform @tweak-yr-loader-animate-content-time @yr-ease-far-out,
-            opacity @tweak-yr-loader-animate-content-time @yr-ease-far-out;
+        @transition: transform @yr-loader-fade-time @yr-ease-far-out,
+            opacity @yr-loader-fade-time @yr-ease-far-out;
         .transition(@transition);
-
-        [data-ajax-loading='start'] &,
-        [data-ajax-loading='swap'] &,
-        [data-ajax-loading='done'] & {
-            opacity: 0;
-            .transform(translateY(@tweak-yr-loader-animate-content-move)
-                scale(@tweak-yr-loader-animate-content-scale););
-            @transition: transform @tweak-yr-loader-animate-content-time @yr-ease-far-in,
-                opacity @tweak-yr-loader-animate-content-time @yr-ease-far-in;
-            .transition(@transition);
-        }
     }
-}*/
+
+    [data-ajax-loading="navigate"] &,
+    [data-ajax-loading="unload"] & {
+        opacity: 0;
+        .transform(translateY(@tweak-yr-loader-fade-content-move)
+            scale(@tweak-yr-loader-fade-content-scale););
+        @transition: transform @yr-loader-fade-time @yr-ease-far-in,
+            opacity @yr-loader-fade-time @yr-ease-far-in;
+        .transition(@transition);
+    }
+}
 
 /**
  * Random-ish timing offsets.
  */
-/*
-.yr-loader-fade-fancy-stagger(@n: 5) {
-    .yr-on-(~'.tweak-yr-loader-animate-content-fancy'); .-do() {
-        &,
-        [data-ajax-loading] & {
-            .yr-for-(@n); .-each(@i) {
-                .yr-rand(@n + @i);
 
-                &:nth-child((~'@{n}n+@{i}')) {
-                    .transition-delay(floor(@rand * @tweak-yr-loader-animate-content-time));
-                }
-            }
+.yr-loader-fade-stagger-inner(@n: 1, @seed: 123) when (@n > 1) {
+    .yr-loader-fade();
+
+    .yr-for-(@n); .-each(@i) {
+        &:nth-child((~'@{n}n+@{i}')) {
+            .yr-loader-fade-stagger-rand(@n + @i + @seed);
         }
     }
 }
+.yr-loader-fade-stagger-inner(@n: 1, @seed: 123) when (@n = 0) {
+    .yr-loader-fade();
+    .yr-loader-fade-stagger-rand(@n + @seed);
+}
 
-.yr-loader-fade-fancy-stagger-wrap() {
-    .yr-on-(~'.tweak-yr-loader-animate-content-fancy'); .-do() {
-        // This is how long the children have to do their animation before the parent does.
-        [data-ajax-loading='start'] &,
-        [data-ajax-loading='swap'] & {
-            .transition-delay(@tweak-yr-loader-animate-content-time * 2);
-        }
+.yr-loader-fade-stagger-rand(@seed: 123) {
+    .yr-rand(@seed);
+    @stagger: floor(@rand * @yr-loader-fade-time);
 
-        // Make sure we fade in from a blank state.
-        [data-ajax-loading='done'] & {
-            .transition-duration(0ms);
-            .transition-delay(0ms);
-        }
+    [data-ajax-loading="navigate"] & {
+        .transition-delay(@stagger);
     }
-}*/
+
+    [data-ajax-loading="unload"] & {
+        .transition-delay(0ms);
+    }
+
+    // How long the parent has to do its animation before the children do.
+    [data-ajax-loading="load"] & {
+        .transition-delay(@yr-loader-fade-time + @stagger);
+    }
+}
+
+.yr-loader-fade-stagger-outer() {
+    .yr-loader-fade();
+
+    // How long the children have to do their animation before the parent does.
+    [data-ajax-loading="navigate"] & {
+        .transition-delay(@yr-loader-fade-time * 2);
+    }
+}
 
 
 /**

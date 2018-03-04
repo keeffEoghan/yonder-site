@@ -70,42 +70,76 @@ function loadAJAX() {
         return false;
     }
 
+    // Give enough time for any animations to finish.
+    const waitTime = Math.max(waitFade.bar(), waitFade.content());
+
     const mercury = new Mercury({
         enableCache: true,
         updateMatrix,
         onClickExceptions,
         onRequestExceptions,
-        timeout: 10000
+        timeout: 10000,
+        onLoadDelay: waitTime
     });
 
     window.addEventListener('mercury:navigate', () => {
-        document.documentElement.setAttribute('data-ajax-loading', 'start');
+        document.documentElement.setAttribute('data-ajax-loading', 'navigate');
     });
 
     // Squarespace init and destroy
 
     window.addEventListener('mercury:unload', () => {
-        document.documentElement.setAttribute('data-ajax-loading', 'swap');
+        document.documentElement.setAttribute('data-ajax-loading', 'unload');
         Lifecycle.destroy();
     });
 
     window.addEventListener('mercury:load', () => {
-        document.documentElement.setAttribute('data-ajax-loading', 'done');
+        document.documentElement.setAttribute('data-ajax-loading', 'load');
         Lifecycle.init();
+        loadImages();
 
-        setTimeout(() => document.documentElement.removeAttribute('data-ajax-loading'), 500);
+        setTimeout(() => document.documentElement.removeAttribute('data-ajax-loading'),
+            waitTime);
     });
 
     // Sync controllers on AJAX load
     window.addEventListener('mercury:load', refresh);
 }
 
-function loadImages() {
-    var images = document.querySelectorAll('img[data-src]:not(.loaded)');
+const loadImages = () =>
+    Array.prototype.forEach.call(document.querySelectorAll('img[data-src]:not(.loaded)'),
+        (image) => ImageLoader.load(image, { load: true }));
 
-    for(var i = 0; i < images.length; i++) {
-        console.log('Loading image', ImageLoader.load(images[i], { load: true }));
+const timeUnits = {
+    map: {
+        'ms': 1,
+        's': 1000
+    },
+    default: ['ms']
+};
+
+const waitFade = {
+    bar: () => ((Tweak.getValue('tweak-yr-loader-show'))? 500 : 0),
+    content() {
+        let wait = 0;
+        const flagTweak = Tweak.getValue('tweak-yr-loader-fade-content');
+        const timeTweak = Tweak.getValue('tweak-yr-loader-fade-content-time');
+
+        if(flagTweak && timeTweak) {
+            const units = (timeTweak.match(/[a-zA-Z]*/gi) || timeUnits.default).join('');
+            const time = parseFloat(timeTweak, 10)*(timeUnits.map[units] || 1);
+
+            wait = ((flagTweak.match(/simple/gi))?
+                    time
+                : ((flagTweak.match(/fancy/gi))?
+                    time * 2
+                :   0));
+        }
+
+        // wait = 800;
+
+        return (wait || 0);
     }
-}
+};
 
 export default site;

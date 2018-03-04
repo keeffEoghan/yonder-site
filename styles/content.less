@@ -55,13 +55,13 @@
             .justify-content(stretch);
             .align-items(center);
 
-            & { .yr-on-(~'.tweak-yr-sqs-block-align-up-high'); .-do() {
+            .tweak-yr-sqs-block-align-up-high & {
                 .align-items(flex-start);
-            }}
+            }
 
-            & { .yr-on-(~'.tweak-yr-sqs-block-align-down-low'); .-do() {
+            .tweak-yr-sqs-block-align-down-low & {
                 .align-items(flex-end);
-            }}
+            }
         }
 
         .col,
@@ -89,30 +89,32 @@
     /**
      * Alternating cell colors - kinda works...
      */
-    & { .yr-on-(~'.tweak-yr-sqs-alt-grid.tweak-yr-sqs-block-alt-show'); .-do() {
-        .sqs-row:nth-child(even) > .col:nth-child(odd) > .sqs-block:nth-child(odd),
-        .sqs-row:nth-child(odd) > .col:nth-child(even) > .sqs-block:nth-child(odd),
-        .sqs-row:nth-child(odd) > .col:nth-child(odd) > .sqs-block:nth-child(even) {
-            &::before {
-                content: '';
-                display: block;
-                position: absolute;
-                top: 0;
-                right: 0;
-                left: 0;
-                bottom: 0;
-                background-color: @tweak-yr-sqs-block-alt-color;
-                z-index: 0;
+    .sqs-row {
+        .yr-on-(~'.tweak-yr-sqs-alt-grid.tweak-yr-sqs-block-alt-show'); .-do() {
+            &:nth-child(even) > .col:nth-child(odd) > .sqs-block:nth-child(odd),
+            &:nth-child(odd) > .col:nth-child(even) > .sqs-block:nth-child(odd),
+            &:nth-child(odd) > .col:nth-child(odd) > .sqs-block:nth-child(even) {
+                &::before {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    bottom: 0;
+                    background-color: @tweak-yr-sqs-block-alt-color;
+                    z-index: 0;
+                }
             }
-        }
 
-        .sqs-block-horizontalrule,
-        .sqs-block-spacer {
-            &::before {
-                visibility: hidden;
+            .sqs-block-horizontalrule,
+            .sqs-block-spacer {
+                &::before {
+                    visibility: hidden;
+                }
             }
         }
-    }}
+    }
 
     @media @mq-collapse {
         .col {
@@ -121,7 +123,7 @@
         }
     }
 
-    & { .yr-on-(~'.tweak-yr-sqs-content-full-bleed'); .-do() {
+    .tweak-yr-sqs-content-full-bleed & {
         .sqs-block {
             padding: 0 !important;
             margin: 0 !important;
@@ -131,7 +133,7 @@
             margin-left: auto;
             margin-right: auto;
         }
-    }}
+    }
 
     .sqs-block-html,
     .sqs-block-markdown,
@@ -266,7 +268,7 @@
      * Apply block styles.
      */
 
-    .style-block(@block) {
+     .style-block(@block) {
         // Base
 
         & { .yr-on-(~'.tweak-yr-@{block}-style-base-normal'); .-do() {}}
@@ -364,13 +366,13 @@
             }
         }}
 
-        & { .yr-on-(~'.tweak-yr-sqs-image-block-fixed-font-size'); .-do() {
+        .tweak-yr-sqs-image-block-fixed-font-size & {
             .sqs-dynamic-text,
             .image-title-wrapper,
             .image-subtitle-wrapper {
                 font-size: 1em !important;
             }
-        }}
+        }
 
         .design-layout-poster {
             .image-card {
@@ -389,17 +391,19 @@
             }
 
             .image-subtitle-wrapper {
-                & { .yr-on-(~'.tweak-yr-sqs-image-block-poster-anchor-sub-up-high'); .-do() {
+                .tweak-yr-sqs-image-block-poster-anchor-sub-down-low &,
+                .tweak-yr-sqs-image-block-poster-anchor-sub-up-high & {
                     position: absolute;
                     width: 100%;
-                    top: @tweak-yr-sqs-space-content;
-                }}
+                }
 
-                & { .yr-on-(~'.tweak-yr-sqs-image-block-poster-anchor-sub-down-low'); .-do() {
-                    position: absolute;
-                    width: 100%;
+                .tweak-yr-sqs-image-block-poster-anchor-sub-up-high & {
+                    top: @tweak-yr-sqs-space-content;
+                }
+
+                .tweak-yr-sqs-image-block-poster-anchor-sub-down-low & {
                     bottom: @tweak-yr-sqs-space-content;
-                }}
+                }
             }
         }
     }
@@ -524,7 +528,7 @@
         max-width: none;
     }
 }
-/*
+
 .yr-main {
     .simple-alt-cell() {
         .yr-on-(~'.tweak-yr-sqs-alt-grid.tweak-yr-sqs-block-alt-show'); .-do() {
@@ -611,7 +615,7 @@
     .sqs-system-gallery {
         margin: auto 0;
     }
-}*/
+}
 
 // This is placed at root level...
 .sqs-search-preview-ui {

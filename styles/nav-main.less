@@ -521,14 +521,19 @@
 
     .tweak-yr-nav-overlay-fancy & {
         ~ .yr-content {
-            will-change: filter;
-            @transition: filter @nav-overlay-time ease-out;
+            will-change: opacity, filter;
+            @transition: opacity @nav-overlay-time ease-in,
+                filter @nav-overlay-time ease-in;
             .transition(@transition);
         }
 
         &:checked {
             ~ .yr-content {
+                opacity: 0.5;
                 filter: ~'saturate(0%)' blur(3px);
+                @transition: opacity @nav-overlay-time ease-out,
+                    filter @nav-overlay-time ease-out;
+                .transition(@transition);
             }
         }
     }
