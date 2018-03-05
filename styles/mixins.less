@@ -50,8 +50,9 @@
  *
  * This will enable the contents when `.flag` is present at or above the element scope:
  * `.yr-on-(~'.flag'); .-do() {...}`
- * Becomes:
- * `&.flag, .flag & {...}`
+ * Becomes `&.flag, .flag & {...}`, if `@override` is `true`.
+ * Or simply `.flag & {...}`, if `@override` is `false`.
+ * 
  * 
  * @note The scoping's a little funny here, to closure the mixin callback scope:
  *       `& { .yr-on-(...); .-do() {...}}` keeps `.-do` in a closure.
@@ -146,16 +147,6 @@
 /**
  * Loader animation styling.
  */
-
-// Style Editor has trouble with time units, so this is a way to provide fallbacks.
-// (Less 1.3.0 bullshit again, stupid variable scoping and missing functions pushed me this way.)
-
-@yr-loader-fade-time: 400ms;
-
-.yr-loader-fade-time(@unit) when (@unit = s), (@unit = ms) {
-    @yr-loader-fade-time: @tweak-yr-loader-fade-content-time;
-}
-.yr-loader-fade-time(get-unit(@tweak-yr-loader-fade-content-time));
 
 @yr-loader-fade-const: false;
 

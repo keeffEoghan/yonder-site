@@ -4,6 +4,8 @@
 
 # To-do
 
+- Errors
+    - Sort out Style Editor breakage bullshit - #3302864
 - Content
     - Ensure colors per section work where native CSS variables don't (JS fallback, setting theme number?)
 - SVG holds

@@ -87,3 +87,18 @@
 
 @yr-ease-far-in: cubic-bezier(1, 0, 0.75, 1);
 @yr-ease-far-out: cubic-bezier(0.25, 0, 0, 1);
+
+
+/**
+ * Loader animations.
+ */
+
+// Style Editor has trouble with time units, so this is a way to provide fallbacks.
+// (Less 1.3.0 bullshit again, stupid variable scoping and missing functions pushed me this way.)
+
+@yr-loader-fade-time: 400ms;
+
+.yr-loader-fade-time(@unit) when (@unit = s), (@unit = ms) {
+    @yr-loader-fade-time: @tweak-yr-loader-fade-content-time;
+}
+.yr-loader-fade-time(get-unit(@tweak-yr-loader-fade-content-time));

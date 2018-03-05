@@ -1,0 +1,97 @@
+/**
+ * Overrides for Squarespace system pages.
+ * Probably volatile, dependent on third party updates.
+ */
+
+.yr-content {
+    .simple-alt-cell() {
+        .yr-on-(~'.tweak-yr-sqs-alt-grid.tweak-yr-sqs-block-alt-show'); .-do() {
+            &:nth-child(even) {
+                background-color: @tweak-yr-sqs-block-alt-color;
+            }
+        }
+    }
+
+    .sqs-events-collection-list {
+        .eventlist-event {
+            margin: 0;
+            .simple-alt-cell();
+        }
+
+        .eventlist-column-info {
+            padding: @tweak-yr-sqs-space-content;
+
+            a {
+                .yr-a();
+            }
+        }
+
+        .eventlist-event:nth-child(even) {
+            .eventlist-column-thumbnail {
+                float: right;
+            }
+
+            .eventlist-column-date {
+                left: auto;
+                right: 0;
+            }
+        }
+    }
+
+    .sqs-events-collection-item {
+        margin: @tweak-yr-sqs-space-content;
+
+        a {
+            .yr-a();
+        }
+
+        .eventitem-content-footer {
+            padding: 0 @tweak-yr-space-pad;
+        }
+    }
+
+    .sqs-audio-playlist {
+        .tracks {
+            max-width: none;
+        }
+
+        .album-title,
+        .album-artist-name,
+        .album-description,
+        .engagement,
+        .track-meta,
+        .track-info {
+            padding: @tweak-yr-space-pad;
+
+            a {
+                .yr-a();
+            }
+        }
+    }
+
+    .sqs-blog-list,
+    .BlogItem,
+    .BlogItem-pagination {
+        margin: @tweak-yr-sqs-space-content;
+    }
+
+    .sqs-blog-list {
+        .BlogList-item {
+            padding: @tweak-yr-space-pad;
+            .simple-alt-cell();
+        }
+    }
+
+    .BlogItem .BlogItem-comments {
+        margin: @tweak-yr-space-p auto;
+    }
+
+    .sqs-system-gallery {
+        margin: auto 0;
+    }
+}
+
+// This is placed at root level...
+.sqs-search-preview-ui {
+    color: @tweak-yr-color-dark-1-tone-2;
+}

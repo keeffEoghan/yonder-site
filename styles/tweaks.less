@@ -25,10 +25,10 @@
  * Loading / Animate Contents
  */
 
-// tweak: { "category": "Loading / Animate Contents", "label": "Animate Contents", "title": "tweak-yr-loader-fade-content", "type": "dropdown", "options": ["Nah", "Simple", "Fancy"], "default": "Fancy", target: ".yr-content", "showOnlyWhenPresent": ".tweak-yr-ajax-enable", "js": "true" }
+// tweak: { "category": "Loading / Animate Contents", "label": "Animate Contents", "title": "tweak-yr-loader-fade-content", "type": "dropdown", "options": ["Nah", "Simple", "Fancy"], "default": "Simple", target: ".yr-content", "showOnlyWhenPresent": ".tweak-yr-ajax-enable", "js": "true" }
 
 // @note Style Editor doesn't handle time units in value sliders...
-// tweak: { "category": "Loading / Animate Contents", "label": "Time", "title": "tweak-yr-loader-fade-content-time", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-content", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-fade-content-simple, .tweak-yr-ajax-enable.tweak-yr-loader-fade-content-fancy", "js": "true" }
+// @disable tweak: { "category": "Loading / Animate Contents", "label": "Time", "title": "tweak-yr-loader-fade-content-time", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-content", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-fade-content-simple, .tweak-yr-ajax-enable.tweak-yr-loader-fade-content-fancy", "js": "true" }
 @tweak-yr-loader-fade-content-time: 400ms;
 
 // tweak: { "category": "Loading / Animate Contents", "label": "Distance", "title": "tweak-yr-loader-fade-content-move", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-content", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-fade-content-fancy" }

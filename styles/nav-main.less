@@ -61,7 +61,7 @@
 
 
 /**
- * Common styles
+ * Common styles.
  */
 
 .yr-nav-toggler,
@@ -78,7 +78,7 @@
 
 
 /**
- * Nav styles
+ * Nav styles.
  */
 
 .yr-nav {
@@ -113,6 +113,10 @@
         .yr-color-theme-5 & {
             background-color: @tweak-yr-color-theme-5-tone-2;
         }
+
+        [data-yr-ajax-loading] & {
+            background-color: transparent !important;
+        }
     }
     
     .tweak-yr-nav-main-show-bar & {
@@ -132,11 +136,8 @@
             top: 0;
             left: 0;
             right: 0;
-            .transform-origin(top center);
-            will-change: background-color, transform;
-            .transition(background-color 400ms ease-out,
-                transform 400ms ease-in-out;);
-            .transition-delay(400ms);
+            will-change: background-color;
+            .transition(background-color @yr-loader-fade-time ease-out);
         }
     }
 
@@ -148,8 +149,6 @@
         &::before {
             background-color: transparent;
             pointer-events: none;
-            .transform(translateY(-100%));
-            .transition-delay(0ms);
         }
     }
 
@@ -499,7 +498,7 @@
 
 
 /**
- * Toggler styles
+ * Toggler styles.
  */
 
 .yr-nav-toggler {
