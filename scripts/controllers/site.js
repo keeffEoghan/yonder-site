@@ -82,23 +82,27 @@ function loadAJAX() {
         onLoadDelay: waitTime
     });
 
-    window.addEventListener('mercury:navigate', () => {
-        document.documentElement.setAttribute('data-ajax-loading', 'navigate');
-    });
+    window.addEventListener('mercury:navigate', () =>
+        document.documentElement.setAttribute('data-yr-ajax-loading', 'navigate'));
 
     // Squarespace init and destroy
 
     window.addEventListener('mercury:unload', () => {
-        document.documentElement.setAttribute('data-ajax-loading', 'unload');
         Lifecycle.destroy();
+        document.documentElement.setAttribute('data-yr-ajax-loading', 'unload');
     });
 
     window.addEventListener('mercury:load', () => {
-        document.documentElement.setAttribute('data-ajax-loading', 'load');
+        // Mercury doesn't seem to always persist the data attribute properly - add a phase...
+        document.documentElement.setAttribute('data-yr-ajax-loading', 'swap');
+
         Lifecycle.init();
         loadImages();
 
-        setTimeout(() => document.documentElement.removeAttribute('data-ajax-loading'),
+        setTimeout(() => document.documentElement.setAttribute('data-yr-ajax-loading', 'load'),
+            0);
+
+        setTimeout(() => document.documentElement.removeAttribute('data-yr-ajax-loading'),
             waitTime);
     });
 
@@ -110,12 +114,9 @@ const loadImages = () =>
     Array.prototype.forEach.call(document.querySelectorAll('img[data-src]:not(.loaded)'),
         (image) => ImageLoader.load(image, { load: true }));
 
-const timeUnits = {
-    map: {
-        'ms': 1,
-        's': 1000
-    },
-    default: ['ms']
+const timeUnitsMap = {
+    'ms': 1,
+    's': 1000
 };
 
 const waitFade = {
@@ -123,11 +124,17 @@ const waitFade = {
     content() {
         let wait = 0;
         const flagTweak = Tweak.getValue('tweak-yr-loader-fade-content');
-        const timeTweak = Tweak.getValue('tweak-yr-loader-fade-content-time');
 
-        if(flagTweak && timeTweak) {
-            const units = (timeTweak.match(/[a-zA-Z]*/gi) || timeUnits.default).join('');
-            const time = parseFloat(timeTweak, 10)*(timeUnits.map[units] || 1);
+        if(flagTweak) {
+            const timeTweak = Tweak.getValue('tweak-yr-loader-fade-content-time');
+
+            // Style Editor screws up this time units - fallback.
+            const units = (timeTweak.match(/[a-zA-Z]*/gi) || '').join('');
+            const time = ((units in timeUnitsMap)?
+                    parseFloat(timeTweak, 10)*timeUnits.map[units]
+                :   400);
+            
+            console.log('tweak-yr-loader-fade-content-time', timeTweak, time);
 
             wait = ((flagTweak.match(/simple/gi))?
                     time
@@ -135,8 +142,6 @@ const waitFade = {
                     time * 2
                 :   0));
         }
-
-        // wait = 800;
 
         return (wait || 0);
     }

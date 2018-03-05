@@ -2,7 +2,7 @@
  * AJAX Loading
  */
 
-[data-ajax-loading] * {
+[data-yr-ajax-loading] * {
     cursor: progress;
 }
 
@@ -35,21 +35,21 @@
         .transition(opacity 500ms ease-out,
             transform 0ms ease-out 500ms;);
 
-        [data-ajax-loading] & {
+        [data-yr-ajax-loading] & {
             opacity: 1;
             .transition(opacity 0ms ease-out,
                 transform 500ms ease-out;);
         }
 
-        [data-ajax-loading="navigate"] & {
+        [data-yr-ajax-loading="navigate"] & {
             .transform(translateX(33%));
         }
 
-        [data-ajax-loading="unload"] & {
+        [data-yr-ajax-loading="unload"] & {
             .transform(translateX(66%));
         }
 
-        [data-ajax-loading="load"] & {
+        [data-yr-ajax-loading="load"] & {
             opacity: 0;
             .transform(translateX(100%));
             .transition(opacity 500ms ease-out 500ms,
@@ -63,23 +63,38 @@
  * Loader content animation
  */
 
+/**
+ * Simple loader content animation.
+ */
+
 .yr-main,
-.yr-footer,
+.yr-footer {
+    & { .yr-on-(~'.tweak-yr-loader-fade-content-simple'); .-do() {
+        .yr-loader-fade(true);
+    }}
+}
+
 .yr-load-fade {
     & { .yr-on-(~'.tweak-yr-loader-fade-content-simple'); .-do() {
         .yr-loader-fade();
     }}
 }
 
+/**
+ * Fancy loader content animation.
+ */
+
 .yr-main,
 .yr-footer {
     .yr-on-(~'.tweak-yr-loader-fade-content-fancy'); .-do() {
+        .yr-loader-fade(true);
         .yr-loader-fade-stagger-outer();
     }
 }
 
 .yr-content {
-    .yr-on-(~'.tweak-yr-loader-fade-content-fancy'); .-do() {/*
+    .yr-on-(~'.tweak-yr-loader-fade-content-fancy'); .-do() {
+        /* Blanket selector ahead... *//*
         * {
             .yr-loader-fade();
             .yr-loader-fade-stagger(1, 12);
@@ -106,6 +121,7 @@
         }
         */
 
+        /* Mega-selector ahead... */
         .yr-load-fade,
 
         .sqs-layout .sqs-row,
@@ -137,6 +153,7 @@
         .BlogItem .BlogItem-pagination-link,
         
         .squarespace-comments {
+            .yr-loader-fade();
             .yr-loader-fade-stagger-inner(5);
         }
     }
