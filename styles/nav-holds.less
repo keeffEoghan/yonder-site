@@ -16,12 +16,86 @@
 
         @media @mq-circle-up {
             position: absolute;
-            z-index: 1;
+            z-index: @yr-z-nav-hold-header;
             max-width: 30vmin;
             max-height: 30vmin;
             overflow: auto;
             padding: 0;
         }
+    }
+
+    .yr-nav-holds-mode-prompt,
+    .yr-nav-holds-mode {
+        order: 1;
+    }
+
+    .yr-nav-holds-mode-prompt {
+        display: none;
+
+        .tweak-yr-nav-holds-mode-prompt-show & {
+            display: block;
+        }
+    }
+
+    .yr-nav-holds-mode-label {
+        .yr-a();
+    }
+
+    .yr-nav-holds-mode-block {
+        &@{yr-select-sqs-block-on} + .yr-nav-holds-mode-label {
+            display: none;
+        }
+
+        &@{yr-select-sqs-block-empty} + .yr-nav-holds-mode-label {
+            display: block;
+        }
+    }
+
+    .yr-nav-holds-mode {
+        opacity: 0;
+
+        &:checked {
+            ~ .yr-nav-holds-info-toggle,
+            ~ .yr-nav-holds-menu .yr-nav-holds-info-toggle {
+                display: block;
+            }
+        }
+    }
+
+    .yr-nav-holds-info-toggle {
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0;
+    }
+
+    .yr-nav-holds-menu .yr-nav-holds-info-toggle {
+        z-index: @yr-z-nav-hold-info-toggle;
+
+        &:checked {
+            /* @todo Set active state on the hold */
+
+            ~ .yr-nav-holds-info-block {
+                opacity: 1;
+                pointer-events: all;
+                visibility: hidden;
+            }
+        }
+    }
+
+    .yr-nav-holds-info-hide {
+        z-index: @yr-z-nav-hold-info-hide;
+    }
+
+    .yr-nav-holds-info-block {
+        display: none;
+        pointer-events: none;
+        visibility: hidden;
+
+        /* @todo Match inner blocks to menu items */
     }
 
     .yr-nav-holds-menu {
@@ -64,6 +138,7 @@
     .yr-nav-hold {
         display: inline-block;
         position: relative;
+        z-index: @yr-z-nav-hold;
 
         @margin: 10%;
         margin: 0 @margin 0 auto;
@@ -136,7 +211,7 @@
         padding: @tweak-yr-nav-holds-pad;
         text-decoration: none;
         color: @tweak-yr-color-light-1-tone-3;
-        z-index: 2;
+        z-index: @yr-z-nav-hold-a;
         .tweak-yr-font-nav-holds;
 
         &:hover,
@@ -192,11 +267,11 @@
     }
 
     .yr-nav-holds-shape-block {
-        &@{yr-select-sqs-block-on} ~ .yr-nav-hold-view {
+        &@{yr-select-sqs-block-on} + .yr-nav-hold-view {
             display: none;
         }
 
-        &@{yr-select-sqs-block-empty} ~ .yr-nav-hold-view {
+        &@{yr-select-sqs-block-empty} + .yr-nav-hold-view {
             display: block;
         }
     }
@@ -214,7 +289,7 @@
     }
 
     .yr-nav-hold-view {
-        z-index: 1;
+        z-index: @yr-z-nav-hold-view;
     }
 
     .yr-nav-holds-defs {

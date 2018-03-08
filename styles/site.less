@@ -252,19 +252,24 @@ img,
     vertical-align: middle;
 }
 
-label {
-    cursor: pointer;
-}
-
 input,
 textarea {
     color: inherit;
     .tweak-yr-font-input;
 }
 
+label,
+input[type="radio"],
+input[type="checkbox"],
+input[type="button"],
+input[type="submit"] {
+    cursor: pointer;
+}
+
 button,
 [role="button"] {
     .tweak-yr-font-button;
+    cursor: pointer;
 }
 
 ::selection {

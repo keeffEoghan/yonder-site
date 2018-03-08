@@ -125,8 +125,8 @@ const waitFade = {
         let wait = 0;
         const flagTweak = Tweak.getValue('tweak-yr-loader-fade-content');
 
-        if(flagTweak) {
-            const timeTweak = Tweak.getValue('tweak-yr-loader-fade-content-time');
+        if(flagTweak && !flagTweak.match(/nah/gi)) {
+            const timeTweak = (Tweak.getValue('tweak-yr-loader-fade-content-time') || '');
 
             // Style Editor screws up this time units - fallback.
             const units = (timeTweak.match(/[a-zA-Z]*/gi) || '').join('');

@@ -4,7 +4,15 @@
         <squarespace:block-field id="nav-holds-titles-block" class="yr-nav-holds-titles-block yr-a" columns="12"></squarespace:block-field>
     </header>
 
-    {##BEGIN} Default SVG hold shapes {END##}
+    <squarespace:block-field id="nav-holds-mode-block"
+        class="yr-nav-holds-mode-prompt yr-nav-holds-mode-block yr-a" columns="12"/>
+    <label class="yr-nav-holds-mode-prompt yr-nav-holds-mode-label"
+        for="yr-nav-holds-mode">More details.</label>
+    <input id="yr-nav-holds-mode" class="yr-nav-holds-mode" type="checkbox"
+        checked
+        title="More details" aria-label="More details">
+
+    {##BEGIN} Default SVG hold shapes definitions. {END##}
     <svg class="yr-nav-holds-defs">
         {@|apply holds/1.svg.block}
         {@|apply holds/2.svg.block}
@@ -16,6 +24,13 @@
     <ul class="yr-nav-holds-menu">
         {.repeated section items}
             <li class="yr-nav-hold">
+                {##BEGIN} Some elements control others, DOM position important. {END##}
+
+                {##BEGIN} Controls which hold info is visible. {END##}
+                <input class="yr-nav-holds-info-toggle yr-nav-holds-info-show"
+                    type="radio" name="yr-nav-holds-info-toggle" value="hold-info-{@index}"
+                    title="Show details" aria-label="Show details">
+
                 {.section collection}
                     <a class="yr-nav-hold-a yr-nav-collection-a" href="{fullUrl}">{navigationTitle}</a>
                 {.end}
@@ -26,14 +41,32 @@
                     </a>
                 {.end}
 
-                {##BEGIN} For overriding the default SVG hold shapes {END##}
+                {##BEGIN} To override the default SVG hold shape. {END##}
                 <squarespace:block-field id="nav-holds-shape-block-{@index}" class="yr-nav-holds-shape-block" columns="1"></squarespace:block-field>
+
+                {##BEGIN} Default SVG hold shape. {END##}
                 <svg class="yr-nav-hold-view" width="100%" height="100%">
                     <use class="yr-use-hold-shape" href="#yr-hold-shape-{@index}"></use>
                 </svg>
+
+                {##BEGIN}
+                    For each hold's info.
+                    The relevant `block-field` for any selected state will be shown on click,
+                    to help clarify where the content needs to be filled in.
+                    For paired holds info, each hold's `block-field` should have enough
+                    inner blocks to correspond to the other blocks - can't do this in pairs,
+                    as JSON-T can't do a nested loop of the same data (scoping context with
+                    `{.repeated section}` doesn't allow jumping back up to a variable in outer
+                    scope).
+                {END##}
+                <squarespace:block-field id="nav-holds-info-block-{@index}" class="yr-nav-holds-info-block" columns="12"></squarespace:block-field>
             </li>
         {.end}
     </ul>
+
+    <input class="yr-nav-holds-info-toggle yr-nav-holds-info-hide"
+        type="radio" name="yr-nav-holds-info-toggle" value="hold-info-hide" checked
+        title="Clear selected details" aria-label="Clear selected details">
 
     <script type="text/javascript">console.log('nav-holds', {@|json-pretty|html});</script>
 </nav>

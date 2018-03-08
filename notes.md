@@ -4,6 +4,7 @@
 
 # To-do
 
+- Home menu comparison view
 - Errors
     - Sort out Style Editor breakage bullshit - #3302864
 - Content

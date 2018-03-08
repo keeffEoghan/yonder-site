@@ -1,4 +1,3 @@
 <section class="yr-home">
     <squarespace:navigation navigationId="nav-holds" template="nav-holds"/>
-    <squarespace:block-field id="home-content-block" class="yr-home-content yr-a" columns="12"/>
 </section>
