@@ -1,16 +1,19 @@
 <nav class="yr-nav-holds" data-controller="nav-holds" data-content-field="navigation-nav-holds">
+    {##BEGIN} Controls normal/detail mode, DOM position important. {END##}
+    <input id="yr-nav-holds-mode" class="yr-nav-holds-mode" type="checkbox"
+        checked
+        title="Details" aria-label="Details">
+    <div class="yr-nav-holds-mode-prompt">
+        <squarespace:block-field id="nav-holds-mode-block"
+            class="yr-nav-holds-mode-block yr-a" columns="12"/>
+        <label class="yr-nav-holds-mode-label"
+            for="yr-nav-holds-mode">Details</label>
+    </div>
+
     <header class="yr-nav-holds-header">
         {@|apply titles.block}
         <squarespace:block-field id="nav-holds-titles-block" class="yr-nav-holds-titles-block yr-a" columns="12"></squarespace:block-field>
     </header>
-
-    <squarespace:block-field id="nav-holds-mode-block"
-        class="yr-nav-holds-mode-prompt yr-nav-holds-mode-block yr-a" columns="12"/>
-    <label class="yr-nav-holds-mode-prompt yr-nav-holds-mode-label"
-        for="yr-nav-holds-mode">More details.</label>
-    <input id="yr-nav-holds-mode" class="yr-nav-holds-mode" type="checkbox"
-        checked
-        title="More details" aria-label="More details">
 
     {##BEGIN} Default SVG hold shapes definitions. {END##}
     <svg class="yr-nav-holds-defs">

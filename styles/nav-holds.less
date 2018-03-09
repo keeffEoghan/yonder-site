@@ -8,37 +8,30 @@
 
     @mq-circle-up: ~'only screen and @{yr-mq-hold-circle-up}';
 
-    .yr-nav-holds-header {
-        .flex(0 0 auto);
-        width: 100%;
-        padding: 2em;
-        text-align: center;
-
-        @media @mq-circle-up {
-            position: absolute;
-            z-index: @yr-z-nav-hold-header;
-            max-width: 30vmin;
-            max-height: 30vmin;
-            overflow: auto;
-            padding: 0;
-        }
-    }
-
-    .yr-nav-holds-mode-prompt,
-    .yr-nav-holds-mode {
-        order: 1;
+    .yr-nav-holds-mode,
+    .yr-nav-holds-mode-prompt {
+        display: none;
     }
 
     .yr-nav-holds-mode-prompt {
-        display: none;
+        order: 1;
+        color: @tweak-yr-color-accent-1-tone-2;
+        margin: @tweak-yr-space-pad;
+        z-index: @yr-z-nav-hold-mode;
+        will-change: color;
+        .transition(color 500ms ease-out);
 
-        .tweak-yr-nav-holds-mode-prompt-show & {
+        .yr-on-(~'.tweak-yr-nav-holds-mode-prompt-show'); .-do() {
             display: block;
         }
     }
 
     .yr-nav-holds-mode-label {
         .yr-a();
+
+        .yr-on-(~'.tweak-yr-a-style-fancy'); .-do() {
+            border-color: @tweak-yr-color-accent-2-tone-1;
+        }
     }
 
     .yr-nav-holds-mode-block {
@@ -51,14 +44,53 @@
         }
     }
 
-    .yr-nav-holds-mode {
-        opacity: 0;
+    .yr-nav-holds-mode,
+    .yr-nav-holds-info-toggle {
+        margin: 0;
+    }
 
+    .yr-nav-holds-mode {
         &:checked {
+            ~ .yr-nav-holds-mode-prompt {
+                color: @tweak-yr-color-accent-2-tone-1;
+
+                .yr-nav-holds-mode-label {
+                    .yr-on-(~'.tweak-yr-a-style-fancy'); .-do() {
+                        border-style: dotted;
+                        border-color: @tweak-yr-color-accent-1-tone-2;
+                    }
+                }
+            }
+
             ~ .yr-nav-holds-info-toggle,
             ~ .yr-nav-holds-menu .yr-nav-holds-info-toggle {
                 display: block;
             }
+
+            ~ .yr-nav-holds-header {
+                opacity: 0;
+                z-index: 0;
+                pointer-events: none;
+            }
+        }
+    }
+
+    .yr-nav-holds-header {
+        .flex(0 0 auto);
+        width: 100%;
+        padding: 2em;
+        text-align: center;
+        will-change: opacity;
+        .transition(opacity 400ms ease-out);
+        /* @todo Cascade fade `.yr-site-title, .yr-site-tagline, .yr-site-description, yr-nav-holds-titles-block` */
+
+        @media @mq-circle-up {
+            position: absolute;
+            z-index: @yr-z-nav-hold-header;
+            max-width: 30vmin;
+            max-height: 30vmin;
+            overflow: auto;
+            padding: 0;
         }
     }
 
@@ -69,6 +101,9 @@
         right: 0;
         bottom: 0;
         left: 0;
+        width: 100%;
+        height: 100%;
+        max-width: none;
         opacity: 0;
     }
 
@@ -147,19 +182,17 @@
             margin: 0 auto 0 @margin;
         }
 
-        & {
-            @themes: @tweak-yr-color-theme-1-tone-2,
-                @tweak-yr-color-theme-2-tone-2,
-                @tweak-yr-color-theme-3-tone-2,
-                @tweak-yr-color-theme-4-tone-2,
-                @tweak-yr-color-theme-5-tone-2;
+        @themes: @tweak-yr-color-theme-1-tone-2,
+            @tweak-yr-color-theme-2-tone-2,
+            @tweak-yr-color-theme-3-tone-2,
+            @tweak-yr-color-theme-4-tone-2,
+            @tweak-yr-color-theme-5-tone-2;
 
-            @n: length(@themes);
+        @n: length(@themes);
 
-            .yr-for-(@n); .-each(@i) {
-                &:nth-child((~'@{n}n+@{i}')) .yr-use-hold-shape {
-                    color: extract(@themes, @i - 1);
-                }
+        .yr-for-(@n); .-each(@i) {
+            &:nth-child((~'@{n}n+@{i}')) .yr-use-hold-shape {
+                color: extract(@themes, @i - 1);
             }
         }
 
@@ -172,8 +205,6 @@
             &:nth-child(odd) {
                 margin: 0;
             }
-
-            @n: 5;
 
             .yr-for-(@n); .-each(@i) {
                 &:nth-child((~'@{n}n+@{i}')) {
@@ -264,6 +295,14 @@
         left: -10%;
         width: 120%;
         height: 120%;
+        fill: currentColor;
+        stroke: currentColor;
+        fill-opacity: 0;
+        stroke-opacity: 0;
+        stroke-width: 0;
+        .transition(fill-opacity 600ms ease-in-out,
+            stroke-opacity 500ms ease-out 50ms,
+            stroke-width 400ms ease-out;);
     }
 
     .yr-nav-holds-shape-block {
@@ -274,18 +313,6 @@
         &@{yr-select-sqs-block-empty} + .yr-nav-hold-view {
             display: block;
         }
-    }
-
-    .yr-nav-holds-shape-block,
-    .yr-nav-hold-view {
-        fill: currentColor;
-        stroke: currentColor;
-        fill-opacity: 0;
-        stroke-opacity: 0;
-        stroke-width: 0;
-        .transition(fill-opacity 600ms ease-in-out,
-            stroke-opacity 500ms ease-out 50ms,
-            stroke-width 400ms ease-out;);
     }
 
     .yr-nav-hold-view {

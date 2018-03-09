@@ -11,7 +11,8 @@
     </head>
     {.var @n0 externalLink.url|slugify}
     {.var @n1 collection.urlId|slugify}
-    <body id="{squarespace.page-id}" class="{squarespace.page-classes} yr-color-theme-{@n0}{@n1}">
+    <body id="{squarespace.page-id}" class="{squarespace.page-classes} yr-color-theme-{@n0}{@n1}
+        tweak-yr-nav-holds-mode-prompt-show">
         <div class="yr-loader"></div>
 
         <squarespace:navigation navigationId="nav-main" template="nav-main"></squarespace:navigation>
