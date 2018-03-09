@@ -204,7 +204,8 @@ pre {
 }
 
 ol,
-ul {
+ul,
+dl {
     list-style-position: outside;
     padding-left: @tweak-yr-space-pad * 2;
     margin: @tweak-yr-space-p auto;
@@ -221,6 +222,10 @@ ol {
 
 ul {
     list-style-type: disc;
+}
+
+dl {
+    list-style-type: square;
 }
 
 li {}
@@ -259,21 +264,30 @@ textarea {
 }
 
 label,
-input[type="radio"],
-input[type="checkbox"],
-input[type="button"],
-input[type="submit"] {
+input {
     cursor: pointer;
 }
 
 button,
-[role="button"] {
+[role="button"],
+[type="button"],
+[type="submit"],
+[type="reset"] {
+    cursor: pointer;
     .tweak-yr-font-button;
+}
+
+input[type] {
     cursor: pointer;
 }
 
+[type="text"] {
+    cursor: initial;
+}
+
 ::selection {
-    background: @tweak-yr-color-selection;
+    background-color: @tweak-yr-color-selection-base;
+    color: @tweak-yr-color-selection-color;
 }
 
 ::placeholder {

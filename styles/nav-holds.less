@@ -1,29 +1,32 @@
 .yr-nav-holds {
-    position: relative;
-    .display(flex);
-    .flex-flow(column nowrap);
-    .justify-content(center);
-    .align-items(center);
     min-height: 100%;
+    
+    &,
+    .yr-nav-holds-main {
+        position: relative;
+        .display(flex);
+        .flex-flow(column nowrap);
+        .justify-content(center);
+        .align-items(center);
+    }
+
+    .yr-nav-holds-main {
+        .flex(1 1 auto);
+        width: 100%;
+    }
 
     @mq-circle-up: ~'only screen and @{yr-mq-hold-circle-up}';
 
-    .yr-nav-holds-mode,
-    .yr-nav-holds-mode-prompt {
-        display: none;
+    #yr-nav-holds-mode,
+    .yr-nav-holds-mode-hint {
+        order: 1;
+        z-index: @yr-z-nav-holds-mode;
     }
 
-    .yr-nav-holds-mode-prompt {
-        order: 1;
+    .yr-nav-holds-mode-hint {
+        position: relative;
         color: @tweak-yr-color-accent-1-tone-2;
         margin: @tweak-yr-space-pad;
-        z-index: @yr-z-nav-hold-mode;
-        will-change: color;
-        .transition(color 500ms ease-out);
-
-        .yr-on-(~'.tweak-yr-nav-holds-mode-prompt-show'); .-do() {
-            display: block;
-        }
     }
 
     .yr-nav-holds-mode-label {
@@ -44,58 +47,14 @@
         }
     }
 
-    .yr-nav-holds-mode,
-    .yr-nav-holds-info-toggle {
-        margin: 0;
-    }
-
-    .yr-nav-holds-mode {
-        &:checked {
-            ~ .yr-nav-holds-mode-prompt {
-                color: @tweak-yr-color-accent-2-tone-1;
-
-                .yr-nav-holds-mode-label {
-                    .yr-on-(~'.tweak-yr-a-style-fancy'); .-do() {
-                        border-style: dotted;
-                        border-color: @tweak-yr-color-accent-1-tone-2;
-                    }
-                }
-            }
-
-            ~ .yr-nav-holds-info-toggle,
-            ~ .yr-nav-holds-menu .yr-nav-holds-info-toggle {
-                display: block;
-            }
-
-            ~ .yr-nav-holds-header {
-                opacity: 0;
-                z-index: 0;
-                pointer-events: none;
-            }
-        }
-    }
-
-    .yr-nav-holds-header {
-        .flex(0 0 auto);
-        width: 100%;
-        padding: 2em;
-        text-align: center;
-        will-change: opacity;
-        .transition(opacity 400ms ease-out);
-        /* @todo Cascade fade `.yr-site-title, .yr-site-tagline, .yr-site-description, yr-nav-holds-titles-block` */
-
-        @media @mq-circle-up {
-            position: absolute;
-            z-index: @yr-z-nav-hold-header;
-            max-width: 30vmin;
-            max-height: 30vmin;
-            overflow: auto;
-            padding: 0;
-        }
-    }
-
+    #yr-nav-holds-mode,
+    #yr-nav-holds-info-reset,
     .yr-nav-holds-info-toggle {
         display: none;
+    }
+
+    #yr-nav-holds-info-reset,
+    .yr-nav-holds-info-toggle {
         position: absolute;
         top: 0;
         right: 0;
@@ -103,34 +62,115 @@
         left: 0;
         width: 100%;
         height: 100%;
+        margin: 0;
+        padding: 0;
+        border: none;
         max-width: none;
         opacity: 0;
     }
 
-    .yr-nav-holds-menu .yr-nav-holds-info-toggle {
-        z-index: @yr-z-nav-hold-info-toggle;
+    @switch-mode-time: 400ms;
 
-        &:checked {
-            /* @todo Set active state on the hold */
+    .switch-mode() {
+        will-change: opacity;
+        .transition(opacity @switch-mode-time ease-out);
+    }
+    .switch-mode-off() {
+        opacity: 0;
+        visibility: hidden;
+        width: 0;
+        height: 0;
 
-            ~ .yr-nav-holds-info-block {
-                opacity: 1;
-                pointer-events: all;
-                visibility: hidden;
-            }
-        }
+        @transition: opacity @switch-mode-time ease-out,
+            visibility 0ms linear @switch-mode-time,
+            width 0ms linear @switch-mode-time,
+            height 0ms linear @switch-mode-time;
+        .transition(@transition);
+    }
+    .switch-mode-on() {
+        opacity: 1;
+        visibility: visible;
     }
 
     .yr-nav-holds-info-hide {
-        z-index: @yr-z-nav-hold-info-hide;
+        // Just used for the `reset` default value.
+        display: none;
     }
 
+    #yr-nav-holds-info-reset {
+        z-index: @yr-z-nav-holds-info-reset;
+    }
+
+    .yr-nav-holds-menu .yr-nav-holds-info-toggle {
+        z-index: @yr-z-nav-holds-info-toggle;
+    }
+
+    .yr-nav-holds-info,
+    .yr-nav-holds-info-block,
+    .yr-nav-holds-info-hint,
+    .yr-nav-holds-header {
+        .switch-mode();
+    }
+
+    .yr-nav-holds-info,
     .yr-nav-holds-info-block {
-        display: none;
-        pointer-events: none;
-        visibility: hidden;
+        .switch-mode-off();
 
         /* @todo Match inner blocks to menu items */
+    }
+
+    .yr-nav-holds-info,
+    .yr-nav-holds-header {
+        position: relative;
+        width: 100%;
+        padding: @tweak-yr-space-pad;
+        text-align: center;
+        /* @todo Cascade fade `.yr-site-title, .yr-site-tagline, .yr-site-description, yr-nav-holds-titles-block` */
+
+        @media @mq-circle-up {
+            position: absolute;
+            z-index: @yr-z-nav-holds-header;
+            max-width: 30vmin;
+            max-height: 30vmin;
+            overflow: auto;
+            padding: 0;
+        }
+    }
+
+    .yr-nav-holds-header {
+        .flex(0 0 auto);
+    }
+
+
+    /**
+     * Toggle mode states.
+     */
+
+    #yr-nav-holds-mode {
+        // `display: none` - depends on a label with `for="yr-nav-holds-mode"` to be toggled.
+
+        &:checked ~ .yr-nav-holds-main {
+            .yr-nav-holds-mode-hint {
+                .yr-nav-holds-mode-label {
+                    .yr-on-(~'.tweak-yr-a-style-fancy'); .-do() {
+                        border-style: dotted;
+                    }
+                }
+            }
+
+            #yr-nav-holds-info-reset,
+            .yr-nav-holds-menu .yr-nav-holds-info-toggle {
+                display: block;
+            }
+
+            .yr-nav-holds-header {
+                .switch-mode-off();
+            }
+
+            .yr-nav-holds-info {
+                .switch-mode-on();
+            }
+        }
     }
 
     .yr-nav-holds-menu {
@@ -173,7 +213,7 @@
     .yr-nav-hold {
         display: inline-block;
         position: relative;
-        z-index: @yr-z-nav-hold;
+        z-index: @yr-z-nav-holds;
 
         @margin: 10%;
         margin: 0 @margin 0 auto;
@@ -242,7 +282,7 @@
         padding: @tweak-yr-nav-holds-pad;
         text-decoration: none;
         color: @tweak-yr-color-light-1-tone-3;
-        z-index: @yr-z-nav-hold-a;
+        z-index: @yr-z-nav-holds-a;
         .tweak-yr-font-nav-holds;
 
         &:hover,
@@ -316,7 +356,7 @@
     }
 
     .yr-nav-hold-view {
-        z-index: @yr-z-nav-hold-view;
+        z-index: @yr-z-nav-holds-view;
     }
 
     .yr-nav-holds-defs {
