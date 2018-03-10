@@ -69,6 +69,10 @@
         opacity: 0;
     }
 
+    /**
+     * Conveniences for toggling elements on mode.
+     */
+
     @switch-mode-time: 400ms;
 
     .switch-mode() {
@@ -78,19 +82,31 @@
     .switch-mode-off() {
         opacity: 0;
         visibility: hidden;
-        width: 0;
-        height: 0;
-
         @transition: opacity @switch-mode-time ease-out,
-            visibility 0ms linear @switch-mode-time,
-            width 0ms linear @switch-mode-time,
-            height 0ms linear @switch-mode-time;
+            visibility 0ms linear @switch-mode-time;
         .transition(@transition);
     }
     .switch-mode-on() {
         opacity: 1;
         visibility: visible;
+        .transition(opacity @switch-mode-time ease-out);
     }
+    .switch-mode-off-flow() {
+        position: absolute;
+        top: 0;
+        left: 0;
+        .switch-mode-off();
+    }
+
+    .switch-mode-on-flow() {
+        position: relative;
+        .switch-mode-on();
+    }
+
+
+    /**
+     * Mode related styles.
+     */
 
     .yr-nav-holds-info-hide {
         // Just used for the `reset` default value.
@@ -109,21 +125,15 @@
     .yr-nav-holds-info-block,
     .yr-nav-holds-info-hint,
     .yr-nav-holds-header {
+        width: 100%;
         .switch-mode();
     }
 
-    .yr-nav-holds-info,
-    .yr-nav-holds-info-block {
-        .switch-mode-off();
-
-        /* @todo Match inner blocks to menu items */
-    }
-
-    .yr-nav-holds-info,
-    .yr-nav-holds-header {
+    .yr-nav-holds-content {
+        .flex(0 0 auto);
         position: relative;
         width: 100%;
-        padding: @tweak-yr-space-pad;
+        margin: @tweak-yr-space-pad;
         text-align: center;
         /* @todo Cascade fade `.yr-site-title, .yr-site-tagline, .yr-site-description, yr-nav-holds-titles-block` */
 
@@ -137,8 +147,11 @@
         }
     }
 
-    .yr-nav-holds-header {
-        .flex(0 0 auto);
+    .yr-nav-holds-info,
+    .yr-nav-holds-info-block {
+        .switch-mode-off-flow();
+
+        /* @todo Match inner blocks to menu items */
     }
 
 
@@ -164,11 +177,11 @@
             }
 
             .yr-nav-holds-header {
-                .switch-mode-off();
+                .switch-mode-off-flow();
             }
 
             .yr-nav-holds-info {
-                .switch-mode-on();
+                .switch-mode-on-flow();
             }
         }
     }

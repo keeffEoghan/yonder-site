@@ -21,31 +21,33 @@
                 type="reset" value="Clear selected details">
         </form>
 
-        <header class="yr-nav-holds-header">
-            {@|apply titles.block}
-            <squarespace:block-field id="nav-holds-titles-block" class="yr-nav-holds-titles-block yr-a" columns="12"></squarespace:block-field>
-        </header>
+        <section class="yr-nav-holds-content">
+            <header class="yr-nav-holds-header">
+                {@|apply titles.block}
+                <squarespace:block-field id="nav-holds-titles-block" class="yr-nav-holds-titles-block yr-a" columns="12"></squarespace:block-field>
+            </header>
 
-        <article class="yr-nav-holds-info">
-            {##BEGIN}
-                For hold pairs details.
-                The relevant `block-field` content blocks for any selected state will be shown on click,
-                to help clarify where the content needs to be filled in - template is generic/flexible.
-                For paired holds info, the `block-field` should have enough content blocks to correspond
-                to all holds (for pairs: `nC2`; `n = 5 => 5C2 = 10`):
-                ```
-                    1 | 1-2, 1-3, 1-4, 1-5
-                    2 | 2-3, 2-4, 2-5
-                    3 | 3-4, 3-5
-                    4 | 4-5
-                    5 | -
-                ```
-            {END##}
-            <squarespace:block-field id="nav-holds-info-block" class="yr-nav-holds-info-block" columns="12"></squarespace:block-field>
-            <squarespace:block-field id="nav-holds-info-hint" class="yr-nav-holds-info-hint" columns="12"></squarespace:block-field>
+            <article class="yr-nav-holds-info">
+                {##BEGIN}
+                    For hold pairs details.
+                    The relevant `block-field` content blocks for any selected state will be shown on click,
+                    to help clarify where the content needs to be filled in - template is generic/flexible.
+                    For paired holds info, the `block-field` should have enough content blocks to correspond
+                    to all holds (for pairs: `nC2`; `n = 5 => 5C2 = 10`):
+                    ```
+                        1 | 1-2, 1-3, 1-4, 1-5
+                        2 | 2-3, 2-4, 2-5
+                        3 | 3-4, 3-5
+                        4 | 4-5
+                        5 | -
+                    ```
+                {END##}
+                <squarespace:block-field id="nav-holds-info-block" class="yr-nav-holds-info-block" columns="12"></squarespace:block-field>
+                <squarespace:block-field id="nav-holds-info-hint" class="yr-nav-holds-info-hint" columns="12"></squarespace:block-field>
 
-            <p>TEST INFO</p>
-        </article>
+                <p>TEST INFO</p>
+            </article>
+        </section>
 
         {##BEGIN} Default SVG hold shapes definitions. {END##}
         <svg class="yr-nav-holds-defs">
