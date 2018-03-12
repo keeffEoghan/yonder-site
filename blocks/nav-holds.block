@@ -10,17 +10,17 @@
             for="yr-nav-holds-mode">Details</label>
     </div>
 
-    <section class="yr-nav-holds-main">
-        {##BEGIN} Controls normal/detail mode, DOM position important. {END##}
-        <input class="yr-nav-holds-info-hide" form="yr-nav-holds-info-form"
-            type="radio" name="yr-nav-holds-info-0-toggle" value="hold-info-0-hide" checked>
-        <input class="yr-nav-holds-info-hide" form="yr-nav-holds-info-form"
-            type="radio" name="yr-nav-holds-info-1-toggle" value="hold-info-1-hide" checked>
-        <form id="yr-nav-holds-info-form">
-            <input id="yr-nav-holds-info-reset"
-                type="reset" value="Clear selected details">
-        </form>
+    {##BEGIN} Controls normal/detail mode, DOM position important. {END##}
+    <input class="yr-nav-holds-info-hide" form="yr-nav-holds-info-form"
+        type="radio" name="yr-nav-holds-info-0-toggle" value="hold-info-0-hide" checked>
+    <input class="yr-nav-holds-info-hide" form="yr-nav-holds-info-form"
+        type="radio" name="yr-nav-holds-info-1-toggle" value="hold-info-1-hide" checked>
+    <form id="yr-nav-holds-info-form">
+        <input id="yr-nav-holds-info-reset" type="reset"
+            value="Clear selected details" title="Clear selected details" aria-label="Clear selected details">
+    </form>
 
+    <section class="yr-nav-holds-main">
         <section class="yr-nav-holds-content">
             <header class="yr-nav-holds-header">
                 {@|apply titles.block}
@@ -62,11 +62,11 @@
             {.repeated section items}
                 <li class="yr-nav-hold">
                     {##BEGIN} Controls which hold info is visible, DOM position important. {END##}
-                    <input class="yr-nav-holds-info-toggle yr-nav-holds-info-show"
+                    <input class="yr-nav-hold-info-toggle yr-nav-holds-info-show"
                         form="yr-nav-holds-info-form"
                         type="radio" name="yr-nav-holds-info-0-toggle" value="hold-info-0-{@index}"
                         title="Show details" aria-label="Show details">
-                    <input class="yr-nav-holds-info-toggle yr-nav-holds-info-show"
+                    <input class="yr-nav-hold-info-toggle yr-nav-holds-info-show"
                         form="yr-nav-holds-info-form"
                         type="radio" name="yr-nav-holds-info-1-toggle" value="hold-info-1-{@index}"
                         title="Show details" aria-label="Show details">
