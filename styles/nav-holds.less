@@ -107,14 +107,22 @@
     /**
      * Mode related styles.
      */
-
-    .yr-nav-holds-info-hide {
-        // Just used for the `reset` default value.
+    
+    #yr-nav-holds-info-form {
         display: none;
     }
 
     #yr-nav-holds-info-reset {
         z-index: @yr-z-nav-holds-info-reset;
+    }
+
+    .yr-nav-holds-info-hide {
+        // Just used for the `reset` default value.
+        display: none;
+
+        &:not(:checked) ~ #yr-nav-holds-info-form {
+            display: block;
+        }
     }
 
     .yr-nav-holds-menu .yr-nav-hold-info-toggle {
@@ -169,10 +177,6 @@
                         border-style: dotted;
                     }
                 }
-            }
-            
-            ~ #yr-nav-holds-info-form {
-                display: block;
             }
 
             ~ .yr-nav-holds-main {
@@ -281,6 +285,7 @@
                         translateY(2em)
                         /* Straighten */
                         rotate(-@r);
+
                     .transform(@transform);
                 }
             }
