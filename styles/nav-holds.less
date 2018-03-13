@@ -113,6 +113,7 @@
         z-index: @yr-z-nav-holds-info-reset;
         font-size: 0;
         color: transparent;
+        pointer-events: none;
         opacity: 0;
         background-color: @tweak-yr-color-base-tone-2;
         will-change: opacity;
@@ -126,8 +127,8 @@
         // If either is not checked, show the reset:
         &:not(:checked) {
             ~ #yr-nav-holds-info-form #yr-nav-holds-info-reset {
-                opacity: 0.5;
                 pointer-events: all;
+                opacity: 0.5;
             }
         }
     }

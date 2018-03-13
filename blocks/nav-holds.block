@@ -1,8 +1,6 @@
 <nav class="yr-nav-holds" data-controller="nav-holds" data-content-field="navigation-nav-holds">
     {##BEGIN} Controls normal/detail mode, DOM position important. {END##}
-    <input id="yr-nav-holds-mode" type="checkbox"
-        checked
-        title="Details" aria-label="Details">
+    <input id="yr-nav-holds-mode" type="checkbox" title="Details" aria-label="Details">
 
     {##BEGIN} Controls normal/detail mode, DOM position important. {END##}
     <input class="yr-nav-holds-info-hide" form="yr-nav-holds-info-form"
