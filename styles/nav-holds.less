@@ -48,7 +48,6 @@
     }
 
     #yr-nav-holds-mode,
-    #yr-nav-holds-info-form,
     .yr-nav-hold-info-toggle {
         display: none;
     }
@@ -108,24 +107,32 @@
      * Mode related styles.
      */
     
-    #yr-nav-holds-info-form {
-        display: none;
-    }
+    #yr-nav-holds-info-form {}
 
     #yr-nav-holds-info-reset {
         z-index: @yr-z-nav-holds-info-reset;
+        font-size: 0;
+        color: transparent;
+        opacity: 0;
+        background-color: @tweak-yr-color-base-tone-2;
+        will-change: opacity;
+        .transition(opacity 500ms ease-out);
     }
 
     .yr-nav-holds-info-hide {
         // Just used for the `reset` default value.
         display: none;
 
-        &:not(:checked) ~ #yr-nav-holds-info-form {
-            display: block;
+        // If either is not checked, show the reset:
+        &:not(:checked) {
+            ~ #yr-nav-holds-info-form #yr-nav-holds-info-reset {
+                opacity: 0.5;
+                pointer-events: all;
+            }
         }
     }
 
-    .yr-nav-holds-menu .yr-nav-hold-info-toggle {
+    .yr-nav-hold-info-toggle {
         z-index: @yr-z-nav-holds-info-toggle;
     }
 
@@ -147,7 +154,7 @@
 
         @media @mq-circle-up {
             position: absolute;
-            z-index: @yr-z-nav-holds-header;
+            z-index: @yr-z-nav-holds-content;
             max-width: 30vmin;
             max-height: 30vmin;
             overflow: auto;
@@ -160,6 +167,35 @@
         .switch-mode-off-flow();
 
         /* @todo Match inner blocks to menu items */
+    }
+
+
+    /**
+     * Detail toggles states.
+     * The last unselected info-toggle radio-group is active.
+     */
+
+    @details-groups: ~'yr-nav-holds-info-0-toggle',
+        ~'yr-nav-holds-info-1-toggle';
+    @details-length: length(@details-groups);
+
+    .yr-for-(@details-length); .-each(@i) {
+        @group: extract(@details-groups, @i - 1);
+        @group-attr: ~'[name="@{group}"]';
+
+        // If unselected, make the info-toggles of this group active.
+        .yr-nav-holds-info-hide@{group-attr}:checked {
+            ~ .yr-nav-holds-main .yr-nav-hold-info-toggle@{group-attr} {
+                pointer-events: all;
+            }
+        }
+
+        // If any preceding are unselected, make the info-toggles of this group inactive.
+        .yr-nav-holds-info-hide:checked ~ .yr-nav-holds-info-hide@{group-attr}:checked {
+            ~ .yr-nav-holds-main .yr-nav-hold-info-toggle@{group-attr} {
+                pointer-events: none;
+            }
+        }
     }
 
 
@@ -180,7 +216,11 @@
             }
 
             ~ .yr-nav-holds-main {
-                .yr-nav-holds-menu .yr-nav-hold-info-toggle {
+                .yr-nav-hold-a {
+                    pointer-events: none;
+                }
+
+                .yr-nav-hold-info-toggle {
                     display: block;
                 }
 
@@ -331,7 +371,7 @@
             ~ .yr-nav-holds-shape-block,
             ~ .yr-nav-hold-view {
                 .transition(fill-opacity 300ms ease-in-out,
-                    stroke-opacity 150ms ease-out 50ms,
+                    stroke-opacity 500ms ease-out 100ms,
                     stroke-width 200ms ease-out;);
             }
         }
@@ -346,15 +386,17 @@
         }
     }
 
-    .yr-nav-hold-info-toggle:checked {
-        .shape-hover();
-        .shape-active();
+    .yr-nav-hold-info-toggle {
+        &:checked {
+            .shape-hover();
+            .shape-active();
 
-        &:hover {
-            ~ .yr-nav-holds-shape-block,
-            ~ .yr-nav-hold-view {
-                fill-opacity: 0;
-                stroke-width: 0;
+            &:hover {
+                ~ .yr-nav-holds-shape-block,
+                ~ .yr-nav-hold-view {
+                    fill-opacity: 0;
+                    stroke-width: 0;
+                }
             }
         }
     }
@@ -375,7 +417,7 @@
         stroke-opacity: 0;
         stroke-width: 0;
         .transition(fill-opacity 600ms ease-in-out,
-            stroke-opacity 500ms ease-out 50ms,
+            stroke-opacity 800ms ease-out 100ms,
             stroke-width 400ms ease-out;);
     }
 

@@ -3,12 +3,6 @@
     <input id="yr-nav-holds-mode" type="checkbox"
         checked
         title="Details" aria-label="Details">
-    <div class="yr-nav-holds-mode-hint">
-        <squarespace:block-field id="nav-holds-mode-block"
-            class="yr-nav-holds-mode-block yr-a" columns="12"/>
-        <label class="yr-nav-holds-mode-label"
-            for="yr-nav-holds-mode">Details</label>
-    </div>
 
     {##BEGIN} Controls normal/detail mode, DOM position important. {END##}
     <input class="yr-nav-holds-info-hide" form="yr-nav-holds-info-form"
@@ -19,6 +13,13 @@
         <input id="yr-nav-holds-info-reset" type="reset"
             value="Clear selected details" title="Clear selected details" aria-label="Clear selected details">
     </form>
+
+    <div class="yr-nav-holds-mode-hint">
+        <squarespace:block-field id="nav-holds-mode-block"
+            class="yr-nav-holds-mode-block yr-a" columns="12"/>
+        <label class="yr-nav-holds-mode-label"
+            for="yr-nav-holds-mode">Details</label>
+    </div>
 
     <section class="yr-nav-holds-main">
         <section class="yr-nav-holds-content">
