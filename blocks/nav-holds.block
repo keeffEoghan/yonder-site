@@ -27,6 +27,8 @@
             </header>
 
             <article class="yr-nav-holds-info">
+                <squarespace:block-field id="nav-holds-info-hint-block" class="yr-nav-holds-info-hint-block" columns="12"></squarespace:block-field>
+
                 {##BEGIN}
                     For hold pairs details.
                     The relevant `block-field` content blocks for any selected state will be shown on click,
@@ -42,9 +44,6 @@
                     ```
                 {END##}
                 <squarespace:block-field id="nav-holds-info-block" class="yr-nav-holds-info-block" columns="12"></squarespace:block-field>
-                <squarespace:block-field id="nav-holds-info-hint" class="yr-nav-holds-info-hint" columns="12"></squarespace:block-field>
-
-                <p>TEST INFO</p>
             </article>
         </section>
 

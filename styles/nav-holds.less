@@ -24,9 +24,14 @@
     }
 
     .yr-nav-holds-mode-hint {
+        display: none;
         position: relative;
         color: @tweak-yr-color-accent-1-tone-2;
         margin: @tweak-yr-space-pad;
+
+        .tweak-yr-nav-holds-details-on & {
+            display: block;
+        }
     }
 
     .yr-nav-holds-mode-label {
@@ -81,8 +86,10 @@
     .switch-mode-off() {
         opacity: 0;
         visibility: hidden;
+        .transform(scale(0));
         @transition: opacity @switch-mode-time ease-out,
-            visibility 0ms linear @switch-mode-time;
+            visibility 0ms linear @switch-mode-time,
+            transform 0ms linear @switch-mode-time;
         .transition(@transition);
     }
     .switch-mode-on() {
@@ -138,8 +145,8 @@
     }
 
     .yr-nav-holds-info,
-    .yr-nav-holds-info-block,
     .yr-nav-holds-info-hint,
+    .yr-nav-holds-info-block,
     .yr-nav-holds-header {
         width: 100%;
         .switch-mode();
@@ -168,6 +175,7 @@
     }
 
     .yr-nav-holds-info,
+    .yr-nav-holds-info-hint,
     .yr-nav-holds-info-block {
         .switch-mode-off-flow();
 
@@ -403,8 +411,9 @@
             ~ .yr-nav-holds-main .yr-nav-hold-info-toggle:checked {
                 ~ .yr-nav-holds-shape-block,
                 ~ .yr-nav-hold-view {
-                    fill-opacity: 0.7;
-                    stroke-width: 7px;
+                    fill-opacity: 0.8;
+                    stroke-width: 8px;
+                    stroke-opacity: 0.025;
                 }
             }
         }
