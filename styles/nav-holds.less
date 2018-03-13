@@ -6,7 +6,7 @@
         position: relative;
         .display(flex);
         .flex-flow(column nowrap);
-        .justify-content(center);
+        .justify-content(flex-start);
         .align-items(center);
     }
 
@@ -155,11 +155,15 @@
 
         @media @mq-circle-up {
             position: absolute;
+            top: 50%;
+            left: 50%;
+            .transform(translate(-50%, -50%));
             z-index: @yr-z-nav-holds-content;
             max-width: 30vmin;
             max-height: 30vmin;
             overflow: auto;
             padding: 0;
+            margin: 0;
         }
     }
 
@@ -246,6 +250,7 @@
         max-width: 1300px;
         max-height: 1300px;
         padding: 2em;
+        margin: auto;
     }
 
     .yr-site-title {
@@ -387,16 +392,19 @@
         }
     }
 
-    .yr-nav-hold-info-toggle {
-        &:checked {
-            .shape-hover();
-            .shape-active();
+    .yr-nav-hold-info-toggle:checked {
+        .shape-hover();
+        .shape-active();
+    }
 
-            &:hover {
+    #yr-nav-holds-info-form {
+        &:active,
+        &:hover {
+            ~ .yr-nav-holds-main .yr-nav-hold-info-toggle:checked {
                 ~ .yr-nav-holds-shape-block,
                 ~ .yr-nav-hold-view {
-                    fill-opacity: 0;
-                    stroke-width: 0;
+                    fill-opacity: 0.7;
+                    stroke-width: 7px;
                 }
             }
         }
