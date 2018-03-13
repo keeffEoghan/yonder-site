@@ -34,9 +34,7 @@
         }
     }
 
-    .yr-nav-holds-mode-label {
-        .yr-a();
-
+    .yr-nav-holds-mode-label-a {
         .yr-on-(~'.tweak-yr-a-style-fancy'); .-do() {
             border-color: @tweak-yr-color-accent-2-tone-1;
         }
@@ -92,21 +90,11 @@
             transform 0ms linear @switch-mode-time;
         .transition(@transition);
     }
-    .switch-mode-on() {
-        opacity: 1;
-        visibility: visible;
-        .transition(opacity @switch-mode-time ease-out);
-    }
     .switch-mode-off-flow() {
         position: absolute;
         top: 0;
         left: 0;
         .switch-mode-off();
-    }
-
-    .switch-mode-on-flow() {
-        position: relative;
-        .switch-mode-on();
     }
 
 
@@ -130,14 +118,6 @@
     .yr-nav-holds-info-hide {
         // Just used for the `reset` default value.
         display: none;
-
-        // If either is not checked, show the reset:
-        &:not(:checked) {
-            ~ #yr-nav-holds-info-form #yr-nav-holds-info-reset {
-                pointer-events: all;
-                opacity: 0.5;
-            }
-        }
     }
 
     .yr-nav-hold-info-toggle {
@@ -145,7 +125,7 @@
     }
 
     .yr-nav-holds-info,
-    .yr-nav-holds-info-hint,
+    .yr-nav-holds-info-hint-block,
     .yr-nav-holds-info-block,
     .yr-nav-holds-header {
         width: 100%;
@@ -155,6 +135,7 @@
     .yr-nav-holds-content {
         .flex(0 0 auto);
         position: relative;
+        z-index: @yr-z-nav-holds-content;
         width: 100%;
         margin: @tweak-yr-space-pad;
         text-align: center;
@@ -165,7 +146,6 @@
             top: 50%;
             left: 50%;
             .transform(translate(-50%, -50%));
-            z-index: @yr-z-nav-holds-content;
             max-width: 30vmin;
             max-height: 30vmin;
             overflow: auto;
@@ -175,10 +155,8 @@
     }
 
     .yr-nav-holds-info,
-    .yr-nav-holds-info-hint,
+    .yr-nav-holds-info-hint-block,
     .yr-nav-holds-info-block {
-        .switch-mode-off-flow();
-
         /* @todo Match inner blocks to menu items */
     }
 
@@ -188,25 +166,56 @@
      * The last unselected info-toggle radio-group is active.
      */
 
-    @details-groups: ~'yr-nav-holds-info-0-toggle',
-        ~'yr-nav-holds-info-1-toggle';
-    @details-length: length(@details-groups);
-
-    .yr-for-(@details-length); .-each(@i) {
-        @group: extract(@details-groups, @i - 1);
-        @group-attr: ~'[name="@{group}"]';
-
-        // If unselected, make the info-toggles of this group active.
-        .yr-nav-holds-info-hide@{group-attr}:checked {
-            ~ .yr-nav-holds-main .yr-nav-hold-info-toggle@{group-attr} {
-                pointer-events: all;
+    .yr-nav-holds-info-hide {
+        // If any are checked...
+        &:checked {
+            // Hide the info.
+            ~ .yr-nav-holds-main {
+                .yr-nav-holds-info-block {
+                    .switch-mode-off-flow();
+                }
             }
         }
 
-        // If any preceding are unselected, make the info-toggles of this group inactive.
-        .yr-nav-holds-info-hide:checked ~ .yr-nav-holds-info-hide@{group-attr}:checked {
-            ~ .yr-nav-holds-main .yr-nav-hold-info-toggle@{group-attr} {
-                pointer-events: none;
+        // If any aren't checked...
+        &:not(:checked) {
+            // Show the reset.
+            ~ #yr-nav-holds-info-form #yr-nav-holds-info-reset {
+                pointer-events: all;
+                opacity: 0.5;
+            }
+        }
+
+        // If all aren't checked...
+        &:not(:checked) + .yr-nav-holds-info-hide:not(:checked) {
+            // Hide the info hint.
+            ~ .yr-nav-holds-main {
+                .yr-nav-holds-info-hint-block {
+                    .switch-mode-off-flow();
+                }
+            }
+        }
+
+        @details-groups: ~'yr-nav-holds-info-0-toggle',
+            ~'yr-nav-holds-info-1-toggle';
+        @details-length: length(@details-groups);
+
+        .yr-for-(@details-length); .-each(@i) {
+            @group: extract(@details-groups, @i - 1);
+            @group-attr: ~'[name="@{group}"]';
+
+            // If unselected, make the info-toggles of this group active.
+            &@{group-attr}:checked {
+                ~ .yr-nav-holds-main .yr-nav-hold-info-toggle@{group-attr} {
+                    pointer-events: all;
+                }
+            }
+
+            // If any preceding are unselected, make the info-toggles of this group inactive.
+            &:checked ~ .yr-nav-holds-info-hide@{group-attr}:checked {
+                ~ .yr-nav-holds-main .yr-nav-hold-info-toggle@{group-attr} {
+                    pointer-events: none;
+                }
             }
         }
     }
@@ -221,7 +230,7 @@
 
         &:checked {
             ~ .yr-nav-holds-mode-hint {
-                .yr-nav-holds-mode-label {
+                .yr-nav-holds-mode-label-a {
                     .yr-on-(~'.tweak-yr-a-style-fancy'); .-do() {
                         border-style: dotted;
                     }
@@ -240,9 +249,13 @@
                 .yr-nav-holds-header {
                     .switch-mode-off-flow();
                 }
+            }
+        }
 
+        &:not(:checked) {
+            ~ .yr-nav-holds-main {
                 .yr-nav-holds-info {
-                    .switch-mode-on-flow();
+                    .switch-mode-off-flow();
                 }
             }
         }
@@ -374,7 +387,7 @@
     .shape-active() {
         ~ .yr-nav-holds-shape-block,
         ~ .yr-nav-hold-view {
-            stroke-opacity: 0.05;
+            stroke-opacity: 0.08;
         }
     }
 
@@ -413,7 +426,7 @@
                 ~ .yr-nav-hold-view {
                     fill-opacity: 0.8;
                     stroke-width: 8px;
-                    stroke-opacity: 0.025;
+                    stroke-opacity: 0.04;
                 }
             }
         }

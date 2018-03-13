@@ -15,12 +15,15 @@
     <div class="yr-nav-holds-mode-hint">
         <squarespace:block-field id="nav-holds-mode-block"
             class="yr-nav-holds-mode-block yr-a" columns="12"/>
-        <label class="yr-nav-holds-mode-label"
-            for="yr-nav-holds-mode">Details</label>
+        <a class="yr-nav-holds-mode-label-a yr-a" href="#yr-nav-holds-content">
+            <label class="yr-nav-holds-mode-label" for="yr-nav-holds-mode">
+                Details
+            </label>
+        </a>
     </div>
 
     <section class="yr-nav-holds-main">
-        <section class="yr-nav-holds-content">
+        <section id="yr-nav-holds-content" class="yr-nav-holds-content">
             <header class="yr-nav-holds-header">
                 {@|apply titles.block}
                 <squarespace:block-field id="nav-holds-titles-block" class="yr-nav-holds-titles-block yr-a" columns="12"></squarespace:block-field>
