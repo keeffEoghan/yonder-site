@@ -6,7 +6,6 @@
 
 - Home menu comparison view
     - Due to limitations with JSON-T logic, will need to use a single `block-field` to hold all the description content blocks (pairs: `nC2`; `n = 5 => 5C2 = 10`).
-    - Do some amount with CSS: toggle details mode, toggle details `block-field`... that's probably it.
     - JS controller needed to toggle for selected pair only.
 - Errors
     - Sort out Style Editor breakage bullshit - #3302864
@@ -45,6 +44,9 @@
 
 # Done
 
+- Home menu comparison view
+    - Due to limitations with JSON-T logic, will need to use a single `block-field` to hold all the description content blocks (pairs: `nC2`; `n = 5 => 5C2 = 10`).
+    - Do some amount with CSS: toggle details mode, toggle details `block-field`... that's probably it.
 - Finish AJAX loading
     - Page animations
 - Block out main zones and animations

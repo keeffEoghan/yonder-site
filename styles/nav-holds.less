@@ -15,7 +15,9 @@
         width: 100%;
     }
 
-    @mq-circle-up: ~'only screen and @{yr-mq-hold-circle-up}';
+    @mq-ring-up: ~'only screen and @{yr-mq-hold-ring-up}';
+    @holds-radius: 50vmin;
+    @holds-radius-inner: @holds-radius * 0.6;
 
     #yr-nav-holds-mode,
     .yr-nav-holds-mode-hint {
@@ -34,7 +36,7 @@
         }
     }
 
-    .yr-nav-holds-mode-label-a {
+    .yr-nav-holds-mode-label {
         .yr-on-(~'.tweak-yr-a-style-fancy'); .-do() {
             border-color: @tweak-yr-color-accent-2-tone-1;
         }
@@ -75,26 +77,26 @@
      * Conveniences for toggling elements on mode.
      */
 
-    @switch-mode-time: 400ms;
+    @switch-time: 600ms;
 
-    .switch-mode() {
+    .switch() {
         will-change: opacity;
-        .transition(opacity @switch-mode-time ease-out);
+        .transition(opacity @switch-time ease-in);
     }
-    .switch-mode-off() {
+    .switch-off() {
         opacity: 0;
         visibility: hidden;
         .transform(scale(0));
-        @transition: opacity @switch-mode-time ease-out,
-            visibility 0ms linear @switch-mode-time,
-            transform 0ms linear @switch-mode-time;
+        @transition: opacity @switch-time ease-out,
+            visibility 0ms linear @switch-time,
+            transform 0ms linear @switch-time;
         .transition(@transition);
     }
-    .switch-mode-off-flow() {
+    .switch-off-flow() {
         position: absolute;
         top: 0;
         left: 0;
-        .switch-mode-off();
+        .switch-off();
     }
 
 
@@ -129,7 +131,7 @@
     .yr-nav-holds-info-block,
     .yr-nav-holds-header {
         width: 100%;
-        .switch-mode();
+        .switch();
     }
 
     .yr-nav-holds-content {
@@ -141,13 +143,13 @@
         text-align: center;
         /* @todo Cascade fade `.yr-site-title, .yr-site-tagline, .yr-site-description, yr-nav-holds-titles-block` */
 
-        @media @mq-circle-up {
+        @media @mq-ring-up {
             position: absolute;
-            top: 50%;
+            top: @holds-radius;
             left: 50%;
             .transform(translate(-50%, -50%));
-            max-width: 30vmin;
-            max-height: 30vmin;
+            max-width: @holds-radius-inner;
+            max-height: @holds-radius-inner;
             overflow: auto;
             padding: 0;
             margin: 0;
@@ -172,7 +174,7 @@
             // Hide the info.
             ~ .yr-nav-holds-main {
                 .yr-nav-holds-info-block {
-                    .switch-mode-off-flow();
+                    .switch-off-flow();
                 }
             }
         }
@@ -191,7 +193,7 @@
             // Hide the info hint.
             ~ .yr-nav-holds-main {
                 .yr-nav-holds-info-hint-block {
-                    .switch-mode-off-flow();
+                    .switch-off-flow();
                 }
             }
         }
@@ -230,7 +232,7 @@
 
         &:checked {
             ~ .yr-nav-holds-mode-hint {
-                .yr-nav-holds-mode-label-a {
+                .yr-nav-holds-mode-label {
                     .yr-on-(~'.tweak-yr-a-style-fancy'); .-do() {
                         border-style: dotted;
                     }
@@ -247,7 +249,7 @@
                 }
 
                 .yr-nav-holds-header {
-                    .switch-mode-off-flow();
+                    .switch-off-flow();
                 }
             }
         }
@@ -255,7 +257,7 @@
         &:not(:checked) {
             ~ .yr-nav-holds-main {
                 .yr-nav-holds-info {
-                    .switch-mode-off-flow();
+                    .switch-off-flow();
                 }
             }
         }
@@ -267,9 +269,7 @@
         .flex-flow(column nowrap);
         .flex(1 1 auto);
         width: 100%;
-        height: 100%;
         max-width: 1300px;
-        max-height: 1300px;
         padding: 2em;
         margin: auto;
     }
@@ -302,10 +302,14 @@
     .yr-nav-hold {
         display: inline-block;
         position: relative;
+        margin: 0 auto;
         z-index: @yr-z-nav-holds;
 
         @margin: 10%;
-        margin: 0 @margin 0 auto;
+
+        &:nth-child(even) {
+            margin: 0 @margin 0 auto;
+        }
 
         &:nth-child(odd) {
             margin: 0 auto 0 @margin;
@@ -317,43 +321,56 @@
             @tweak-yr-color-theme-4-tone-2,
             @tweak-yr-color-theme-5-tone-2;
 
-        @n: length(@themes);
+        @themes-n: length(@themes);
 
-        .yr-for-(@n); .-each(@i) {
-            &:nth-child((~'@{n}n+@{i}')) .yr-use-hold-shape {
+        .yr-for-(@themes-n); .-each(@i) {
+            &:nth-child((~'@{themes-n}n+@{i}')) .yr-use-hold-shape {
                 color: extract(@themes, @i - 1);
             }
         }
 
-        @media @mq-circle-up {
-            position: absolute;
-            top: 50%;
-            left: 50%;
+        .tweak-yr-nav-holds-ring-show & {
+            @media @mq-ring-up {
+                // Select the first `@tweak-yr-nav-holds-ring-num` of holds.
+                &:nth-child((~'-n+@{tweak-yr-nav-holds-ring-num}')) {
+                    position: absolute;
+                    top: @holds-radius;
+                    left: 50%;
 
-            &,
-            &:nth-child(odd) {
-                margin: 0;
-            }
+                    &:nth-child(even),
+                    &:nth-child(odd) {
+                        margin: 0;
+                    }
+                }
 
-            .yr-for-(@n); .-each(@i) {
-                &:nth-child((~'@{n}n+@{i}')) {
-                    @r: (@i - 1) * 360deg / @n;
+                .yr-for-(@tweak-yr-nav-holds-ring-num); .-each(@i) {
+                    &:nth-child(@i) {
+                        @r: (@i - 1) * 360deg / @tweak-yr-nav-holds-ring-num;
 
-                    @transform:
-                        /* Center */
-                        translate(-50%, -50%)
-                        /* Angle in circle */
-                        rotate(@r)
-                        /* Move up onto circle circumference */
-                        translateY(-47vmin)
-                        /* Move back inside bounds of circle */
-                        translateY(50%)
-                        /* Move back a little margin */
-                        translateY(2em)
-                        /* Straighten */
-                        rotate(-@r);
+                        @transform:
+                            /* Center */
+                            translate(-50%, -50%)
+                            /* Angle in circle */
+                            rotate(@r)
+                            /* Move up onto circle circumference */
+                            translateY(@holds-radius * -0.95)
+                            /* Move back inside bounds of circle */
+                            translateY(50%)
+                            /* Move back a little margin */
+                            translateY(2em)
+                            /* Straighten */
+                            rotate(-@r);
 
-                    .transform(@transform);
+                        .transform(@transform);
+                    }
+                }
+
+                // Move any of the rest down.
+
+                @rest: @tweak-yr-nav-holds-ring-num + 1;
+
+                &:nth-child(@rest) {
+                    margin-top: @holds-radius * 2;
                 }
             }
         }

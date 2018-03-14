@@ -297,6 +297,7 @@
      */
 
     @nav-gap: 2.7rem;
+    @fades: 4;
 
     .yr-nav-panel {
         .display(flex);
@@ -328,7 +329,12 @@
 
             .yr-nav-fade {
                 opacity: 1;
-                .fade-loop(@fades, 300ms, 100ms);
+
+                .yr-for-(@fades); .-each(@i) {
+                    &:nth-child(@i) {
+                        .transition-delay(300ms + ((@i - 1) * 100ms));
+                    }
+                }
             }
         }
     }
@@ -336,6 +342,7 @@
     .yr-nav-header,
     .yr-nav-footer-block {
         width: 100%;
+        .flex(0 0 auto);
     }
 
     .yr-nav-header {
@@ -474,25 +481,16 @@
         .transition(background-color 500ms ease-out;);
     }
 
-    /**
-     * Animation
-     */
-
-    @fades: 5;
-
-    .fade-loop(@n, @start, @gap) when (@n > 0) {
-        .fade-loop((@n - 1), @start, @gap);
-
-        &:nth-child(@n) {
-            .transition-delay(@start + ((@n - 1) * @gap));
-        }
-    }
-
     .yr-nav-fade {
         opacity: 0;
         will-change: opacity;
         .transition(opacity 200ms @yr-ease-fade);
-        .fade-loop(@fades, 0ms, 100ms);
+
+        .yr-for-(@fades); .-each(@i) {
+            &:nth-child(@i) {
+                .transition-delay((@i - 1) * 100ms);
+            }
+        }
     }
 }
 

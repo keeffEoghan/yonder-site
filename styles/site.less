@@ -154,8 +154,11 @@ a {
     /* color: @tweak-yr-color-dark-1-tone-1; */
     color: inherit;
     cursor: pointer;
+}
 
-    .yr-on-(~'.yr-a', true); .-do() {
+.yr-a {
+    &,
+    a {
         .yr-a();
     }
 }

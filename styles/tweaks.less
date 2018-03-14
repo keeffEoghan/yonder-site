@@ -541,10 +541,10 @@
 
 
 /**
- * Holds Navigation
+ * Home Navigation
  */
 
-// tweak: { "category": "Holds Navigation", "label": "Font", "title": "tweak-yr-font-nav-holds", "type": "font", "loadAllVariants": true, "target": ".yr-nav-hold-a" }
+// tweak: { "category": "Home Navigation", "label": "Font", "title": "tweak-yr-font-nav-holds", "type": "font", "loadAllVariants": true, "target": ".yr-nav-hold-a" }
 .tweak-yr-font-nav-holds {
     // Doesn't display well in `Style Editor`...
     // font-family: @yr-font-sans;
@@ -557,34 +557,44 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Holds Navigation", "label": "Minimum Size", "title": "tweak-yr-nav-holds-size-min", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
+// tweak: { "category": "Home Navigation", "label": "Minimum Size", "title": "tweak-yr-nav-holds-size-min", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
 @tweak-yr-nav-holds-size-min: 9em;
 
-// tweak: { "category": "Holds Navigation", "label": "Maximum Size", "title": "tweak-yr-nav-holds-size-max", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
+// tweak: { "category": "Home Navigation", "label": "Maximum Size", "title": "tweak-yr-nav-holds-size-max", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
 @tweak-yr-nav-holds-size-max: 18em;
 
-// tweak: { "category": "Holds Navigation", "label": "Switch to Circle Size", "title": "tweak-yr-mq-hold-circle-up", "type": "value", "min": 0, "max": 2000, "step": 1, "target": ".yr-nav-holds" }
-@tweak-yr-mq-hold-circle-up: 500px;
-
 // @note Style Editor doesn't handle viewport units in value sliders...
-// tweak: { "category": "Holds Navigation", "label": "Padding", "title": "tweak-yr-nav-holds-pad", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
+// tweak: { "category": "Home Navigation", "label": "Padding", "title": "tweak-yr-nav-holds-pad", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
 @tweak-yr-nav-holds-pad: 8vmin;
 
 
 /**
- * Holds Navigation / Header
+ * Home Navigation / Ring
  */
 
-// tweak: { "category": "Holds Navigation / Header", "label": "Show Site Title", "title": "tweak-yr-nav-holds-site-title-show", "type": "checkbox", "active": false, "target": ".yr-nav-holds .yr-nav-holds-header" }
-// tweak: { "category": "Holds Navigation / Header", "label": "Show Site Tagline", "title": "tweak-yr-nav-holds-site-tagline-show", "type": "checkbox", "active": false, "target": ".yr-nav-holds .yr-nav-holds-header" }
-// tweak: { "category": "Holds Navigation / Header", "label": "Show Site Description", "title": "tweak-yr-nav-holds-site-description-show", "type": "checkbox", "active": false, "target": ".yr-nav-holds .yr-nav-holds-header" }
+// tweak: { "category": "Home Navigation / Ring", "label": "Show Ring Layout", "title": "tweak-yr-nav-holds-ring-show", "type": "checkbox", "active": true, "target": ".yr-nav-holds" }
+
+// tweak: { "category": "Home Navigation / Ring", "label": "Ring Layout at Size", "title": "tweak-yr-mq-hold-ring-up", "type": "value", "min": 0, "max": 2000, "step": 1, "target": ".yr-nav-holds", "showOnlyWhenPresent": ".tweak-yr-nav-holds-ring-show" }
+@tweak-yr-mq-hold-ring-up: 700px;
+
+// tweak: { "category": "Home Navigation / Ring", "label": "Number", "title": "tweak-yr-nav-holds-ring-num", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-holds", "showOnlyWhenPresent": ".tweak-yr-nav-holds-ring-show" }
+@tweak-yr-nav-holds-ring-num: 5;
 
 
 /**
- * Holds Navigation / Details
+ * Home Navigation / Header
  */
 
-// tweak: { "category": "Holds Navigation / Details", "label": "Enable Details Mode", "title": "tweak-yr-nav-holds-details-on", "type": "checkbox", "active": true, "target": ".yr-nav-holds" }
+// tweak: { "category": "Home Navigation / Header", "label": "Show Site Title", "title": "tweak-yr-nav-holds-site-title-show", "type": "checkbox", "active": false, "target": ".yr-nav-holds .yr-nav-holds-header" }
+// tweak: { "category": "Home Navigation / Header", "label": "Show Site Tagline", "title": "tweak-yr-nav-holds-site-tagline-show", "type": "checkbox", "active": false, "target": ".yr-nav-holds .yr-nav-holds-header" }
+// tweak: { "category": "Home Navigation / Header", "label": "Show Site Description", "title": "tweak-yr-nav-holds-site-description-show", "type": "checkbox", "active": false, "target": ".yr-nav-holds .yr-nav-holds-header" }
+
+
+/**
+ * Home Navigation / Details
+ */
+
+// tweak: { "category": "Home Navigation / Details", "label": "Enable Details Mode", "title": "tweak-yr-nav-holds-details-on", "type": "checkbox", "active": true, "target": ".yr-nav-holds" }
 
 
 /**

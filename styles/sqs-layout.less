@@ -93,28 +93,31 @@
     /**
      * Alternating cell colors - kinda works...
      */
-    .sqs-row {
-        .yr-on-(~'.tweak-yr-sqs-alt-grid.tweak-yr-sqs-block-alt-show'); .-do() {
-            &:nth-child(even) > [class*="sqs-col"]:nth-child(odd) > .sqs-block:nth-child(odd),
-            &:nth-child(odd) > [class*="sqs-col"]:nth-child(even) > .sqs-block:nth-child(odd),
-            &:nth-child(odd) > [class*="sqs-col"]:nth-child(odd) > .sqs-block:nth-child(even) {
-                &::before {
-                    content: '';
-                    display: block;
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    left: 0;
-                    bottom: 0;
-                    background-color: @tweak-yr-sqs-block-alt-color;
-                    z-index: 0;
+    .yr-main &,
+    &.yr-alt-block-color {
+        .sqs-row {
+            .yr-on-(~'.tweak-yr-sqs-alt-grid.tweak-yr-sqs-block-alt-show'); .-do() {
+                &:nth-child(even) > [class*="sqs-col"]:nth-child(odd) > .sqs-block:nth-child(odd),
+                &:nth-child(odd) > [class*="sqs-col"]:nth-child(even) > .sqs-block:nth-child(odd),
+                &:nth-child(odd) > [class*="sqs-col"]:nth-child(odd) > .sqs-block:nth-child(even) {
+                    &::before {
+                        content: '';
+                        display: block;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        left: 0;
+                        bottom: 0;
+                        background-color: @tweak-yr-sqs-block-alt-color;
+                        z-index: 0;
+                    }
                 }
-            }
 
-            .sqs-block-horizontalrule,
-            .sqs-block-spacer {
-                &::before {
-                    visibility: hidden;
+                .sqs-block-horizontalrule,
+                .sqs-block-spacer {
+                    &::before {
+                        visibility: hidden;
+                    }
                 }
             }
         }
