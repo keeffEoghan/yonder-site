@@ -5,7 +5,11 @@
 # To-do
 
 - Home menu comparison view
-    - Due to limitations with JSON-T logic, will need to use a single `block-field` to hold all the description content blocks (pairs: `nC2`; `n = 5 => 5C2 = 10`).
+    - Due to limitations with JSON-T logic, will need to use some other way to hold all the description content (pairs: `nC2`; `n = 5 => 5C2 = 10`):
+        - Multiple `block-field`s? (Generate `n^2`, and only ever show unique pair combos of them?)
+        - Using `code-block` to just code it by hand?
+        - A single `block-field`, with some specified arrangement of content blocks? (Inconsistent layout engine might fuck this up... force 2-column layout to ensure...?)
+        - Specifed extra menu items? (Using `description` field sucks, and how to tell which item belongs where...?)
     - JS controller needed to toggle for selected pair only.
 - Errors
     - Sort out Style Editor breakage bullshit - #3302864

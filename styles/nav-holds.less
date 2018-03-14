@@ -30,6 +30,7 @@
         position: relative;
         color: @tweak-yr-color-accent-1-tone-2;
         margin: @tweak-yr-space-pad;
+        text-align: center;
 
         .tweak-yr-nav-holds-details-on & {
             display: block;
@@ -37,6 +38,8 @@
     }
 
     .yr-nav-holds-mode-label {
+        .yr-a();
+
         .yr-on-(~'.tweak-yr-a-style-fancy'); .-do() {
             border-color: @tweak-yr-color-accent-2-tone-1;
         }
@@ -77,19 +80,20 @@
      * Conveniences for toggling elements on mode.
      */
 
-    @switch-time: 600ms;
+    @switch-time-on: 600ms;
+    @switch-time-off: 300ms;
 
     .switch() {
         will-change: opacity;
-        .transition(opacity @switch-time ease-in);
+        .transition(opacity @switch-time-on ease-in);
     }
     .switch-off() {
         opacity: 0;
         visibility: hidden;
         .transform(scale(0));
-        @transition: opacity @switch-time ease-out,
-            visibility 0ms linear @switch-time,
-            transform 0ms linear @switch-time;
+        @transition: opacity @switch-time-off ease-out,
+            visibility 0ms linear @switch-time-off,
+            transform 0ms linear @switch-time-off;
         .transition(@transition);
     }
     .switch-off-flow() {

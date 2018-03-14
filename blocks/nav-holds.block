@@ -15,7 +15,7 @@
     <div class="yr-nav-holds-mode-hint">
         <squarespace:block-field id="nav-holds-mode-block"
             class="yr-nav-holds-mode-block yr-a" columns="12"/>
-        <label class="yr-nav-holds-mode-label yr-a" for="yr-nav-holds-mode">Details</label>
+        <label class="yr-nav-holds-mode-label" for="yr-nav-holds-mode">Details</label>
     </div>
 
     <section class="yr-nav-holds-main">
