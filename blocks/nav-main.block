@@ -8,7 +8,7 @@
         <squarespace:block-field id="yr-nav-main-home-icon"
             class="yr-nav-button-icon-block" columns="1">
         </squarespace:block-field>
-        <div class="yr-nav-button-icon">{@|apply nav/home.svg.block}</div>
+        <div class="yr-nav-button-icon">{@|apply nav-main/home.svg.block}</div>
     </a>
 
     {##BEGIN} Controlled by `.yr-nav-toggler`, DOM position important. {END##}
@@ -19,7 +19,7 @@
         <squarespace:block-field id="yr-nav-main-toggle-open-icon"
             class="yr-nav-button-icon-block" columns="1">
         </squarespace:block-field>
-        <div class="yr-nav-button-icon">{@|apply nav/open.svg.block}</div>
+        <div class="yr-nav-button-icon">{@|apply nav-main/open.svg.block}</div>
     </div>
 
     <nav class="yr-nav-panel" data-content-field="navigation-nav-main">
@@ -28,7 +28,7 @@
             <squarespace:block-field id="yr-nav-main-toggle-close-icon"
                 class="yr-nav-button-icon-block" columns="1">
             </squarespace:block-field>
-            <div class="yr-nav-button-icon">{@|apply nav/close.svg.block}</div>
+            <div class="yr-nav-button-icon">{@|apply nav-main/close.svg.block}</div>
         </div>
 
         <header class="yr-nav-header yr-nav-fade">

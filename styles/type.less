@@ -9,7 +9,7 @@
 
 /**
  * @license
- * MyFonts Webfont Build ID 3525258, 2018-02-13T09:43:54-0500
+ * MyFonts Webfont Build ID 3543405, 2018-03-16T12:13:18-0400
  * 
  * The fonts listed in this notice are subject to the End User License
  * Agreement(s) entered into by the website owner. All other parties are 
@@ -27,41 +27,55 @@
  * URL: https://www.myfonts.com/fonts/typedepot/centrale-sans/medium-italic/
  * 
  * 
- * License: https://www.myfonts.com/viewlicense?type=web&buildid=3525258
+ * License: https://www.myfonts.com/viewlicense?type=web&buildid=3543405
  * Licensed pageviews: 500,000
  * Webfonts copyright: Copyright (c) 2016 by typedepot. All rights reserved.
  * 
  * © 2018 MyFonts Inc
-*/
+ */
 
-/* @import must be at top of file, otherwise CSS will not work */
-@import url("/count/35ca8a");
+/**
+ * `@import` must be at top of file, otherwise CSS will not work.
+ * @see https://answers.squarespace.com/questions/43913/using-myfonts-with-squarespace.html
+ */
+
+// Original
+// @import url("/count/36116d");
+
+@import url("//hello.myfonts.net/count/36116d#.css");
+@import url("/count/36116d#.css");
 
 @font-face {
-    font-family: 'Centrale Sans Bold';
-    src: url('/assets/fonts/CentraleSans/35CA8A_0_0.eot');
-    src: url('/assets/fonts/CentraleSans/35CA8A_0_0.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/CentraleSans/35CA8A_0_0.woff2') format('woff2'),
-        url('/assets/fonts/CentraleSans/35CA8A_0_0.woff') format('woff'),
-        url('/assets/fonts/CentraleSans/35CA8A_0_0.ttf') format('truetype');
+    font-family: 'Centrale Sans';
+    font-weight: bold;
+    font-style: normal;
+    src: url('webfonts/36116D_0_0.eot');
+    src: url('webfonts/36116D_0_0.eot?#iefix') format('embedded-opentype'),
+        url('webfonts/36116D_0_0.woff2') format('woff2'),
+        url('webfonts/36116D_0_0.woff') format('woff'),
+        url('webfonts/36116D_0_0.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Centrale Sans Medium';
-    src: url('/assets/fonts/CentraleSans/35CA8A_1_0.eot');
-    src: url('/assets/fonts/CentraleSans/35CA8A_1_0.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/CentraleSans/35CA8A_1_0.woff2') format('woff2'),
-        url('/assets/fonts/CentraleSans/35CA8A_1_0.woff') format('woff'),
-        url('/assets/fonts/CentraleSans/35CA8A_1_0.ttf') format('truetype');
+    font-family: 'Centrale Sans';
+    font-weight: normal;
+    font-style: normal;
+    src: url('webfonts/36116D_1_0.eot');
+    src: url('webfonts/36116D_1_0.eot?#iefix') format('embedded-opentype'),
+        url('webfonts/36116D_1_0.woff2') format('woff2'),
+        url('webfonts/36116D_1_0.woff') format('woff'),
+        url('webfonts/36116D_1_0.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Centrale Sans Medium Italic';
-    src: url('/assets/fonts/CentraleSans/35CA8A_2_0.eot');
-    src: url('/assets/fonts/CentraleSans/35CA8A_2_0.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/CentraleSans/35CA8A_2_0.woff2') format('woff2'),
-        url('/assets/fonts/CentraleSans/35CA8A_2_0.woff') format('woff'),
-        url('/assets/fonts/CentraleSans/35CA8A_2_0.ttf') format('truetype');
+    font-family: 'Centrale Sans';
+    font-weight: normal;
+    font-style: italic;
+    src: url('webfonts/36116D_2_0.eot');
+    src: url('webfonts/36116D_2_0.eot?#iefix') format('embedded-opentype'),
+        url('webfonts/36116D_2_0.woff2') format('woff2'),
+        url('webfonts/36116D_2_0.woff') format('woff'),
+        url('webfonts/36116D_2_0.ttf') format('truetype');
 }
  
 
@@ -80,12 +94,7 @@
  * Sans-serif
  */
 
-/* Sans-serif / Medium */
-@yr-font-sans: 'Centrale Sans Medium', 'Helvetica', 'Arial', sans-serif;
-@yr-font-sans-italic: 'Centrale Sans Medium Italic', 'Helvetica', 'Arial', sans-serif;
-
-/* Sans-serif / Bold */
-@yr-font-sans-bold: 'Centrale Sans Bold', 'Helvetica', 'Arial', sans-serif;
+@yr-font-sans: 'Centrale Sans', 'Helvetica', 'Arial', sans-serif;
 
 
 /**

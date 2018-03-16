@@ -83,11 +83,11 @@
     @switch-time-on: 600ms;
     @switch-time-off: 300ms;
 
-    .switch() {
+    .switcher() {
         will-change: opacity;
         .transition(opacity @switch-time-on ease-in);
     }
-    .switch-off() {
+    .switcher-off() {
         opacity: 0;
         visibility: hidden;
         .transform(scale(0));
@@ -96,11 +96,11 @@
             transform 0ms linear @switch-time-off;
         .transition(@transition);
     }
-    .switch-off-flow() {
+    .switcher-off-flow() {
         position: absolute;
         top: 0;
         left: 0;
-        .switch-off();
+        .switcher-off();
     }
 
 
@@ -135,7 +135,7 @@
     .yr-nav-holds-info-block,
     .yr-nav-holds-header {
         width: 100%;
-        .switch();
+        .switcher();
     }
 
     .yr-nav-holds-content {
@@ -160,12 +160,6 @@
         }
     }
 
-    .yr-nav-holds-info,
-    .yr-nav-holds-info-hint-block,
-    .yr-nav-holds-info-block {
-        /* @todo Match inner blocks to menu items */
-    }
-
 
     /**
      * Detail toggles states.
@@ -178,7 +172,7 @@
             // Hide the info.
             ~ .yr-nav-holds-main {
                 .yr-nav-holds-info-block {
-                    .switch-off-flow();
+                    .switcher-off-flow();
                 }
             }
         }
@@ -197,7 +191,7 @@
             // Hide the info hint.
             ~ .yr-nav-holds-main {
                 .yr-nav-holds-info-hint-block {
-                    .switch-off-flow();
+                    .switcher-off-flow();
                 }
             }
         }
@@ -223,6 +217,10 @@
                     pointer-events: none;
                 }
             }
+
+            // ~ .yr-nav-holds-main .yr-nav-holds-info-block {
+                /* @todo Match inner blocks to menu items */
+            // }
         }
     }
 
@@ -253,7 +251,7 @@
                 }
 
                 .yr-nav-holds-header {
-                    .switch-off-flow();
+                    .switcher-off-flow();
                 }
             }
         }
@@ -261,7 +259,7 @@
         &:not(:checked) {
             ~ .yr-nav-holds-main {
                 .yr-nav-holds-info {
-                    .switch-off-flow();
+                    .switcher-off-flow();
                 }
             }
         }

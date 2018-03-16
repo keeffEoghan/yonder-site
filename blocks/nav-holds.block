@@ -2,7 +2,7 @@
     {##BEGIN} Controls normal/detail mode, DOM position important. {END##}
     <input id="yr-nav-holds-mode" type="checkbox" title="Details" aria-label="Details">
 
-    {##BEGIN} Controls normal/detail mode, DOM position important. {END##}
+    {##BEGIN} Controls detail display, DOM position important. {END##}
     <input class="yr-nav-holds-info-hide" form="yr-nav-holds-info-form"
         type="radio" name="yr-nav-holds-info-0-toggle" value="hold-info-0-hide" checked>
     <input class="yr-nav-holds-info-hide" form="yr-nav-holds-info-form"
@@ -12,7 +12,19 @@
             value="Clear selected details" title="Clear selected details" aria-label="Clear selected details">
     </form>
 
+    {##BEGIN} Anything controlled by the preceeding elements, DOM position important. {END##}
+
     <div class="yr-nav-holds-mode-hint">
+        {##BEGIN}
+        <squarespace:block-field id="yr-nav-holds-home-icon"
+            class="yr-nav-button-icon-block" columns="1">
+        </squarespace:block-field>
+        <label class="yr-nav-holds-home yr-nav-button" for="yr-nav-holds-mode"
+            title="Go home" aria-label="Go home">
+            <span class="yr-nav-button-icon">{@|apply nav-main/home.svg.block}</span>
+        </label>
+        {END##}
+
         <squarespace:block-field id="nav-holds-mode-block"
             class="yr-nav-holds-mode-block yr-a" columns="12"/>
         <label class="yr-nav-holds-mode-label" for="yr-nav-holds-mode">Details</label>
@@ -71,11 +83,11 @@
 
         {##BEGIN} Default SVG hold shapes definitions. {END##}
         <svg class="yr-nav-holds-defs">
-            {@|apply holds/1.svg.block}
-            {@|apply holds/2.svg.block}
-            {@|apply holds/3.svg.block}
-            {@|apply holds/4.svg.block}
-            {@|apply holds/5.svg.block}
+            {@|apply nav-holds/1.svg.block}
+            {@|apply nav-holds/2.svg.block}
+            {@|apply nav-holds/3.svg.block}
+            {@|apply nav-holds/4.svg.block}
+            {@|apply nav-holds/5.svg.block}
         </svg>
 
         <ul class="yr-nav-holds-menu">

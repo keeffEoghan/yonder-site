@@ -4,15 +4,30 @@
 
 # To-do
 
-- Home menu comparison view
-    - Due to limitations with JSON-T logic, will need to use some other way to hold all the description content (pairs: `nC2`; `n = 5 => 5C2 = 10`):
-        - Multiple `block-field`s? (Generate `n^2`, and only ever show unique pair combos of them?)
-        - Using `code-block` to just code it by hand?
-        - A single `block-field`, with some specified arrangement of content blocks? (Inconsistent layout engine might fuck this up... force 2-column layout to ensure...?)
-        - Specifed extra menu items? (Using `description` field sucks, and how to tell which item belongs where...?)
-    - JS controller needed to toggle for selected pair only.
+- Review feedback
+    - Holds comparison view:
+        - "Y" button to return to normal mode.
+        - Small-screen, just modal the details over the top.
+        - Content entry, single `block-field` with `spacer-block`s delimiting content separations (document this).
+    - Access:
+        - Give them your account details for now, so they can play and look around.
+        - Set up on main site subdomain until ready for release.
+        - Set up through `thisisyonder.squarespace.com` account on a subdomain.
+            - What's the cleanest way to transfer the site and template over, while still keeping the existing one as a holding page?
 - Errors
     - Sort out Style Editor breakage bullshit - #3302864
+        - Fix the font's `/count` failing HTTP request.
+- Home menu comparison view
+    - Due to limitations with JSON-T logic, will need to use some other way to hold all the description content (pairs: `nC2`; `n = 5 => 5C2 = 10`):
+        - Using `code-block` to just code it by hand?
+        - A single `block-field`, with some specified arrangement of content blocks?
+            - Inconsistent layout engine might fuck this up... use 2-column layout to make it more predictable...?
+        - Specifed extra menu items?
+            - Using `description` field sucks, and how to tell which item belongs where...?
+        - Multiple `block-field`s?
+            - Won't work... not having access to outermost index prevents the nested loop we need.
+            - Generate `n^2`, and only ever show unique pair combos of them?
+    - JS controller needed to toggle for selected pair only.
 - Content
     - Ensure colors per section work where native CSS variables don't (JS fallback, setting theme number?)
 - SVG holds

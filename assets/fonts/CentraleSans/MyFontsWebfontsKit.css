@@ -1,0 +1,39 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 3543405, 2018-03-16T12:13:18-0400
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: CentraleSansBold by Typedepot
+ * URL: https://www.myfonts.com/fonts/typedepot/centrale-sans/bold/
+ * 
+ * Webfont: CentraleSansMedium by Typedepot
+ * URL: https://www.myfonts.com/fonts/typedepot/centrale-sans/medium/
+ * 
+ * Webfont: CentraleSansMedium-It by Typedepot
+ * URL: https://www.myfonts.com/fonts/typedepot/centrale-sans/medium-italic/
+ * 
+ * 
+ * License: https://www.myfonts.com/viewlicense?type=web&buildid=3543405
+ * Licensed pageviews: 500,000
+ * Webfonts copyright: Copyright (c) 2016 by typedepot. All rights reserved.
+ * 
+ * © 2018 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("/count/36116d");
+
+
+@font-face {font-family: 'CentraleSans';font-weight: bold;font-style: normal;src: url('webfonts/36116D_0_0.eot');src: url('webfonts/36116D_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/36116D_0_0.woff2') format('woff2'),url('webfonts/36116D_0_0.woff') format('woff'),url('webfonts/36116D_0_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'CentraleSans';font-weight: normal;font-style: normal;src: url('webfonts/36116D_1_0.eot');src: url('webfonts/36116D_1_0.eot?#iefix') format('embedded-opentype'),url('webfonts/36116D_1_0.woff2') format('woff2'),url('webfonts/36116D_1_0.woff') format('woff'),url('webfonts/36116D_1_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'CentraleSans';font-weight: normal;font-style: italic;src: url('webfonts/36116D_2_0.eot');src: url('webfonts/36116D_2_0.eot?#iefix') format('embedded-opentype'),url('webfonts/36116D_2_0.woff2') format('woff2'),url('webfonts/36116D_2_0.woff') format('woff'),url('webfonts/36116D_2_0.ttf') format('truetype');}
