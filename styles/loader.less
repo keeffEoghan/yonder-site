@@ -32,13 +32,15 @@
         }
 
         will-change: opacity, transform;
-        .transition(opacity 500ms ease-out,
-            transform 0ms ease-out 500ms;);
+        @transition: opacity 500ms ease-out,
+            transform 0ms ease-out 500ms;
+        .transition(@transition);
 
         [data-yr-ajax-loading] & {
             opacity: 1;
-            .transition(opacity 0ms ease-out,
-                transform 500ms ease-out;);
+            @transition: opacity 0ms ease-out,
+                transform 500ms ease-out;
+            .transition(@transition);
         }
 
         [data-yr-ajax-loading="navigate"] & {
@@ -52,8 +54,9 @@
         [data-yr-ajax-loading="load"] & {
             opacity: 0;
             .transform(translateX(100%));
-            .transition(opacity 500ms ease-out 500ms,
-                transform 500ms ease-out;);
+            @transition: opacity 500ms ease-out 500ms,
+                transform 500ms ease-out;
+            .transition(@transition);
         }
     }
 }
@@ -94,7 +97,7 @@
 
 .yr-content {
     .yr-on-(~'.tweak-yr-loader-fade-content-fancy'); .-do() {
-        /* Blanket selector ahead... *//*
+        /* Blanket selector ahead... many selected elements *//*
         * {
             .yr-loader-fade();
             .yr-loader-fade-stagger(1, 12);
@@ -121,7 +124,7 @@
         }
         */
 
-        /* Mega-selector ahead... */
+        /* Mega-selector ahead... many selectors */
         .yr-load-fade,
 
         .sqs-layout .sqs-row,

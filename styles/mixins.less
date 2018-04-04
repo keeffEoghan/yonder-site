@@ -7,6 +7,7 @@
  * WIP.
  *
  * @see https://github.com/seven-phases-max/less.curious/blob/master/src/for.less
+ * @todo These don't seem to work in the Style Editor mode.
  */
 
 .yr-for-(@i, @n) {
@@ -17,7 +18,7 @@
     .yr-for-(1, @n);
 }
 
-.yr-for-(@i, @n) when not (@i = @n)  {
+.yr-for-(@i, @n) when (@i < @n)  {
     .yr-for-((@i + (@n - @i) / abs(@n - @i)), @n);
 }
 
@@ -25,9 +26,22 @@
  * Simple pseudo-random.
  */
 
+// Unbelievably, some LESS functions like `sin` and `mod` exist in the runtime Squarespace LESS,
+// but not in the Style Editor version... so we need to use "safe" versions here.
+.yr-mod(@a, @b) {
+    @mod: @a - (@b * floor(@a / @b));
+}
+
 .yr-rand(@seed: 123456) {
-    @r: sin(@seed) * 123456;
-    @rand: @r - floor(@r);
+    // `sin` not reliably supported by Squarespace LESS...
+    // @r: sin(@seed) * 123456;
+    // @rand: @r - floor(@r);
+
+    // `((a * seed) + c) % m`
+    // With `m = 2^32 = 4294967296`; `a = 1103515245`; `c = 12345`.
+    // @see https://stackoverflow.com/questions/3062746/special-simple-random-number-generator
+    .yr-mod((1103515245 * @seed) + 12345, 4294967296);
+    @rand: @mod;
 }
 
 
@@ -105,9 +119,10 @@
             pointer-events: none;
             .transform-origin(bottom);
             will-change: transform, opacity, border-color;
-            .transition(transform 500ms ease-out,
+            @transition: transform 500ms ease-out,
                 opacity 500ms ease-out,
-                border-color 500ms ease-out;);
+                border-color 500ms ease-out;
+            .transition(@transition);
         }
 
         &:visited::before {
@@ -118,9 +133,10 @@
         &:focus,
         &:active {
             &::before {
-                .transition(transform 200ms ease-out,
+                @transition: transform 200ms ease-out,
                     opacity 300ms ease-out,
-                    border-color 300ms ease-out;);
+                    border-color 300ms ease-out;
+                .transition(@transition);
             }
         }
 

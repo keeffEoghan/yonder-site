@@ -125,5 +125,9 @@
         </ul>
     </section>
 
-    <script type="text/javascript">console.log('nav-holds', {@|json-pretty|html});</script>
+    <script type="text/javascript">
+        if(self.debug) {
+            console.log('nav-holds', {@|json-pretty|html});
+        }
+    </script>
 </nav>

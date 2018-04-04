@@ -416,9 +416,10 @@
         &:active {
             ~ .yr-nav-holds-shape-block,
             ~ .yr-nav-hold-view {
-                .transition(fill-opacity 300ms ease-in-out,
+                @transition: fill-opacity 300ms ease-in-out,
                     stroke-opacity 500ms ease-out 100ms,
-                    stroke-width 200ms ease-out;);
+                    stroke-width 200ms ease-out;
+                .transition(@transition);
             }
         }
 
@@ -466,9 +467,10 @@
         fill-opacity: 0;
         stroke-opacity: 0;
         stroke-width: 0;
-        .transition(fill-opacity 600ms ease-in-out,
+        @transition: fill-opacity 600ms ease-in-out,
             stroke-opacity 800ms ease-out 100ms,
-            stroke-width 400ms ease-out;);
+            stroke-width 400ms ease-out;
+        .transition(@transition);
     }
 
     .yr-nav-holds-shape-block {

@@ -18,6 +18,9 @@
         }
     {.end}
 </style>
-<script class="yr-nav-color" data-content-field="navigation-nav-holds" type="text/javascript">
-    console.log('nav-colors', {@|json-pretty|html});
+
+<script type="text/javascript">
+    if(self.debug) {
+        console.log('nav-colors', {@|json-pretty|html});
+    }
 </script>

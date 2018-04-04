@@ -28,6 +28,10 @@
 
         {squarespace-footers}
 
-        <script type="text/javascript">console.log('site', {@|json-pretty|html});</script>
+        <script type="text/javascript">
+            if(self.debug) {
+                console.log('site', {@|json-pretty|html});
+            }
+        </script>
     </body>
 </html>
