@@ -317,17 +317,9 @@
             margin: 0 auto 0 @margin;
         }
 
-        @themes: @tweak-yr-color-theme-1-tone-2,
-            @tweak-yr-color-theme-2-tone-2,
-            @tweak-yr-color-theme-3-tone-2,
-            @tweak-yr-color-theme-4-tone-2,
-            @tweak-yr-color-theme-5-tone-2;
-
-        @themes-n: length(@themes);
-
-        .yr-for-(@themes-n); .-each(@i) {
-            &:nth-child((~'@{themes-n}n+@{i}')) .yr-use-hold-shape {
-                color: extract(@themes, @i - 1);
+        .yr-for-(@yr-color-themes-num); .-each(@i) {
+            &:nth-child((~'@{yr-color-themes-num}n+@{i}')) .yr-use-hold-shape {
+                color: extract(extract(@yr-color-themes, @i - 1), 1);
             }
         }
 
@@ -369,9 +361,9 @@
 
                 // Move any of the rest down.
 
-                @rest: @tweak-yr-nav-holds-ring-num + 1;
+                @next: @tweak-yr-nav-holds-ring-num + 1;
 
-                &:nth-child(@rest) {
+                &:nth-child(@next) {
                     margin-top: @holds-radius * 2;
                 }
             }

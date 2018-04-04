@@ -2,6 +2,9 @@
  * Export the tweak values as CSS variables so they can be used via JSON-T template...
  */
 :root {
+    // Would do this in a loop, but can't set the property key dynamically...
+    // @todo Editable limit to the number of color themes.
+
     --tweak-yr-color-theme-1-tone-1: @tweak-yr-color-theme-1-tone-1;
     --tweak-yr-color-theme-1-tone-2: @tweak-yr-color-theme-1-tone-2;
     --tweak-yr-color-theme-1-tone-3: @tweak-yr-color-theme-1-tone-3;
@@ -22,10 +25,8 @@
     --tweak-yr-color-theme-5-tone-2: @tweak-yr-color-theme-5-tone-2;
     --tweak-yr-color-theme-5-tone-3: @tweak-yr-color-theme-5-tone-3;
 
-    --tweak-yr-color-theme-none-tone-1: @tweak-yr-color-theme-none-tone-1;
-    --tweak-yr-color-theme-none-tone-2: @tweak-yr-color-theme-none-tone-2;
-    --tweak-yr-color-theme-none-tone-3: @tweak-yr-color-theme-none-tone-3;
 
+    // Set the default to "none".
     --tweak-yr-color-theme-on-tone-1: var(--tweak-yr-color-theme-none-tone-1);
     --tweak-yr-color-theme-on-tone-2: var(--tweak-yr-color-theme-none-tone-2);
     --tweak-yr-color-theme-on-tone-3: var(--tweak-yr-color-theme-none-tone-3);

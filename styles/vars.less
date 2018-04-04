@@ -84,6 +84,38 @@
 
 
 /**
+ * Color Themes
+ */
+
+// Nested list - [theme[tone]]
+
+@yr-color-theme-1: @tweak-yr-color-theme-1-tone-1,
+    @tweak-yr-color-theme-1-tone-2,
+    @tweak-yr-color-theme-1-tone-3;
+@yr-color-theme-2: @tweak-yr-color-theme-2-tone-1,
+    @tweak-yr-color-theme-2-tone-2,
+    @tweak-yr-color-theme-2-tone-3;
+@yr-color-theme-3: @tweak-yr-color-theme-3-tone-1,
+    @tweak-yr-color-theme-3-tone-2,
+    @tweak-yr-color-theme-3-tone-3;
+@yr-color-theme-4: @tweak-yr-color-theme-4-tone-1,
+    @tweak-yr-color-theme-4-tone-2,
+    @tweak-yr-color-theme-4-tone-3;
+@yr-color-theme-5: @tweak-yr-color-theme-5-tone-1,
+    @tweak-yr-color-theme-5-tone-2,
+    @tweak-yr-color-theme-5-tone-3;
+
+@yr-color-themes: @yr-color-theme-1,
+    @yr-color-theme-2,
+    @yr-color-theme-3,
+    @yr-color-theme-4,
+    @yr-color-theme-5;
+
+@yr-color-themes-all-num: length(@yr-color-themes);
+@yr-color-themes-num: min(@yr-color-themes-all-num, @tweak-yr-color-themes-num);
+
+
+/**
  * Eases
  */
 
