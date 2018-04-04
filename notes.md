@@ -16,7 +16,7 @@
             - What's the cleanest way to transfer the site and template over, while still keeping the existing one as a holding page?
 - Errors
     - Sort out Style Editor breakage bullshit - #3302864
-        - Fix the font's `/count` failing HTTP request.
+        - Several things break when in edit mode... LESS inconsistencies, unbelievable
 - Home menu comparison view
     - Due to limitations with JSON-T logic, will need to use some other way to hold all the description content (pairs: `nC2`; `n = 5 => 5C2 = 10`):
         - Using `code-block` to just code it by hand?
@@ -63,6 +63,9 @@
 
 # Done
 
+- Errors
+    - Sort out Style Editor breakage bullshit - #3302864
+        - Fix the font's `/count` failing HTTP request.
 - Home menu comparison view
     - Due to limitations with JSON-T logic, will need to use a single `block-field` to hold all the description content blocks (pairs: `nC2`; `n = 5 => 5C2 = 10`).
     - Do some amount with CSS: toggle details mode, toggle details `block-field`... that's probably it.
