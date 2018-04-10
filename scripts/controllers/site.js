@@ -66,7 +66,8 @@ function loadAJAX() {
     const ajaxEnabled = Tweak.getValue('tweak-yr-ajax-enable') === 'true';
 
     // Don't use ajax in authenticated session or when tweak option is disabled.
-    if ((!debug && authenticated) || !ajaxEnabled) {
+    // if ((!debug && authenticated) || !ajaxEnabled) {
+    if (!ajaxEnabled) {
         return false;
     }
 
@@ -93,11 +94,12 @@ function loadAJAX() {
     });
 
     window.addEventListener('mercury:load', () => {
-        // Mercury doesn't seem to always persist the data attribute properly - add a phase...
+        // Mercury doesn't control the data attribute - add a phase...
         document.documentElement.setAttribute('data-yr-ajax-loading', 'swap');
 
         Lifecycle.init();
         loadImages();
+        refresh();
 
         setTimeout(() => document.documentElement.setAttribute('data-yr-ajax-loading', 'load'),
             0);
@@ -105,9 +107,6 @@ function loadAJAX() {
         setTimeout(() => document.documentElement.removeAttribute('data-yr-ajax-loading'),
             waitTime);
     });
-
-    // Sync controllers on AJAX load
-    window.addEventListener('mercury:load', refresh);
 }
 
 const loadImages = () =>

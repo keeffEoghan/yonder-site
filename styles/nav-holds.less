@@ -274,6 +274,12 @@
         max-width: 1300px;
         padding: 2em;
         margin: auto;
+
+        .yr-on-(~'.tweak-yr-nav-holds-ring-show'); .-do() {
+            @media @mq-ring-up {
+                min-height: @holds-radius * 1.9;
+            }
+        }
     }
 
     .yr-site-title {
@@ -323,7 +329,7 @@
             }
         }
 
-        .tweak-yr-nav-holds-ring-show & {
+        .yr-on-(~'.tweak-yr-nav-holds-ring-show'); .-do() {
             @media @mq-ring-up {
                 // Select the first `@tweak-yr-nav-holds-ring-num` of holds.
                 &:nth-child((~'-n+@{tweak-yr-nav-holds-ring-num}')) {
