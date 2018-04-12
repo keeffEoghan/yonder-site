@@ -1,21 +1,25 @@
-<nav class="yr-nav-holds" data-controller="yr-nav-holds" data-content-field="navigation-nav-holds">
+<nav class="yr-nav-holds" data-controller="yr-nav-holds"
+    data-content-field="navigation-nav-holds">
     {##BEGIN} Controls normal/detail mode, DOM position important. {END##}
-    <input id="yr-nav-holds-mode" type="checkbox" title="Details" aria-label="Details">
+    <input id="yr-nav-holds-mode" class="yr-nav-holds-mode" type="checkbox"
+        title="Details" aria-label="Details">
 
     {##BEGIN} Controls detail display, DOM position important. {END##}
-    <input class="yr-nav-holds-info-hide" form="yr-nav-holds-info-form"
-        type="radio" name="yr-nav-holds-info-0-toggle" value="hold-info-0-hide" checked>
-    <input class="yr-nav-holds-info-hide" form="yr-nav-holds-info-form"
-        type="radio" name="yr-nav-holds-info-1-toggle" value="hold-info-1-hide" checked>
-    <form id="yr-nav-holds-info-form">
-        <input id="yr-nav-holds-info-reset" type="reset"
-            value="Clear selected details" title="Clear selected details" aria-label="Clear selected details">
+    <input class="yr-nav-holds-info-toggle yr-nav-holds-info-hide" form="yr-nav-holds-info-form"
+        type="radio" name="yr-nav-holds-info-0-toggle" value="null" checked>
+    <input class="yr-nav-holds-info-toggle yr-nav-holds-info-hide" form="yr-nav-holds-info-form"
+        type="radio" name="yr-nav-holds-info-1-toggle" value="null" checked>
+    <form id="yr-nav-holds-info-form" class="yr-nav-holds-info-form">
+        <input id="yr-nav-holds-info-reset"
+            class="yr-nav-holds-info-toggle yr-nav-holds-info-reset"
+            type="reset" value="Clear selected details"
+            title="Clear selected details" aria-label="Clear selected details">
     </form>
 
     {##BEGIN} Anything controlled by the preceeding elements, DOM position important. {END##}
 
     <div class="yr-nav-holds-mode-hint">
-        {##BEGIN}
+        {##BEGIN} @todo Use the home icon to get out of detail mode instead
         <squarespace:block-field id="yr-nav-holds-home-icon"
             class="yr-nav-button-icon-block" columns="1">
         </squarespace:block-field>
@@ -30,7 +34,7 @@
         <label class="yr-nav-holds-mode-label" for="yr-nav-holds-mode">Details</label>
     </div>
 
-    <section id="eok" class="yr-nav-holds-main">
+    <section class="yr-nav-holds-main">
         <section id="yr-nav-holds-content" class="yr-nav-holds-content">
             <header class="yr-nav-holds-header">
                 {@|apply titles.block}
@@ -45,115 +49,23 @@
 
                     Squarespace is not the ideal environment for setting this up.
                     JSON-T's loop logic is too basic to loop the number of `block-field`
-                    items we need - it's OK though, just need to inject `open-block`s with
-                    JavaScript at runtime (OK demand for CMS editor to have JS enabled).
+                    items needed - also can't inject `open-block`s with JavaScript at runtime,
+                    since the content injection for these blocks happens before runtime...
+                    So, need to use a method where the blocks are set up ahead-of-time, and
+                    the CMS user edits them for the right amount of content (with hints from
+                    JS/CSS as to which content matches which state).
+
+                    Puts the burden of correctly creating the content on that user, but
+                    hopefully should be straighforward enough.
+                    Essentially, this `block-field` is an open box within which the content
+                    needs to be defined in the right number, with some hints to help clarify.
 
                     The relevant `block-field` content blocks for any selected state will
-                    be shown on click, to help clarify where the content needs to be filled
-                    in - template is generic/flexible.
+                    be shown on click, to help clarify where the content needs to be filled in.
                     For paired holds info, the `block-field` should have enough content
                     blocks to correspond to all holds (for pairs: `nC2`; `n = 5 => 5C2 = 10`).
-                    Example combinations:
-                    ```
-                        Intuitive cascade from the maths.
-                        Do each number one by one, remove already-used pairs.
 
-                        1 | 1-2, 1-3, 1-4, 1-5
-                        2 | 2-3, 2-4, 2-5
-                        3 | 3-4, 3-5
-                        4 | 4-5
-                        5 | -
-
-                        1 | -
-                        2 | 2-1
-                        3 | 3-2, 3-1
-                        4 | 4-3, 4-2, 4-1
-                        5 | 5-4, 5-3, 5-2, 5-1
-
-                        Intuitive for coding and presentation?
-                        Nice square-ish shape, nested loop, increment each, then increment the increment.
-
-                        Short:
-                            1 | 1-2, 1-3
-                            2 | 2-3, 2-4
-                            3 | 3-4, 3-5
-                            4 | 4-5, 4-1
-                            5 | 5-1, 5-2
-
-                        Long:
-                            1  |  1-2,  1-3,  1-4,  1-5, 1-6
-                            2  |  2-3,  2-4,  2-5,  2-6, 2-7
-                            3  |  3-4,  3-5,  3-6,  3-7, 3-8
-                            4  |  4-5,  4-6,  4-7,  4-8, 4-9
-                            5  |  5-6,  5-7,  5-8,  5-9, 5-10
-                            6  |  6-7,  6-8,  6-9, 6-10
-                            7  |  7-8,  7-9, 7-10,  7-1
-                            8  |  8-9, 8-10,  8-1,  8-2
-                            9  | 9-10,  9-1,  9-2,  9-3
-                            10 | 10-1, 10-2, 10-3, 10-4
-
-                        Flattened version of previous.
-                        For "easily" editing via CMS in a single column, and CSS selection.
-
-                        Short:
-                            1+1 | 1-2
-                            2+1 | 2-3
-                            3+1 | 3-4
-                            4+1 | 4-5
-                            5+1 | 5-1
-                            1+2 | 1-3
-                            2+2 | 2-4
-                            3+2 | 3-5
-                            4+2 | 4-1
-                            5+2 | 5-2
-
-                        Long:
-                            1+1  | 1-2
-                            1+2  | 1-3
-                            1+3  | 1-4
-                            1+4  | 1-5
-                            1+5  | 1-6
-                            2+1  | 2-3
-                            2+2  | 2-4
-                            2+3  | 2-5
-                            2+4  | 2-6
-                            2+5  | 2-7
-                            3+1  | 3-4
-                            3+2  | 3-5
-                            3+3  | 3-6
-                            3+4  | 3-7
-                            3+5  | 3-8
-                            4+1  | 4-5
-                            4+2  | 4-6
-                            4+3  | 4-7
-                            4+4  | 4-8
-                            4+5  | 4-9
-                            5+1  | 5-6
-                            5+2  | 5-7
-                            5+3  | 5-8
-                            5+4  | 5-9
-                            5+5  | 5-10
-                            6+1  | 6-7
-                            6+2  | 6-8
-                            6+3  | 6-9
-                            6+4  | 6-10
-                            7+1  | 7-8
-                            7+2  | 7-9
-                            7+3  | 7-10
-                            7+4  | 7-1
-                            8+1  | 8-9
-                            8+2  | 8-10
-                            8+3  | 8-1
-                            8+4  | 8-2
-                            9+1  | 9-10
-                            9+2  | 9-1
-                            9+3  | 9-2
-                            9+4  | 9-3
-                            10+1 | 10-1
-                            10+2 | 10-2
-                            10+3 | 10-3
-                            10+4 | 10-4
-                    ```
+                    @see The controller script for example combinations.
                 {END##}
                 <squarespace:block-field id="nav-holds-info-block" class="yr-nav-holds-info-block" columns="12"></squarespace:block-field>
             </article>
@@ -172,13 +84,13 @@
             {.repeated section items}
                 <li class="yr-nav-hold">
                     {##BEGIN} Controls which hold info is visible, DOM position important. {END##}
-                    <input class="yr-nav-hold-info-toggle yr-nav-holds-info-show"
-                        form="yr-nav-holds-info-form"
-                        type="radio" name="yr-nav-holds-info-0-toggle" value="hold-info-0-{@index}"
+                    <input class="yr-nav-holds-info-toggle yr-nav-holds-info-show"
+                        form="yr-nav-holds-info-form" type="radio"
+                        name="yr-nav-holds-info-0-toggle" value="{@index}"
                         title="Show details" aria-label="Show details">
-                    <input class="yr-nav-hold-info-toggle yr-nav-holds-info-show"
-                        form="yr-nav-holds-info-form"
-                        type="radio" name="yr-nav-holds-info-1-toggle" value="hold-info-1-{@index}"
+                    <input class="yr-nav-holds-info-toggle yr-nav-holds-info-show"
+                        form="yr-nav-holds-info-form" type="radio"
+                        name="yr-nav-holds-info-1-toggle" value="{@index}"
                         title="Show details" aria-label="Show details">
 
                     {.section collection}

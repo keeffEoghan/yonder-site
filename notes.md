@@ -4,11 +4,13 @@
 
 # To-do
 
+- Document and instruct
+    - The workaround for getting content into the holds comparison view - using a top-level "new row" action.
 - Review feedback
     - Holds comparison view:
         - "Y" button to return to normal mode.
         - Small-screen, just modal the details over the top.
-        - Content entry, single `block-field` with `spacer-block`s delimiting content separations (document this).
+        - Content entry, single `block-field` with top-level rows delimiting content separations (document this).
     - Access:
         - Set up on main site subdomain until ready for release.
         - Set up through `thisisyonder.squarespace.com` account on a subdomain.

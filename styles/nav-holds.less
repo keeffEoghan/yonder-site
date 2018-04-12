@@ -19,7 +19,7 @@
     @holds-radius: 50vmin;
     @holds-radius-inner: @holds-radius * 0.6;
 
-    #yr-nav-holds-mode,
+    .yr-nav-holds-mode,
     .yr-nav-holds-mode-hint {
         order: 1;
         z-index: @yr-z-nav-holds-mode;
@@ -55,13 +55,13 @@
         }
     }
 
-    #yr-nav-holds-mode,
-    .yr-nav-hold-info-toggle {
+    .yr-nav-holds-mode,
+    .yr-nav-holds-info-show {
         display: none;
     }
 
-    #yr-nav-holds-info-reset,
-    .yr-nav-hold-info-toggle {
+    .yr-nav-holds-info-reset,
+    .yr-nav-holds-info-show {
         position: absolute;
         top: 0;
         right: 0;
@@ -108,9 +108,9 @@
      * Mode related styles.
      */
     
-    #yr-nav-holds-info-form {}
+    .yr-nav-holds-info-form {}
 
-    #yr-nav-holds-info-reset {
+    .yr-nav-holds-info-reset {
         z-index: @yr-z-nav-holds-info-reset;
         font-size: 0;
         color: transparent;
@@ -126,7 +126,7 @@
         display: none;
     }
 
-    .yr-nav-hold-info-toggle {
+    .yr-nav-holds-info-show {
         z-index: @yr-z-nav-holds-info-toggle;
     }
 
@@ -160,13 +160,52 @@
         }
     }
 
+    /**
+     * Info content pair styles.
+     * Repurposing the layout system... for top-level layout, blocks or rows denote the info
+     * content for a pair of holds.
+     * Very dependent on layout engine and DOM structure.
+     */
+    .yr-nav-holds-info-block {
+        > .sqs-row > [class*="sqs-col"] {
+            // Rows and blocks at the top level are matched to hold pairs.
+            > .sqs-row,
+            > .sqs-block,
+            > [class*="sqs-col"] {
+                &:not(.yr-holds-selected) {
+                    .switcher-off-flow();
+                }
+            }
+
+            // Allow the "place new row" action to define a pair without changing layout.
+            > .sqs-row > [class*="sqs-col"] {
+                width: 100%;
+            }
+        }
+
+        &@{yr-select-sqs-edit-on} > .sqs-row > [class*="sqs-col"] {
+            > .sqs-row,
+            > .sqs-block,
+            > [class*="sqs-col"] {
+                border: 1px dotted rgba(0, 0, 0, 0.5);
+                margin: 20% 0 20% !important;
+            }
+        }
+    }
+
 
     /**
      * Detail toggles states.
      * The last unselected info-toggle radio-group is active.
+     * Details contwent is shown for a checked pair of holds (radios).
      */
 
     .yr-nav-holds-info-hide {
+        /**
+         * @todo Rewrite these states in a more cascade-friendly way?
+         *       (Might mean conditionally showing rather than hiding the content...)
+         */
+
         // If any are checked...
         &:checked {
             // Hide the info.
@@ -180,7 +219,7 @@
         // If any aren't checked...
         &:not(:checked) {
             // Show the reset.
-            ~ #yr-nav-holds-info-form #yr-nav-holds-info-reset {
+            ~ .yr-nav-holds-info-form .yr-nav-holds-info-reset {
                 pointer-events: all;
                 opacity: 0.5;
             }
@@ -196,6 +235,10 @@
             }
         }
 
+        /**
+         * Handle the pairs states.
+         */
+
         @details-groups: ~'yr-nav-holds-info-0-toggle',
             ~'yr-nav-holds-info-1-toggle';
         @details-length: length(@details-groups);
@@ -206,21 +249,19 @@
 
             // If unselected, make the info-toggles of this group active.
             &@{group-attr}:checked {
-                ~ .yr-nav-holds-main .yr-nav-hold-info-toggle@{group-attr} {
+                ~ .yr-nav-holds-main .yr-nav-holds-info-show@{group-attr} {
                     pointer-events: all;
                 }
             }
 
             // If any preceding are unselected, make the info-toggles of this group inactive.
             &:checked ~ .yr-nav-holds-info-hide@{group-attr}:checked {
-                ~ .yr-nav-holds-main .yr-nav-hold-info-toggle@{group-attr} {
+                ~ .yr-nav-holds-main .yr-nav-holds-info-show@{group-attr} {
                     pointer-events: none;
                 }
             }
 
-            // ~ .yr-nav-holds-main .yr-nav-holds-info-block {
-                /* @todo Match inner blocks to menu items */
-            // }
+            /* @todo Match inner blocks to hold pairs without scripts...? */
         }
     }
 
@@ -229,7 +270,7 @@
      * Toggle mode states.
      */
 
-    #yr-nav-holds-mode {
+    .yr-nav-holds-mode {
         // `display: none` - depends on a label with `for="yr-nav-holds-mode"` to be toggled.
 
         &:checked {
@@ -246,7 +287,7 @@
                     pointer-events: none;
                 }
 
-                .yr-nav-hold-info-toggle {
+                .yr-nav-holds-info-show {
                     display: block;
                 }
 
@@ -277,7 +318,7 @@
 
         .yr-on-(~'.tweak-yr-nav-holds-ring-show'); .-do() {
             @media @mq-ring-up {
-                min-height: @holds-radius * 1.9;
+                min-height: @holds-radius * 1.8;
             }
         }
     }
@@ -408,7 +449,7 @@
         }
     }
 
-    .yr-nav-hold-info-toggle,
+    .yr-nav-holds-info-show,
     .yr-nav-hold-a {
         &:hover,
         &:active {
@@ -431,15 +472,15 @@
         }
     }
 
-    .yr-nav-hold-info-toggle:checked {
+    .yr-nav-holds-info-show:checked {
         .shape-hover();
         .shape-active();
     }
 
-    #yr-nav-holds-info-form {
+    .yr-nav-holds-info-form {
         &:active,
         &:hover {
-            ~ .yr-nav-holds-main .yr-nav-hold-info-toggle:checked {
+            ~ .yr-nav-holds-main .yr-nav-holds-info-show:checked {
                 ~ .yr-nav-holds-shape-block,
                 ~ .yr-nav-hold-view {
                     fill-opacity: 0.8;
