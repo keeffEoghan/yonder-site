@@ -4,9 +4,9 @@ function navHolds(element) {
     const $element = $(element);
 
     const info = {
-        $hides: $element.find('.yr-nav-holds-info-hide'),
         $form: $element.find('.yr-nav-holds-info-form'),
         $container: $element.find('.yr-nav-holds-content'),
+
         $content: $element.find('.yr-nav-holds-info-block > .sqs-row > [class*="sqs-col"]')
             .children('.sqs-row, .sqs-block, [class*="sqs-col"]'),
         $holds: $element.find('.yr-nav-holds-menu').children('.yr-nav-hold'),
@@ -87,6 +87,8 @@ function navHolds(element) {
     };
 
     $element.on('change', '.yr-nav-holds-info-show', info.toggle);
+
+    // @todo Refresh DOM references / controller when CMS edits have occurred.
 }
 
 export default navHolds;

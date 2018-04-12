@@ -5,14 +5,16 @@ import Mercury from '@squarespace/mercury';
 
 import { authenticated, debug } from '../constants';
 
-function site() {
+function site(element) {
+    const $element = $(element);
+
     loadAJAX();
 
     $(loadImages);
     window.addEventListener('load', loadImages);
 
     // Prevent link events reaching `body` when `a` descendents are being edited in CMS.
-    $('body > *').on('click', 'a .sqs-editing', false);
+    $element.find('body > *').on('click', 'a .sqs-editing', false);
 }
 
 // Exceptions: external links, hash links

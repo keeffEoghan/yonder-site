@@ -10,7 +10,7 @@
     - Holds comparison view:
         - "Y" button to return to normal mode.
         - Small-screen, just modal the details over the top.
-        - Content entry, single `block-field` with top-level rows delimiting content separations (document this).
+        - Fix little bug in pair info edit, refresh the DOM references when CMS edits occur.
     - Access:
         - Set up on main site subdomain until ready for release.
         - Set up through `thisisyonder.squarespace.com` account on a subdomain.
@@ -64,6 +64,8 @@
 # Done
 
 - Review feedback
+    - Holds comparison view:
+        - Content entry, single `block-field` with top-level rows delimiting content separations (document this).
     - Access:
         - Give them your account details for now, so they can play and look around.
 - Errors
