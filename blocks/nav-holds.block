@@ -35,7 +35,7 @@
     </div>
 
     <section class="yr-nav-holds-main">
-        <section id="yr-nav-holds-content" class="yr-nav-holds-content">
+        <section class="yr-nav-holds-content">
             <header class="yr-nav-holds-header">
                 {@|apply titles.block}
                 <squarespace:block-field id="nav-holds-titles-block" class="yr-nav-holds-titles-block yr-a" columns="12"></squarespace:block-field>

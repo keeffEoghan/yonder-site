@@ -89,8 +89,11 @@
     }
     .switcher-off() {
         opacity: 0;
+
+        // For hiding the CMS controls
         visibility: hidden;
         .transform(scale(0));
+
         @transition: opacity @switch-time-off ease-out,
             visibility 0ms linear @switch-time-off,
             transform 0ms linear @switch-time-off;
@@ -167,28 +170,37 @@
      * Very dependent on layout engine and DOM structure.
      */
     .yr-nav-holds-info-block {
-        > .sqs-row > [class*="sqs-col"] {
-            // Rows and blocks at the top level are matched to hold pairs.
-            > .sqs-row,
-            > .sqs-block,
-            > [class*="sqs-col"] {
-                &:not(.yr-holds-selected) {
-                    .switcher-off-flow();
-                }
-            }
+        // Hint editors about which content matches which selections.
+        .yr-holds-unchosen {
+            opacity: 0.25;
+        }
 
-            // Allow the "place new row" action to define a pair without changing layout.
-            > .sqs-row > [class*="sqs-col"] {
-                width: 100%;
+        // Rows and blocks at the top level are matched to hold pairs - grid tiers are:
+        @grid-tier: ~'> .sqs-row > [class*="sqs-col"]';
+
+        // The "place new row" action defines a pair without changing layout - at grid tier 1.
+        @{grid-tier} @{grid-tier} {
+            width: 100%;
+        }
+
+        // Editing
+        @{yr-select-sqs-edit-mode} & {
+            // Hint editors about which content matches which selections - at grid tier 0.
+            @{grid-tier} {
+                > .sqs-row,
+                > .sqs-block,
+                > [class*="sqs-col"] {
+                    border: 1px dotted rgba(0, 0, 0, 0.5);
+                    margin: 20% 0 20% !important;
+                }
             }
         }
 
-        &@{yr-select-sqs-edit-on} > .sqs-row > [class*="sqs-col"] {
-            > .sqs-row,
-            > .sqs-block,
-            > [class*="sqs-col"] {
-                border: 1px dotted rgba(0, 0, 0, 0.5);
-                margin: 20% 0 20% !important;
+        // Viewing
+        body:not(@{yr-select-sqs-edit-mode}) & {
+            // Display everything to users by default - conditionally hide with script class.
+            .yr-holds-unchosen {
+                .switcher-off-flow();
             }
         }
     }

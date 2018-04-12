@@ -6,6 +6,7 @@ function navHolds(element) {
     const info = {
         $hides: $element.find('.yr-nav-holds-info-hide'),
         $form: $element.find('.yr-nav-holds-info-form'),
+        $container: $element.find('.yr-nav-holds-content'),
         $content: $element.find('.yr-nav-holds-info-block > .sqs-row > [class*="sqs-col"]')
             .children('.sqs-row, .sqs-block, [class*="sqs-col"]'),
         $holds: $element.find('.yr-nav-holds-menu').children('.yr-nav-hold'),
@@ -65,8 +66,24 @@ function navHolds(element) {
         },
 
         toggle: () =>
-            info.$content.removeClass('yr-holds-selected')
-                .eq(info.combo()).addClass('yr-holds-selected')
+            info.scroll(info.$content.addClass('yr-holds-unchosen')
+                .eq(info.combo()).removeClass('yr-holds-unchosen')),
+
+        scroll($chosen) {
+            // Scroll into view - for a hint while editing.
+            if($chosen.length) {
+                const box = info.$container.offset();
+                const chosenBox = $chosen.offset();
+
+                info.$container.scrollTop(info.$container.scrollTop()+
+                    // Align to top
+                    chosenBox.top-box.top-
+                    // Center
+                    Math.max(0, box.height-chosenBox.height)*0.5);
+            }
+
+            return $chosen;
+        }
     };
 
     $element.on('change', '.yr-nav-holds-info-show', info.toggle);
