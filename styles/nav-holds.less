@@ -490,6 +490,11 @@
     .yr-nav-holds-info-show:checked {
         .shape-hover();
         .shape-active();
+
+        // Prevent holds being compared to themselves.
+        ~ .yr-nav-holds-info-show {
+            pointer-events: none !important;
+        }
     }
 
     .yr-nav-holds-info-form {
