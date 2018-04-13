@@ -170,17 +170,20 @@
      * Very dependent on layout engine and DOM structure.
      */
     .yr-nav-holds-info-block {
-        // Hint editors about which content matches which selections.
-        .yr-holds-unchosen {
-            opacity: 0.25;
-        }
-
         // Rows and blocks at the top level are matched to hold pairs - grid tiers are:
         @grid-tier: ~'> .sqs-row > [class*="sqs-col"]';
 
-        // The "place new row" action defines a pair without changing layout - at grid tier 1.
-        @{grid-tier} @{grid-tier} {
-            width: 100%;
+        @{grid-tier} {
+            // Hint which rows don't match the chosen holds - at grid tier 0.
+            > .yr-holds-unchosen {
+                opacity: 0.25;
+                filter: ~'saturate(0%)';
+            }
+
+            // The "place new row" action defines a pair without changing layout - at grid tier 1.
+            @{grid-tier} {
+                width: 100%;
+            }
         }
 
         // Editing
@@ -190,8 +193,8 @@
                 > .sqs-row,
                 > .sqs-block,
                 > [class*="sqs-col"] {
-                    border: 1px dotted rgba(0, 0, 0, 0.5);
                     margin: 10% 0 10% !important;
+                    border: 1px dotted rgba(0, 0, 0, 0.5);
                 }
             }
         }

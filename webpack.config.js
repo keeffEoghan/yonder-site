@@ -19,6 +19,10 @@ const config = {
                 loader: 'babel-loader'
             },
             {
+                test: /\?(.+\&)?yr-babel(\&.+)?$/,
+                loader: 'babel-loader'
+            },
+            {
                 test: require.resolve('zepto'),
                 loader: 'imports-loader?this=>window'
             }

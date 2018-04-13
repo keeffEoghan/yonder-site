@@ -4,30 +4,16 @@
 
 # To-do
 
-- Document and instruct
-    - The workaround for getting content into the holds comparison view - using a top-level "new row" action.
 - Review feedback
     - Holds comparison view:
         - "Y" button to return to normal mode.
         - Small-screen, just modal the details over the top.
-        - Fix little bug in pair info edit, refresh the DOM references when CMS edits occur.
     - Access:
         - Set up on main site subdomain until ready for release.
         - Set up through `thisisyonder.squarespace.com` account on a subdomain.
             - What's the cleanest way to transfer the site and template over, while still keeping the existing one as a holding page?
-- Errors
-    - Several things break when in edit mode... LESS inconsistencies, unbelievable
-- Home menu comparison view
-    - Due to limitations with JSON-T logic, will need to use some other way to hold all the description content (pairs: `nC2`; `n = 5 => 5C2 = 10`):
-        - Using `code-block` to just code it by hand?
-        - A single `block-field`, with some specified arrangement of content blocks?
-            - Inconsistent layout engine might fuck this up... use 2-column layout to make it more predictable...?
-        - Specifed extra menu items?
-            - Using `description` field sucks, and how to tell which item belongs where...?
-        - Multiple `block-field`s?
-            - Won't work... not having access to outermost index prevents the nested loop we need.
-            - Generate `n^2`, and only ever show unique pair combos of them?
-    - JS controller needed to toggle for selected pair only.
+- Bugs and errors
+    - Several things break when in edit mode... Squarespace LESS inconsistencies, unbelievable
 - Content
     - Ensure colors per section work where native CSS variables don't (JS fallback, setting theme number?)
 - SVG holds
@@ -38,7 +24,8 @@
                 - Hacky... can tweak values create new tweaks? Like have a value tweak for number of holds, and generate enough corresponding tweaks in LESS...?
 - Squarespace setup
     - Transfer template, domain to live
-- Document some of the Squarespace workarounds you're using
+- Document and instruct
+    - The workaround for getting content into the holds comparison view - using a top-level "new row" action.
     - 2 Ways of doing the header banners:
         - With the Squarespace image poster layout and correct font settings (defaults)
         - With a `text-block`, `h1`, and header code injected `style` or `code-block` to give it a background image: `.yr-main > .sqs-layout:first-child > .sqs-row:first-child > .col:first-child > .sqs-block-html { /* ... */ }`
@@ -55,11 +42,6 @@
     - Event detail page
     - SVG asset notes:
         - Inline styles (`CSS Properties: Style Attributes`)
-        - Centered within 200x200 canvas, covering size, around text
-        - All borders present
-- Set up [Webpack](https://github.com/webpack-contrib/extract-text-webpack-plugin/blob/webpack-1/README.md) with [Autoprefixer](https://github.com/postcss/autoprefixer#webpack) and [LESS](https://github.com/webpack-contrib/less-loader)?
-    - Currently working with Squarespace's weird divergent LESS implementation; prefixes etc are tricky.
-    - Parking for now, as prefixing isn't as big an issue as it once was (for our current needs at least).
 
 # Done
 
@@ -68,12 +50,22 @@
         - Content entry, single `block-field` with top-level rows delimiting content separations (document this).
     - Access:
         - Give them your account details for now, so they can play and look around.
-- Errors
+- Bugs and errors
+    - Fix little bug in pair info edit, refresh the DOM references when CMS edits occur.
     - Sort out Style Editor breakage bullshit - #3302864
         - Fix the font's `/count` failing HTTP request.
 - Home menu comparison view
-    - Due to limitations with JSON-T logic, will need to use a single `block-field` to hold all the description content blocks (pairs: `nC2`; `n = 5 => 5C2 = 10`).
     - Do some amount with CSS: toggle details mode, toggle details `block-field`... that's probably it.
+    - JS controller needed to toggle for selected pair only.
+    - Due to limitations with JSON-T logic, will need to use some other way to hold all the description content (pairs: `nC2`; `n = 5 => 5C2 = 10`):
+        - Using `code-block` to just code it by hand?
+        - A single `block-field`, with some specified arrangement of content blocks?
+            - Inconsistent layout engine might fuck this up... use 2-column layout to make it more predictable...?
+        - Specifed extra menu items?
+            - Using `description` field sucks, and how to tell which item belongs where...?
+        - Multiple `block-field`s?
+            - Won't work... not having access to outermost index prevents the nested loop we need.
+            - Generate `n^2`, and only ever show unique pair combos of them?
 - Finish AJAX loading
     - Page animations
 - Block out main zones and animations
@@ -101,8 +93,11 @@
     - Dark/light colors - switch based on what's beneath (not always clear), or have floating header bar appear?
 - Design
     - New hold SVG assets
-        - Centered within 200x200 canvas
+        - Centered within 200x200 canvas, covering size, around text
         - All borders present
     - Dark/light colors - switch based on what's beneath (not always clear), or have floating header bar appear?
 - Decide how to configure the landing page holds
     - Secondary navigation links
+- Set up [Webpack](https://github.com/webpack-contrib/extract-text-webpack-plugin/blob/webpack-1/README.md) with [Autoprefixer](https://github.com/postcss/autoprefixer#webpack) and [LESS](https://github.com/webpack-contrib/less-loader)?
+    - Currently working with Squarespace's weird divergent LESS implementation; prefixes etc are tricky.
+    - Parking for now, as prefixing isn't as big an issue as it once was (for our current needs at least).

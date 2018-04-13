@@ -1,4 +1,5 @@
 import $ from 'zepto';
+import Darwin from '../darwin';
 
 function navHolds(element) {
     const $element = $(element);
@@ -6,10 +7,18 @@ function navHolds(element) {
     const info = {
         $form: $element.find('.yr-nav-holds-info-form'),
         $container: $element.find('.yr-nav-holds-content'),
+        $block: $element.find('.yr-nav-holds-info-block'),
 
-        $content: $element.find('.yr-nav-holds-info-block > .sqs-row > [class*="sqs-col"]')
-            .children('.sqs-row, .sqs-block, [class*="sqs-col"]'),
-        $holds: $element.find('.yr-nav-holds-menu').children('.yr-nav-hold'),
+        $holds: null,
+        $content: null,
+
+        refresh() {
+            info.$holds = $element.find('.yr-nav-holds-menu > .yr-nav-hold');
+
+            info.$content = $element
+                .find('.yr-nav-holds-info-block > .sqs-row > [class*="sqs-col"]')
+                .children('.sqs-row, .sqs-block, [class*="sqs-col"]');
+        },
 
         chosen: () =>
             info.$form.serializeArray()
@@ -71,7 +80,7 @@ function navHolds(element) {
 
         scroll($chosen) {
             // Scroll into view - for a hint while editing.
-            if($chosen.length) {
+            if($chosen.length && !info.$block.is('.sqs-editing')) {
                 const box = info.$container.offset();
                 const chosenBox = $chosen.offset();
 
@@ -83,12 +92,31 @@ function navHolds(element) {
             }
 
             return $chosen;
+        },
+
+        retoggle() {
+            info.refresh();
+            info.toggle();
         }
     };
 
+    info.retoggle();
+
     $element.on('change', '.yr-nav-holds-info-show', info.toggle);
 
-    // @todo Refresh DOM references / controller when CMS edits have occurred.
+    // Refresh DOM references / controller when CMS edits have occurred.
+    const darwin = new Darwin({
+        callback: (mutations) =>
+            (mutations.some((mutation) => mutation.type === 'childList') &&
+                info.retoggle()),
+
+        targets: [
+            '.yr-nav-holds-menu > .yr-nav-hold',
+            '.yr-nav-holds-info-block'
+        ]
+    });
+
+    darwin.init();
 }
 
 export default navHolds;
