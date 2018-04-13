@@ -79,8 +79,8 @@ function navHolds(element) {
                 .eq(info.combo()).removeClass('yr-holds-unchosen')),
 
         scroll($chosen) {
-            // Scroll into view - for a hint while editing.
-            if($chosen.length && !info.$block.is('.sqs-editing')) {
+            // Scroll into view - for a hint while in the CMS (as other info can also be seen).
+            if(!info.$block.is('.sqs-editing') && $chosen.length) {
                 const box = info.$container.offset();
                 const chosenBox = $chosen.offset();
 

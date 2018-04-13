@@ -171,7 +171,6 @@
         font-size: 0;
         color: transparent;
         pointer-events: none;
-        opacity: 0;
         background-color: @tweak-yr-color-base-tone-2;
         will-change: opacity;
         .transition(opacity 500ms ease-out);
@@ -190,14 +189,19 @@
     .yr-nav-holds-info-hint-block,
     .yr-nav-holds-info-block,
     .yr-nav-holds-header {
-        width: 100%;
         .switcher();
+    }
+
+    .yr-nav-holds-info,
+    .yr-nav-holds-info-hint-block,
+    .yr-nav-holds-header {
+        width: 100%;
     }
 
     .yr-nav-holds-content {
         .flex(0 0 auto);
         position: relative;
-        z-index: @yr-z-nav-holds-content;
+        z-index: @yr-z-nav-holds-info-modal;
         width: 100%;
         margin: @tweak-yr-space-pad;
         text-align: center;
@@ -213,6 +217,7 @@
             overflow: auto;
             padding: 0;
             margin: 0;
+            z-index: @yr-z-nav-holds-content;
         }
     }
 
@@ -223,6 +228,27 @@
      * Very dependent on layout engine and DOM structure.
      */
     .yr-nav-holds-info-block {
+        // On small screens, show the info as a modal over the top.
+        position: fixed;
+        left: 20%;
+        right: 20%;
+        top: 50%;
+        .transform(translateY(-50%));
+        max-height: 80%;
+        overflow: auto;
+        z-index: @yr-z-nav-holds-info-modal;
+
+        @media @mq-ring-up {
+            position: relative;
+            width: 100%;
+            left: auto;
+            right: auto;
+            top: auto;
+            .transform(none);
+            max-height: none;
+            z-index: auto;
+        }
+
         // Rows and blocks at the top level are matched to hold pairs - grid tiers are:
         @grid-tier: ~'> .sqs-row > [class*="sqs-col"]';
 
@@ -262,6 +288,18 @@
         }
     }
 
+    .yr-nav-holds-info-hint-block {
+        position: fixed;
+        bottom: 0;
+        background-color: @tweak-yr-color-base-tone-1;
+
+        @media @mq-ring-up {
+            position: relative;
+            bottom: auto;
+            background-color: transparent;
+        }
+    }
+
 
     /**
      * Detail toggles states.
@@ -280,7 +318,11 @@
             // Hide the info.
             ~ .yr-nav-holds-main {
                 .yr-nav-holds-info-block {
-                    .switcher-off-flow();
+                    .switcher-off();
+
+                    @media @mq-ring-up {
+                        .switcher-off-flow();
+                    }
                 }
             }
         }
@@ -300,6 +342,16 @@
             ~ .yr-nav-holds-main {
                 .yr-nav-holds-info-hint-block {
                     .switcher-off-flow();
+                    top: auto;
+                }
+            }
+
+            // Bump up the reset on small screens when the info's in overlay/modal.
+            ~ .yr-nav-holds-info-form .yr-nav-holds-info-reset {
+                z-index: @yr-z-nav-holds-info-modal-reset;
+
+                @media @mq-ring-up {
+                    z-index: @yr-z-nav-holds-info-reset;
                 }
             }
         }
