@@ -6,7 +6,7 @@
     <a class="yr-nav-home-a yr-nav-button" href="/"
         title="Go home" aria-label="Go home">
         <squarespace:block-field id="yr-nav-main-home-icon"
-            class="yr-nav-button-icon-block" columns="1">
+            class="yr-nav-button-icon-block yr-no-alt-block-color" columns="1">
         </squarespace:block-field>
         <div class="yr-nav-button-icon">{@|apply nav-main/home.svg.block}</div>
     </a>
@@ -17,7 +17,7 @@
     {##BEGIN} Controlled by `.yr-nav-toggler`, DOM position important. {END##}
     <div class="yr-nav-toggle yr-nav-toggle-open yr-nav-button">
         <squarespace:block-field id="yr-nav-main-toggle-open-icon"
-            class="yr-nav-button-icon-block" columns="1">
+            class="yr-nav-button-icon-block yr-no-alt-block-color" columns="1">
         </squarespace:block-field>
         <div class="yr-nav-button-icon">{@|apply nav-main/open.svg.block}</div>
     </div>
@@ -26,7 +26,7 @@
         {##BEGIN} Controlled by `.yr-nav-toggler`, DOM position important. {END##}
         <div class="yr-nav-toggle yr-nav-toggle-close yr-nav-button yr-nav-fade">
             <squarespace:block-field id="yr-nav-main-toggle-close-icon"
-                class="yr-nav-button-icon-block" columns="1">
+                class="yr-nav-button-icon-block yr-no-alt-block-color" columns="1">
             </squarespace:block-field>
             <div class="yr-nav-button-icon">{@|apply nav-main/close.svg.block}</div>
         </div>

@@ -13,11 +13,94 @@
     .yr-nav-holds-main {
         .flex(1 1 auto);
         width: 100%;
+
+        .yr-on-(~'.tweak-yr-sqs-alt-grid.tweak-yr-sqs-block-alt-show.tweak-yr-sqs-nav-holds-block-alt-hide');
+        .-do() {
+            .sqs-block {
+                &::before {
+                    visibility: hidden;
+                }
+            }
+        }
     }
 
     @mq-ring-up: ~'only screen and @{yr-mq-hold-ring-up}';
     @holds-radius: 50vmin;
     @holds-radius-inner: @holds-radius * 0.6;
+
+    /**
+     * Conveniences for toggling elements on mode.
+     */
+
+    @switch-time-on: 600ms;
+    @switch-time-off: 300ms;
+
+    .switcher() {
+        will-change: opacity;
+        .transition(opacity @switch-time-on ease-in);
+    }
+    .switcher-off() {
+        opacity: 0;
+
+        // For hiding the CMS controls
+        visibility: hidden;
+        .transform(scale(0));
+
+        @transition: opacity @switch-time-off ease-out,
+            visibility 0ms linear @switch-time-off,
+            transform 0ms linear @switch-time-off;
+        .transition(@transition);
+    }
+    .switcher-off-flow() {
+        position: absolute;
+        top: 0;
+        left: 0;
+        .switcher-off();
+    }
+
+
+    /**
+     * Using the nav "exit/home" button to exit details mode.
+     */
+
+    .yr-svg-shape {
+        .yr-nav-svg-shape();
+    }
+
+    .yr-nav-holds-mode-exit {
+        z-index: @yr-z-nav-holds-mode-exit;
+        .yr-nav-fixed();
+        .yr-nav-button();
+        .yr-align-nav-left-mid(@tweak-yr-nav-button-offset);
+        .yr-size-nav(@tweak-yr-nav-home-size);
+
+
+        .homepage & {
+            color: @tweak-yr-color-accent-1-tone-1;
+        }
+
+        .homepage &:hover,
+        .homepage &:focus {
+            color: @tweak-yr-color-accent-1-tone-3;
+        }
+    }
+
+    .yr-nav-button-icon();
+
+    .yr-nav-holds-mode-exit-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        .yr-hide-text();
+    }
+
+
+    /**
+     * Start of the mode styles.
+     */
 
     .yr-nav-holds-mode,
     .yr-nav-holds-mode-hint {
@@ -74,36 +157,6 @@
         border: none;
         max-width: none;
         opacity: 0;
-    }
-
-    /**
-     * Conveniences for toggling elements on mode.
-     */
-
-    @switch-time-on: 600ms;
-    @switch-time-off: 300ms;
-
-    .switcher() {
-        will-change: opacity;
-        .transition(opacity @switch-time-on ease-in);
-    }
-    .switcher-off() {
-        opacity: 0;
-
-        // For hiding the CMS controls
-        visibility: hidden;
-        .transform(scale(0));
-
-        @transition: opacity @switch-time-off ease-out,
-            visibility 0ms linear @switch-time-off,
-            transform 0ms linear @switch-time-off;
-        .transition(@transition);
-    }
-    .switcher-off-flow() {
-        position: absolute;
-        top: 0;
-        left: 0;
-        .switcher-off();
     }
 
 
@@ -204,6 +257,7 @@
             // Display everything to users by default - conditionally hide with script class.
             .yr-holds-unchosen {
                 .switcher-off-flow();
+                right: 0;
             }
         }
     }
@@ -290,11 +344,7 @@
 
         &:checked {
             ~ .yr-nav-holds-mode-hint {
-                .yr-nav-holds-mode-label {
-                    .yr-on-(~'.tweak-yr-a-style-fancy'); .-do() {
-                        border-style: dotted;
-                    }
-                }
+                .switcher-off();
             }
 
             ~ .yr-nav-holds-main {
@@ -313,6 +363,10 @@
         }
 
         &:not(:checked) {
+            ~ .yr-nav-holds-mode-exit {
+                .switcher-off();
+            }
+
             ~ .yr-nav-holds-main {
                 .yr-nav-holds-info {
                     .switcher-off-flow();

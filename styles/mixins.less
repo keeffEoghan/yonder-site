@@ -89,6 +89,16 @@
 
 
 /**
+ * Hide text (for text replacement, logos, a11y, etc).
+ * Dimensions need to be set somehow for this to work.
+ */
+.yr-hide-text() {
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/**
  * Fancy link styling.
  */
 
@@ -269,4 +279,127 @@
 }
 .display(@display) when (@display = inline-flex) {
     .flex-inline();
+}
+
+
+/**
+ * Nav.
+ */
+
+.yr-nav-fixed() {
+    position: fixed;
+    top: @tweak-yr-nav-button-offset;
+}
+
+.yr-nav-button() {
+    min-width: @yr-size-hit-min;
+    min-height: @yr-size-hit-min;
+    background-position: center;
+    color: @tweak-yr-color-light-1-tone-3;
+    will-change: opacity, color;
+    @transition: opacity 300ms @yr-ease-fade,
+        color 300ms @yr-ease-fade;
+    .transition(@transition);
+}
+
+/**
+ * Switch which side of the view the nav is on.
+ *
+ * @param size {Length}
+ */
+.yr-align-nav-left(@size) {
+    left: @size;
+
+    .tweak-yr-nav-align-switch & {
+        right: @size;
+        left: auto;
+    }
+}
+.yr-align-nav-right(@size) {
+    right: @size;
+
+    .tweak-yr-nav-align-switch & {
+        left: @size;
+        right: auto;
+    }
+}
+
+/**
+ * Same as `.align-view`, but for center-anchored elements.
+ *
+ * @param size {Length}
+ */
+.yr-align-nav-left-mid(@size) {
+    .yr-align-nav-left(@size);
+    .transform(translate(-50%, -50%));
+
+    .tweak-yr-nav-align-switch & {
+        .transform(translate(50%, -50%));
+    }
+}
+.yr-align-nav-right-mid(@size) {
+    .yr-align-nav-right(@size);
+    .transform(translate(50%, -50%));
+
+    .tweak-yr-nav-align-switch & {
+        .transform(translate(-50%, -50%));
+    }
+}
+
+.yr-size-nav(@size) {
+    width: @size;
+    height: @size;
+    background-size: @size;
+
+    .yr-inline-svg {
+        width: @size;
+        height: @size;
+    }
+}
+
+.yr-nav-svg-shape() {
+    fill: currentColor;
+    @transition: color 300ms @yr-ease-fade;
+    .transition(@transition);
+}
+
+/**
+ * For replacing default icons with `block-field` contents.
+ */
+
+.yr-nav-button-icon() {
+    .yr-nav-button-icon,
+    .yr-nav-button-icon-block {
+        width: 100%;
+        height: 100%;
+    }
+
+    .display-yr-nav-button-icon() {
+        .display(inline-flex);
+    }
+
+    .yr-nav-button-icon {
+        .display-yr-nav-button-icon();
+        .flex-flow(row nowrap);
+        .justify-content(center);
+        .align-items(center);
+    }
+
+    .yr-nav-button-icon-block {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        &@{yr-select-sqs-block-on} {
+            & ~ .yr-nav-button-icon {
+                display: none;
+            }
+        }
+
+        &@{yr-select-sqs-block-empty} {
+            & ~ .yr-nav-button-icon {
+                .display-yr-nav-button-icon();
+            }
+        }
+    }
 }

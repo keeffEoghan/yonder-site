@@ -18,17 +18,17 @@
 
     {##BEGIN} Anything controlled by the preceeding elements, DOM position important. {END##}
 
-    <div class="yr-nav-holds-mode-hint">
-        {##BEGIN} @todo Use the home icon to get out of detail mode instead
-        <squarespace:block-field id="yr-nav-holds-home-icon"
-            class="yr-nav-button-icon-block" columns="1">
-        </squarespace:block-field>
-        <label class="yr-nav-holds-home yr-nav-button" for="yr-nav-holds-mode"
-            title="Go home" aria-label="Go home">
-            <span class="yr-nav-button-icon">{@|apply nav-main/home.svg.block}</span>
+    <div class="yr-nav-holds-mode-exit yr-nav-button">
+        <label class="yr-nav-holds-mode-exit-button" for="yr-nav-holds-mode">
+            Go Back
         </label>
-        {END##}
+        <squarespace:block-field id="yr-nav-holds-mode-exit-icon"
+            class="yr-nav-button-icon-block yr-no-alt-block-color" columns="1">
+        </squarespace:block-field>
+        <div class="yr-nav-button-icon">{@|apply nav-main/home.svg.block}</div>
+    </div>
 
+    <div class="yr-nav-holds-mode-hint">
         <squarespace:block-field id="nav-holds-mode-block"
             class="yr-nav-holds-mode-block yr-a" columns="12"/>
         <label class="yr-nav-holds-mode-label" for="yr-nav-holds-mode">Details</label>
@@ -104,7 +104,7 @@
                     {.end}
 
                     {##BEGIN} To override the default SVG hold shape. {END##}
-                    <squarespace:block-field id="nav-holds-shape-block-{@index}" class="yr-nav-holds-shape-block" columns="1"></squarespace:block-field>
+                    <squarespace:block-field id="nav-holds-shape-block-{@index}" class="yr-nav-holds-shape-block yr-no-alt-block-color" columns="1"></squarespace:block-field>
 
                     {##BEGIN} Default SVG hold shape. {END##}
                     <svg class="yr-nav-hold-view" width="100%" height="100%">
