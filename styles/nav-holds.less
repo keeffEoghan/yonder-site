@@ -198,7 +198,6 @@
         z-index: @yr-z-nav-holds-info-toggle;
     }
 
-    .yr-nav-holds-info,
     .yr-nav-holds-info-block,
     .yr-nav-holds-header {
         .switcher();
@@ -485,12 +484,12 @@
             }
 
             ~ .yr-nav-holds-main {
-                .yr-nav-holds-info {
-                    .switcher-off-flow();
-                }
-
                 .yr-nav-holds-info-hint-block {
                     .hide-info-hint();
+                }
+
+                .yr-nav-holds-info-block {
+                    .switcher-off-flow();
                 }
             }
         }
