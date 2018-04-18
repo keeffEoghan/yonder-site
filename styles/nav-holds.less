@@ -173,7 +173,13 @@
         pointer-events: none;
         background-color: @tweak-yr-color-base-tone-2;
         will-change: opacity;
-        .transition(opacity 500ms ease-out);
+        @transition: opacity 500ms ease-out,
+            z-index 0ms linear 500ms;
+        .transition(@transition);
+
+        @media @mq-ring-up {
+            .transition(opacity 500ms ease-out);
+        }
     }
 
     .yr-nav-holds-info-hide {
@@ -230,13 +236,15 @@
     .yr-nav-holds-info-block {
         // On small screens, show the info as a modal over the top.
         position: fixed;
-        left: 20%;
-        right: 20%;
+        left: 1em;
+        right: 1em;
         top: 50%;
         .transform(translateY(-50%));
-        max-height: 80%;
+        max-height: 90%;
         overflow: auto;
         z-index: @yr-z-nav-holds-info-modal;
+        background-color: @tweak-yr-color-overlays-light-tone-4;
+        border-radius: 2px;
 
         @media @mq-ring-up {
             position: relative;
@@ -247,6 +255,7 @@
             .transform(none);
             max-height: none;
             z-index: auto;
+            background-color: transparent;
         }
 
         // Rows and blocks at the top level are matched to hold pairs - grid tiers are:
@@ -291,7 +300,7 @@
     .yr-nav-holds-info-hint-block {
         position: fixed;
         bottom: 0;
-        background-color: @tweak-yr-color-base-tone-1;
+        background-color: @tweak-yr-color-overlays-light-tone-4;
 
         @media @mq-ring-up {
             position: relative;
@@ -332,6 +341,14 @@
             // Show the reset.
             ~ .yr-nav-holds-info-form .yr-nav-holds-info-reset {
                 pointer-events: all;
+
+                @media @mq-ring-up {
+                    opacity: 0.5;
+                }
+            }
+
+            ~ .yr-nav-holds-mode-exit,
+            ~ .yr-nav-holds-mode-hint {
                 opacity: 0.5;
             }
         }
@@ -341,14 +358,19 @@
             // Hide the info hint.
             ~ .yr-nav-holds-main {
                 .yr-nav-holds-info-hint-block {
-                    .switcher-off-flow();
-                    top: auto;
+                    .switcher-off();
+
+                    @media @mq-ring-up {
+                        .switcher-off-flow();
+                    }
                 }
             }
 
             // Bump up the reset on small screens when the info's in overlay/modal.
             ~ .yr-nav-holds-info-form .yr-nav-holds-info-reset {
+                opacity: 0.5;
                 z-index: @yr-z-nav-holds-info-modal-reset;
+                .transition(opacity 500ms ease-out);
 
                 @media @mq-ring-up {
                     z-index: @yr-z-nav-holds-info-reset;
