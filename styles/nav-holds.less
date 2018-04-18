@@ -148,7 +148,6 @@
 
     .yr-nav-holds-info-reset,
     .yr-nav-holds-info-show {
-        position: absolute;
         top: 0;
         right: 0;
         bottom: 0;
@@ -162,6 +161,10 @@
         opacity: 0;
     }
 
+    .yr-nav-holds-info-show {
+        position: absolute;
+    }
+
 
     /**
      * Mode related styles.
@@ -170,6 +173,7 @@
     .yr-nav-holds-info-form {}
 
     .yr-nav-holds-info-reset {
+        position: fixed;
         z-index: @yr-z-nav-holds-info-reset;
         font-size: 0;
         color: transparent;
@@ -195,7 +199,6 @@
     }
 
     .yr-nav-holds-info,
-    .yr-nav-holds-info-hint-block,
     .yr-nav-holds-info-block,
     .yr-nav-holds-header {
         .switcher();
@@ -311,12 +314,31 @@
     .yr-nav-holds-info-hint-block {
         position: fixed;
         bottom: 0;
-        background-color: @tweak-yr-color-overlays-light-tone-4;
+        color: @tweak-yr-color-light-1-tone-3;
+        background-color: @tweak-yr-color-overlays-dark-tone-4;
+        will-change: transform;
+        @transition: transform @switch-time-on ease-in;
+        .transition(@transition);
 
         @media @mq-ring-up {
             position: relative;
             bottom: auto;
+            color: inherit;
             background-color: transparent;
+            .switcher();
+        }
+    }
+
+    .hide-info-hint() {
+        visibility: hidden;
+        .transform(translateY(100%));
+
+        @transition: transform @switch-time-off ease-in,
+            visibility 0ms linear @switch-time-off;
+        .transition(@transition);
+
+        @media @mq-ring-up {
+            .switcher-off-flow();
         }
     }
 
@@ -374,11 +396,7 @@
             // Hide the info hint.
             ~ .yr-nav-holds-main {
                 .yr-nav-holds-info-hint-block {
-                    .switcher-off();
-
-                    @media @mq-ring-up {
-                        .switcher-off-flow();
-                    }
+                    .hide-info-hint();
                 }
             }
 
@@ -469,6 +487,10 @@
             ~ .yr-nav-holds-main {
                 .yr-nav-holds-info {
                     .switcher-off-flow();
+                }
+
+                .yr-nav-holds-info-hint-block {
+                    .hide-info-hint();
                 }
             }
         }
