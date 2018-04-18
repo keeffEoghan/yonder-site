@@ -207,9 +207,8 @@
     .yr-nav-holds-content {
         .flex(0 0 auto);
         position: relative;
-        z-index: @yr-z-nav-holds-info-modal;
+        z-index: @yr-z-nav-holds-content;
         width: 100%;
-        margin: @tweak-yr-space-pad;
         text-align: center;
         /* @todo Cascade fade `.yr-site-title, .yr-site-tagline, .yr-site-description, yr-nav-holds-titles-block` */
 
@@ -221,9 +220,14 @@
             max-width: @holds-radius-inner;
             max-height: @holds-radius-inner;
             overflow: auto;
+        }
+    }
+
+    .yr-nav-holds-header {
+        padding: @tweak-yr-sqs-space-content;
+
+        @media @mq-ring-up {
             padding: 0;
-            margin: 0;
-            z-index: @yr-z-nav-holds-content;
         }
     }
 
