@@ -86,7 +86,7 @@
         }
     }
 
-    .tweak-yr-nav-main-show-bar.homepage & {
+    .tweak-yr-nav-main-show-bar.tweak-yr-nav-main-hide-bar-home.homepage & {
         min-height: 0;
         height: 0;
         padding: 0;
@@ -116,14 +116,14 @@
         .transition(@transition);
     }
 
-    .homepage & > .yr-nav-button {
+    .tweak-yr-nav-main-hide-bar-home.homepage & > .yr-nav-button {
         color: @tweak-yr-color-accent-1-tone-1;
     }
 
-    .homepage & > .yr-nav-button:hover,
-    .homepage & > .yr-nav-button:focus,
-    .homepage .yr-nav-toggler:hover + & > .yr-nav-toggle,
-    .homepage .yr-nav-toggler:focus + & > .yr-nav-toggle {
+    .tweak-yr-nav-main-hide-bar-home.homepage & > .yr-nav-button:hover,
+    .tweak-yr-nav-main-hide-bar-home.homepage & > .yr-nav-button:focus,
+    .tweak-yr-nav-main-hide-bar-home.homepage .yr-nav-toggler:hover + & > .yr-nav-toggle,
+    .tweak-yr-nav-main-hide-bar-home.homepage .yr-nav-toggler:focus + & > .yr-nav-toggle {
         color: @tweak-yr-color-accent-1-tone-3;
     }
 
@@ -136,7 +136,7 @@
         .yr-align-nav-left-mid(@tweak-yr-nav-button-offset);
         .yr-size-nav(@tweak-yr-nav-home-size);
 
-        .homepage & {
+        .tweak-yr-nav-main-hide-bar-home.homepage & {
             opacity: 0;
             pointer-events: none;
         }
@@ -150,7 +150,7 @@
     .yr-nav-toggler:focus + &.yr-nav-toggle {
         color: @tweak-yr-color-light-1-tone-1;
 
-        .homepage & {
+        .tweak-yr-nav-main-hide-bar-home.homepage & {
             color: @tweak-yr-color-accent-1-tone-3;
         }
     }
