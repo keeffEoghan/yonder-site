@@ -5,16 +5,19 @@
  * Selectors
  */
 
-/* For CMS editing modes */
+// For CMS editing modes
+
+// These appear on `body`
 @yr-select-sqs-edit-mode: ~'.sqs-edit-mode';
 @yr-select-sqs-edit-mode-on: ~'.sqs-edit-mode-active';
+@yr-select-sqs-edit-style: ~'.sqs-hide-overlay-widgets';
 
-@yr-select-sqs-edit-on: ~'.sqs-editing';
-
+// These appear on the relevant editable element
 // Invalid selector unfortunately
 // @yr-select-sqs-block-off: ~'squarespace:block-field';
 @yr-select-sqs-block-on: ~'[data-type="block-field"]';
 @yr-select-sqs-block-empty: ~'@{yr-select-sqs-block-on}.empty';
+@yr-select-sqs-edit-on: ~'.sqs-editing';
 
 
 /**

@@ -104,11 +104,49 @@ function navHolds(element) {
 
     $element.on('change', '.yr-nav-holds-info-show', info.toggle);
 
-    // Refresh DOM references / controller when CMS edits have occurred.
+
+    /**
+     * Loop the default SVGs used, to `use` only symbols that are available.
+     * (Can't do this with JSON-T or CSS alone really.)
+     */
+    const $holdDefs = $('.yr-nav-holds-defs').children();
+
+    const validateHoldRefs = () =>
+        ($holdDefs.length && $element.find('.yr-use-hold-shape')
+            .each((i, e) => {
+                const $e = $(e);
+                const oldRef = $($e.attr('xlink:href'));
+                const $oldRef = $(oldRef);
+
+                if(!$oldRef.length) {
+                    const $holdDef = $holdDefs.eq(i%$holdDefs.length);
+                    const $ref = $holdDef.find('.yr-hold-shape');
+                    const ref = (($ref.length)? $ref : $holdDef).attr('id');
+
+                    if(ref) {
+                        // `xlink:href` is deprecated for `href`, but only works this way.
+                        $e.attr('xlink:href',
+                            $e.attr('xlink:href').replace(/#.*$/gi, '#'+ref));
+                    }
+                }
+            }));
+
+    validateHoldRefs();
+
+
+    /**
+     * Refresh DOM references / controller when CMS edits have occurred.
+     * (Otherwise we'll be referencing detached DOM.)
+     */
+
     const darwin = new Darwin({
-        callback: (mutations) =>
-            (mutations.some((mutation) => mutation.type === 'childList') &&
-                info.retoggle()),
+        callback: (mutations) => {
+            if(mutations.some((mutation) => mutation.type === 'childList')) {
+                info.retoggle();
+            }
+
+            validateHoldRefs();
+        },
 
         targets: [
             '.yr-nav-holds-menu > .yr-nav-hold',

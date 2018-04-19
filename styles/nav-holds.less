@@ -718,6 +718,8 @@
 
     .yr-nav-hold-view {
         z-index: @yr-z-nav-holds-view;
+        // Prevent this jQuery/Zepto error: https://bugs.jquery.com/ticket/11352
+        pointer-events: none;
     }
 
     .yr-nav-holds-defs {
