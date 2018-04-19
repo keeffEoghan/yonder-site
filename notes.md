@@ -5,22 +5,18 @@
 # To-do
 
 - Review feedback
-    - Holds comparison view:
-        - Small-screen, just modal the details over the top?
     - Access:
         - Set up on main site subdomain until ready for release.
         - Set up through `thisisyonder.squarespace.com` account on a subdomain.
             - What's the cleanest way to transfer the site and template over, while still keeping the existing one as a holding page?
 - Bugs and errors
+    - Broken image block layouts...?
+    - Reset styles still doesn't work... times out I think?
     - Several things break when in edit mode... Squarespace LESS inconsistencies, unbelievable
-- Content
-    - Ensure colors per section work where native CSS variables don't (JS fallback, setting theme number?)
-- SVG holds
-    - Multiple themes in style editor... clunky but needed? Improve with JS rather than JSON-T / Style Editor
-    - Later
-        - Configurable by CMS?
-            - Number of holds (consider color themes too)
-                - Hacky... can tweak values create new tweaks? Like have a value tweak for number of holds, and generate enough corresponding tweaks in LESS...?
+        - Holds ring layout breaks within style editor.
+        - Content styles don't update within style editor.
+        - Some things seem to require a page refresh to take hold.
+    - Others...?
 - Squarespace setup
     - Transfer template, domain to live
 - Document and instruct
@@ -46,6 +42,7 @@
 
 - Review feedback
     - Holds comparison view:
+        - Small-screen, just modal the details over the top?
         - "Y" button to return to normal mode.
         - Content entry, single `block-field` with top-level rows delimiting content separations (document this).
     - Access:
@@ -70,6 +67,7 @@
     - Page animations
 - Block out main zones and animations
 - Content
+    - (Ignored: unnecessary) Ensure colors per section work where native CSS variables don't (JS fallback, setting theme number?)
     - Custom overrides for certain interior blocks
         - Give a simple `class`-based way for editors to enable the more complex tweak-based overrides on an individual basis (say, JS class switching in header-code-injection).
         - Pick certain existing blocks to custom decorate?
@@ -84,10 +82,13 @@
     - [Buy](https://www.myfonts.com/cart/432948577)
     - Sort out the sidebar etc styles again.
 - SVG holds
+    - Multiple themes in style editor... clunky but needed? Improve with JS rather than JSON-T / Style Editor.
     - Centered and scaled SVGs (remove current `transform` workaround)
     - Strokes
     - Configurable by CMS?
         - Hold SVG inline images (`code block`)
+        - Number of holds (consider color themes too)
+            - Hacky... can tweak values create new tweaks? Like have a value tweak for number of holds, and generate enough corresponding tweaks in LESS...?
 - Main navigation
     - Switch from background image tweak to open block field...
     - Dark/light colors - switch based on what's beneath (not always clear), or have floating header bar appear?
