@@ -125,8 +125,7 @@ function loadAJAX() {
 
 const loadImages = () =>
     $element.find('img[data-src]').not('.loaded, [src]:not([src=""])')
-        .each((i, image) =>
-            console.log(image, image.className, ImageLoader.load(image, { load: true })));
+        .each((i, image) => ImageLoader.load(image, { load: true }));
 
 const timeUnitsMap = {
     'ms': 1,

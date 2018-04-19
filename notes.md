@@ -10,7 +10,6 @@
         - Set up through `thisisyonder.squarespace.com` account on a subdomain.
             - What's the cleanest way to transfer the site and template over, while still keeping the existing one as a holding page?
 - Bugs and errors
-    - Broken image block layouts...?
     - Reset styles still doesn't work... times out I think?
     - Several things break when in edit mode... Squarespace LESS inconsistencies, unbelievable
         - Holds ring layout breaks within style editor.
@@ -48,6 +47,7 @@
     - Access:
         - Give them your account details for now, so they can play and look around.
 - Bugs and errors
+    - Broken image block layouts...?
     - Fix little bug in pair info edit, refresh the DOM references when CMS edits occur.
     - Sort out Style Editor breakage bullshit - #3302864
         - Fix the font's `/count` failing HTTP request.
