@@ -5,8 +5,12 @@ import Mercury from '@squarespace/mercury';
 
 import { authenticated, debug } from '../constants';
 
-function site(element) {
-    const $element = $(element);
+let element;
+let $element;
+
+function site(e) {
+    element = e;
+    $element = $(element);
 
     loadAJAX();
 
@@ -85,30 +89,38 @@ function loadAJAX() {
         onLoadDelay: waitTime
     });
 
-    window.addEventListener('mercury:navigate', () =>
-        document.documentElement.setAttribute('data-yr-ajax-loading', 'navigate'));
+    const stages = {
+        navigate() {
+            $element.attr('data-yr-ajax-loading', 'navigate');
+            // Close the navigation menu if it's open.
+            $element.find('.yr-nav-toggler').prop('checked', false);
+        },
+        unload() {
+            Lifecycle.destroy();
+            $element.attr('data-yr-ajax-loading', 'unload');
+        },
+        swap() {
+            // Mercury doesn't control the data attribute - add a phase...
+            $element.attr('data-yr-ajax-loading', 'swap');
+
+            Lifecycle.init();
+            loadImages();
+            refresh();
+
+            setTimeout(stages.load, 0);
+            setTimeout(stages.fin, waitTime);
+        },
+        load: () => $element.attr('data-yr-ajax-loading', 'load'),
+        fin: () => $element.removeAttr('data-yr-ajax-loading')
+    };
+
+    window.addEventListener('mercury:navigate', stages.navigate);
 
     // Squarespace init and destroy
 
-    window.addEventListener('mercury:unload', () => {
-        Lifecycle.destroy();
-        document.documentElement.setAttribute('data-yr-ajax-loading', 'unload');
-    });
+    window.addEventListener('mercury:unload', stages.unload);
 
-    window.addEventListener('mercury:load', () => {
-        // Mercury doesn't control the data attribute - add a phase...
-        document.documentElement.setAttribute('data-yr-ajax-loading', 'swap');
-
-        Lifecycle.init();
-        loadImages();
-        refresh();
-
-        setTimeout(() => document.documentElement.setAttribute('data-yr-ajax-loading', 'load'),
-            0);
-
-        setTimeout(() => document.documentElement.removeAttribute('data-yr-ajax-loading'),
-            waitTime);
-    });
+    window.addEventListener('mercury:load', stages.swap);
 }
 
 const loadImages = () =>
