@@ -223,7 +223,7 @@
 
         @media @mq-ring-up {
             position: absolute;
-            top: @holds-radius;
+            top: 50%;
             left: 50%;
             .transform(translate(-50%, -50%));
             z-index: @yr-z-nav-holds-content;
@@ -564,7 +564,7 @@
                 // Select the first `@tweak-yr-nav-holds-ring-num` of holds.
                 &:nth-child((~'-n+@{tweak-yr-nav-holds-ring-num}')) {
                     position: absolute;
-                    top: @holds-radius;
+                    top: 50%;
                     left: 50%;
 
                     &:nth-child(even),

@@ -1,5 +1,5 @@
 {##BEGIN} Define the active theme colours according to the current page {END##}
-<style type="text/css">
+<style type="text/css" class="yr-colors-theme-on">
     :root {
         {.var @n0 externalLink.url|slugify}
         {.var @n1 collection.urlId|slugify}

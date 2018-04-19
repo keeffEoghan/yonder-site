@@ -15,7 +15,7 @@ function site(e) {
     loadAJAX();
 
     $(loadImages);
-    window.addEventListener('load', loadImages);
+    $element.on('load', loadImages);
 
     // Prevent link events reaching `body` when `a` descendents are being edited in CMS.
     $element.find('body > *').on('click', 'a .sqs-editing', false);
@@ -124,8 +124,9 @@ function loadAJAX() {
 }
 
 const loadImages = () =>
-    Array.prototype.forEach.call(document.querySelectorAll('img[data-src]:not(.loaded)'),
-        (image) => ImageLoader.load(image, { load: true }));
+    $element.find('img[data-src]').not('.loaded, [src]:not([src=""])')
+        .each((i, image) =>
+            console.log(image, image.className, ImageLoader.load(image, { load: true })));
 
 const timeUnitsMap = {
     'ms': 1,
