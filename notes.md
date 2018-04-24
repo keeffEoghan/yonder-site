@@ -4,6 +4,10 @@
 
 # To-do
 
+- Home animations
+    - Drag/slide holds and fade background.
+    - Speckled tiling background.
+        - Configurable?
 - Review feedback
     - Access:
         - Set up on main site subdomain until ready for release.
@@ -22,7 +26,7 @@
     - The workaround for getting content into the holds comparison view - using a top-level "new row" action.
     - 2 Ways of doing the header banners:
         - With the Squarespace image poster layout and correct font settings (defaults)
-        - With a `text-block`, `h1`, and header code injected `style` or `code-block` to give it a background image: `.yr-main > .sqs-layout:first-child > .sqs-row:first-child > .col:first-child > .sqs-block-html { /* ... */ }`
+        - With a `text-block`, `h1`, and header code injected `style` or `code-block` to give it a background image.
     - [Navigation links](https://support.squarespace.com/hc/en-us/articles/205814758-Using-links-in-your-navigation)
     - Arbitrary files (e.g: SVG):
         - [As file links](https://support.squarespace.com/hc/en-us/articles/205813928)

@@ -19,8 +19,9 @@
     {##BEGIN} Anything controlled by the preceeding elements, DOM position important. {END##}
 
     <div class="yr-nav-holds-mode-exit yr-nav-button">
-        <label class="yr-nav-holds-mode-exit-button" for="yr-nav-holds-mode">
-            Go Back
+        <label class="yr-nav-holds-mode-exit-button" for="yr-nav-holds-mode"
+            title="Exit" aria-label="Exit">
+            Exit
         </label>
         <squarespace:block-field id="yr-nav-holds-mode-exit-icon"
             class="yr-nav-button-icon-block yr-no-alt-block-color" columns="1">
