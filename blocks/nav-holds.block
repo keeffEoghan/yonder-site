@@ -81,9 +81,6 @@
                 {@|apply nav-holds/4.svg.block}
                 {@|apply nav-holds/5.svg.block}
             </defs>
-            <defs>
-                {@|apply filters/goo.svg.block}
-            </defs>
         </svg>
 
         <ul class="yr-nav-holds-menu">

@@ -160,6 +160,7 @@ function navHolds(element) {
 
     // Test
 
+    /*
     const $menu = $element.find('.yr-nav-holds-menu');
     const $blob = $('<li class="yr-nav-hold-blob"></li>').appendTo($menu);
     const rad = 60;
@@ -210,6 +211,7 @@ function navHolds(element) {
             height: rad*2
         });
     });
+    */
 }
 
 export default navHolds;
