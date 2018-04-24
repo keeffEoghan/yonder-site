@@ -1,5 +1,6 @@
 import $ from 'zepto';
 import Darwin from '../darwin';
+import { distance } from 'popmotion/calc';
 
 function navHolds(element) {
     const $element = $(element);
@@ -155,6 +156,60 @@ function navHolds(element) {
     });
 
     darwin.init();
+
+
+    // Test
+
+    const $menu = $element.find('.yr-nav-holds-menu');
+    const $blob = $('<li class="yr-nav-hold-blob"></li>').appendTo($menu);
+    const rad = 60;
+
+    const $holds = $menu.find('.yr-nav-hold');
+
+    $(self).on('mousemove', (e) => {
+        const menuBox = $menu.offset();
+
+        const s = $holds.reduce((r, hold, i) => {
+                const $hold = $(hold);
+                const holdBox = $hold.offset();
+                const d = distance({
+                        x: holdBox.left+(holdBox.width*0.5),
+                        y: holdBox.top+(holdBox.height*0.5)
+                    },
+                    {
+                        x: e.pageX,
+                        y: e.pageY
+                    });
+                const limit = Math.max(holdBox.width, holdBox.height)*0.5;
+                const scale = (limit-d)/limit;
+
+                if(scale > r.scale) {
+                    r.scale = scale;
+                    r.$hold = $hold;
+                }
+
+                return r;
+            },
+            {
+                scale: 0,
+                $hold: null
+            });
+
+        $blob.css({
+            backgroundColor: ((s.$hold)?
+                    s.$hold.find('.yr-use-hold-shape').css('color')
+                :   ''),
+            transform: `
+                translate(${e.pageX-rad-menuBox.left}px,
+                    ${e.pageY-rad-menuBox.top}px)
+                scale(${s.scale})
+            `,
+            left: 0,
+            top: 0,
+            width: rad*2,
+            height: rad*2
+        });
+    });
 }
 
 export default navHolds;

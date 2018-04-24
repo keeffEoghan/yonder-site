@@ -26,6 +26,7 @@
     "@squarespace/core": "^1.0.1",
     "@squarespace/darwin": "^1.0.3",
     "@squarespace/mercury": "^1.1.1",
+    "popmotion": "^8.1.22",
     "zepto": "^1.2.0"
   },
   "devDependencies": {

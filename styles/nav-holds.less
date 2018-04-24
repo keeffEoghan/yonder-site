@@ -504,10 +504,13 @@
         max-width: 1300px;
         padding: 2em;
         margin: auto;
+        filter: url('#yr-filter-goo');
+        z-index: @yr-z-nav-holds-info-toggle;
 
         .yr-on-(~'.tweak-yr-nav-holds-ring-show'); .-do() {
             @media @mq-ring-up {
                 min-height: @holds-radius * 1.8;
+                z-index: @yr-z-nav-holds;
             }
         }
     }
@@ -638,6 +641,13 @@
         }
     }
 
+    // Added by JS controller.
+    .yr-nav-hold-blob {
+        position: absolute;
+        border-radius: 100%;
+        pointer-events: none;
+    }
+
     .yr-nav-holds-info-show,
     .yr-nav-hold-a {
         &:hover,
@@ -724,7 +734,9 @@
 
     .yr-nav-holds-defs {
         display: none;
+    }
 
+    .yr-nav-holds-shape-defs {
         path:nth-child(1) {
             fill-opacity: 1;
             stroke-opacity: 1;
