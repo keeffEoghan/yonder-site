@@ -1,6 +1,8 @@
 import $ from 'zepto';
-import Darwin from '../darwin';
-import { distance } from 'popmotion/calc';
+import { vec2 } from 'gl-matrix';
+
+import SVG from '../libs/custom/svg';
+import Darwin from '../libs/custom/darwin';
 
 function navHolds(element) {
     const $element = $(element);
@@ -110,27 +112,25 @@ function navHolds(element) {
      * Loop the default SVGs used, to `use` only symbols that are available.
      * (Can't do this with JSON-T or CSS alone really.)
      */
-    const $holdDefs = $('.yr-nav-holds-defs').children();
+    const $holdDefs = $('.yr-nav-holds-shape-defs').children();
 
-    const validateHoldRefs = () =>
-        ($holdDefs.length && $element.find('.yr-use-hold-shape')
-            .each((i, e) => {
-                const $e = $(e);
-                const oldRef = $($e.attr('xlink:href'));
-                const $oldRef = $(oldRef);
+    const validateHoldRefs = () => ($holdDefs.length &&
+        $element.find('.yr-use-hold-shape').each((i, e) => {
+            const $e = $(e);
+            const href = (($e.attr('href'))? 'href' : 'xlink:href');
+            const oldRef = $e.attr(href);
+            const $oldRef = $(oldRef);
 
-                if(!$oldRef.length) {
-                    const $holdDef = $holdDefs.eq(i%$holdDefs.length);
-                    const $ref = $holdDef.find('.yr-hold-shape');
-                    const ref = (($ref.length)? $ref : $holdDef).attr('id');
+            if(!$oldRef.length) {
+                const $holdDef = $holdDefs.eq(i%$holdDefs.length);
+                const $ref = $holdDef.find('.yr-hold-shape');
+                const ref = (($ref.length)? $ref : $holdDef).attr('id');
 
-                    if(ref) {
-                        // `xlink:href` is deprecated for `href`, but only works this way.
-                        $e.attr('xlink:href',
-                            $e.attr('xlink:href').replace(/#.*$/gi, '#'+ref));
-                    }
+                if(ref) {
+                    $e.attr(href, oldRef.replace(/#.*$/gi, '#'+ref));
                 }
-            }));
+            }
+        }));
 
     validateHoldRefs();
 
@@ -138,6 +138,8 @@ function navHolds(element) {
     /**
      * Refresh DOM references / controller when CMS edits have occurred.
      * (Otherwise we'll be referencing detached DOM.)
+     *
+     * @todo Refresh the controller when exiting edit mode, for a clean slate.
      */
 
     const darwin = new Darwin({
@@ -159,59 +161,141 @@ function navHolds(element) {
 
 
     // Test
+    
+    (() => {
+        if(!SVG.supported) { return; }
 
-    /*
-    const $menu = $element.find('.yr-nav-holds-menu');
-    const $blob = $('<li class="yr-nav-hold-blob"></li>').appendTo($menu);
-    const rad = 60;
+        // Init... needed internally in SVG.js even if we're not drawing in this element.
+        SVG($('.yr-nav-holds-defs')[0]);
 
-    const $holds = $menu.find('.yr-nav-hold');
+        const force = {
+            pos: vec2.fromValues(100, 100),
+            rad: 40,
+            pow: 2
+        };
 
-    $(self).on('mousemove', (e) => {
-        const menuBox = $menu.offset();
+        force.rad2 = force.rad*force.rad;
 
-        const s = $holds.reduce((r, hold, i) => {
-                const $hold = $(hold);
-                const holdBox = $hold.offset();
-                const d = distance({
-                        x: holdBox.left+(holdBox.width*0.5),
-                        y: holdBox.top+(holdBox.height*0.5)
-                    },
-                    {
-                        x: e.pageX,
-                        y: e.pageY
-                    });
-                const limit = Math.max(holdBox.width, holdBox.height)*0.5;
-                const scale = (limit-d)/limit;
+        const vec2Cache = Array(2).fill().map(vec2.create);
 
-                if(scale > r.scale) {
-                    r.scale = scale;
-                    r.$hold = $hold;
+        /**
+         * Handle each SVG.js path command individually - various ways to move points.
+         *
+         * @see https://css-tricks.com/svg-path-syntax-illustrated-guide/
+         * @see https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths
+         * @see https://github.com/svgdotjs/svg.js/blob/master/src/patharray.js
+         */
+        // function movePathPoints([command, ...rest]) {};
+
+        const $holds = $element.find('.yr-nav-hold').each((h, hold) => {
+            const $hold = $(hold);
+
+            // Find the SVGs we want - the default, or one in a `block-field`.
+
+            const $block = $hold.find('.yr-nav-holds-shape-block');
+
+            const $shapes = (($block.hasClass('empty'))? $hold : $block)
+                // These classes must be added to any custom SVGs to opt them into this effect.
+                .find('svg.yr-hold-shape, use.yr-use-hold-shape');
+
+            $shapes.each((s, shape) => {
+                // Replace any relevant `use` with the symbol - so we can use it independently.
+                shape = SVG.adopt(shape);
+
+                if(shape.hasClass('yr-use-hold-shape')) {
+                    const href = ((shape.attr('href'))? 'href' : 'xlink:href');
+
+                    shape = shape.replace(shape.reference(href).clone(shape.parent()));
                 }
 
-                return r;
-            },
-            {
-                scale: 0,
-                $hold: null
-            });
+                // Exit/reset if the shape's out of range of the force.
+                // @todo Improve, take into account the radius...
+                // if(!shape.inside(...force.pos)) { return; }
 
-        $blob.css({
-            backgroundColor: ((s.$hold)?
-                    s.$hold.find('.yr-use-hold-shape').css('color')
-                :   ''),
-            transform: `
-                translate(${e.pageX-rad-menuBox.left}px,
-                    ${e.pageY-rad-menuBox.top}px)
-                scale(${s.scale})
-            `,
-            left: 0,
-            top: 0,
-            width: rad*2,
-            height: rad*2
+                // Get on with the effect
+                // @todo Hook this part up to animation and pointer input.
+                shape.select('path').each((p, paths) => {
+                    const path = paths[p];
+                    const points = path.array().clone();
+
+                    path.animate().loop(true, true)
+                        .plot(points.value.map((move) => {
+                            const l = move.length;
+
+                            // All of the SVG.js path moves define the command name in the
+                            // first index.
+                            // Ignore the `Z` command.
+                            if(l === 1) { return move; }
+
+                            const point = vec2.set(vec2Cache[0], move[l-2], move[l-1]);
+                            const to = vec2.sub(vec2Cache[1], point, force.pos);
+
+                            // Square units used for performance, if accuracy not an issue...
+                            const len2 = vec2.sqrLen(to);
+                            const f = force.pow*Math.max(force.rad2-len2, 0)/force.rad2;
+
+                            const out = vec2.scaleAndAdd(point, force.pos, to, f+1);
+
+                            return [...move.slice(0, -2), ...out];
+                        }));
+                });
+            });
         });
-    });
-    */
+    })();
+
+    /*
+    (() => {
+        const $menu = $element.find('.yr-nav-holds-menu');
+        const $blob = $('<li class="yr-nav-hold-blob"></li>').appendTo($menu);
+        const rad = 60;
+
+        const $holds = $menu.find('.yr-nav-hold');
+
+        $(self).on('mousemove', (e) => {
+            const menuBox = $menu.offset();
+
+            const s = $holds.reduce((r, hold, i) => {
+                    const $hold = $(hold);
+                    const holdBox = $hold.offset();
+                    const d = distance({
+                            x: holdBox.left+(holdBox.width*0.5),
+                            y: holdBox.top+(holdBox.height*0.5)
+                        },
+                        {
+                            x: e.pageX,
+                            y: e.pageY
+                        });
+                    const limit = Math.max(holdBox.width, holdBox.height)*0.5;
+                    const scale = (limit-d)/limit;
+
+                    if(scale > r.scale) {
+                        r.scale = scale;
+                        r.$hold = $hold;
+                    }
+
+                    return r;
+                },
+                {
+                    scale: 0,
+                    $hold: null
+                });
+
+            $blob.css({
+                backgroundColor: ((s.$hold)?
+                        s.$hold.find('.yr-use-hold-shape, .yr-hold-shape').css('color')
+                    :   ''),
+                transform: `
+                    translate(${e.pageX-rad-menuBox.left}px,
+                        ${e.pageY-rad-menuBox.top}px)
+                    scale(${s.scale})
+                `,
+                left: 0,
+                top: 0,
+                width: rad*2,
+                height: rad*2
+            });
+        });
+    })();*/
 }
 
 export default navHolds;

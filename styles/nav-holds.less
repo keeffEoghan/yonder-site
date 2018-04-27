@@ -557,8 +557,11 @@
         }
 
         .yr-for-(@yr-color-themes-num); .-each(@i) {
-            &:nth-child((~'@{yr-color-themes-num}n+@{i}')) .yr-use-hold-shape {
-                color: extract(extract(@yr-color-themes, @i - 1), 1);
+            &:nth-child((~'@{yr-color-themes-num}n+@{i}')) {
+                .yr-hold-shape,
+                .yr-use-hold-shape {
+                    color: extract(extract(@yr-color-themes, @i - 1), 1);
+                }
             }
         }
 
@@ -736,7 +739,7 @@
         display: none;
     }
 
-    .yr-nav-holds-shape-defs {
+    .yr-hold-shape {
         path:nth-child(1) {
             fill-opacity: 1;
             stroke-opacity: 1;

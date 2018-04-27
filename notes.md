@@ -4,6 +4,8 @@
 
 # To-do
 
+- Finesse
+    - Home info content stagger transitions
 - Home animations
     - Drag/slide holds and fade background.
     - Speckled tiling background.

@@ -25,6 +25,10 @@ const config = {
             {
                 test: require.resolve('zepto'),
                 loader: 'imports-loader?this=>window'
+            },
+            {
+                test: require.resolve('svg.pathmorphing.js'),
+                loader: 'imports-loader?SVG=svg.js'
             }
         ]
     },
