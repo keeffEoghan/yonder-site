@@ -27,7 +27,7 @@ const config = {
                 loader: 'imports-loader?this=>window'
             },
             {
-                test: require.resolve('svg.pathmorphing.js'),
+                test: require.resolve('svg.pathmorphing2.js'),
                 loader: 'imports-loader?SVG=svg.js'
             }
         ]

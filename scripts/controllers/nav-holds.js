@@ -3,6 +3,8 @@ import { vec2 } from 'gl-matrix';
 
 import SVG from '../libs/custom/svg';
 import Darwin from '../libs/custom/darwin';
+import metaball from '../libs/svg-metaball';
+import { tau } from '../constants';
 
 function navHolds(element) {
     const $element = $(element);
@@ -169,7 +171,7 @@ function navHolds(element) {
         SVG($('.yr-nav-holds-defs')[0]);
 
         const force = {
-            pos: vec2.fromValues(100, 100),
+            pos: vec2.fromValues(0, 0),
             rad: 40,
             pow: 2,
             radFrom: 60,
@@ -180,7 +182,7 @@ function navHolds(element) {
         force.radFrom2 = force.radFrom*force.radFrom;
         force.radTo2 = force.radTo*force.radTo;
 
-        const vec2Cache = Array(2).fill().map(vec2.create);
+        const cacheVec2 = Array(2).fill().map(vec2.create);
 
 
         /**
@@ -227,6 +229,27 @@ function navHolds(element) {
             }
         }
 
+        function bezierRingCurve(cx, cy, rad, steps, step, startA = 0) {
+            const stepA = tau/steps;
+
+            const a0 = startA+(stepA*(step-1));
+            const x0 = Math.cos(a0)*rad;
+            const y0 = Math.sin(a0)*rad;
+
+            const a1 = startA+(stepA*step);
+            const x1 = Math.cos(a1)*rad;
+            const y1 = Math.sin(a1)*rad;
+
+            const cp = 4/3*Math.tan(Math.PI/(2*steps));
+
+            return [
+                'C',
+                cx+x0+(-y0*cp), cy+y0+(x0*cp),
+                cx+x1+(y1*cp), cy+y1+(-x1*cp),
+                cx+x1, cy+y1
+            ];
+        }
+
         const $holds = $element.find('.yr-nav-hold').each((h, hold) => {
             const $hold = $(hold);
 
@@ -250,9 +273,7 @@ function navHolds(element) {
 
                 const { cx, cy } = shape.rbox(shape);
 
-                // Exit/reset if the shape's out of range of the force.
-                // @todo Improve, take into account the radius...
-                // if(!shape.inside(...force.pos)) { return; }
+                // @todo Bounds checking.
 
                 // Get on with the effect
                 // @todo Hook this part up to animation and pointer input.
@@ -262,33 +283,26 @@ function navHolds(element) {
                     // @see https://codepen.io/keeffEoghan/pen/odZQJg
                     const path = paths[p];
                     const moves = path.array().value;
-                    const n = moves.length;
-                    const angle = Math.PI*2/n;
-                    const start = movePoint(0, moves, vec2Cache[0]);
-                    const startAngle = Math.atan2(start[1], start[0]);
-                    const cp = 4/3*Math.tan(Math.PI/(2*n));
+                    const start = movePoint(0, moves, cacheVec2[0]);
+                    const startA = Math.atan2(start[1], start[0]);
 
-                    const points = moves.map((move, m, moves) => {
-                        const x0 = Math.cos(startAngle+(angle*(m-1)))*force.radFrom;
-                        const y0 = Math.sin(startAngle+(angle*(m-1)))*force.radFrom;
-                        const x1 = Math.cos(startAngle+(angle*m))*force.radFrom;
-                        const y1 = Math.sin(startAngle+(angle*m))*force.radFrom;
+                    let points = metaball(force.radFrom, force.radFrom*0.5,
+                        force.pos, vec2.set(cacheVec2[0], cx, cy),
+                        2);
 
-                        return [
-                            'C',
-                            cx+x0+(-y0*cp), cy+y0+(x0*cp),
-                            cx+x1+(y1*cp), cy+y1+(-x1*cp),
-                            cx+x1, cy+y1
-                        ];
-                    });
+                    if(!points || !points.length) {
+                        points = moves.map((move, m, moves) =>
+                            bezierRingCurve(cx, cy, force.radFrom, moves.length, m, startA));
 
-                    points.unshift(['M', ...points[points.length-1].slice(-2)]);
+                        points.unshift(['M', ...points[points.length-1].slice(-2)]);
+                    }
+
                     points.push(['Z']);
 
                     /*
                     const points = moves.map((move, m, moves) => {
-                            const point = movePoint(m, moves, vec2Cache[0]);
-                            const to = vec2.sub(vec2Cache[1], point, force.pos);
+                            const point = movePoint(m, moves, cacheVec2[0]);
+                            const to = vec2.sub(cacheVec2[1], point, force.pos);
 
                             // @todo Check if we're inside the shape?
                             const angle = Math.atan2(to[1], to[0]);
@@ -308,7 +322,8 @@ function navHolds(element) {
                         .sort(({ angle }) => angle)
                         .map(({ move }) => move);*/
 
-                    path.animate().loop(true, true).plot(points);
+                    // path.animate().loop(true, true).plot(points);
+                    path.animate().plot(points);
                 });
             });
         });
