@@ -257,26 +257,25 @@ function navHolds(element) {
                 shape.select('path').each((p, paths) => {
                     const path = paths[p];
 
-                    // Create a circle of beziers.
+                    // Create an approximate circle of beziers.
                     // @see https://stackoverflow.com/questions/1734745/how-to-create-circle-with-b%C3%A9zier-curves
                     // @see https://codepen.io/keeffEoghan/pen/odZQJg
                     const n = path.array().value.length;
                     const angle = Math.PI*2/n;
                     const cp = 4/3*Math.tan(Math.PI/(2*n));
-                    const box = shape.rbox(shape);
-                    const r = force.radFrom;
+                    const { cx, cy } = shape.rbox(shape);
 
                     const points = path.array().value.map((move, m, moves) => {
-                        const x0 = Math.cos(angle*(m-1));
-                        const y0 = Math.sin(angle*(m-1));
-                        const x1 = Math.cos(angle*m);
-                        const y1 = Math.sin(angle*m);
+                        const x0 = Math.cos(angle*(m-1))*force.radFrom;
+                        const y0 = Math.sin(angle*(m-1))*force.radFrom;
+                        const x1 = Math.cos(angle*m)*force.radFrom;
+                        const y1 = Math.sin(angle*m)*force.radFrom;
 
                         return [
                             'C',
-                            box.cx+(x0*r)+(-y0*cp*r), box.cy+(y0*r)+(x0*cp*r),
-                            box.cx+(x1*r)+(y1*cp*r), box.cy+(y1*r)+(-x1*cp*r),
-                            box.cx+(x1*r), box.cy+(y1*r)
+                            cx+x0+(-y0*cp), cy+y0+(x0*cp),
+                            cx+x1+(y1*cp), cy+y1+(-x1*cp),
+                            cx+x1, cy+y1
                         ];
                     });
 

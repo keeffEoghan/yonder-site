@@ -29,7 +29,7 @@
     "gl-matrix": "^2.5.1",
     "popmotion": "^8.1.22",
     "svg.js": "^2.6.4",
-    "svg.pathmorphing.js": "^0.1.1",
+    "svg.pathmorphing2.js": "^0.1.0",
     "zepto": "^1.2.0"
   },
   "devDependencies": {
