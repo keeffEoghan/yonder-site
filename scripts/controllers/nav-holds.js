@@ -171,21 +171,61 @@ function navHolds(element) {
         const force = {
             pos: vec2.fromValues(100, 100),
             rad: 40,
-            pow: 2
+            pow: 2,
+            radFrom: 60,
+            radTo: 30
         };
 
         force.rad2 = force.rad*force.rad;
+        force.radFrom2 = force.radFrom*force.radFrom;
+        force.radTo2 = force.radTo*force.radTo;
 
         const vec2Cache = Array(2).fill().map(vec2.create);
 
+
         /**
          * Handle each SVG.js path command individually - various ways to move points.
+         * Change everything into absolute coordinates.
+         * All coordinates are absolute, as handled by `SVG.PathArray`.
          *
          * @see https://css-tricks.com/svg-path-syntax-illustrated-guide/
          * @see https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths
          * @see https://github.com/svgdotjs/svg.js/blob/master/src/patharray.js
          */
-        // function movePathPoints([command, ...rest]) {};
+        function movePoint(m, moves, point) {
+            const move = moves[m];
+            // SVG.js path moves define the command name first.
+            const c = move[0];
+            const l = move.length;
+
+            if(c.search(/[mltcsqa]/gi) >= 0) {
+                // Endpoint last.
+                return vec2.set(point, move[l-2], move[l-1]);
+            }
+            else if(c.search(/h/gi) >= 0) {
+                // Endpoint x last, y in previous move.
+                return vec2.set(point, move[l-1], movePoint(m-1, moves, point)[1]);
+            }
+            else if(c.search(/v/gi) >= 0) {
+                // Endpoint y last, x in previous move.
+                return vec2.set(point, movePoint(m-1, moves, point)[0], move[l-1]);
+            }
+            else if(c.search(/z/gi) >= 0) {
+                // Endpoint in previous `M` move.
+                let i = m-1;
+
+                for(; i > 0; --i) {
+                    if(moves[i][0].search(/m/gi) >= 0) {
+                        break;
+                    }
+                }
+
+                return movePoint(i, moves, point);
+            }
+            else {
+                console.warn('Unknown SVG path command.', c, move, m, moves);
+            }
+        }
 
         const $holds = $element.find('.yr-nav-hold').each((h, hold) => {
             const $hold = $(hold);
@@ -216,28 +256,57 @@ function navHolds(element) {
                 // @todo Hook this part up to animation and pointer input.
                 shape.select('path').each((p, paths) => {
                     const path = paths[p];
-                    const points = path.array().clone();
 
-                    path.animate().loop(true, true)
-                        .plot(points.value.map((move) => {
-                            const l = move.length;
+                    // Create a circle of beziers.
+                    // @see https://stackoverflow.com/questions/1734745/how-to-create-circle-with-b%C3%A9zier-curves
+                    // @see https://codepen.io/keeffEoghan/pen/odZQJg
+                    const n = path.array().value.length;
+                    const angle = Math.PI*2/n;
+                    const cp = 4/3*Math.tan(Math.PI/(2*n));
+                    const box = shape.rbox(shape);
+                    const r = force.radFrom;
 
-                            // All of the SVG.js path moves define the command name in the
-                            // first index.
-                            // Ignore the `Z` command.
-                            if(l === 1) { return move; }
+                    const points = path.array().value.map((move, m, moves) => {
+                        const x0 = Math.cos(angle*(m-1));
+                        const y0 = Math.sin(angle*(m-1));
+                        const x1 = Math.cos(angle*m);
+                        const y1 = Math.sin(angle*m);
 
-                            const point = vec2.set(vec2Cache[0], move[l-2], move[l-1]);
+                        return [
+                            'C',
+                            box.cx+(x0*r)+(-y0*cp*r), box.cy+(y0*r)+(x0*cp*r),
+                            box.cx+(x1*r)+(y1*cp*r), box.cy+(y1*r)+(-x1*cp*r),
+                            box.cx+(x1*r), box.cy+(y1*r)
+                        ];
+                    });
+
+                    points.unshift(['M', ...points[points.length-1].slice(-2)]);
+                    points.push(['Z']);
+
+                    /*
+                    const points = path.array().value.map((move, m, moves) => {
+                            const point = movePoint(m, moves, vec2Cache[0]);
                             const to = vec2.sub(vec2Cache[1], point, force.pos);
 
+                            // @todo Check if we're inside the shape?
+                            const angle = Math.atan2(to[1], to[0]);
+                            const out = ;
+
                             // Square units used for performance, if accuracy not an issue...
-                            const len2 = vec2.sqrLen(to);
-                            const f = force.pow*Math.max(force.rad2-len2, 0)/force.rad2;
+                            // const len2 = vec2.sqrLen(to);
+                            // const f = force.pow*Math.max(force.rad2-len2, 0)/force.rad2;
 
-                            const out = vec2.scaleAndAdd(point, force.pos, to, f+1);
+                            // const out = vec2.scaleAndAdd(point, force.pos, to, 1-f);
 
-                            return [...move.slice(0, -2), ...out];
-                        }));
+                            return {
+                                move: [...move.slice(0, -2), ...out],
+                                angle
+                            };
+                        })
+                        .sort(({ angle }) => angle)
+                        .map(({ move }) => move);*/
+
+                    path.animate().loop(true, true).plot(points);
                 });
             });
         });

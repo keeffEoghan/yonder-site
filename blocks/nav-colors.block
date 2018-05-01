@@ -20,7 +20,5 @@
 </style>
 
 <script type="text/javascript">
-    if(self.debug) {
-        console.log('nav-colors', {@|json-pretty|html});
-    }
+    ((self.debug) && console.log('nav-colors', {@|json-pretty|html}));
 </script>

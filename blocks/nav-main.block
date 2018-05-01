@@ -80,8 +80,6 @@
     </nav>
 
     <script type="text/javascript">
-        if(self.debug) {
-            console.log('nav-main', {@|json-pretty|html});
-        }
+        ((self.debug) && console.log('nav-main', {@|json-pretty|html}));
     </script>
 </section>

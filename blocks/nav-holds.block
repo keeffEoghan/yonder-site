@@ -119,8 +119,6 @@
     </section>
 
     <script type="text/javascript">
-        if(self.debug) {
-            console.log('nav-holds', {@|json-pretty|html});
-        }
+        ((self.debug) && console.log('nav-holds', {@|json-pretty|html}));
     </script>
 </nav>

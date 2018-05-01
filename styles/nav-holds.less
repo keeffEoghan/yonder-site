@@ -740,22 +740,27 @@
     }
 
     .yr-hold-shape {
-        path:nth-child(1) {
-            fill-opacity: 1;
-            stroke-opacity: 1;
-        }
+        stroke-linejoin: round;
+        stroke-linecap: round;
 
-        path:nth-child(2) {
-            fill: @tweak-yr-color-light-2-tone-2;
-            opacity: 0.2;
-            stroke-width: 0;
-        }
+        path {
+            &:nth-child(1) {
+                fill-opacity: 1;
+                stroke-opacity: 1;
+            }
 
-        path:nth-child(3) {
-            stroke: @tweak-yr-color-dark-1-tone-1;
-            fill: none;
-            stroke-width: 2px;
-            stroke-miterlimit: 10px;
+            &:nth-child(2) {
+                fill: @tweak-yr-color-light-2-tone-2;
+                opacity: 0.2;
+                stroke-width: 0;
+            }
+
+            &:nth-child(3) {
+                stroke: @tweak-yr-color-dark-1-tone-1;
+                fill: none;
+                stroke-width: 2px;
+                stroke-miterlimit: 10px;
+            }
         }
     }
 }
