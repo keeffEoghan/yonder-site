@@ -3,8 +3,9 @@ import { vec2 } from 'gl-matrix';
 
 import SVG from '../libs/custom/svg';
 import Darwin from '../libs/custom/darwin';
-import metaball from '../libs/svg-metaball';
-import { tau } from '../constants';
+
+import { bezierCircle, bezierCirclePart } from '../svg/paths';
+import metaball from '../svg/metaball';
 
 function navHolds(element) {
     const $element = $(element);
@@ -170,19 +171,15 @@ function navHolds(element) {
         // Init... needed internally in SVG.js even if we're not drawing in this element.
         SVG($('.yr-nav-holds-defs')[0]);
 
+        const cacheVec2 = Array(2).fill().map(vec2.create);
+
         const force = {
-            pos: vec2.fromValues(0, 0),
-            rad: 40,
+            pos: vec2.fromValues(20, 100),
             pow: 2,
-            radFrom: 60,
-            radTo: 30
+            rad: 30
         };
 
         force.rad2 = force.rad*force.rad;
-        force.radFrom2 = force.radFrom*force.radFrom;
-        force.radTo2 = force.radTo*force.radTo;
-
-        const cacheVec2 = Array(2).fill().map(vec2.create);
 
 
         /**
@@ -229,26 +226,7 @@ function navHolds(element) {
             }
         }
 
-        function bezierRingCurve(cx, cy, rad, steps, step, startA = 0) {
-            const stepA = tau/steps;
-
-            const a0 = startA+(stepA*(step-1));
-            const x0 = Math.cos(a0)*rad;
-            const y0 = Math.sin(a0)*rad;
-
-            const a1 = startA+(stepA*step);
-            const x1 = Math.cos(a1)*rad;
-            const y1 = Math.sin(a1)*rad;
-
-            const cp = 4/3*Math.tan(Math.PI/(2*steps));
-
-            return [
-                'C',
-                cx+x0+(-y0*cp), cy+y0+(x0*cp),
-                cx+x1+(y1*cp), cy+y1+(-x1*cp),
-                cx+x1, cy+y1
-            ];
-        }
+        const boxRad = (box) => Math.pow(box.w*box.h, 0.5)*0.5;
 
         const $holds = $element.find('.yr-nav-hold').each((h, hold) => {
             const $hold = $(hold);
@@ -271,33 +249,39 @@ function navHolds(element) {
                     shape = shape.replace(shape.reference(href).clone(shape.parent()));
                 }
 
-                const { cx, cy } = shape.rbox(shape);
-
                 // @todo Bounds checking.
+
+                const shapeArea = boxRad(shape.rbox(shape));
 
                 // Get on with the effect
                 // @todo Hook this part up to animation and pointer input.
                 shape.select('path').each((p, paths) => {
-                    // Create an approximate circle of beziers.
-                    // @see https://stackoverflow.com/questions/1734745/how-to-create-circle-with-b%C3%A9zier-curves
-                    // @see https://codepen.io/keeffEoghan/pen/odZQJg
                     const path = paths[p];
+
+                    const box = path.rbox(path);
+                    const pathMid = vec2.set(cacheVec2[1], box.cx, box.cy);
+                    const pathArea = boxRad(box);
+
                     const moves = path.array().value;
-                    const start = movePoint(0, moves, cacheVec2[0]);
+                    const start = movePoint(0, moves, cacheVec2[1]);
                     const startA = Math.atan2(start[1], start[0]);
 
-                    let points = metaball(force.radFrom, force.radFrom*0.5,
-                        force.pos, vec2.set(cacheVec2[0], cx, cy),
-                        2);
+                    let points = metaball(force.rad*pathArea/shapeArea, force.pos,
+                        pathArea, pathMid);
 
-                    if(!points || !points.length) {
-                        points = moves.map((move, m, moves) =>
-                            bezierRingCurve(cx, cy, force.radFrom, moves.length, m, startA));
+                    // @todo Work out how to insert a start point at the same start angle.
+                    // console.log((new SVG.PathArray()).morph(points));
 
-                        points.unshift(['M', ...points[points.length-1].slice(-2)]);
+                    let reverse = false;
+
+                    if(typeof points === 'number') {
+                        // Can't draw a metaball - simply a circle for the shape.
+                        points = bezierCircle(pathMid[0], pathMid[1], pathArea,
+                            moves.length, startA);
+
+                        // If circles apart, snap back to the orginal shape.
+                        reverse = points > 0;
                     }
-
-                    points.push(['Z']);
 
                     /*
                     const points = moves.map((move, m, moves) => {
@@ -322,8 +306,9 @@ function navHolds(element) {
                         .sort(({ angle }) => angle)
                         .map(({ move }) => move);*/
 
-                    // path.animate().loop(true, true).plot(points);
-                    path.animate().plot(points);
+                    path.animate(1000, '<>').loop(true, true).plot(points);
+                    // path.animate().plot(points);
+                    // path.plot(points);
                 });
             });
         });
