@@ -1,10 +1,10 @@
 import $ from 'zepto';
-import { vec2 } from 'gl-matrix';
+import { vec2, mat2 } from 'gl-matrix';
 
 import SVG from '../libs/custom/svg';
 import Darwin from '../libs/custom/darwin';
 
-import { bezierCircle, bezierCirclePart } from '../svg/paths';
+import { pathCircle, pickMovePoints, pickMoveEndpoint, movePointOffsets } from '../svg/paths';
 import metaball from '../svg/metaball';
 
 function navHolds(element) {
@@ -171,7 +171,11 @@ function navHolds(element) {
         // Init... needed internally in SVG.js even if we're not drawing in this element.
         SVG($('.yr-nav-holds-defs')[0]);
 
-        const cacheVec2 = Array(2).fill().map(vec2.create);
+        const cache = {
+            vec2: Array(2).fill().map(vec2.create),
+            mat2: Array(1).fill().map(mat2.create),
+            array: []
+        };
 
         const force = {
             pos: vec2.fromValues(20, 100),
@@ -180,51 +184,6 @@ function navHolds(element) {
         };
 
         force.rad2 = force.rad*force.rad;
-
-
-        /**
-         * Handle each SVG.js path command individually - various ways to move points.
-         * Change everything into absolute coordinates.
-         * All coordinates are absolute, as handled by `SVG.PathArray`.
-         *
-         * @see https://css-tricks.com/svg-path-syntax-illustrated-guide/
-         * @see https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths
-         * @see https://github.com/svgdotjs/svg.js/blob/master/src/patharray.js
-         */
-        function movePoint(m, moves, point) {
-            const move = moves[m];
-            // SVG.js path moves define the command name first.
-            const c = move[0];
-            const l = move.length;
-
-            if(c.search(/[mltcsqa]/gi) >= 0) {
-                // Endpoint last.
-                return vec2.set(point, move[l-2], move[l-1]);
-            }
-            else if(c.search(/h/gi) >= 0) {
-                // Endpoint x last, y in previous move.
-                return vec2.set(point, move[l-1], movePoint(m-1, moves, point)[1]);
-            }
-            else if(c.search(/v/gi) >= 0) {
-                // Endpoint y last, x in previous move.
-                return vec2.set(point, movePoint(m-1, moves, point)[0], move[l-1]);
-            }
-            else if(c.search(/z/gi) >= 0) {
-                // Endpoint in previous `M` move.
-                let i = m-1;
-
-                for(; i > 0; --i) {
-                    if(moves[i][0].search(/m/gi) >= 0) {
-                        break;
-                    }
-                }
-
-                return movePoint(i, moves, point);
-            }
-            else {
-                console.warn('Unknown SVG path command.', c, move, m, moves);
-            }
-        }
 
         const boxRad = (box) => Math.pow(box.w*box.h, 0.5)*0.5;
 
@@ -259,34 +218,58 @@ function navHolds(element) {
                     const path = paths[p];
 
                     const box = path.rbox(path);
-                    const pathMid = vec2.set(cacheVec2[1], box.cx, box.cy);
+                    const pathMid = vec2.set(cache.vec2[0], box.cx, box.cy);
                     const pathArea = boxRad(box);
 
                     const moves = path.array().value;
-                    const start = movePoint(0, moves, cacheVec2[1]);
-                    const startA = Math.atan2(start[1], start[0]);
 
-                    let points = metaball(force.rad*pathArea/shapeArea, force.pos,
-                        pathArea, pathMid);
+                    const start = pickMoveEndpoint(moves, 0, cache.vec2[1]);
+                    const startAngle = Math.atan2(start[1], start[0]);
 
-                    // @todo Work out how to insert a start point at the same start angle.
-                    // console.log((new SVG.PathArray()).morph(points));
+                    const forcePosRel = vec2.transformMat2(cache.vec2[1],
+                        force.pos, mat2.fromRotation(cache.mat2[0], -startAngle));
+
+                    // @todo This rotation probably needs a bit of work.
+                    let toMoves = metaball(force.rad*pathArea/shapeArea,
+                        forcePosRel, pathArea, pathMid);
 
                     let reverse = false;
 
-                    if(typeof points === 'number') {
+                    if(Array.isArray(toMoves)) {
+                        const rot = mat2.fromRotation(cache.mat2[0], startAngle);
+
+                        toMoves.forEach((move, m, toMoves) => {
+                            const offsets = movePointOffsets[move[0]];
+
+                            pickMovePoints(toMoves, m, cache.array).forEach((pointRel, p) => {
+                                const [offsetX, offsetY] = offsets[p];
+                                const start = ((offsetX !== null)? offsetX : offsetY);
+
+                                if(start !== null) {
+                                    const end = ((offsetY !== null)? offsetY : offsetX);
+                                    const point = vec2.transformMat2(cache.vec2[1],
+                                        pointRel, rot);
+
+                                    move.splice(start, Math.abs(end-start)+1, ...point);
+                                }
+                            });
+                        });
+                    }
+                    else {
+                        console.log('no balls');
+
                         // Can't draw a metaball - simply a circle for the shape.
-                        points = bezierCircle(pathMid[0], pathMid[1], pathArea,
-                            moves.length, startA);
+                        toMoves = pathCircle(pathMid[0], pathMid[1], pathArea,
+                            moves.length, startAngle);
 
                         // If circles apart, snap back to the orginal shape.
-                        reverse = points > 0;
+                        reverse = toMoves > 0;
                     }
 
                     /*
-                    const points = moves.map((move, m, moves) => {
-                            const point = movePoint(m, moves, cacheVec2[0]);
-                            const to = vec2.sub(cacheVec2[1], point, force.pos);
+                    const toMoves = moves.map((move, m, moves) => {
+                            const point = pickMoveEndpoint(moves, m, cache.vec2[0]);
+                            const to = vec2.sub(cache.vec2[1], point, force.pos);
 
                             // @todo Check if we're inside the shape?
                             const angle = Math.atan2(to[1], to[0]);
@@ -306,9 +289,9 @@ function navHolds(element) {
                         .sort(({ angle }) => angle)
                         .map(({ move }) => move);*/
 
-                    path.animate(1000, '<>').loop(true, true).plot(points);
-                    // path.animate().plot(points);
-                    // path.plot(points);
+                    path.animate(1000, '<>').loop(true, true).plot(toMoves);
+                    // path.animate().plot(toMoves);
+                    // path.plot(toMoves);
                 });
             });
         });
