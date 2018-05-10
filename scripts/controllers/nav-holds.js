@@ -1,11 +1,13 @@
 import $ from 'zepto';
-import { vec2, mat2 } from 'gl-matrix';
+import { vec2, mat2d } from 'gl-matrix';
 
 import SVG from '../libs/custom/svg';
 import Darwin from '../libs/custom/darwin';
 
-import { pathCircle, pickMovePoints, pickMoveEndpoint, movePointOffsets } from '../svg/paths';
-import metaball from '../svg/metaball';
+import { pathCircle, pathMetaball, pickMovePoints, pickMoveEndpoint, movePointOffsets }
+    from '../svg/paths';
+
+import { atan2Circle } from '../utils';
 
 function navHolds(element) {
     const $element = $(element);
@@ -172,22 +174,29 @@ function navHolds(element) {
         SVG($('.yr-nav-holds-defs')[0]);
 
         const cache = {
-            vec2: Array(2).fill().map(vec2.create),
-            mat2: Array(1).fill().map(mat2.create),
-            array: []
+            vec2: Array(3).fill().map(vec2.create),
+            mat2d: Array(1).fill().map(mat2d.create),
+            array: Array(2).fill().map(Array)
         };
 
         const force = {
-            pos: vec2.fromValues(20, 100),
+            pos: vec2.fromValues(180, 180),
             pow: 2,
             rad: 30
         };
 
         force.rad2 = force.rad*force.rad;
+        force.angle = Math.atan2(force.pos[1], force.pos[0]);
 
-        const boxRad = (box) => Math.pow(box.w*box.h, 0.5)*0.5;
+        const boxRad = ({ w, h }) => Math.sqrt(w*h)*0.5;
 
-        const $holds = $element.find('.yr-nav-hold').each((h, hold) => {
+        const $holds = $element.find('.yr-nav-hold');
+
+        $holds.each((h, hold) => {
+            // @todo Remove.
+            force.pos = vec2.add(force.pos, vec2.random(force.pos, 100), vec2.fromValues(100, 100));
+            force.angle = Math.atan2(force.pos[1], force.pos[0]);
+
             const $hold = $(hold);
 
             // Find the SVGs we want - the default, or one in a `block-field`.
@@ -210,61 +219,111 @@ function navHolds(element) {
 
                 // @todo Bounds checking.
 
-                const shapeArea = boxRad(shape.rbox(shape));
+                const shapeBox = shape.rbox(shape);
+                const shapeArea = boxRad(shapeBox);
+                const center = vec2.set(cache.vec2[0], shapeBox.cx, shapeBox.cy);
+
+                // @todo Remove.
+                // vec2.random(force.pos, 100);
+                // vec2.add(force.pos, force.pos, center);
 
                 // Get on with the effect
                 // @todo Hook this part up to animation and pointer input.
                 shape.select('path').each((p, paths) => {
                     const path = paths[p];
 
-                    const box = path.rbox(path);
-                    const pathMid = vec2.set(cache.vec2[0], box.cx, box.cy);
-                    const pathArea = boxRad(box);
+                    // @todo Remove.
+                    path.scale(0.5);
+
+                    const pathBox = path.rbox(path);
+                    const pathArea = boxRad(pathBox);
 
                     const moves = path.array().value;
 
                     const start = pickMoveEndpoint(moves, 0, cache.vec2[1]);
                     const startAngle = Math.atan2(start[1], start[0]);
+                    // const startAngle = Math.PI*h/($holds.length-1);
+                    // const startAngle = 0;
+                    
+                    // Rotate about center, force relative to shape.
 
-                    const forcePosRel = vec2.transformMat2(cache.vec2[1],
-                        force.pos, mat2.fromRotation(cache.mat2[0], -startAngle));
+                    const fulcrum = vec2.copy(cache.vec2[2], center);
+                    const transform = cache.mat2d[0];
+
+                    mat2d.fromTranslation(transform, fulcrum);
+                    mat2d.rotate(transform, transform, force.angle-startAngle);
+                    mat2d.translate(transform, transform, vec2.scale(fulcrum, fulcrum, -1));
+
+                    const forcePosRel = vec2.transformMat2d(cache.vec2[2],
+                        force.pos, transform);
+                    // const forcePosRel = force.pos;
 
                     // @todo This rotation probably needs a bit of work.
-                    let toMoves = metaball(force.rad*pathArea/shapeArea,
-                        forcePosRel, pathArea, pathMid);
+                    /*let toMoves = pathMetaball(forcePosRel, force.rad*pathArea/shapeArea,
+                        center, pathArea,
+                        undefined, undefined, undefined, undefined,
+                        cache.array[0]);*/
 
-                    let reverse = false;
+                    let toMoves = [
+                        // Metaball
+                        ...(pathMetaball(forcePosRel, force.rad*pathArea/shapeArea,
+                            center, pathArea) || []),
+                        // Original force position
+                        ...pathCircle(...force.pos, force.rad*pathArea/shapeArea-2,
+                            3, startAngle),
+                        // Transformed force position
+                        ...pathCircle(...forcePosRel, force.rad*pathArea/shapeArea-2,
+                            3, startAngle),
+                        // Original shape position
+                        ...(pathCircle(...center, pathArea, 5, startAngle)
+                            .map((m) => ((m[0] === 'C')?
+                                    ['L', m[m.length-2], m[m.length-1]]
+                                :   m))),
+                        // Shape starting point
+                        ...pathCircle(...start, 20, 3, 0)
+                    ];
 
                     if(Array.isArray(toMoves)) {
-                        const rot = mat2.fromRotation(cache.mat2[0], startAngle);
+                        // Invert the transformation to return to global space from local.
 
-                        toMoves.forEach((move, m, toMoves) => {
-                            const offsets = movePointOffsets[move[0]];
+                        // mat2d.invert(transform, transform);
 
-                            pickMovePoints(toMoves, m, cache.array).forEach((pointRel, p) => {
-                                const [offsetX, offsetY] = offsets[p];
-                                const start = ((offsetX !== null)? offsetX : offsetY);
+                        // toMoves.forEach((move, m, toMoves) => {
+                        //     const offsets = movePointOffsets[move[0]];
 
-                                if(start !== null) {
-                                    const end = ((offsetY !== null)? offsetY : offsetX);
-                                    const point = vec2.transformMat2(cache.vec2[1],
-                                        pointRel, rot);
+                        //     pickMovePoints(toMoves, m, cache.array[1]).forEach((pointRel, p) => {
+                        //         const [offsetX, offsetY] = offsets[p];
+                        //         const start = ((offsetX !== null)? offsetX : offsetY);
 
-                                    move.splice(start, Math.abs(end-start)+1, ...point);
-                                }
-                            });
-                        });
+                        //         if(start !== null) {
+                        //             const end = ((offsetY !== null)? offsetY : offsetX);
+                        //             const pointAbs = vec2.transformMat2d(cache.vec2[2],
+                        //                 pointRel, transform);
+
+                        //             move.splice(start, Math.abs(end-start)+1, ...pointAbs);
+                        //         }
+                        //     });
+                        // });
+
+                        // Animate.
+
+                        path
+                            .animate(1000, '<>')
+                            // .loop(true, true)
+                            .plot(toMoves);
                     }
                     else {
                         console.log('no balls');
 
-                        // Can't draw a metaball - simply a circle for the shape.
-                        toMoves = pathCircle(pathMid[0], pathMid[1], pathArea,
-                            moves.length, startAngle);
-
-                        // If circles apart, snap back to the orginal shape.
-                        reverse = toMoves > 0;
+                        // Can't draw a metaball - if circles apart, snap back to the orginal
+                        // shape.
+                        if(path.fx && path.fx.situation) {
+                            path.reverse(true);
+                        }
                     }
+
+                    // toMoves = pathCircle(forcePosRel[0], forcePosRel[1], 20,
+                    //     moves.length);
 
                     /*
                     const toMoves = moves.map((move, m, moves) => {
@@ -288,10 +347,6 @@ function navHolds(element) {
                         })
                         .sort(({ angle }) => angle)
                         .map(({ move }) => move);*/
-
-                    path.animate(1000, '<>').loop(true, true).plot(toMoves);
-                    // path.animate().plot(toMoves);
-                    // path.plot(toMoves);
                 });
             });
         });
