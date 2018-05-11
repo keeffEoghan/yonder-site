@@ -8,6 +8,7 @@ import { pathCircle, pathMetaball, pickMovePoints, pickMoveEndpoint, movePointOf
     from '../svg/paths';
 
 import { atan2Circle } from '../utils';
+import { angleBetween, angleDiffX } from '../vec2';
 
 function navHolds(element) {
     const $element = $(element);
@@ -180,7 +181,10 @@ function navHolds(element) {
         };
 
         const force = {
-            pos: vec2.fromValues(180, 180),
+            pos: vec2.fromValues(0, 0),
+            // pos: vec2.fromValues(180, 100),
+            // pos: vec2.fromValues(60, 169),
+            // pos: vec2.fromValues(60, 31),
             pow: 2,
             rad: 30
         };
@@ -193,10 +197,6 @@ function navHolds(element) {
         const $holds = $element.find('.yr-nav-hold');
 
         $holds.each((h, hold) => {
-            // @todo Remove.
-            force.pos = vec2.add(force.pos, vec2.random(force.pos, 100), vec2.fromValues(100, 100));
-            force.angle = Math.atan2(force.pos[1], force.pos[0]);
-
             const $hold = $(hold);
 
             // Find the SVGs we want - the default, or one in a `block-field`.
@@ -224,8 +224,8 @@ function navHolds(element) {
                 const center = vec2.set(cache.vec2[0], shapeBox.cx, shapeBox.cy);
 
                 // @todo Remove.
-                // vec2.random(force.pos, 100);
-                // vec2.add(force.pos, force.pos, center);
+                vec2.add(force.pos, vec2.random(force.pos, 100), center);
+                force.angle = Math.atan2(force.pos[1], force.pos[0]);
 
                 // Get on with the effect
                 // @todo Hook this part up to animation and pointer input.
@@ -249,61 +249,75 @@ function navHolds(element) {
 
                     const fulcrum = vec2.copy(cache.vec2[2], center);
                     const transform = cache.mat2d[0];
+                    // @todo This rotation probably needs a bit of work. Shift by force radius?
+                    const diffAngle = angleDiffX(start, center)-angleDiffX(force.pos, center);
 
                     mat2d.fromTranslation(transform, fulcrum);
-                    mat2d.rotate(transform, transform, force.angle-startAngle);
+                    mat2d.rotate(transform, transform, diffAngle);
                     mat2d.translate(transform, transform, vec2.scale(fulcrum, fulcrum, -1));
 
                     const forcePosRel = vec2.transformMat2d(cache.vec2[2],
                         force.pos, transform);
                     // const forcePosRel = force.pos;
 
-                    // @todo This rotation probably needs a bit of work.
-                    /*let toMoves = pathMetaball(forcePosRel, force.rad*pathArea/shapeArea,
+                    // @todo Account for winding direction...
+                    //       Just +/- difference of the angles of first and last path moves?
+                    let toMoves = pathMetaball(forcePosRel, force.rad*pathArea/shapeArea,
                         center, pathArea,
                         undefined, undefined, undefined, undefined,
-                        cache.array[0]);*/
-
-                    let toMoves = [
-                        // Metaball
-                        ...(pathMetaball(forcePosRel, force.rad*pathArea/shapeArea,
-                            center, pathArea) || []),
-                        // Original force position
-                        ...pathCircle(...force.pos, force.rad*pathArea/shapeArea-2,
-                            3, startAngle),
-                        // Transformed force position
-                        ...pathCircle(...forcePosRel, force.rad*pathArea/shapeArea-2,
-                            3, startAngle),
-                        // Original shape position
-                        ...(pathCircle(...center, pathArea, 5, startAngle)
-                            .map((m) => ((m[0] === 'C')?
-                                    ['L', m[m.length-2], m[m.length-1]]
-                                :   m))),
-                        // Shape starting point
-                        ...pathCircle(...start, 20, 3, 0)
-                    ];
+                        cache.array[0]);
 
                     if(Array.isArray(toMoves)) {
                         // Invert the transformation to return to global space from local.
+                        // @todo Objective is to align the start point of the metaball with the
+                        //       start point of the path. Does this achieve it?
 
-                        // mat2d.invert(transform, transform);
+                        mat2d.invert(transform, transform);
 
-                        // toMoves.forEach((move, m, toMoves) => {
-                        //     const offsets = movePointOffsets[move[0]];
+                        toMoves.forEach((move, m, toMoves) => {
+                            const offsets = movePointOffsets[move[0]];
 
-                        //     pickMovePoints(toMoves, m, cache.array[1]).forEach((pointRel, p) => {
-                        //         const [offsetX, offsetY] = offsets[p];
-                        //         const start = ((offsetX !== null)? offsetX : offsetY);
+                            pickMovePoints(toMoves, m, cache.array[1]).forEach((pointRel, p) => {
+                                const [offsetX, offsetY] = offsets[p];
+                                const start = ((offsetX !== null)? offsetX : offsetY);
 
-                        //         if(start !== null) {
-                        //             const end = ((offsetY !== null)? offsetY : offsetX);
-                        //             const pointAbs = vec2.transformMat2d(cache.vec2[2],
-                        //                 pointRel, transform);
+                                if(start !== null) {
+                                    const end = ((offsetY !== null)? offsetY : offsetX);
+                                    const pointAbs = vec2.transformMat2d(cache.vec2[2],
+                                        pointRel, transform);
 
-                        //             move.splice(start, Math.abs(end-start)+1, ...pointAbs);
-                        //         }
-                        //     });
-                        // });
+                                    move.splice(start, Math.abs(end-start)+1, ...pointAbs);
+                                }
+                            });
+                        });
+
+                        // @todo Remove.
+
+                        // toMoves = [
+                        //     // Metaballs
+                        //     ...toMoves,
+                        //     //Original
+                        //     ...moves
+                        //         .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
+                        //                 ['L', m[m.length-2], m[m.length-1]]
+                        //             :   m)),
+                        //     // Original shape position
+                        //     // ...pathCircle(...center, pathArea, 5, startAngle)
+                        //     //     .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
+                        //     //             ['L', m[m.length-2], m[m.length-1]]
+                        //     //         :   m)),
+                        //     // Original force position
+                        //     ...pathCircle(...force.pos, force.rad*pathArea/shapeArea-2,
+                        //         3, startAngle),
+                        //     // Transformed force position
+                        //     ...pathCircle(...forcePosRel, force.rad*pathArea/shapeArea-2,
+                        //         3, startAngle),
+                        //     // Shape starting point
+                        //     ...pathCircle(...start, 10, 3, startAngle)
+                        //         .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
+                        //                 ['L', m[m.length-2], m[m.length-1]]
+                        //             :   m))
+                        // ];
 
                         // Animate.
 

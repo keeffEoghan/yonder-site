@@ -12,7 +12,6 @@
         - Configurable?
 - Review feedback
     - Access:
-        - Set up on main site subdomain until ready for release.
         - Set up through `thisisyonder.squarespace.com` account on a subdomain.
             - What's the cleanest way to transfer the site and template over, while still keeping the existing one as a holding page?
 - Bugs and errors
@@ -22,8 +21,6 @@
         - Content styles don't update within style editor.
         - Some things seem to require a page refresh to take hold.
     - Others...?
-- Squarespace setup
-    - Transfer template, domain to live
 - Document and instruct
     - The workaround for getting content into the holds comparison view - using a top-level "new row" action.
     - 2 Ways of doing the header banners:
@@ -51,6 +48,7 @@
         - "Y" button to return to normal mode.
         - Content entry, single `block-field` with top-level rows delimiting content separations (document this).
     - Access:
+        - Set up on main site subdomain until ready for release - `web-staging.thisisyonder.com`.
         - Give them your account details for now, so they can play and look around.
 - Bugs and errors
     - Broken image block layouts...?

@@ -2,7 +2,7 @@ import { vec2 } from 'gl-matrix';
 import a2c from 'svgpath/lib/a2c';
 
 import { tau } from '../constants';
-import { angleDiff, polar } from '../vec2';
+import { angleDiffX, polar } from '../vec2';
 
 /**
  * Create an approximate circle of beziers.
@@ -139,7 +139,7 @@ export function pathMetaball(center0, radius0, center1, radius1,
         u1 = 0;
     }
 
-    const angleBetweenCenters = angleDiff(center1, center0);
+    const angleBetweenCenters = angleDiffX(center1, center0);
 
     // Calculate the max spread
     const maxSpread = Math.acos((radius0-radius1)/dist);
@@ -151,10 +151,10 @@ export function pathMetaball(center0, radius0, center1, radius1,
     const a3 = angleBetweenCenters-u0-(maxSpread-u0)*spread;
 
     // Point locations
-    const m0p = polar(cacheVec2[0], center0, a0, radius0);
-    const m1p = polar(cacheVec2[1], center1, a1, radius1);
-    const m2p = polar(cacheVec2[2], center1, a2, radius1);
-    const m3p = polar(cacheVec2[3], center0, a3, radius0);
+    let m0p = polar(cacheVec2[0], center0, a0, radius0);
+    let m1p = polar(cacheVec2[1], center1, a1, radius1);
+    let m2p = polar(cacheVec2[2], center1, a2, radius1);
+    let m3p = polar(cacheVec2[3], center0, a3, radius0);
 
     // Define handle length by the distance between both ends of the curve
     const d2Base = Math.min(spread*handle, vec2.dist(m0p, m1p)/sumRadius);
@@ -168,14 +168,18 @@ export function pathMetaball(center0, radius0, center1, radius1,
 
     // Handle locations
 
-    const m1h0 = polar(cacheVec2[4], m0p, a0-halfPI, r0);
-    const m1h1 = polar(cacheVec2[5], m1p, a1+halfPI, r1);
+    let m1h0 = polar(cacheVec2[4], m0p, a0-halfPI, r0);
+    let m1h1 = polar(cacheVec2[5], m1p, a1+halfPI, r1);
 
-    const m3h0 = polar(cacheVec2[6], m2p, a2-halfPI, r1);
-    const m3h1 = polar(cacheVec2[7], m3p, a3+halfPI, r0);
+    let m3h0 = polar(cacheVec2[6], m2p, a2-halfPI, r1);
+    let m3h1 = polar(cacheVec2[7], m3p, a3+halfPI, r0);
 
     const arcFlag0 = ((dist < radius0 && radius0 > radius1)? 0 : 1);
     const arcFlag1 = ((dist < radius1 && radius1 > radius0)? 0 : 1);
+
+    // @todo Put this behind an `anti` flag.
+    // [m0p, m3p, m2p, m1p, m3h1, m3h0, m1h1, m1h0] =
+    // [m0p, m1p, m2p, m3p, m1h0, m1h1, m3h0, m3h1];
 
     // Use beziers rather than arcs - makes animation easier for everyone.
     // The arguments are in a different order to the SVG arc command:
