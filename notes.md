@@ -13,18 +13,12 @@
 - Review feedback
     - Access:
         - Set up through `thisisyonder.squarespace.com` account.
-            - Using a combined template won't really work (see test below) - we need a 2 template approach:
-                - Can't sandbox off the areas (such as the shop) we need for the holding page.
-                - Cleanest, though may mean a slight extra charge.
             - Billing setup:
                 - Holding site:
-                    - Switch to monthly cycle, so we lose less when we disable it (nice timing as we're at the end of the year).
                     - When the staging site is ready to go live, cancel the subscription and remove the domain.
                 - Staging site:
-                    - Just set up a new trial site on `thisisyonder.squarespace.com` account, and point the domain to `web-staging.thisisyonder.com`.
                     - Edit content and code.
                     - When ready, set up the new billing (Personal, or Business if needed), and point the domain to `thisisyonder.com`.
-            - Should now have both templates up on Squarespace - the old one on the current domain, the new one on a subdomain.
 - Bugs and errors
     - Reset styles still doesn't work... times out I think?
     - Several things break when in edit mode... Squarespace LESS inconsistencies, unbelievable
@@ -59,6 +53,16 @@
         - "Y" button to return to normal mode.
         - Content entry, single `block-field` with top-level rows delimiting content separations (document this).
     - Access:
+        - Set up through `thisisyonder.squarespace.com` account.
+            - Using a combined template won't really work (see test below) - we need a 2 template approach:
+                - Can't sandbox off the areas (such as the shop) we need for the holding page.
+                - Cleanest, though may mean a slight extra charge.
+            - Billing setup:
+                - Holding site:
+                    - Switch to monthly cycle, so we lose less when we disable it (nice timing as we're at the end of the year).
+                - Staging site:
+                    - Just set up a new trial site on `thisisyonder.squarespace.com` account, and point the domain to `web-staging.thisisyonder.com`.
+            - Should now have both templates up on Squarespace - the old one on the current domain, the new one on a subdomain.
         - Tested combined template approach for handling staging/holding together:
             - Turn on Developer Mode.
             - Clone old template repo.

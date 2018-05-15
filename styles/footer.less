@@ -5,9 +5,16 @@
         display: block;
         position: relative;
         z-index: @yr-z-footer;
-        padding: 2em 0;
         color: @tweak-yr-color-dark-1-tone-3;
         background-color: @tweak-yr-color-base-tone-3;
+    }
+
+    .yr-footer-block {
+        margin: 2em 0;
+
+        &@{yr-select-sqs-block-empty} {
+            margin: 0;
+        }
     }
 
     .yr-contact {
@@ -15,6 +22,7 @@
 
         .tweak-yr-footer-contact-show & {
             display: block;
+            margin: 2em 0;
         }
     }
 }
