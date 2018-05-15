@@ -12,8 +12,19 @@
         - Configurable?
 - Review feedback
     - Access:
-        - Set up through `thisisyonder.squarespace.com` account on a subdomain.
-            - What's the cleanest way to transfer the site and template over, while still keeping the existing one as a holding page?
+        - Set up through `thisisyonder.squarespace.com` account.
+            - Using a combined template won't really work (see test below) - we need a 2 template approach:
+                - Can't sandbox off the areas (such as the shop) we need for the holding page.
+                - Cleanest, though may mean a slight extra charge.
+            - Billing setup:
+                - Holding site:
+                    - Switch to monthly cycle, so we lose less when we disable it (nice timing as we're at the end of the year).
+                    - When the staging site is ready to go live, cancel the subscription and remove the domain.
+                - Staging site:
+                    - Just set up a new trial site on `thisisyonder.squarespace.com` account, and point the domain to `web-staging.thisisyonder.com`.
+                    - Edit content and code.
+                    - When ready, set up the new billing (Personal, or Business if needed), and point the domain to `thisisyonder.com`.
+            - Should now have both templates up on Squarespace - the old one on the current domain, the new one on a subdomain.
 - Bugs and errors
     - Reset styles still doesn't work... times out I think?
     - Several things break when in edit mode... Squarespace LESS inconsistencies, unbelievable
@@ -48,6 +59,20 @@
         - "Y" button to return to normal mode.
         - Content entry, single `block-field` with top-level rows delimiting content separations (document this).
     - Access:
+        - Tested combined template approach for handling staging/holding together:
+            - Turn on Developer Mode.
+            - Clone old template repo.
+            - Locally, set up the combination of the 2 sites:
+                - Create a static page with all the old website content (static download, as a backup).
+                - Build and test that - transferring anything you need to across from regular content to the static page.
+                - Once that's working OK, copy all the files from the new site's repo.
+                - Set up separate regions/layouts for the homepage holding page.
+                - Move all the (used) parts of the old site into the new region structure.
+                - Namespace the old styles, taking care with any global variables, tweaks, etc.
+                - Update any references to scripts, blocks, etc to load the old ones.
+                - See if you can figure out how to deal with the old collections - might need to just copy in the static HTML there as a `code-block` or something.
+                - If layouts switching isn't working, try just using conditional `apply`.
+                - Build that site, test.
         - Set up on main site subdomain until ready for release - `web-staging.thisisyonder.com`.
         - Give them your account details for now, so they can play and look around.
 - Bugs and errors

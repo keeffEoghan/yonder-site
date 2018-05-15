@@ -191,6 +191,11 @@ export function pathMetaball(center0, radius0, center1, radius1,
     // Generate the connector path
     // @todo Reuse any input arrays.
     out.splice(0, Infinity,
+        // Starting point.
+        // ...pathCircle(...m0p, 10, 3)
+        //     .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
+        //             ['L', m[m.length-2], m[m.length-1]]
+        //         :   m)),
         ['M', ...m0p],
         ['C', ...m1h0, ...m1h1, ...m1p],
         // ['A', radius1, radius1, 0, arcFlag0, 0, ...m2p],

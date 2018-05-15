@@ -169,6 +169,8 @@ function navHolds(element) {
     // Test
     
     (() => {
+        return;
+
         if(!SVG.supported) { return; }
 
         // Init... needed internally in SVG.js even if we're not drawing in this element.
@@ -262,6 +264,7 @@ function navHolds(element) {
 
                     // @todo Account for winding direction...
                     //       Just +/- difference of the angles of first and last path moves?
+                    // @see https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order
                     let toMoves = pathMetaball(forcePosRel, force.rad*pathArea/shapeArea,
                         center, pathArea,
                         undefined, undefined, undefined, undefined,

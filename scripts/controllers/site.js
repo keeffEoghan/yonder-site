@@ -32,9 +32,9 @@ const onRequestExceptions = [];
 // choose whether to update attributes, replace HTML, or both.
 const updateMatrix = [
     // This would be nice, but won;t work as Mercury only queries for the first selector
-    // { selector: '[data-ajax-update~=html]', updateHTML: true },
-    // { selector: '[data-ajax-update~=attrs]', updateAttrs: true },
-    // { selector: '[data-ajax-update~=script]', updateScript: true },
+    // { selector: '[yr-ajax~=html]', updateHTML: true },
+    // { selector: '[yr-ajax~=attrs]', updateAttrs: true },
+    // { selector: '[yr-ajax~=script]', updateScript: true },
 
     { selector: 'html', updateAttrs: true },
     { selector: 'title', updateHTML: true },
