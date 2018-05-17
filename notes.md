@@ -12,8 +12,6 @@
             - Determine shape path's winding, to reduce "flips":
                 - Work out the [winding clockwiseness](https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order)
                 - Reverse metaball path if needed.
-            - Align starting points, to reduce "turns":
-                - Could also be generalised to split the metaball at *every* point in the shape...
     - Drag/slide holds and fade background.
     - Speckled tiling background.
         - Configurable?
@@ -60,6 +58,7 @@
             - After stupid red herring trying to transform before creating metaball...
             - We'll work with bézier curves for the metaball to simplify things.
             - Align starting points, to reduce "turns":
+                - Might also be generalised to split the metaball at *every* point in the shape... but this would be more difficult than it's worth.
                 - Split the metaball path at the point closest to the shape's starting point.
                 - Nearest point on metaball path to a given shape point:
                     - Could try [a bézier-based approach to this](https://stackoverflow.com/a/44993719/716898), but seems unnecessarily complicated/specific (have to search curve-by-curve).

@@ -24,11 +24,23 @@ export function pathCircleMove(cx, cy, rad, step, steps = 4, angle = 0, out = []
 
     const cp = 4/3*Math.tan(Math.PI/(2*steps));
 
-    out.splice(0, Infinity,
+    /*out.splice(0, Infinity,
         'C',
         cx+x0+(-y0*cp), cy+y0+(x0*cp),
         cx+x1+(y1*cp), cy+y1+(-x1*cp),
-        cx+x1, cy+y1);
+        cx+x1, cy+y1);*/
+
+    let l = 0;
+
+    out[l++] = 'C';
+    out[l++] = cx+x0+(-y0*cp);
+    out[l++] = cy+y0+(x0*cp);
+    out[l++] = cx+x1+(y1*cp);
+    out[l++] = cy+y1+(-x1*cp);
+    out[l++] = cx+x1;
+    out[l++] = cy+y1;
+
+    out.length = l;
 
     return out;
 }
@@ -41,12 +53,27 @@ export function pathCircle(cx, cy, rad, steps = 4, angle = 0, closed = true, out
         out[s+c] = pathCircleMove(cx, cy, rad, s, steps, angle, out[s+c]);
     }
 
-    const end = out[steps];
-
-    (out[0] || (out[0] = [])).splice(0, Infinity, 'M', end[end.length-2], end[end.length-1]);
-
     if(closed) {
-        (out[steps+c] || (out[steps+c] = [])).splice(0, Infinity, 'Z');
+        const end = out[steps];
+
+        // (out[0] || (out[0] = [])).splice(0, Infinity, 'M', end[end.length-2], end[end.length-1]);
+        // (out[steps+c] || (out[steps+c] = [])).splice(0, Infinity, 'Z');
+
+        const open = (out[0] || (out[0] = []));
+        let i = 0;
+
+        open[o++] = 'M';
+        open[o++] = end[end.length-2];
+        open[o++] = end[end.length-1];
+
+        open.length = o;
+
+        const close = (out[steps+c] || (out[steps+c] = []));
+
+        i = 0;
+        close[o++] = 'Z';
+
+        close.length = o;
     }
 
     return out;
@@ -190,14 +217,13 @@ export function pathMetaball(center0, radius0, center1, radius1,
 
     // Generate the connector path
     // @todo Reuse any input arrays.
-    out.splice(0, Infinity,
+    out.splice(((closed)? 1 : 0), Infinity,
         // Debug.
         // ...pathCircle(...m0p, 10, 3)
         //     .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
         //             ['L', m[m.length-2], m[m.length-1]]
         //         :   m)),
-
-        ['M', ...m0p],
+        // ['M', ...m0p],
         ['C', ...m1h0, ...m1h1, ...m1p],
         // ['A', radius1, radius1, 0, arcFlag0, 0, ...m2p],
         ...a2cToSVG(a2c0),
@@ -206,6 +232,7 @@ export function pathMetaball(center0, radius0, center1, radius1,
         ...a2cToSVG(a2c1));
 
     if(closed) {
+        (out[0] || (out[0] = [])).splice(0, Infinity, 'M', ...m0p);
         (out[out.length] || (out[out.length] = [])).splice(0, Infinity, 'Z');
     }
 

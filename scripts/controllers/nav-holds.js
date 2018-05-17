@@ -12,7 +12,7 @@ import { pathCircle, pathMetaball, pickMovePoints, pickMoveEndpoint, movePointOf
 import nearestOnPath from '../svg/nearest-on-path';
 
 import { __ } from '../constants';
-import { atan2Circle } from '../utils';
+import { atan2Circle, wrapNum } from '../utils';
 import { angleBetween, angleDiffX } from '../vec2';
 
 function navHolds(element) {
@@ -256,10 +256,9 @@ function navHolds(element) {
                         center, pathArea, __, __, __, __, cache.array[0]);
 
                     if(Array.isArray(toMoves)) {
-                        // Line up the starting point with the starting point of the shape, to
-                        // minimise folding during the morph.
+                        // Line up the start point with with start point of the shape, to
+                        // help minimise turning during the morph.
                         // Split the metaball path at the starting point.
-                        // @todo Split metaball path for *every* point in the shape path? Flag?
 
                         const toPath = (new SVG.Path()).plot(toMoves);
                         const start = vec2ToPojo(pickMoveEndpoint(moves, 0, cache.vec2[1]),
@@ -305,8 +304,9 @@ function navHolds(element) {
 
                         // Get the length to split the segment at.
 
-                        const segEnd0 = vec2ToPojo(pickMoveEndpoint(toMoves, seg-1,
-                                cache.vec2[1]),
+                        const segEnd0 = vec2ToPojo(pickMoveEndpoint(toMoves,
+                                wrapNum(seg-1, toMoves.length), cache.vec2[1]),
+                                // seg-1, cache.vec2[1]),
                             cache.pojo[0]);
 
                         const segEnd1 = vec2ToPojo(points[points.length-1], cache.pojo[1]);
@@ -355,7 +355,31 @@ function navHolds(element) {
                             },
                             splits);
 
-                        toMoves.splice(seg, 1, ...splits);
+                        // toMoves.splice(seg, 1, ...splits);
+
+                        // Insert the new split and sort the path points so the it's at the start.
+
+                        const m = ((toMoves[0][0].search(/^m$/i) < 0)? 0 : 1);
+
+                        // Remove the first moves up to the old segment index.
+                        const prev = toMoves.splice(m, seg+1-m, splits[1]);
+                        // const prev = toMoves.splice(m, seg+1-m, ...splits);
+
+                        // Remove the old segment, now split.
+                        prev.pop();
+
+                        const z = ((toMoves[toMoves.length-1][0].search(/^z$/i) < 0)? 0 : 1);
+                        const endSplit = splits[0];
+
+                        // Put the previous items at the end, and insert the new split segments.
+                        toMoves.splice(toMoves.length-z, 0, ...prev, endSplit);
+                        // toMoves.splice(toMoves.length-z, 0, ...prev);
+
+                        // Update any opening "M" command.
+                        if(m) {
+                            toMoves[m-1][1] = endSplit[endSplit.length-2];
+                            toMoves[m-1][2] = endSplit[endSplit.length-1];
+                        }
 
                         // @todo Remove.
 
@@ -384,10 +408,10 @@ function navHolds(element) {
                             //             ['L', m[m.length-2], m[m.length-1]]
                             //         :   m)),
                             // Split starting point
-                            // ...pathCircle(...splits[0].slice(-2), 10, 3, 0)
-                            //     .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
-                            //             ['L', m[m.length-2], m[m.length-1]]
-                            //         :   m))
+                            ...pathCircle(...splits[0].slice(-2), 10, 3, 0)
+                                .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
+                                        ['L', m[m.length-2], m[m.length-1]]
+                                    :   m))
                         ];*/
 
                         // Animate.
