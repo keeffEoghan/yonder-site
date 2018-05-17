@@ -188,9 +188,6 @@ function navHolds(element) {
 
         const force = {
             pos: vec2.fromValues(0, 0),
-            // pos: vec2.fromValues(180, 100),
-            // pos: vec2.fromValues(60, 169),
-            // pos: vec2.fromValues(60, 31),
             pow: 2,
             rad: 30
         };
@@ -198,10 +195,10 @@ function navHolds(element) {
         const pojoToVec2 = (pojo, out = vec2.create()) => vec2.set(out, pojo.x, pojo.y);
         const vec2ToPojo = (vec2, out = {}) => (out.x = vec2[0], out.y = vec2[1], out);
 
+        const boxRad = ({ w, h }) => Math.sqrt(w*h)*0.5;
+
         force.rad2 = force.rad*force.rad;
         force.angle = Math.atan2(force.pos[1], force.pos[0]);
-
-        const boxRad = ({ w, h }) => Math.sqrt(w*h)*0.5;
 
         const $holds = $element.find('.yr-nav-hold');
 
@@ -249,28 +246,6 @@ function navHolds(element) {
 
                     const moves = path.array().value;
 
-                    // This transformation bullshit was never going to work...
-                    /*
-                    const start = pickMoveEndpoint(moves, 0, cache.vec2[1]);
-                    const startAngle = Math.atan2(start[1], start[0]);
-                    // const startAngle = Math.PI*h/($holds.length-1);
-                    // const startAngle = 0;
-                    
-                    // Rotate about center, force relative to shape.
-
-                    const fulcrum = vec2.copy(cache.vec2[2], center);
-                    const transform = cache.mat2d[0];
-                    // @todo This rotation probably needs a bit of work. Shift by force radius?
-                    const diffAngle = angleDiffX(start, center)-angleDiffX(force.pos, center);
-
-                    mat2d.fromTranslation(transform, fulcrum);
-                    mat2d.rotate(transform, transform, diffAngle);
-                    mat2d.translate(transform, transform, vec2.scale(fulcrum, fulcrum, -1));
-
-                    const forcePosRel = vec2.transformMat2d(cache.vec2[2],
-                        force.pos, transform);
-                    */
-
                     // @todo Account for winding direction...
                     //       Just +/- difference of the angles over all path moves?
                     //       Don't worry about the various SVG winding fill types.
@@ -310,12 +285,12 @@ function navHolds(element) {
                         const seg = toMoves.findIndex((move, m, toMoves) => {
                                 if(move[0].search(/^[mz]$/i) >= 0) { return false; }
 
-                                const point = vec2ToPojo(pickMoveEndpoint(toMoves, m,
-                                        cache.vec2[1]),
-                                    cache.pojo[0]);
+                                const end = pickMoveEndpoint(toMoves, m, cache.vec2[1]);
+                                const length = nearestOnPath(path.node,
+                                    vec2ToPojo(end, cache.pojo[0]),
+                                    __, __, __, 'length');
 
-                                return splitAt <
-                                    nearestOnPath(path.node, point, __, __, __, 'length');
+                                return splitAt < length;
                             });
 
                         if(seg < 0) {
@@ -382,30 +357,6 @@ function navHolds(element) {
 
                         toMoves.splice(seg, 1, ...splits);
 
-                        /*
-                        // Invert the transformation to return to global space from local.
-                        // @todo Objective is to align the start point of the metaball with the
-                        //       start point of the path. Does this achieve it?
-
-                        mat2d.invert(transform, transform);
-
-                        toMoves.forEach((move, m, toMoves) => {
-                            const offsets = movePointOffsets[move[0]];
-
-                            pickMovePoints(toMoves, m, cache.array[1]).forEach((pointRel, p) => {
-                                const [offsetX, offsetY] = offsets[p];
-                                const start = ((offsetX !== null)? offsetX : offsetY);
-
-                                if(start !== null) {
-                                    const end = ((offsetY !== null)? offsetY : offsetX);
-                                    const pointAbs = vec2.transformMat2d(cache.vec2[2],
-                                        pointRel, transform);
-
-                                    move.splice(start, Math.abs(end-start)+1, ...pointAbs);
-                                }
-                            });
-                        });*/
-
                         // @todo Remove.
 
                         /*toMoves = [
@@ -455,90 +406,10 @@ function navHolds(element) {
                             path.reverse(true);
                         }
                     }
-
-                    // toMoves = pathCircle(forcePosRel[0], forcePosRel[1], 20,
-                    //     moves.length);
-
-                    /*
-                    const toMoves = moves.map((move, m, moves) => {
-                            const point = pickMoveEndpoint(moves, m, cache.vec2[0]);
-                            const to = vec2.sub(cache.vec2[1], point, force.pos);
-
-                            // @todo Check if we're inside the shape?
-                            const angle = Math.atan2(to[1], to[0]);
-                            const out = ;
-
-                            // Square units used for performance, if accuracy not an issue...
-                            // const len2 = vec2.sqrLen(to);
-                            // const f = force.pow*Math.max(force.rad2-len2, 0)/force.rad2;
-
-                            // const out = vec2.scaleAndAdd(point, force.pos, to, 1-f);
-
-                            return {
-                                move: [...move.slice(0, -2), ...out],
-                                angle
-                            };
-                        })
-                        .sort(({ angle }) => angle)
-                        .map(({ move }) => move);*/
                 });
             });
         });
     })();
-
-    /*
-    (() => {
-        const $menu = $element.find('.yr-nav-holds-menu');
-        const $blob = $('<li class="yr-nav-hold-blob"></li>').appendTo($menu);
-        const rad = 60;
-
-        const $holds = $menu.find('.yr-nav-hold');
-
-        $(self).on('mousemove', (e) => {
-            const menuBox = $menu.offset();
-
-            const s = $holds.reduce((r, hold, i) => {
-                    const $hold = $(hold);
-                    const holdBox = $hold.offset();
-                    const d = distance({
-                            x: holdBox.left+(holdBox.width*0.5),
-                            y: holdBox.top+(holdBox.height*0.5)
-                        },
-                        {
-                            x: e.pageX,
-                            y: e.pageY
-                        });
-                    const limit = Math.max(holdBox.width, holdBox.height)*0.5;
-                    const scale = (limit-d)/limit;
-
-                    if(scale > r.scale) {
-                        r.scale = scale;
-                        r.$hold = $hold;
-                    }
-
-                    return r;
-                },
-                {
-                    scale: 0,
-                    $hold: null
-                });
-
-            $blob.css({
-                backgroundColor: ((s.$hold)?
-                        s.$hold.find('.yr-use-hold-shape, .yr-hold-shape').css('color')
-                    :   ''),
-                transform: `
-                    translate(${e.pageX-rad-menuBox.left}px,
-                        ${e.pageY-rad-menuBox.top}px)
-                    scale(${s.scale})
-                `,
-                left: 0,
-                top: 0,
-                width: rad*2,
-                height: rad*2
-            });
-        });
-    })();*/
 }
 
 export default navHolds;
