@@ -7,6 +7,13 @@
 - Finesse
     - Home info content stagger transitions
 - Home animations
+    - Blob morphing hold shapes:
+        - Minimise "folding" during morph from shape to metaball:
+            - Determine shape path's winding, to reduce "flips":
+                - Work out the [winding clockwiseness](https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order)
+                - Reverse metaball path if needed.
+            - Align starting points, to reduce "turns":
+                - Could also be generalised to split the metaball at *every* point in the shape...
     - Drag/slide holds and fade background.
     - Speckled tiling background.
         - Configurable?
@@ -47,6 +54,24 @@
 
 # Done
 
+- Home animations
+    - Blob morphing hold shapes:
+        - Minimise "folding" during morph from shape to metaball:
+            - After stupid red herring trying to transform before creating metaball...
+            - We'll work with bézier curves for the metaball to simplify things.
+            - Align starting points, to reduce "turns":
+                - Split the metaball path at the point closest to the shape's starting point.
+                - Nearest point on metaball path to a given shape point:
+                    - Could try [a bézier-based approach to this](https://stackoverflow.com/a/44993719/716898), but seems unnecessarily complicated/specific (have to search curve-by-curve).
+                    - Trying [a general approach to this](https://gist.github.com/mbostock/8027637), using `getPointAtLength` and other SVG path methods (polyfilled?).
+                    - Want the nearest length along the path as the ouput of this, so we can next find the curve at that length, and then the length along that curve to split it.
+                - Splitting the metaball path:
+                    - Could try [a kinda general approach to this](http://bl.ocks.org/bycoffe/18441cddeb8fe147b719fab5e30b5d45), but seems less succinct (splitting the path into points and drawing new curves to connect them).
+                    - Trying [a bézier-based approach to this](https://github.com/jasonHzq/bezier-utils/).
+                        - Relies on getting the right bézier segment at a given length from the above nearest point search (`getPathSegAtLength`, which may need [a polyfill](https://github.com/progers/pathseg)).
+                        - See also:
+                            - [Alternative bézier splitting](https://github.com/tdzienniak/deCasteljau/blob/master/decasteljau.js)
+                            - [Possible alternative for `getPathSegAtLength`](https://github.com/rveciana/svg-path-properties)
 - Review feedback
     - Holds comparison view:
         - Small-screen, just modal the details over the top?

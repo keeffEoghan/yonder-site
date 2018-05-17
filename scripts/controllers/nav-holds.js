@@ -1,5 +1,7 @@
 import $ from 'zepto';
-import { vec2, mat2d } from 'gl-matrix';
+// @todo Import only the needed functions
+import { vec2 } from 'gl-matrix';
+import { getSubBezier } from 'bezier-utils';
 
 import SVG from '../libs/custom/svg';
 import Darwin from '../libs/custom/darwin';
@@ -7,6 +9,9 @@ import Darwin from '../libs/custom/darwin';
 import { pathCircle, pathMetaball, pickMovePoints, pickMoveEndpoint, movePointOffsets }
     from '../svg/paths';
 
+import nearestOnPath from '../svg/nearest-on-path';
+
+import { __ } from '../constants';
 import { atan2Circle } from '../utils';
 import { angleBetween, angleDiffX } from '../vec2';
 
@@ -169,16 +174,15 @@ function navHolds(element) {
     // Test
     
     (() => {
-        return;
-
         if(!SVG.supported) { return; }
 
         // Init... needed internally in SVG.js even if we're not drawing in this element.
         SVG($('.yr-nav-holds-defs')[0]);
 
         const cache = {
+            pojo: Array(2).fill().map(() => ({})),
             vec2: Array(3).fill().map(vec2.create),
-            mat2d: Array(1).fill().map(mat2d.create),
+            // mat2d: Array(1).fill().map(mat2d.create),
             array: Array(2).fill().map(Array)
         };
 
@@ -190,6 +194,9 @@ function navHolds(element) {
             pow: 2,
             rad: 30
         };
+
+        const pojoToVec2 = (pojo, out = vec2.create()) => vec2.set(out, pojo.x, pojo.y);
+        const vec2ToPojo = (vec2, out = {}) => (out.x = vec2[0], out.y = vec2[1], out);
 
         force.rad2 = force.rad*force.rad;
         force.angle = Math.atan2(force.pos[1], force.pos[0]);
@@ -242,6 +249,8 @@ function navHolds(element) {
 
                     const moves = path.array().value;
 
+                    // This transformation bullshit was never going to work...
+                    /*
                     const start = pickMoveEndpoint(moves, 0, cache.vec2[1]);
                     const startAngle = Math.atan2(start[1], start[0]);
                     // const startAngle = Math.PI*h/($holds.length-1);
@@ -260,17 +269,120 @@ function navHolds(element) {
 
                     const forcePosRel = vec2.transformMat2d(cache.vec2[2],
                         force.pos, transform);
-                    // const forcePosRel = force.pos;
+                    */
 
                     // @todo Account for winding direction...
-                    //       Just +/- difference of the angles of first and last path moves?
+                    //       Just +/- difference of the angles over all path moves?
+                    //       Don't worry about the various SVG winding fill types.
+                    //       Actually, could just do this by setting points on a nearby path
+                    //       along the metaball path in the same loop direction as the shape.
                     // @see https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order
-                    let toMoves = pathMetaball(forcePosRel, force.rad*pathArea/shapeArea,
-                        center, pathArea,
-                        undefined, undefined, undefined, undefined,
-                        cache.array[0]);
+                    let toMoves = pathMetaball(force.pos, force.rad*pathArea/shapeArea,
+                        center, pathArea, __, __, __, __, cache.array[0]);
 
                     if(Array.isArray(toMoves)) {
+                        // Line up the starting point with the starting point of the shape, to
+                        // minimise folding during the morph.
+                        // Split the metaball path at the starting point.
+                        // @todo Split metaball path for *every* point in the shape path? Flag?
+
+                        const toPath = (new SVG.Path()).plot(toMoves);
+                        const start = vec2ToPojo(pickMoveEndpoint(moves, 0, cache.vec2[1]),
+                            cache.pojo[0]);
+
+                        // @todo WAY TOO MANY calls to `nearestOnPath` - may need to unroll it.
+
+                        const splitAt = nearestOnPath(path.node, start, __, __, __, 'length');
+
+
+                        // Get the relevant segment of the path.
+                        
+                        // Could use the old `getPathSegAtLength` API, but the polyfill's biiiig:
+                        // const seg = toPath.node.getPathSegAtLength(splitAt);
+                        // const segAt0 = nearestOnPath(toPath.node,
+                        //     pickMoveEndpoint(toMoves, seg-1, cache.vec2[1]),
+                        //     __, __, __, 'length');
+
+                        // const segAt1 = nearestOnPath(toPath.node,
+                        //     pickMoveEndpoint(toMoves, seg, cache.vec2[1]),
+                        //     __, __, __, 'length');
+
+                        const seg = toMoves.findIndex((move, m, toMoves) => {
+                                if(move[0].search(/^[mz]$/i) >= 0) { return false; }
+
+                                const point = vec2ToPojo(pickMoveEndpoint(toMoves, m,
+                                        cache.vec2[1]),
+                                    cache.pojo[0]);
+
+                                return splitAt <
+                                    nearestOnPath(path.node, point, __, __, __, 'length');
+                            });
+
+                        if(seg < 0) {
+                            console.warn("Couldn't find path segment nearest point");
+                            return;
+                        }
+
+                        cache.array[1].length = 0;
+
+                        const points = pickMovePoints(toMoves, seg, cache.array[1]);
+
+
+                        // Get the length to split the segment at.
+
+                        const segEnd0 = vec2ToPojo(pickMoveEndpoint(toMoves, seg-1,
+                                cache.vec2[1]),
+                            cache.pojo[0]);
+
+                        const segEnd1 = vec2ToPojo(points[points.length-1], cache.pojo[1]);
+
+                        const segAt0 = nearestOnPath(toPath.node, segEnd0, __, __, __, 'length');
+                        const segAt1 = nearestOnPath(toPath.node, segEnd1, __, __, __, 'length');
+
+                        if(splitAt < segAt0 || segAt1 < splitAt) {
+                            console.warn("Invalid lengths on segment nearest point");
+                            return;
+                        }
+
+                        // Convert into the form `bezier-utils` accepts
+                        points.reduceRight((points, point, p) => {
+                                points.splice(p, 1, vec2ToPojo(point));
+
+                                return points;
+                            },
+                            points);
+
+                        points.unshift(segEnd0);
+
+
+                        // Split at the length along the path segment.
+
+                        const splits = getSubBezier(points, (splitAt-segAt0)/(segAt1-segAt0));
+
+                        // Modifying arrays in-place to try keep memory usage down.
+                        splits.reduceRight((splits, split, s) => {
+                                split.reduceRight((split, point, p) => {
+                                        ((p)?
+                                            // Flatten the objects into an array.
+                                            split.splice(p, 1, point.x, point.y)
+                                            // Don't need the first points, as they're the
+                                            // previous move's endpoint.
+                                        :   split.shift());
+
+                                        return split;
+                                    },
+                                    split)
+                                    .unshift('C');
+
+                                splits.splice(s, 1, split);
+
+                                return splits;
+                            },
+                            splits);
+
+                        toMoves.splice(seg, 1, ...splits);
+
+                        /*
                         // Invert the transformation to return to global space from local.
                         // @todo Objective is to align the start point of the metaball with the
                         //       start point of the path. Does this achieve it?
@@ -292,41 +404,46 @@ function navHolds(element) {
                                     move.splice(start, Math.abs(end-start)+1, ...pointAbs);
                                 }
                             });
-                        });
+                        });*/
 
                         // @todo Remove.
 
-                        // toMoves = [
-                        //     // Metaballs
-                        //     ...toMoves,
-                        //     //Original
-                        //     ...moves
-                        //         .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
-                        //                 ['L', m[m.length-2], m[m.length-1]]
-                        //             :   m)),
-                        //     // Original shape position
-                        //     // ...pathCircle(...center, pathArea, 5, startAngle)
-                        //     //     .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
-                        //     //             ['L', m[m.length-2], m[m.length-1]]
-                        //     //         :   m)),
-                        //     // Original force position
-                        //     ...pathCircle(...force.pos, force.rad*pathArea/shapeArea-2,
-                        //         3, startAngle),
-                        //     // Transformed force position
-                        //     ...pathCircle(...forcePosRel, force.rad*pathArea/shapeArea-2,
-                        //         3, startAngle),
-                        //     // Shape starting point
-                        //     ...pathCircle(...start, 10, 3, startAngle)
-                        //         .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
-                        //                 ['L', m[m.length-2], m[m.length-1]]
-                        //             :   m))
-                        // ];
+                        /*toMoves = [
+                            // Metaballs
+                            ...toMoves,
+                            //Original
+                            // ...moves
+                            //     .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
+                            //             ['L', m[m.length-2], m[m.length-1]]
+                            //         :   m)),
+                            // Original shape position
+                            // ...pathCircle(...center, pathArea, 5, startAngle)
+                            //     .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
+                            //             ['L', m[m.length-2], m[m.length-1]]
+                            //         :   m)),
+                            // Original force position
+                            // ...pathCircle(...force.pos, force.rad*pathArea/shapeArea-2,
+                            //     3, startAngle),
+                            // Transformed force position
+                            // ...pathCircle(...forcePosRel, force.rad*pathArea/shapeArea-2,
+                            //     3, startAngle),
+                            // Shape starting point
+                            // ...pathCircle(...pojoToVec2(start, cache.vec2[2]), 10, 5, 0)
+                            //     .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
+                            //             ['L', m[m.length-2], m[m.length-1]]
+                            //         :   m)),
+                            // Split starting point
+                            // ...pathCircle(...splits[0].slice(-2), 10, 3, 0)
+                            //     .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
+                            //             ['L', m[m.length-2], m[m.length-1]]
+                            //         :   m))
+                        ];*/
 
                         // Animate.
 
                         path
                             .animate(1000, '<>')
-                            // .loop(true, true)
+                            .loop(true, true)
                             .plot(toMoves);
                     }
                     else {
