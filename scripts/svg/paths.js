@@ -4,6 +4,10 @@ import a2c from 'svgpath/lib/a2c';
 import { tau } from '../constants';
 import { angleDiffX, polar } from '../vec2';
 
+const cache = {
+    vec2: Array(2).fill().map(vec2.create)
+};
+
 /**
  * Create an approximate circle of beziers.
  *
@@ -60,20 +64,20 @@ export function pathCircle(cx, cy, rad, steps = 4, angle = 0, closed = true, out
         // (out[steps+c] || (out[steps+c] = [])).splice(0, Infinity, 'Z');
 
         const open = (out[0] || (out[0] = []));
-        let i = 0;
+        let l = 0;
 
-        open[o++] = 'M';
-        open[o++] = end[end.length-2];
-        open[o++] = end[end.length-1];
+        open[l++] = 'M';
+        open[l++] = end[end.length-2];
+        open[l++] = end[end.length-1];
 
-        open.length = o;
+        open.length = l;
 
         const close = (out[steps+c] || (out[steps+c] = []));
 
-        i = 0;
-        close[o++] = 'Z';
+        l = 0;
+        close[l++] = 'Z';
 
-        close.length = o;
+        close.length = l;
     }
 
     return out;
@@ -354,3 +358,19 @@ export function pickMovePoints(moves, m, points = []) {
 
     return points;
 }
+
+/**
+ * Determine an `SVG.PathArray`'s winding direction.
+ *
+ * @see https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order
+ *
+ * @param {SVG.PathArray} path A path in `SVG.PathArray.value` form.
+ * @return {Number} Positive if clockwise, negative if counter-clockwise.
+ */
+export const pathWinding = (path) => path.reduce((sum, move, m, moves) => {
+        const a = pickMoveEndpoint(moves, m, cache.vec2[0]);
+        const b = pickMoveEndpoint(moves, m, cache.vec2[1]);
+
+        return sum+(b[0]-a[0])*(b[1]+a[1]);
+    },
+    0);

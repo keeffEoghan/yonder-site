@@ -2,11 +2,15 @@ import $ from 'zepto';
 // @todo Import only the needed functions
 import { vec2 } from 'gl-matrix';
 import { getSubBezier } from 'bezier-utils';
+import { reverse } from 'svg-path-reverse';
 
 import SVG from '../libs/custom/svg';
 import Darwin from '../libs/custom/darwin';
 
-import { pathCircle, pathMetaball, pickMovePoints, pickMoveEndpoint, movePointOffsets }
+import {
+        pathCircle, pathMetaball, pickMovePoints, pickMoveEndpoint, movePointOffsets,
+        pathWinding
+    }
     from '../svg/paths';
 
 import nearestOnPath from '../svg/nearest-on-path';
@@ -246,12 +250,6 @@ function navHolds(element) {
 
                     const moves = path.array().value;
 
-                    // @todo Account for winding direction...
-                    //       Just +/- difference of the angles over all path moves?
-                    //       Don't worry about the various SVG winding fill types.
-                    //       Actually, could just do this by setting points on a nearby path
-                    //       along the metaball path in the same loop direction as the shape.
-                    // @see https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order
                     let toMoves = pathMetaball(force.pos, force.rad*pathArea/shapeArea,
                         center, pathArea, __, __, __, __, cache.array[0]);
 
@@ -260,14 +258,16 @@ function navHolds(element) {
                         // help minimise turning during the morph.
                         // Split the metaball path at the starting point.
 
-                        const toPath = (new SVG.Path()).plot(toMoves);
-                        const start = vec2ToPojo(pickMoveEndpoint(moves, 0, cache.vec2[1]),
-                            cache.pojo[0]);
+                        const start = vec2ToPojo(pickMoveEndpoint(moves, moves.length-1,
+                                cache.vec2[1]),
+                            // cache.pojo[0]);
+                            undefined);
 
                         // @todo WAY TOO MANY calls to `nearestOnPath` - may need to unroll it.
 
                         const splitAt = nearestOnPath(path.node, start, __, __, __, 'length');
 
+                        const toPath = (new SVG.Path()).plot(toMoves);
 
                         // Get the relevant segment of the path.
                         
@@ -306,7 +306,6 @@ function navHolds(element) {
 
                         const segEnd0 = vec2ToPojo(pickMoveEndpoint(toMoves,
                                 wrapNum(seg-1, toMoves.length), cache.vec2[1]),
-                                // seg-1, cache.vec2[1]),
                             cache.pojo[0]);
 
                         const segEnd1 = vec2ToPojo(points[points.length-1], cache.pojo[1]);
@@ -355,7 +354,6 @@ function navHolds(element) {
                             },
                             splits);
 
-                        // toMoves.splice(seg, 1, ...splits);
 
                         // Insert the new split and sort the path points so the it's at the start.
 
@@ -363,7 +361,6 @@ function navHolds(element) {
 
                         // Remove the first moves up to the old segment index.
                         const prev = toMoves.splice(m, seg+1-m, splits[1]);
-                        // const prev = toMoves.splice(m, seg+1-m, ...splits);
 
                         // Remove the old segment, now split.
                         prev.pop();
@@ -373,7 +370,6 @@ function navHolds(element) {
 
                         // Put the previous items at the end, and insert the new split segments.
                         toMoves.splice(toMoves.length-z, 0, ...prev, endSplit);
-                        // toMoves.splice(toMoves.length-z, 0, ...prev);
 
                         // Update any opening "M" command.
                         if(m) {
@@ -382,40 +378,48 @@ function navHolds(element) {
                         }
 
                         // @todo Remove.
+                        // @todo Why aren't the start points lining up?
 
-                        /*toMoves = [
+                        toMoves.splice(0, Infinity,
                             // Metaballs
                             ...toMoves,
-                            //Original
+                            //Original.
                             // ...moves
                             //     .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
                             //             ['L', m[m.length-2], m[m.length-1]]
                             //         :   m)),
-                            // Original shape position
+                            // Original shape position.
                             // ...pathCircle(...center, pathArea, 5, startAngle)
                             //     .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
                             //             ['L', m[m.length-2], m[m.length-1]]
                             //         :   m)),
-                            // Original force position
+                            // Original force position.
                             // ...pathCircle(...force.pos, force.rad*pathArea/shapeArea-2,
                             //     3, startAngle),
-                            // Transformed force position
-                            // ...pathCircle(...forcePosRel, force.rad*pathArea/shapeArea-2,
-                            //     3, startAngle),
-                            // Shape starting point
-                            // ...pathCircle(...pojoToVec2(start, cache.vec2[2]), 10, 5, 0)
-                            //     .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
-                            //             ['L', m[m.length-2], m[m.length-1]]
-                            //         :   m)),
-                            // Split starting point
+                            // Shape starting point.
+                            ...pathCircle(...pojoToVec2(start), 10, 5, 0)
+                                .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
+                                        ['L', m[m.length-2], m[m.length-1]]
+                                    :   m)),
+                            // Metaball starting point.
                             ...pathCircle(...splits[0].slice(-2), 10, 3, 0)
                                 .map((m) => ((m[0].search(/^[tcsqa]$/i) >= 0)?
                                         ['L', m[m.length-2], m[m.length-1]]
                                     :   m))
-                        ];*/
+                        );
+
+                        toPath.plot(toMoves);
+
+                        // Account for winding direction, to help minimise flipping during the
+                        // morph.
+                        const toD = ((pathWinding(toMoves)*pathWinding(moves) < 0)?
+                                toPath.attr('d')
+                            :   reverse(toPath.attr('d')));
+
+                        toMoves = toPath.plot(toD).array().value;
 
                         // Animate.
-
+                        
                         path
                             .animate(1000, '<>')
                             .loop(true, true)

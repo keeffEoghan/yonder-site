@@ -30,6 +30,7 @@
     "bezier-utils": "^0.1.0",
     "gl-matrix": "^2.5.1",
     "popmotion": "^8.1.22",
+    "svg-path-reverse": "^1.0.0",
     "svg.js": "^2.6.4",
     "svg.pathmorphing2.js": "^0.1.0",
     "svgpath": "^2.2.1",
