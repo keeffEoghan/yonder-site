@@ -2,6 +2,7 @@ import { vec2 } from 'gl-matrix';
 import a2c from 'svgpath/lib/a2c';
 
 import { tau } from '../constants';
+import { wrapNum } from '../utils';
 import { angleDiffX, polar } from '../vec2';
 
 const cache = {
@@ -219,7 +220,11 @@ export function pathMetaball(center0, radius0, center1, radius1,
     const a2c0 = a2c(...m1p, ...m2p, arcFlag0, 0, radius1, radius1, 0);
     const a2c1 = a2c(...m3p, ...m0p, arcFlag1, 0, radius0, radius0, 0);
 
-    // Generate the connector path
+    if(closed) {
+        (out[0] || (out[0] = [])).splice(0, Infinity, 'M', ...m0p);
+    }
+
+    // Generate the connector path.
     // @todo Reuse any input arrays.
     out.splice(((closed)? 1 : 0), Infinity,
         // Debug.
@@ -236,7 +241,6 @@ export function pathMetaball(center0, radius0, center1, radius1,
         ...a2cToSVG(a2c1));
 
     if(closed) {
-        (out[0] || (out[0] = [])).splice(0, Infinity, 'M', ...m0p);
         (out[out.length] || (out[out.length] = [])).splice(0, Infinity, 'Z');
     }
 
@@ -325,10 +329,6 @@ export { movePointOffsets };
  * @param {Array.<Array?>?} points An array of points to write the results into.
  * @return {(Array.<Array>|Null)} The array of points in this move, if valid.
  */
-/*export const pickMovePoints = (() => {
-    const pickMovePoint = (points, p, move, v) =>
-        vec2.set((points[p] || (points[p] = vec2.create())), move[v], move[v+1]);
-*/
 export function pickMovePoints(moves, m, points = []) {
     const move = moves[m];
     // SVG.js path moves define the command name first.
@@ -369,7 +369,7 @@ export function pickMovePoints(moves, m, points = []) {
  */
 export const pathWinding = (path) => path.reduce((sum, move, m, moves) => {
         const a = pickMoveEndpoint(moves, m, cache.vec2[0]);
-        const b = pickMoveEndpoint(moves, m, cache.vec2[1]);
+        const b = pickMoveEndpoint(moves, wrapNum(m+1, moves.length), cache.vec2[1]);
 
         return sum+(b[0]-a[0])*(b[1]+a[1]);
     },

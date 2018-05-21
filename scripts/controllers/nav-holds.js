@@ -183,6 +183,7 @@ function navHolds(element) {
         // Init... needed internally in SVG.js even if we're not drawing in this element.
         SVG($('.yr-nav-holds-defs')[0]);
 
+        // @todo Caching is an optimisation... don't do it prematurely.
         const cache = {
             pojo: Array(2).fill().map(() => ({})),
             vec2: Array(3).fill().map(vec2.create),
@@ -231,7 +232,7 @@ function navHolds(element) {
 
                 const shapeBox = shape.rbox(shape);
                 const shapeArea = boxRad(shapeBox);
-                const center = vec2.set(cache.vec2[0], shapeBox.cx, shapeBox.cy);
+                const center = vec2.set(vec2.create(), shapeBox.cx, shapeBox.cy);
 
                 // @todo Remove.
                 vec2.add(force.pos, vec2.random(force.pos, 100), center);
@@ -251,42 +252,41 @@ function navHolds(element) {
                     const moves = path.array().value;
 
                     let toMoves = pathMetaball(force.pos, force.rad*pathArea/shapeArea,
-                        center, pathArea, __, __, __, __, cache.array[0]);
+                        center, pathArea, __, __, __, __, []);
 
                     if(Array.isArray(toMoves)) {
+                        const toPath = (new SVG.Path()).plot(toMoves);
+
                         // Line up the start point with with start point of the shape, to
                         // help minimise turning during the morph.
                         // Split the metaball path at the starting point.
 
                         const start = vec2ToPojo(pickMoveEndpoint(moves, moves.length-1,
-                                cache.vec2[1]),
-                            // cache.pojo[0]);
-                            undefined);
+                                vec2.create()),
+                            {});
 
                         // @todo WAY TOO MANY calls to `nearestOnPath` - may need to unroll it.
 
-                        const splitAt = nearestOnPath(path.node, start, __, __, __, 'length');
-
-                        const toPath = (new SVG.Path()).plot(toMoves);
+                        const splitAt = nearestOnPath(toPath.node, start, __, __, __, 'length');
 
                         // Get the relevant segment of the path.
                         
                         // Could use the old `getPathSegAtLength` API, but the polyfill's biiiig:
                         // const seg = toPath.node.getPathSegAtLength(splitAt);
                         // const segAt0 = nearestOnPath(toPath.node,
-                        //     pickMoveEndpoint(toMoves, seg-1, cache.vec2[1]),
+                        //     pickMoveEndpoint(toMoves, seg-1, vec2.create()),
                         //     __, __, __, 'length');
 
                         // const segAt1 = nearestOnPath(toPath.node,
-                        //     pickMoveEndpoint(toMoves, seg, cache.vec2[1]),
+                        //     pickMoveEndpoint(toMoves, seg, vec2.create()),
                         //     __, __, __, 'length');
 
                         const seg = toMoves.findIndex((move, m, toMoves) => {
                                 if(move[0].search(/^[mz]$/i) >= 0) { return false; }
 
-                                const end = pickMoveEndpoint(toMoves, m, cache.vec2[1]);
+                                const end = pickMoveEndpoint(toMoves, m, vec2.create());
                                 const length = nearestOnPath(path.node,
-                                    vec2ToPojo(end, cache.pojo[0]),
+                                    vec2ToPojo(end, {}),
                                     __, __, __, 'length');
 
                                 return splitAt < length;
@@ -297,18 +297,18 @@ function navHolds(element) {
                             return;
                         }
 
-                        cache.array[1].length = 0;
+                        // cache.array[1].length = 0;
 
-                        const points = pickMovePoints(toMoves, seg, cache.array[1]);
+                        const points = pickMovePoints(toMoves, seg, []);
 
 
                         // Get the length to split the segment at.
 
                         const segEnd0 = vec2ToPojo(pickMoveEndpoint(toMoves,
-                                wrapNum(seg-1, toMoves.length), cache.vec2[1]),
-                            cache.pojo[0]);
+                                wrapNum(seg-1, toMoves.length), vec2.create()),
+                            {});
 
-                        const segEnd1 = vec2ToPojo(points[points.length-1], cache.pojo[1]);
+                        const segEnd1 = vec2ToPojo(points[points.length-1], {});
 
                         const segAt0 = nearestOnPath(toPath.node, segEnd0, __, __, __, 'length');
                         const segAt1 = nearestOnPath(toPath.node, segEnd1, __, __, __, 'length');
@@ -378,9 +378,8 @@ function navHolds(element) {
                         }
 
                         // @todo Remove.
-                        // @todo Why aren't the start points lining up?
 
-                        toMoves.splice(0, Infinity,
+                        /*toMoves.splice(0, Infinity,
                             // Metaballs
                             ...toMoves,
                             //Original.
@@ -407,23 +406,24 @@ function navHolds(element) {
                                         ['L', m[m.length-2], m[m.length-1]]
                                     :   m))
                         );
+                        */
 
                         toPath.plot(toMoves);
 
+
                         // Account for winding direction, to help minimise flipping during the
                         // morph.
-                        const toD = ((pathWinding(toMoves)*pathWinding(moves) < 0)?
-                                toPath.attr('d')
-                            :   reverse(toPath.attr('d')));
+                        const toD = ((pathWinding(moves)*pathWinding(toMoves) < 0)?
+                                reverse(toPath.attr('d'))
+                            :   toPath.attr('d'));
 
                         toMoves = toPath.plot(toD).array().value;
 
                         // Animate.
-                        
                         path
                             .animate(1000, '<>')
                             .loop(true, true)
-                            .plot(toMoves);
+                            .plot(toD);
                     }
                     else {
                         console.log('no balls');
