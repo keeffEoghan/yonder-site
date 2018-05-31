@@ -429,7 +429,6 @@ export function bezierVia(points, tension = 0.25, closed = false, out = []) {
             // Each control point is located on the tangent of the curve; the distance
             // between it and the current point is a fraction of the distance between the
             // current point and the respective point.
-            // @todo I'm not sure these are all used as expected...
             ctrl[p] = [
                 vec2.scaleAndAdd(vec2.create(), pc, n, -dp*tension),
                 vec2.scaleAndAdd(vec2.create(), pc, n, dn*tension)
@@ -451,23 +450,21 @@ export function bezierVia(points, tension = 0.25, closed = false, out = []) {
 
         // Define the curves.
         for(let i = 1; i < l; ++i) {
-            // Each bezier curve uses the 2 adjacent control points.
+            // Each bezier curve uses the adjacent control points.
             (out[i-1+c] || (out[i-1+c] = [])).splice(0, Infinity,
-                ['C', ...ctrl[i-1][1], ...ctrl[i][0], ...points[i]]);
+                'C', ...ctrl[i-1][1], ...ctrl[i][0], ...points[i]);
         }
     }
     else if(l === 2) {
         // If we only have two points, we can only draw a straight line.
-        out.splice(c, Infinity, ['L', ...points[0]], ['L', ...points[1]]);
-    }
-    else {
-        // If we're given less than two points, there's nothing to do.
-        out.length = 0;
+        (out[c] || (out[c] = [])).splice(0, Infinity, 'L', ...points[1]);
     }
 
     if(c) {
         (out[out.length] || (out[out.length] = [])).splice(0, Infinity, 'Z');
     }
+
+    out.length = l-1+(c*2);
 
     return out;
 }

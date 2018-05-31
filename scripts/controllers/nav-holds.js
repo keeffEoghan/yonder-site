@@ -1,6 +1,7 @@
 import $ from 'zepto';
 // @todo Import only the needed functions
 import { vec2 } from 'gl-matrix';
+import bezier from 'bezier';
 import {
         cubicSuperPath, uncubicSuperPath, splitAtPositions, positions
     } from 'svg.pathmorphing2.js/src/cubicsuperpath';
@@ -195,7 +196,7 @@ function navHolds(element) {
         const force = {
             pos: vec2.fromValues(0, 0),
             pow: 2,
-            rad: 30
+            rad: 90
         };
 
         const pojoToVec2 = (pojo, out = vec2.create()) => vec2.set(out, pojo.x, pojo.y);
@@ -205,6 +206,9 @@ function navHolds(element) {
 
         force.rad2 = force.rad*force.rad;
         force.angle = Math.atan2(force.pos[1], force.pos[0]);
+
+        const morphBezier = [0, 0.3, 1, 1];
+        const morphEase = (t) => bezier(morphBezier, t);
 
         const $holds = $element.find('.yr-nav-hold');
 
@@ -255,13 +259,14 @@ function navHolds(element) {
                     // @todo Remove.
                     // path.scale(0.5);
 
-                    const moves = path.array().value;
+                    const coarseMoves = path.array().value;
+
 
                     // Prepare paths:
 
                     // Normalize path as bézier curves.
 
-                    const superPath = cubicSuperPath(moves);
+                    const fineCSP = cubicSuperPath(coarseMoves);
 
                     // Subdivide into finer pieces.
 
@@ -272,24 +277,86 @@ function navHolds(element) {
                     const splitPositions = Array(parseInt(length/slice, 10)-1).fill(0)
                         .reduce((_a, _b, i, all) => (all[i] = (i+1)*slice/length, all), null);
 
-                    const pathPositions = positions(superPath);
+                    const pathPositions = positions(fineCSP);
 
-                    splitAtPositions(superPath, pathPositions, splitPositions);
+                    splitAtPositions(fineCSP, pathPositions, splitPositions);
 
                     // Replace the old path.
 
-                    const toMoves = uncubicSuperPath(superPath);
+                    const finePathArray = uncubicSuperPath(fineCSP);
 
-                    path.plot(toMoves);
+                    path.plot(finePathArray);
 
-                    // Store the superpath to be used later for interaction.
+                    // A clone we can modify for morphing, keeping the original.
+                    const morphPathArray = finePathArray.clone();
+
+                    // Store the superpaths to be used later for interaction.
+                    path.remember('fine', finePathArray);
+                    path.remember('morph', morphPathArray);
+
 
                     // (2) Respond to interaction:
 
-                    // (2.1) Morph points towards pointer - within radius, eased by force/distance.
+                    // (2.1) Morph points towards pointer - interploate within radius, eased by
+                    // force/distance.
+
+                    // Points to draw a bezier curve through, and index offset.
+                    const morphVia = {
+                        points: [],
+                        index: -1,
+                        array: [],
+                        vec2: vec2.create()
+                    };
+
+                    finePathArray.value.forEach((move, m, moves) => {
+                        if(move[0].search(/^z$/i) >= 0) { return; }
+
+                        const point = pickMoveEndpoint(moves, m, morphVia.vec2);
+                        const dist = force.rad-vec2.dist(point, force.pos);
+
+                        if(dist > 0) {
+                            // Gather the points we'll curve through.
+
+                            if(morphVia.index < 0) {
+                                // Start a new segment to curve through.
+                                morphVia.index = m;
+                            }
+
+                            // @todo Might need to use a normal here as `lerp` target instead.
+                            const morphed = vec2.lerp(vec2.create(), point, force.pos,
+                                morphEase(dist/force.rad));
+
+                            morphVia.points.push(morphed);
+                        }
+                        else if(morphVia.index >= 0) {
+                            // Curve through the points.
+
+                            const curved = bezierVia(morphVia.points, __, __, morphVia.array);
+
+                            morphPathArray.value.splice(morphVia.index, curved.length, ...curved);
+
+                            // Reset the collection.
+                            morphVia.index = -1;
+                            morphVia.points.length = 0;
+                        }
+                    });
+
+                    // We might've replaced the starting 'M' move.
+                    const morphedStart = morphPathArray.value[0];
+
+                    if(morphedStart[0].search(/^m$/i) < 0) {
+                        morphedStart.splice(0, Infinity,
+                            ((morphedStart[0].search(/^[lcsqtahvz]$/) >= 0)? 'm' : 'M'),
+                            ...pickMoveEndpoint(morphPathArray.value, 0, morphVia.vec2));
+                    }
+
+                    path
+                        .animate(1000, '<>')
+                        .loop(true, true)
+                        .plot(morphPathArray);
 
                     // (2.2) Draw a curve through the morphed points (`bezierVia`).
-                    console.log(bezierVia([[0, 1], [0, 3], [5, 1], [10, 23]]));
+                    // console.log(bezierVia([[0, 1], [0, 3], [5, 1], [10, 23]]));
 
                     /**
                      * @todo How is this going to look at distance...?
