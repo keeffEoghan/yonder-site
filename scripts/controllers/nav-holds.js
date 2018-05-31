@@ -10,7 +10,7 @@ import Darwin from '../libs/custom/darwin';
 
 import {
         pathCircle, pathMetaball, pickMovePoints, pickMoveEndpoint, movePointOffsets,
-        pathWinding
+        bezierVia, pathWinding
     }
     from '../svg/paths';
 
@@ -268,6 +268,7 @@ function navHolds(element) {
                     const length = path.node.getTotalLength();
                     const maxSlice = 5;
                     const slice = length/Math.ceil(length/maxSlice);
+
                     const splitPositions = Array(parseInt(length/slice, 10)-1).fill(0)
                         .reduce((_a, _b, i, all) => (all[i] = (i+1)*slice/length, all), null);
 
@@ -281,10 +282,15 @@ function navHolds(element) {
 
                     path.plot(toMoves);
 
+                    // Store the superpath to be used later for interaction.
+
                     // (2) Respond to interaction:
 
                     // (2.1) Morph points towards pointer - within radius, eased by force/distance.
-                    
+
+                    // (2.2) Draw a curve through the morphed points (`bezierVia`).
+                    console.log(bezierVia([[0, 1], [0, 3], [5, 1], [10, 23]]));
+
                     /**
                      * @todo How is this going to look at distance...?
                      *       Maybe when a hold is grabbed:
@@ -301,7 +307,6 @@ function navHolds(element) {
                         // .animate(1000, '<>')
                         // .loop(true, true)
                         // .plot(toMoves);
-                    
 
                     /*
                         ----------------

@@ -6,7 +6,7 @@ import { wrapNum } from '../utils';
 import { angleDiffX, polar } from '../vec2';
 
 const cache = {
-    vec2: Array(2).fill().map(vec2.create)
+    vec2: Array(8).fill().map(vec2.create)
 };
 
 /**
@@ -96,7 +96,6 @@ export function pathCircle(cx, cy, rad, steps = 4, angle = 0, closed = true, out
  */
 
 const halfPI = Math.PI*0.5;
-const cacheVec2 = Array(8).fill().map(vec2.create);
 
 // For converting from `a2c` curves to SVG.js curves - ignore the first point.
 const a2cToSVG = (() => {
@@ -119,6 +118,8 @@ const a2cToSVG = (() => {
  * @param {Number?} handle Factor for the scale of the curve handles.
  * @param {Number?} spread Factor for the spread of the connecting membrane.
  * @param {Number?} stretch Factor for the maximum distance between the circles.
+ * @param {Boolean?} closed Whether to close the path.
+ * @param {Array?} out The output array to store the result in.
  *
  * @return {(Array|Number|Undefined)} The path if the metaballs can be drawn, or error values
  *                                    if not (see description).
@@ -183,10 +184,10 @@ export function pathMetaball(center0, radius0, center1, radius1,
     const a3 = angleBetweenCenters-u0-(maxSpread-u0)*spread;
 
     // Point locations
-    let m0p = polar(cacheVec2[0], center0, a0, radius0);
-    let m1p = polar(cacheVec2[1], center1, a1, radius1);
-    let m2p = polar(cacheVec2[2], center1, a2, radius1);
-    let m3p = polar(cacheVec2[3], center0, a3, radius0);
+    let m0p = polar(cache.vec2[0], center0, a0, radius0);
+    let m1p = polar(cache.vec2[1], center1, a1, radius1);
+    let m2p = polar(cache.vec2[2], center1, a2, radius1);
+    let m3p = polar(cache.vec2[3], center0, a3, radius0);
 
     // Define handle length by the distance between both ends of the curve
     const d2Base = Math.min(spread*handle, vec2.dist(m0p, m1p)/sumRadius);
@@ -200,11 +201,11 @@ export function pathMetaball(center0, radius0, center1, radius1,
 
     // Handle locations
 
-    let m1h0 = polar(cacheVec2[4], m0p, a0-halfPI, r0);
-    let m1h1 = polar(cacheVec2[5], m1p, a1+halfPI, r1);
+    let m1h0 = polar(cache.vec2[4], m0p, a0-halfPI, r0);
+    let m1h1 = polar(cache.vec2[5], m1p, a1+halfPI, r1);
 
-    let m3h0 = polar(cacheVec2[6], m2p, a2-halfPI, r1);
-    let m3h1 = polar(cacheVec2[7], m3p, a3+halfPI, r0);
+    let m3h0 = polar(cache.vec2[6], m2p, a2-halfPI, r1);
+    let m3h1 = polar(cache.vec2[7], m3p, a3+halfPI, r0);
 
     const arcFlag0 = ((dist < radius0 && radius0 > radius1)? 0 : 1);
     const arcFlag1 = ((dist < radius1 && radius1 > radius0)? 0 : 1);
@@ -256,7 +257,7 @@ export function pathMetaball(center0, radius0, center1, radius1,
  * @param {Array.<Array>} moves The path array of moves.
  * @param {Number} m The index of the move within `moves` to use.
  * @param {Array?} point A point to write the result into.
- * @return {(Array|Null)} The endpoint in this move, if valid.
+ * @return {(Array.<Number>|Null)} The endpoint in this move, if valid.
  */
 export function pickMoveEndpoint(moves, m, point = vec2.create()) {
     const move = moves[m];
@@ -327,7 +328,7 @@ export { movePointOffsets };
  * @param {Array.<Array>} moves The path array of moves.
  * @param {Number} m The index of the move within `moves` to use.
  * @param {Array.<Array?>?} points An array of points to write the results into.
- * @return {(Array.<Array>|Null)} The array of points in this move, if valid.
+ * @return {(Array.<Array.<Number>>|Null)} The array of points in this move, if valid.
  */
 export function pickMovePoints(moves, m, points = []) {
     const move = moves[m];
@@ -374,3 +375,99 @@ export const pathWinding = (path) => path.reduce((sum, move, m, moves) => {
         return sum+(b[0]-a[0])*(b[1]+a[1]);
     },
     0);
+
+
+/**
+ * Draw a smooth set of bézier curves through a given set of points.
+ * Makes some simple assumptions to draw smooth curves based just on points:
+ * - Control points at each point are on a line parallel to the line joining the previous and
+ *     next points.
+ * - Their length along this line is proportional to the distance between the previous and
+ *     next points (and configurable by a `tension` parameter).
+ *
+ * @see https://goodcode.io/articles/bezier-canvas/
+ * @see https://github.com/dobarkod/canvas-bezier-multiple
+ *
+ * @param {Array.<Array.<Number>>} points The array of points to curve through.
+ * @param {Number} tension The degree of sharpness of the curves.
+ * @param {Boolean?} closed Whether to close the path.
+ * @param {Array?} out The output array to store the result in.
+ *
+ * @return {Array?} The `SVG.PathArray` notation of the bézier curve, if any is possible.
+ */
+export function bezierVia(points, tension = 0.25, closed = false, out = []) {
+    const l = points.length;
+    const c = ((l >= 2 && closed)? 1 : 0);
+
+    if(c) {
+        (out[0] || (out[0] = [])).splice(0, Infinity, 'M', ...points[0]);
+    }
+
+    if(l > 2) {
+        // For each interior point, we need to calculate the tangent and pick two points on it
+        // to serve as control points for curves to and from the point.
+        // This is similar to the `SVG.CubicSuperPath` array form (`svg.pathmorphin2.js`).
+        const ctrl = [];
+
+        for(let p = 1; p < l-1; ++p) {
+            const pp = points[p-1];
+            const pc = points[p];
+            const pn = points[p+1];
+
+            // Calculate the normalized tangent slope vector [dx, dy].
+            // Don't work with the derivative so we don't have to handle the vertical line edge
+            // cases separately.
+            // The normalised vector from the previous point to the next.
+            const n = vec2.normalize(cache.vec2[0], vec2.sub(cache.vec2[0], pn, pp));
+
+            // Distances to previous and next points, to know how far to put the control points
+            // along the tangents (tension).
+            const dp = vec2.dist(pc, pp);
+            const dn = vec2.dist(pc, pn);
+
+            // Calculate control points.
+            // Each control point is located on the tangent of the curve; the distance
+            // between it and the current point is a fraction of the distance between the
+            // current point and the respective point.
+            // @todo I'm not sure these are all used as expected...
+            ctrl[p] = [
+                vec2.scaleAndAdd(vec2.create(), pc, n, -dp*tension),
+                vec2.scaleAndAdd(vec2.create(), pc, n, dn*tension)
+            ];
+        }
+
+        // For the end points, we only need to calculate one control point.
+        // A point in the middle between the endpoint and the other's control point works well.
+
+        ctrl[0] = [
+            null,
+            vec2.scaleAndAdd(vec2.create(), points[0], ctrl[1][0], 0.5)
+        ];
+
+        ctrl[l-1] = [
+            vec2.scaleAndAdd(vec2.create(), points[l-1], ctrl[l-2][1], 0.5),
+            null
+        ];
+
+        // Define the curves.
+        for(let i = 1; i < l; ++i) {
+            // Each bezier curve uses the 2 adjacent control points.
+            (out[i-1+c] || (out[i-1+c] = [])).splice(0, Infinity,
+                ['C', ...ctrl[i-1][1], ...ctrl[i][0], ...points[i]]);
+        }
+    }
+    else if(l === 2) {
+        // If we only have two points, we can only draw a straight line.
+        out.splice(c, Infinity, ['L', ...points[0]], ['L', ...points[1]]);
+    }
+    else {
+        // If we're given less than two points, there's nothing to do.
+        out.length = 0;
+    }
+
+    if(c) {
+        (out[out.length] || (out[out.length] = [])).splice(0, Infinity, 'Z');
+    }
+
+    return out;
+}
