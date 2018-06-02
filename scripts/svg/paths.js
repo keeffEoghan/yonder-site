@@ -395,7 +395,7 @@ export const pathWinding = (path) => path.reduce((sum, move, m, moves) => {
  *
  * @return {Array?} The `SVG.PathArray` notation of the bézier curve, if any is possible.
  */
-export function bezierVia(points, tension = 0.25, closed = false, out = []) {
+export function bezierVia(points, tension = 0.25, ends = null, closed = false, out = []) {
     const l = points.length;
     const c = ((l >= 2 && closed)? 1 : 0);
 
@@ -435,18 +435,27 @@ export function bezierVia(points, tension = 0.25, closed = false, out = []) {
             ];
         }
 
+        // Calculate the end control points if needed.
         // For the end points, we only need to calculate one control point.
         // A point in the middle between the endpoint and the other's control point works well.
 
-        ctrl[0] = [
-            null,
-            vec2.scaleAndAdd(vec2.create(), points[0], ctrl[1][0], 0.5)
-        ];
+        if(ends && ends[0]) {
+            ctrl[0] = [null, ends[0]];
+        }
+        else {
+            const first = vec2.create();
 
-        ctrl[l-1] = [
-            vec2.scaleAndAdd(vec2.create(), points[l-1], ctrl[l-2][1], 0.5),
-            null
-        ];
+            ctrl[0] = [null, vec2.scale(first, vec2.add(first, points[0], ctrl[1][0]), 0.5)];
+        }
+
+        if(ends && ends[1]) {
+            ctrl[l-1] = [ends[1], null];
+        }
+        else {
+            const last = vec2.create();
+
+            ctrl[l-1] = [vec2.scale(last, vec2.add(last, points[l-1], ctrl[l-2][1]), 0.5), null];
+        }
 
         // Define the curves.
         for(let i = 1; i < l; ++i) {

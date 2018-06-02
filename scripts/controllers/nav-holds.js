@@ -196,7 +196,7 @@ function navHolds(element) {
         const force = {
             pos: vec2.fromValues(0, 0),
             pow: 2,
-            rad: 90
+            rad: 80
         };
 
         const pojoToVec2 = (pojo, out = vec2.create()) => vec2.set(out, pojo.x, pojo.y);
@@ -271,10 +271,10 @@ function navHolds(element) {
                     // Subdivide into finer pieces.
 
                     const length = path.node.getTotalLength();
-                    const maxSlice = 5;
+                    const maxSlice = 10;
                     const slice = length/Math.ceil(length/maxSlice);
 
-                    const splitPositions = Array(parseInt(length/slice, 10)-1).fill(0)
+                    const splitPositions = Array(Math.floor(length/slice)-1).fill(0)
                         .reduce((_a, _b, i, all) => (all[i] = (i+1)*slice/length, all), null);
 
                     const pathPositions = positions(fineCSP);
@@ -308,10 +308,16 @@ function navHolds(element) {
                         vec2: vec2.create()
                     };
 
-                    finePathArray.value.forEach((move, m, moves) => {
-                        if(move[0].search(/^z$/i) >= 0) { return; }
+                    const fineMoves = finePathArray.value;
+                    const morphMoves = morphPathArray.value;
 
-                        const point = pickMoveEndpoint(moves, m, morphVia.vec2);
+                    // Account for being on the middle of a curve when crossing the end of the
+                    // array... so far assumes closed shapes.
+                    for(let i = 0; i < fineMoves.length || morphVia.index >= 0; ++i) {
+                        const m = i%fineMoves.length;
+                        const move = fineMoves[m];
+
+                        const point = pickMoveEndpoint(fineMoves, m, morphVia.vec2);
                         const dist = force.rad-vec2.dist(point, force.pos);
 
                         if(dist > 0) {
@@ -320,6 +326,11 @@ function navHolds(element) {
                             if(morphVia.index < 0) {
                                 // Start a new segment to curve through.
                                 morphVia.index = m;
+
+                                // Need a point before the first point curved through.
+                                const start = pickMoveEndpoint(fineMoves, wrapNum(m-1, fineMoves.length));
+
+                                morphVia.points.push(start);
                             }
 
                             // @todo Might need to use a normal here as `lerp` target instead.
@@ -331,23 +342,43 @@ function navHolds(element) {
                         else if(morphVia.index >= 0) {
                             // Curve through the points.
 
-                            const curved = bezierVia(morphVia.points, __, __, morphVia.array);
+                            // @todo Smooth connection to adjacent points.
+                            const curves = bezierVia(morphVia.points);
 
-                            morphPathArray.value.splice(morphVia.index, curved.length, ...curved);
+                            const spliceCurve = (offset, curves) =>
+                                curves.forEach((curve, c) => {
+                                    const move = morphMoves[offset+c];
+
+                                    if(move[0].search(/^m$/i) >= 0) {
+                                        // We might've replaced an 'M' move.
+                                        move.splice(0, Infinity,
+                                            ((move[0] === 'm')? 'm' : 'M'),
+                                            curve[curve.length-2], curve[curve.length-1]);
+                                    }
+                                    else if(move[0].search(/^z$/i) >= 0) {
+                                        // We might've replaced an 'Z' move.
+                                        move.splice(0, Infinity, 'Z');
+                                    }
+                                    else {
+                                        // Béziers fine for anything else.
+                                        move.splice(0, Infinity, ...curve);
+                                    }
+                                });
+
+                            // Merge in the new curves - accounting for wrapping in the arrays.
+
+                            const extra = (morphVia.index+curves.length)-morphMoves.length;
+
+                            if(extra > 0) {
+                                spliceCurve(0, curves.splice(-extra, extra));
+                            }
+
+                            spliceCurve(morphVia.index, curves);
 
                             // Reset the collection.
                             morphVia.index = -1;
                             morphVia.points.length = 0;
                         }
-                    });
-
-                    // We might've replaced the starting 'M' move.
-                    const morphedStart = morphPathArray.value[0];
-
-                    if(morphedStart[0].search(/^m$/i) < 0) {
-                        morphedStart.splice(0, Infinity,
-                            ((morphedStart[0].search(/^[lcsqtahvz]$/) >= 0)? 'm' : 'M'),
-                            ...pickMoveEndpoint(morphPathArray.value, 0, morphVia.vec2));
                     }
 
                     path
