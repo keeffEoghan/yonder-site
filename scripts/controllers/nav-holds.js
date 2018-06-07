@@ -183,7 +183,7 @@ function navHolds(element) {
         if(!SVG.supported) { return; }
 
         // Init... needed internally in SVG.js even if we're not drawing in this element.
-        SVG($('.yr-nav-holds-defs')[0]);
+        const svg = SVG($('.yr-nav-holds-defs')[0]);
 
         // @todo Caching is an optimisation... don't do it prematurely.
         const cache = {
@@ -193,6 +193,14 @@ function navHolds(element) {
             array: Array(2).fill().map(Array)
         };
 
+
+        /**
+         * @todo Remove redundant libs:
+         *       - 'svgpath/lib/a2c': `a2c` => 'svg.pathmorphing2.js': `arcToPath`
+         *       - 'bezier-utils': `getSubBezier` => 'svg.pathmorphing2.js': `segSplit`
+         *
+         * @todo Resize SVG to the full container - so the interactions avoid bounds.
+         */
         const force = {
             pos: vec2.fromValues(0, 0),
             pow: 2,
@@ -223,14 +231,6 @@ function navHolds(element) {
                 // These classes must be added to any custom SVGs to opt them into this effect.
                 .find('svg.yr-hold-shape, use.yr-use-hold-shape');
 
-            /**
-             * @todo Remove redundant libs:
-             *       - 'svgpath/lib/a2c': `a2c` => 'svg.pathmorphing2.js': `arcToPath`
-             *       - 'bezier-utils': `getSubBezier` => 'svg.pathmorphing2.js': `segSplit`
-             *
-             * @todo Resize SVG to the full container - so the interactions avoid bounds.
-             */
-
             $shapes.each((s, shape) => {
                 shape = SVG.adopt(shape);
 
@@ -241,18 +241,16 @@ function navHolds(element) {
                     shape = shape.replace(shape.reference(href).clone(shape.parent()));
                 }
 
-                // @todo Bounds checking.
+                // @todo Remove.
 
                 const shapeBox = shape.rbox(shape);
                 const shapeArea = boxRad(shapeBox);
                 const center = vec2.set(vec2.create(), shapeBox.cx, shapeBox.cy);
 
-                // @todo Remove.
                 vec2.add(force.pos, vec2.random(force.pos, 100), center);
                 force.angle = Math.atan2(force.pos[1], force.pos[0]);
 
                 // Get on with the effect
-                // @todo Hook this part up to animation and pointer input.
                 shape.select('path').each((p, paths) => {
                     const path = paths[p];
 
@@ -295,6 +293,21 @@ function navHolds(element) {
                     path.remember('morph', morphPathArray);
 
 
+                    // Create a hit area for pointers.
+
+                    const pathBox = path.rbox(path.parent());
+
+                    svg.rect(pathBox.w+(force.rad*2), pathBox.h+(force.rad*2))
+                        .move(pathBox.x-force.rad, pathBox.y-force.rad)
+                        // .on('pointermove', console.log)
+                        .on('mousemove', console.log)
+                        .putIn(shape);
+                    /*
+                });
+            });
+        });
+
+
                     // (2) Respond to interaction:
 
                     // (2.1) Morph points towards pointer - interploate within radius, eased by
@@ -304,12 +317,11 @@ function navHolds(element) {
                     const morphVia = {
                         points: [],
                         index: -1,
-                        array: [],
                         vec2: vec2.create()
                     };
 
-                    const fineMoves = finePathArray.value;
-                    const morphMoves = morphPathArray.value;
+                    const fineMoves = path.remember('fine').value;
+                    const morphMoves = path.remember('morph').value;
 
                     // Account for being on the middle of a curve when crossing the end of the
                     // array... so far assumes closed shapes.
@@ -342,7 +354,7 @@ function navHolds(element) {
                         else if(morphVia.index >= 0) {
                             // Curve through the points.
 
-                            // @todo Smooth connection to adjacent points.
+                            // @todo Smooth connections - to curve points, to adjacent points.
                             const curves = bezierVia(morphVia.points);
 
                             const spliceCurve = (offset, curves) =>
@@ -384,7 +396,7 @@ function navHolds(element) {
                     path
                         .animate(1000, '<>')
                         .loop(true, true)
-                        .plot(morphPathArray);
+                        .plot(morphMoves);*/
 
                     // (2.2) Draw a curve through the morphed points (`bezierVia`).
                     // console.log(bezierVia([[0, 1], [0, 3], [5, 1], [10, 23]]));
