@@ -212,11 +212,23 @@ function navHolds(element) {
 
         const boxRad = ({ w, h }) => Math.sqrt(w*h)*0.5;
 
-        force.rad2 = force.rad*force.rad;
-        force.angle = Math.atan2(force.pos[1], force.pos[0]);
+        // force.rad2 = force.rad*force.rad;
+        // force.angle = Math.atan2(force.pos[1], force.pos[0]);
 
-        const morphBezier = [0, 0.3, 1, 1];
+        // const morphBezier = [0, 0, 1, 1];
+        const morphBezier = [0, 0, 1.2, 1.2];
         const morphEase = (t) => bezier(morphBezier, t);
+
+        const hits = {
+            items: [],
+            boxes: [],
+            resize: () => hits.items.forEach((item, i) => hits.boxes[i] = item.rbox()),
+            get: ([px, py], rad) => hits.items.filter((item, i) => {
+                const { x, y, x2, y2 } = hits.boxes[i];
+
+                return (px+rad >= x && py+rad >= y && px-rad <= x2 && py-rad <= y2);
+            })
+        };
 
         const $holds = $element.find('.yr-nav-hold');
 
@@ -241,16 +253,9 @@ function navHolds(element) {
                     shape = shape.replace(shape.reference(href).clone(shape.parent()));
                 }
 
-                // @todo Remove.
+                // @todo Increase the SVG size as much as needed.
 
-                const shapeBox = shape.rbox(shape);
-                const shapeArea = boxRad(shapeBox);
-                const center = vec2.set(vec2.create(), shapeBox.cx, shapeBox.cy);
-
-                vec2.add(force.pos, vec2.random(force.pos, 100), center);
-                force.angle = Math.atan2(force.pos[1], force.pos[0]);
-
-                // Get on with the effect
+                // Prepare the effect.
                 shape.select('path').each((p, paths) => {
                     const path = paths[p];
 
@@ -283,7 +288,7 @@ function navHolds(element) {
 
                     const finePathArray = uncubicSuperPath(fineCSP);
 
-                    path.plot(finePathArray);
+                    path.plot(finePathArray.clone());
 
                     // A clone we can modify for morphing, keeping the original.
                     const morphPathArray = finePathArray.clone();
@@ -293,22 +298,144 @@ function navHolds(element) {
                     path.remember('morph', morphPathArray);
 
 
-                    // Create a hit area for pointers.
-
-                    const pathBox = path.rbox(path.parent());
-
-                    svg.rect(pathBox.w+(force.rad*2), pathBox.h+(force.rad*2))
-                        .move(pathBox.x-force.rad, pathBox.y-force.rad)
-                        // .on('pointermove', console.log)
-                        .on('mousemove', console.log)
-                        .putIn(shape);
-                    /*
+                    // Create a hit area for pointers - in a single layer, to manage `z` etc.
+                    hits.items.push(path);
                 });
             });
         });
 
 
-                    // (2) Respond to interaction:
+        // (2) Respond to interaction:
+
+        // Points to draw a bezier curve through, and index offset.
+        const morphVia = {
+            points: [],
+            index: -1,
+            vec2: Array(2).fill(0).map(vec2.create)
+        };
+
+        function blobPointer(path, force) {
+            // (2.1) Morph points towards pointer - interploate within radius, eased by
+            // force/distance.
+
+            const pos = pojoToVec2(path.point(...force.pos), morphVia.vec2[0]);
+
+            // console.log('hit?', pos, path, force);
+
+            // Draw curves through points close enough to the pointer.
+            const morphMoves = path.remember('morph').value;
+            // @todo Use the morphed path instead of the original path, as the source?
+            // const moves = morphMoves;
+            const moves = path.remember('fine').value;
+
+            // Account for being on the middle of a curve when crossing the end of the
+            // array... so far assumes closed shapes.
+            for(let i = 0; i < moves.length || morphVia.index >= 0; ++i) {
+                const m = i%moves.length;
+                const move = moves[m];
+
+                const point = pickMoveEndpoint(moves, m, morphVia.vec2[1]);
+                const dist = force.rad-vec2.dist(point, pos);
+
+                if(dist > 0) {
+                    // console.log('from...', morphVia.index);
+
+                    // Gather the points we'll curve through.
+
+                    if(morphVia.index < 0) {
+                        // Start a new segment to curve through.
+                        morphVia.index = m;
+
+                        // Need a point before the first point curved through.
+                        const start = pickMoveEndpoint(moves, wrapNum(m-1, moves.length));
+
+                        morphVia.points.push(start);
+                    }
+
+                    // @todo Might need to use a normal here as `lerp` target instead.
+                    const morphed = vec2.lerp(vec2.create(), point, pos,
+                        morphEase(dist/force.rad));
+
+                    morphVia.points.push(morphed);
+                }
+                else if(morphVia.index >= 0) {
+                    // console.log('...to', morphVia.index+morphVia.points.length);
+
+                    // Curve through the points.
+
+                    // @todo Smooth connections - to curve points, to adjacent points.
+                    const curves = bezierVia(morphVia.points);
+
+                    const spliceCurve = (offset, curves) =>
+                        curves.forEach((curve, c) => {
+                            const move = morphMoves[offset+c];
+
+                            if(move[0].search(/^m$/i) >= 0) {
+                                // We might've replaced an 'M' move.
+                                move.splice(0, Infinity,
+                                    ((move[0] === 'm')? 'm' : 'M'),
+                                    curve[curve.length-2], curve[curve.length-1]);
+                            }
+                            else if(move[0].search(/^z$/i) >= 0) {
+                                // We might've replaced an 'Z' move.
+                                move.splice(0, Infinity, 'Z');
+                            }
+                            else {
+                                // Béziers fine for anything else.
+                                move.splice(0, Infinity, ...curve);
+                            }
+                        });
+
+                    // Merge in the new curves - accounting for wrapping in the arrays.
+
+                    const extra = (morphVia.index+curves.length)-morphMoves.length;
+
+                    if(extra > 0) {
+                        spliceCurve(0, curves.splice(-extra, extra));
+                    }
+
+                    spliceCurve(morphVia.index, curves);
+
+                    // Reset the collection.
+                    morphVia.index = -1;
+                    morphVia.points.length = 0;
+                }
+            }
+
+            path
+                // .animate(100, '<>')
+                .plot(morphMoves);
+        }
+
+        $holds.each((h, hold) => {
+            return;
+            const $hold = $(hold);
+
+            // Find the SVGs we want - the default, or one in a `block-field`.
+
+            const $block = $hold.find('.yr-nav-holds-shape-block');
+
+            const $shapes = (($block.hasClass('empty'))? $hold : $block)
+                // These classes must be added to any custom SVGs to opt them into this effect.
+                .find('svg.yr-hold-shape, use.yr-use-hold-shape');
+
+            $shapes.each((s, shape) => {
+                shape = SVG.adopt(shape);
+
+                // @todo Increase the SVG size as much as needed.
+
+                // @todo Remove.
+
+                const shapeBox = shape.rbox(shape);
+                const shapeArea = boxRad(shapeBox);
+                const center = vec2.set(vec2.create(), shapeBox.cx, shapeBox.cy);
+
+                vec2.add(force.pos, vec2.random(force.pos, 100), center);
+                force.angle = Math.atan2(force.pos[1], force.pos[0]);
+
+                // Get on with the effect.
+                shape.select('path').each((p, paths) => {
+                    const path = paths[p];
 
                     // (2.1) Morph points towards pointer - interploate within radius, eased by
                     // force/distance.
@@ -320,16 +447,18 @@ function navHolds(element) {
                         vec2: vec2.create()
                     };
 
-                    const fineMoves = path.remember('fine').value;
+                    const moves = path.remember('fine').value;
                     const morphMoves = path.remember('morph').value;
 
+                    // Draw curves through points close enough to the pointer.
+                    // @todo Use the morphed path instead of the original path?
                     // Account for being on the middle of a curve when crossing the end of the
                     // array... so far assumes closed shapes.
-                    for(let i = 0; i < fineMoves.length || morphVia.index >= 0; ++i) {
-                        const m = i%fineMoves.length;
-                        const move = fineMoves[m];
+                    for(let i = 0; i < moves.length || morphVia.index >= 0; ++i) {
+                        const m = i%moves.length;
+                        const move = moves[m];
 
-                        const point = pickMoveEndpoint(fineMoves, m, morphVia.vec2);
+                        const point = pickMoveEndpoint(moves, m, morphVia.vec2);
                         const dist = force.rad-vec2.dist(point, force.pos);
 
                         if(dist > 0) {
@@ -340,7 +469,7 @@ function navHolds(element) {
                                 morphVia.index = m;
 
                                 // Need a point before the first point curved through.
-                                const start = pickMoveEndpoint(fineMoves, wrapNum(m-1, fineMoves.length));
+                                const start = pickMoveEndpoint(moves, wrapNum(m-1, moves.length));
 
                                 morphVia.points.push(start);
                             }
@@ -396,7 +525,7 @@ function navHolds(element) {
                     path
                         .animate(1000, '<>')
                         .loop(true, true)
-                        .plot(morphMoves);*/
+                        .plot(morphMoves);
 
                     // (2.2) Draw a curve through the morphed points (`bezierVia`).
                     // console.log(bezierVia([[0, 1], [0, 3], [5, 1], [10, 23]]));
@@ -575,6 +704,15 @@ function navHolds(element) {
                     */
                 });
             });
+        });
+
+        // Keep the hits up to date.
+        hits.resize();
+        $(window).on('resize', hits.resize);
+
+        $element.on('pointermove', ({ x, y }) => {
+            vec2.set(force.pos, x, y);
+            hits.get(force.pos, force.rad).forEach((hit) => blobPointer(hit, force));
         });
     })();
 }

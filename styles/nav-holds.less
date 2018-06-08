@@ -731,8 +731,6 @@
 
     .yr-nav-hold-view {
         z-index: @yr-z-nav-holds-view;
-        // Prevent this jQuery/Zepto error: https://bugs.jquery.com/ticket/11352
-        pointer-events: none;
     }
 
     .yr-nav-holds-defs {
@@ -762,10 +760,5 @@
                 stroke-miterlimit: 10px;
             }
         }
-    }
-
-    .yr-hold-hit-box {
-        position: absolute;
-        box-sizing: content-box;
     }
 }
