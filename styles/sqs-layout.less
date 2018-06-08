@@ -6,13 +6,17 @@
 .sqs-layout {
     overflow: hidden;
 
+
+    // Collapse the grid when the screen's too small.
+    // @todo Recurse this, to handle grids within grids, to some degree.
+
     @mq-collapse: ~'only screen and @{yr-mq-m-dn}';
 
-    @media @mq-collapse {
-        [class*="sqs-col"] {
+    [class*="sqs-col"] {
+        @media @mq-collapse {
             float: none;
             clear: both;
-            width: auto;
+            width: auto !important;
             // width: 100%;
         }
     }

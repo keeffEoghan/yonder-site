@@ -180,6 +180,8 @@ function navHolds(element) {
     // Test
     
     (() => {
+        return;
+
         if(!SVG.supported) { return; }
 
         // Init... needed internally in SVG.js even if we're not drawing in this element.
@@ -320,13 +322,15 @@ function navHolds(element) {
 
             const pos = pojoToVec2(path.point(...force.pos), morphVia.vec2[0]);
 
-            // console.log('hit?', pos, path, force);
-
             // Draw curves through points close enough to the pointer.
             const morphMoves = path.remember('morph').value;
             // @todo Use the morphed path instead of the original path, as the source?
             // const moves = morphMoves;
             const moves = path.remember('fine').value;
+
+            // @todo Reuse memory with indeces, rather than emptying array?
+            morphVia.points.length = 0;
+            morphVia.index = -1;
 
             // Account for being on the middle of a curve when crossing the end of the
             // array... so far assumes closed shapes.
@@ -338,8 +342,6 @@ function navHolds(element) {
                 const dist = force.rad-vec2.dist(point, pos);
 
                 if(dist > 0) {
-                    // console.log('from...', morphVia.index);
-
                     // Gather the points we'll curve through.
 
                     if(morphVia.index < 0) {
@@ -359,13 +361,12 @@ function navHolds(element) {
                     morphVia.points.push(morphed);
                 }
                 else if(morphVia.index >= 0) {
-                    // console.log('...to', morphVia.index+morphVia.points.length);
-
                     // Curve through the points.
 
-                    // @todo Smooth connections - to curve points, to adjacent points.
+                    // @todo Reuse memory, rather than new array?
                     const curves = bezierVia(morphVia.points);
 
+                    // @todo Loop or view into array, rather than new array.
                     const spliceCurve = (offset, curves) =>
                         curves.forEach((curve, c) => {
                             const move = morphMoves[offset+c];
@@ -389,6 +390,8 @@ function navHolds(element) {
                     // Merge in the new curves - accounting for wrapping in the arrays.
 
                     const extra = (morphVia.index+curves.length)-morphMoves.length;
+
+                    // @todo Indexes or view into array, rather than new array.
 
                     if(extra > 0) {
                         spliceCurve(0, curves.splice(-extra, extra));

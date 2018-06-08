@@ -4,20 +4,19 @@
 
 # To-do
 
+- Content
+    - Collapse nested grids...
+    - Missing pages:
+        - Contact!
+        - 404 Page!
 - Finesse
     - Home info content stagger transitions.
 - Home animations
     - Blob morphing hold shapes:
         - Pack in the whole metaball thing and go for morphing the nearest points out around the pointer instead, working more sympathetically with the shape?
             - Likely much better and more flexible, as we don't have to deal with flipping or turning when the morph happens, more sympathetic to the shape, probably more flexible.
-            - Pointer will have a radius of influence and a factor of pinch - both variable.
             - Steps:
-                - Input shape path.
-                - Replace in-place with prepared path:
-                    - Normalise to béziers.
-                    - Subdivide béziers to given precision.
                 - Target path upon pointer interaction:
-                    - Any points within influence radius shift towards pointer, eased according to pinch factor.
                     - Change radius and pinch on presses etc.
                     - Mix it up with negative pinch (move away from pointer), etc.
         - Minimise "folding" during morph from shape to metaball:
@@ -66,6 +65,15 @@
 
 - Home animations
     - Blob morphing hold shapes:
+        - Pack in the whole metaball thing and go for morphing the nearest points out around the pointer instead, working more sympathetically with the shape?
+            - Pointer will have a radius of influence and a factor of pinch - both variable.
+            - Steps:
+                - Input shape path.
+                - Replace in-place with prepared path:
+                    - Normalise to béziers.
+                    - Subdivide béziers to given precision.
+                - Target path upon pointer interaction:
+                    - Any points within influence radius shift towards pointer, eased according to pinch factor.
         - Minimise "folding" during morph from shape to metaball:
             - After stupid red herring trying to transform before creating metaball...
             - We'll work with bézier curves for the metaball to simplify things.
