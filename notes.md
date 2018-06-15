@@ -5,10 +5,13 @@
 # To-do
 
 - Content
-    - Collapse nested grids...
+    - Nested cells:
+        - Collapse nested grids...
+        - Size nested fonts (e.g: relative to screen size).
     - Missing pages:
         - Contact!
         - 404 Page!
+        - EU law popup?
 - Finesse
     - Home info content stagger transitions.
 - Home animations

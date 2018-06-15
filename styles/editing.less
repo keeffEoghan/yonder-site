@@ -3,8 +3,36 @@
  */
 
 @{yr-select-sqs-edit-mode} {
-    @{yr-select-sqs-block-empty} {
-        min-width: 30px;
-        min-height: 30px;
+    .sqs-layout {
+        @{yr-select-sqs-block-empty} {
+            min-width: 30px;
+            min-height: 30px;
+        }
+
+        .sqs-block {
+            &::after {
+                content: attr(id);
+                display: block;
+                visibility: hidden;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                padding: @tweak-yr-sqs-space-content;
+                color: @tweak-yr-color-light-2-tone-2;
+                background-color: @tweak-yr-color-overlays-dark-tone-3;
+                z-index: @yr-z-top;
+                .tweak-yr-font-mono;
+                font-size: 0.5em;
+            }
+
+            &:hover,
+            &:focus {
+                &::after {
+                    visibility: visible;
+                }
+            }
+        }
     }
 }

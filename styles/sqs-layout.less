@@ -10,14 +10,13 @@
     // Collapse the grid when the screen's too small.
     // @todo Recurse this, to handle grids within grids, to some degree.
 
-    @mq-collapse: ~'only screen and @{yr-mq-m-dn}';
+    @mq-fold: ~'@{yr-mq-pre} and @{tweak-yr-size-fold-grid}';
 
     [class*="sqs-col"] {
-        @media @mq-collapse {
+        @media @mq-fold {
             float: none;
             clear: both;
             width: auto !important;
-            // width: 100%;
         }
     }
 
@@ -41,7 +40,7 @@
         .sqs-block {
             .display(flex);
 
-            @media @mq-collapse {
+            @media @mq-fold {
                 display: block;
             }
         }
