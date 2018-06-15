@@ -2,8 +2,13 @@
  * Site
  */
 
-// tweak: { "category": "Site", "label": "Collapse Grid Size", "title": "tweak-yr-size-fold-grid", "type": "value", "min": 0, "max": 4000, "step": 1 }
-@tweak-yr-size-fold-grid: 700px;
+// tweak: { "category": "Site / Responsive", "label": "Fold Grid", "title": "tweak-yr-fold-grid", "type": "dropdown", "options": ["Nah", "Once", "Many"], "default": "Many" }
+
+// tweak: { "category": "Site / Responsive", "label": "Fold Grid At", "title": "tweak-yr-size-fold-grid-at", "type": "value", "min": 0, "max": 10000, "step": 1, "showOnlyWhenPresent": ".tweak-yr-fold-grid-once, .tweak-yr-fold-grid-many" }
+@tweak-yr-size-fold-grid-at: 500px;
+
+// tweak: { "category": "Site / Responsive", "label": "Unfold Grid At", "title": "tweak-yr-size-fold-grid-end", "type": "value", "min": 0, "max": 10000, "step": 1, "showOnlyWhenPresent": ".tweak-yr-fold-grid-many" }
+@tweak-yr-size-fold-grid-end: 1000px;
 
 
 /**

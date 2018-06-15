@@ -280,6 +280,9 @@
 .display(@display) when (@display = inline-flex) {
     .flex-inline();
 }
+.display(@display) when not (@display = flex) and not (@display = inline-flex) {
+    display: @display;
+}
 
 
 /**

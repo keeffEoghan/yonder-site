@@ -3,22 +3,75 @@
  * Probably volatile, dependent on third party updates.
  */
 
+
 .sqs-layout {
     overflow: hidden;
 
 
     // Collapse the grid when the screen's too small.
-    // @todo Recurse this, to handle grids within grids, to some degree.
 
-    @mq-fold: ~'@{yr-mq-pre} and @{yr-mq-fold-grid-dn}';
-
-    [class*="sqs-col"] {
-        @media @mq-fold {
-            float: none;
-            clear: both;
-            width: auto !important;
-        }
+    .yr-fold-cells() {
+        display: block !important;
+        width: 100% !important;
+        float: none;
+        clear: both;
     }
+
+    & { .yr-on-(~'.tweak-yr-fold-grid-once'); .-do() {
+        @mq-fold: ~'@{yr-mq-pre} and @{yr-mq-fold-grid-dn}';
+
+        @media @mq-fold {
+            [class*="sqs-col"] {
+                .yr-fold-cells();
+            }
+        }
+    }}
+
+    & { .yr-on-(~'.tweak-yr-fold-grid-many'); .-do() {
+        // Recursive collapse to handle grids within grids, to some degree.
+
+        @n-cols: 12;
+
+        @start: @tweak-yr-size-fold-grid-at;
+        @dist: @tweak-yr-size-fold-grid-end - @start;
+
+        // Mixin way doesn't work so well, probably due to some mixin variable scoping issue.
+        // .yr-for-(@n-cols); .-each(@i) {
+        //     .yr-for-(@outer); .-each(@j) {
+        //         // `@outer` never changes somehow...
+        //     }
+        // }
+
+        .for-i(@i) when (@i > 0) {
+            .sqs-col-@{i} {
+                @factor: (@n-cols - @i) / max(@n-cols - 1, 1);
+                @size-i: @start + (@dist * @factor);
+                @mq: ~'@{yr-mq-pre} and (max-width: @{size-i})';
+
+                @media @mq {
+                    .yr-fold-cells();
+                }
+            }
+
+            .for-j(@j) when (@j > 0) {
+                .sqs-col-@{i} .sqs-col-@{j} {
+                    @factor: (@i - @j) / max(@i - 1, 1);
+                    @size-j: @start + (@dist * @factor);
+                    @mq: ~'@{yr-mq-pre} and (max-width: @{size-j})';
+
+                    @media @mq {
+                        .yr-fold-cells();
+                    }
+                }
+
+                .for-j(@j - 1);
+            }
+            .for-j(@i);
+
+            .for-i(@i - 1);
+        }
+        .for-i(@n-cols);
+    }}
 
     .sqs-block {
         position: relative;
@@ -39,10 +92,6 @@
         [class*="sqs-col"],
         .sqs-block {
             .display(flex);
-
-            @media @mq-fold {
-                display: block;
-            }
         }
 
         .sqs-row {
