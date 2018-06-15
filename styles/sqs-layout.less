@@ -10,7 +10,7 @@
     // Collapse the grid when the screen's too small.
     // @todo Recurse this, to handle grids within grids, to some degree.
 
-    @mq-fold: ~'@{yr-mq-pre} and @{tweak-yr-size-fold-grid}';
+    @mq-fold: ~'@{yr-mq-pre} and @{yr-mq-fold-grid-dn}';
 
     [class*="sqs-col"] {
         @media @mq-fold {
