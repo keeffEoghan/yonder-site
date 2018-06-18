@@ -1,28 +1,50 @@
 .yr-footer {
-    display: none;
+    position: relative;
+    z-index: @yr-z-footer;
+    color: @tweak-yr-color-dark-1-tone-3;
+    background-color: @tweak-yr-color-base-tone-3;
 
-    .tweak-yr-footer-show & {
-        display: block;
-        position: relative;
-        z-index: @yr-z-footer;
-        color: @tweak-yr-color-dark-1-tone-3;
-        background-color: @tweak-yr-color-base-tone-3;
+    .yr-on-(~'.tweak-yr-footer-hide'); .-do() {
+        display: none;
     }
 
     .yr-footer-block {
-        margin: 2em 0;
+        margin: @tweak-yr-space-content auto;
 
         &@{yr-select-sqs-block-empty} {
             margin: 0;
         }
     }
 
-    .yr-contact {
-        display: none;
+    .yr-business {
+        margin: @tweak-yr-space-content auto;
 
-        .tweak-yr-footer-contact-show & {
-            display: block;
-            margin: 2em 0;
+        .yr-on-(~'.tweak-yr-footer-business-hide'); .-do() {
+            display: none;
+        }
+
+        .yr-business-location {
+            .yr-on-(~'.tweak-yr-footer-business-location-hide'); .-do() {
+                display: none;
+            }
+        }
+
+        .yr-business-location-map {
+            .yr-on-(~'.tweak-yr-footer-business-location-map-hide'); .-do() {
+                display: none;
+            }
+        }
+
+        .yr-business-contact {
+            .yr-on-(~'.tweak-yr-footer-business-contact-hide'); .-do() {
+                display: none;
+            }
+        }
+
+        .yr-business-hours {
+            .yr-on-(~'.tweak-yr-footer-business-hours-hide'); .-do() {
+                display: none;
+            }
         }
     }
 }

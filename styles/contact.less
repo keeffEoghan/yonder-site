@@ -1,1 +1,41 @@
-.yr-contact {}
+.yr-contact {
+    .yr-contact-block {
+        margin: @tweak-yr-space-content auto;
+
+        &@{yr-select-sqs-block-empty} {
+            margin: 0;
+        }
+    }
+
+    .yr-business {
+        margin: @tweak-yr-space-content auto;
+
+        .yr-on-(~'.tweak-yr-contact-business-hide'); .-do() {
+            display: none;
+        }
+
+        .yr-business-location {
+            .yr-on-(~'.tweak-yr-contact-business-location-hide'); .-do() {
+                display: none;
+            }
+        }
+
+        .yr-business-location-map {
+            .yr-on-(~'.tweak-yr-contact-business-location-map-hide'); .-do() {
+                display: none;
+            }
+        }
+
+        .yr-business-contact {
+            .yr-on-(~'.tweak-yr-contact-business-contact-hide'); .-do() {
+                display: none;
+            }
+        }
+
+        .yr-business-hours {
+            .yr-on-(~'.tweak-yr-contact-business-hours-hide'); .-do() {
+                display: none;
+            }
+        }
+    }
+}

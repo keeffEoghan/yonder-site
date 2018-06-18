@@ -6,11 +6,9 @@
 
 - Content
     - Nested cells:
-        - Collapse nested grids...
         - Size nested fonts (e.g: relative to screen size).
     - Missing pages:
         - Contact!
-        - 404 Page!
         - EU law popup?
 - Finesse
     - Home info content stagger transitions.
@@ -66,6 +64,11 @@
 
 # Done
 
+- Content
+    - Nested cells:
+        - Collapse nested grids...
+    - Missing pages:
+        - 404 Page
 - Home animations
     - Blob morphing hold shapes:
         - Pack in the whole metaball thing and go for morphing the nearest points out around the pointer instead, working more sympathetically with the shape?

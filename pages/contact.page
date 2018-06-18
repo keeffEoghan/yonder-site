@@ -1,1 +1,11 @@
-{@|apply business.block}
+<article class="yr-contact">
+    <squarespace:block-field id="yr-contact-block-1"
+        class="yr-contact-block-1 yr-contact-block" columns="12">
+    </squarespace:block-field>
+
+    {@|apply business.block}
+
+    <squarespace:block-field id="yr-contact-block-2"
+        class="yr-contact-block-2 yr-contact-block" columns="12">
+    </squarespace:block-field>
+</article>

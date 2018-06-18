@@ -1,3 +1,3 @@
-<section class="yr-home">
+<article class="yr-home">
     <squarespace:navigation navigationId="nav-holds" template="nav-holds"/>
-</section>
+</article>

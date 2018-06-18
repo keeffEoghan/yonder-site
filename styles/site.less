@@ -294,3 +294,33 @@ input[type] {
     color: inherit;
     opacity: 0.66;
 }
+
+
+/**
+ * Block styles - base.
+ */
+
+.yr-block-style-base-dark {
+    .style-block-dark();
+}
+
+.yr-block-style-base-light {
+    .style-block-light();
+}
+
+.yr-block-style-base-stripes {
+    .style-block-stripes();
+
+    &.yr-block-style-base-stripes-sticky {
+        .style-block-stripes-sticky();
+    }
+}
+
+
+/**
+ * Block styles - color.
+ */
+
+.yr-block-style-color-theme {
+    .style-block-color-theme();
+}

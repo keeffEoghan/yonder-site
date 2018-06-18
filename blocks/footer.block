@@ -1,4 +1,11 @@
 <footer class="yr-footer">
-    <squarespace:block-field id="footer-block" class="yr-footer-block" columns="12"></squarespace:block-field>
-    {@|apply contact.block}
+    <squarespace:block-field id="footer-block-1"
+        class="yr-footer-block-1 yr-footer-block" columns="12">
+    </squarespace:block-field>
+
+    {@|apply business.block}
+
+    <squarespace:block-field id="footer-block-2"
+        class="yr-footer-block-2 yr-footer-block" columns="12">
+    </squarespace:block-field>
 </footer>

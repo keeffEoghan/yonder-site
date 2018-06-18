@@ -207,7 +207,7 @@
     .sqs-block-search,
     .sqs-block-form {
         .sqs-block-content {
-            padding: @tweak-yr-sqs-space-content;
+            padding: @tweak-yr-space-content;
         }
 
         a:not([role="button"]) {
@@ -233,93 +233,7 @@
 
     .sqs-block-button {
         .sqs-block-content {
-            padding: @tweak-yr-sqs-space-content;
-        }
-    }
-
-
-    /**
-     * Block styles base mixins.
-     */
-
-    .style-block-dark() {
-        background-color: @tweak-yr-color-dark-2-tone-2;
-
-        .sqs-block-content {
-            color: @tweak-yr-color-light-1-tone-2;
-        }
-    }
-
-    .style-block-light() {
-        background-color: @tweak-yr-color-light-1-tone-2;
-
-        .sqs-block-content {
-            color: @tweak-yr-color-dark-1-tone-2;
-        }
-    }
-
-
-    /**
-     * The stripes border style - typically to indicate content crossing between pages.
-     * To change the border color, you can simply change `color` of the block.
-     */
-    .style-block-stripes() {
-        background-color: @tweak-yr-sqs-block-style-stripes-color-2;
-        color: @tweak-yr-sqs-block-style-stripes-color-1;
-
-        &::before,
-        &::after {
-            content: '';
-            display: block;
-            position: absolute;
-        }
-
-        .fill(@pad: 0) {
-            top: @pad;
-            right: @pad;
-            left: @pad;
-            bottom: @pad;
-        }
-
-        &::before {
-            z-index: 0;
-            .fill(0);
-
-            background-image: repeating-linear-gradient(-45deg,
-                transparent 0,
-                transparent @tweak-yr-sqs-block-style-stripes-width,
-                currentColor @tweak-yr-sqs-block-style-stripes-width,
-                currentColor (@tweak-yr-sqs-block-style-stripes-width * 2));
-        }
-
-        &::after {
-            z-index: 1;
-            background-color: currentColor;
-            .fill(@tweak-yr-sqs-block-style-stripes-space);
-        }
-
-        .sqs-block-content {
-            color: @tweak-yr-color-dark-1-tone-2;
-            padding: @tweak-yr-sqs-space-content;
-        }
-    }
-
-    .style-block-stripes-sticky() {
-        &::before {
-            background-attachment: fixed;
-        }
-    }
-
-
-    /**
-     * Block styles color mixins.
-     */
-
-    .style-block-color-theme() {
-        .sqs-block-content {
-            color: @tweak-yr-color-dark-1-tone-2;
-            // @todo Set this to be the _other_ page's theme color for content links?
-            color: var(--tweak-yr-color-theme-on-tone-1);
+            padding: @tweak-yr-space-content;
         }
     }
 
@@ -345,7 +259,7 @@
             .style-block-stripes();
         }}
 
-        & { .yr-on-(~'.tweak-yr-@{block}-style-base-stripes.tweak-yr-sqs-block-style-stripes-sticky'); .-do() {
+        & { .yr-on-(~'.tweak-yr-@{block}-style-base-stripes.tweak-yr-block-style-stripes-sticky'); .-do() {
             .style-block-stripes-sticky();
         }}
 
@@ -403,6 +317,7 @@
         .yr-a();
     }
 
+
     /**
      * Often used as a header banner.
      */
@@ -422,7 +337,7 @@
 
             .image-caption p {
                 .tweak-yr-font-p !important;
-                padding: @tweak-yr-sqs-space-content @tweak-yr-space-pad;
+                padding: @tweak-yr-space-content @tweak-yr-space-pad;
             }
         }}
 
@@ -458,11 +373,11 @@
                 }
 
                 .tweak-yr-sqs-image-block-poster-anchor-sub-up-high & {
-                    top: @tweak-yr-sqs-space-content;
+                    top: @tweak-yr-space-content;
                 }
 
                 .tweak-yr-sqs-image-block-poster-anchor-sub-down-low & {
-                    bottom: @tweak-yr-sqs-space-content;
+                    bottom: @tweak-yr-space-content;
                 }
             }
         }
