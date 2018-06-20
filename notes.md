@@ -4,6 +4,21 @@
 
 # To-do
 
+- Content feedback
+    - Sticky anchor headers?
+    - Missing content:
+        - Comparison view
+        - Navigation blurb
+    - Comparison view
+        - Use overlay for desktop as well.
+        - More obvious way to exit the comparison mode (test with users)
+    - Feature link
+        - Better text position, taller image container (or maintain a nicer aspect ratio)
+    - Simple events schedule
+        - Colin calendar embed (need embed endpoint, maybe different view options)
+        - Squarespace calendar (only monthly view)
+        - Squarespace grid (not much space, finicky)
+        - [Eventbrite embed](https://www.eventbrite.com/support/articles/en_US/How_To/how-to-sell-eventbrite-tickets-registrations-on-your-website-using-embeddable-widgets) (table...?)
 - Content
     - Nested cells:
         - Size nested fonts (e.g: relative to screen size).

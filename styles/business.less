@@ -1,13 +1,14 @@
 .yr-business {
+    text-align: center;
+
     .yr-business-location-items,
     .yr-business-contact,
-    .yr-business-hours {
-        margin: @tweak-yr-space-content;
+    .yr-business-hours,
+    .yr-business-block {
+        margin: @tweak-yr-space-content auto;
     }
 
     .yr-business-block {
-        margin: @tweak-yr-space-content auto;
-
         &@{yr-select-sqs-block-empty} {
             margin: 0;
         }
@@ -17,6 +18,10 @@
         .yr-on-(~'.tweak-yr-business-location-hide'); .-do() {
             display: none;
         }
+    }
+
+    .yr-business-location-item--lines {
+        margin: @tweak-yr-space-p auto;
     }
 
     .yr-business-location-item--lines .yr-business-location-item {
@@ -33,7 +38,7 @@
         display: block;
         border: 0;
         height: 300px;
-        margin: @tweak-yr-space-content auto;
+        background-color: @tweak-yr-color-dark-2-tone-1;
 
         .yr-on-(~'.tweak-yr-business-location-map-hide'); .-do() {
             display: none;
