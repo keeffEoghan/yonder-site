@@ -60,7 +60,7 @@
 
 /**
  * Convenience for toggling a global or local flag.
- * Override controls whether we'll do the long expansion bt default.
+ * Override controls whether we'll do the long expansion by default.
  *
  * This will enable the contents when `.flag` is present at or above the element scope:
  * `.yr-on-(~'.flag'); .-do() {...}`
@@ -209,8 +209,8 @@
     [data-yr-ajax-loading="swap"] & {
         // Hide.
         opacity: 0;
-        .transform(translateY(@tweak-yr-loader-fade-content-move)
-            scale(@tweak-yr-loader-fade-content-scale););
+        .transform(translateY(@tweak-yr-fade-page-move)
+            scale(@tweak-yr-fade-page-scale););
     }
 
     [data-yr-ajax-loading="navigate"] &,

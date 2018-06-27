@@ -83,13 +83,13 @@
 
 .yr-main,
 .yr-footer {
-    & { .yr-on-(~'.tweak-yr-loader-fade-content-simple'); .-do() {
+    & { .yr-on-(~'.tweak-yr-fade-page-simple'); .-do() {
         .yr-loader-fade();
     }}
 }
 
 .yr-load-fade {
-    & { .yr-on-(~'.tweak-yr-loader-fade-content-simple'); .-do() {
+    & { .yr-on-(~'.tweak-yr-fade-page-simple'); .-do() {
         .yr-loader-fade();
     }}
 }
@@ -100,14 +100,14 @@
 
 .yr-main,
 .yr-footer {
-    .yr-on-(~'.tweak-yr-loader-fade-content-fancy'); .-do() {
+    .yr-on-(~'.tweak-yr-fade-page-fancy'); .-do() {
         .yr-loader-fade();
         .yr-loader-fade-stagger-outer();
     }
 }
 
 .yr-content {
-    .yr-on-(~'.tweak-yr-loader-fade-content-fancy'); .-do() {
+    .yr-on-(~'.tweak-yr-fade-page-fancy'); .-do() {
         /* Blanket selector ahead... many selected elements *//*
         * {
             .yr-loader-fade();

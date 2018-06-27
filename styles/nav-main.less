@@ -82,7 +82,7 @@
             left: 0;
             right: 0;
             will-change: background-color;
-            .transition(background-color @yr-loader-fade-time ease-out);
+            .transition(background-color @yr-fade-page-time ease-out);
         }
     }
 
@@ -417,11 +417,12 @@
     padding: 0;
     border: none;
 
-    .tweak-yr-nav-overlay-fancy &,
-    .tweak-yr-nav-overlay-fancier & {
-        ~ .yr-content {
-            will-change: opacity, filter;
+    ~ .yr-content {
+        .tweak-yr-nav-overlay-fancy &,
+        .tweak-yr-nav-overlay-fancier & {
+            will-change: opacity, transform, filter;
             @transition: opacity @nav-overlay-time ease-in,
+                transform @nav-overlay-time ease-in,
                 filter @nav-overlay-time ease-in;
             .transition(@transition);
         }
@@ -432,9 +433,23 @@
             .tweak-yr-nav-overlay-fancy &,
             .tweak-yr-nav-overlay-fancier & {
                 opacity: 0.5;
+
+                @move: @tweak-yr-fade-page-move * 0.5;
+
+                @transform: translateX(-@move)
+                    scale(@tweak-yr-fade-page-scale);
+                .transform(@transform);
+
                 @transition: opacity @nav-overlay-time ease-out,
+                    transform @nav-overlay-time ease-out,
                     filter @nav-overlay-time ease-out;
                 .transition(@transition);
+
+                .tweak-yr-nav-align-switch & {
+                    @transform: translateX(@move)
+                        scale(@tweak-yr-fade-page-scale);
+                    .transform(@transform);
+                }
             }
 
             .tweak-yr-nav-overlay-fancy & {

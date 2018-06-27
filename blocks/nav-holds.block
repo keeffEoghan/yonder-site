@@ -39,11 +39,13 @@
         <section class="yr-nav-holds-content">
             <header class="yr-nav-holds-header">
                 {@|apply titles.block}
-                <squarespace:block-field id="nav-holds-titles-block" class="yr-nav-holds-titles-block yr-a" columns="12"></squarespace:block-field>
+                <squarespace:block-field id="nav-holds-titles-block"
+                    class="yr-nav-holds-titles-block yr-a" columns="12"/>
             </header>
 
             <article class="yr-nav-holds-info">
-                <squarespace:block-field id="nav-holds-info-hint-block" class="yr-nav-holds-info-hint-block" columns="12"></squarespace:block-field>
+                <squarespace:block-field id="nav-holds-info-hint-block"
+                    class="yr-nav-holds-info-hint-block" columns="12"/>
 
                 {##BEGIN}
                     For hold pairs details.
@@ -117,6 +119,9 @@
             {.end}
         </ul>
     </section>
+
+    <squarespace:block-field id="nav-holds-content-block"
+        class="yr-nav-holds-content-block yr-a" columns="12"/>
 
     <script type="text/javascript">
         ((self.debug) && console.log('nav-holds', {@|json-pretty|html}));

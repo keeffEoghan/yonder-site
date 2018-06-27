@@ -6,9 +6,11 @@
 
 // tweak: { "category": "Site / Responsive", "label": "Fold Grid At", "title": "tweak-yr-size-fold-grid-at", "type": "value", "min": 0, "max": 10000, "step": 1, "showOnlyWhenPresent": ".tweak-yr-fold-grid-once, .tweak-yr-fold-grid-many" }
 @tweak-yr-size-fold-grid-at: 400px;
+:root { --tweak-yr-size-fold-grid-at: @tweak-yr-size-fold-grid-at; }
 
 // tweak: { "category": "Site / Responsive", "label": "Unfold Grid At", "title": "tweak-yr-size-fold-grid-end", "type": "value", "min": 0, "max": 10000, "step": 1, "showOnlyWhenPresent": ".tweak-yr-fold-grid-many" }
 @tweak-yr-size-fold-grid-end: 900px;
+:root { --tweak-yr-size-fold-grid-end: @tweak-yr-size-fold-grid-end; }
 
 
 /**
@@ -27,29 +29,15 @@
 
 // tweak: { "category": "Loading / Loading Bar", "label": "Size", "title": "tweak-yr-loader-size", "type": "value", "min": 1, "max": 100, "step": 1, "target": ".yr-loader", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-show" }
 @tweak-yr-loader-size: 3px;
+:root { --tweak-yr-loader-size: @tweak-yr-loader-size; }
 
 // tweak: { "category": "Loading / Loading Bar", "label": "Color Bar", "title": "tweak-yr-color-loader-bar", "type": "color", "disableTransparency": "false", "target": ".yr-loader", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-show" }
 @tweak-yr-color-loader-bar: #fff;
+:root { --tweak-yr-color-loader-bar: @tweak-yr-color-loader-bar; }
 
 // tweak: { "category": "Loading / Loading Bar", "label": "Color Base", "title": "tweak-yr-color-loader-base", "type": "color", "disableTransparency": "false", "target": ".yr-loader", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-show" }
 @tweak-yr-color-loader-base: #000;
-
-
-/**
- * Loading / Animate Contents
- */
-
-// tweak: { "category": "Loading / Animate Contents", "label": "Animate Contents", "title": "tweak-yr-loader-fade-content", "type": "dropdown", "options": ["Nah", "Simple", "Fancy"], "default": "Simple", target: ".yr-content", "showOnlyWhenPresent": ".tweak-yr-ajax-enable", "js": "true" }
-
-// @note Style Editor doesn't handle time units in value sliders...
-// @disable tweak: { "category": "Loading / Animate Contents", "label": "Time", "title": "tweak-yr-loader-fade-content-time", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-content", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-fade-content-simple, .tweak-yr-ajax-enable.tweak-yr-loader-fade-content-fancy", "js": "true" }
-@tweak-yr-loader-fade-content-time: 400ms;
-
-// tweak: { "category": "Loading / Animate Contents", "label": "Distance", "title": "tweak-yr-loader-fade-content-move", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-content", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-fade-content-fancy" }
-@tweak-yr-loader-fade-content-move: 30px;
-
-// tweak: { "category": "Loading / Animate Contents", "label": "Scale", "title": "tweak-yr-loader-fade-content-scale", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-content", "showOnlyWhenPresent": ".tweak-yr-ajax-enable.tweak-yr-loader-fade-content-fancy" }
-@tweak-yr-loader-fade-content-scale: 0.99;
+:root { --tweak-yr-color-loader-base: @tweak-yr-color-loader-base; }
 
 
 /**
@@ -58,11 +46,13 @@
 
 // tweak: { "category": "Typography", "label": "Big Screen Font Size", "title": "tweak-yr-font-base-size-2", "type": "value", "min": 0, "max": 100, "step": 1, "target": "body" }
 @tweak-yr-font-base-size-2: 15pt;
+:root { --tweak-yr-font-base-size-2: @tweak-yr-font-base-size-2; }
 
 // tweak: { "category": "Typography", "label": "Use Fancy Links", "title": "tweak-yr-a-style-fancy", "type": "checkbox", "active": true, "target": "a" }
 
 // tweak: { "category": "Typography", "label": "Fancy Links Expand", "title": "tweak-yr-a-style-fancy-scale", "type": "value", "min": -100, "max": 100, "step": 1, "target": "a", "showOnlyWhenPresent": ".tweak-yr-a-style-fancy" }
 @tweak-yr-a-style-fancy-scale: 5;
+:root { --tweak-yr-a-style-fancy-scale: @tweak-yr-a-style-fancy-scale; }
 
 // tweak: { "category": "Typography", "label": "Base", "title": "tweak-yr-font-base", "type": "font", "loadAllVariants": true, "target": "body" }
 .tweak-yr-font-base {
@@ -134,7 +124,8 @@
 .tweak-yr-font-h2 {
     // Doesn't display well in `Style Editor`... but font-picker won't take custom fonts anyway.
     font-family: @yr-font-sans;
-    font-size: 1.2em;
+    // font-size: 1.2em;
+    font-size: 2em;
     line-height: 1.6em;
     letter-spacing: 0em;
     font-weight: 600;
@@ -146,7 +137,7 @@
 .tweak-yr-font-h3 {
     // Doesn't display well in `Style Editor`... but font-picker won't take custom fonts anyway.
     font-family: @yr-font-serif;
-    font-size: 1.2em;
+    font-size: 1.5em;
     line-height: 1.6em;
     letter-spacing: 0em;
     font-weight: 600;
@@ -202,33 +193,43 @@
 
 // tweak: { "category": "Spacing", "label": "Line Maximum Length", "title": "tweak-yr-space-line-max", "type": "value", "min": -100, "max": 100, "step": 1, "target": "body" }
 @tweak-yr-space-line-max: 36em;
+:root { --tweak-yr-space-line-max: @tweak-yr-space-line-max; }
 
 // tweak: { "category": "Spacing", "label": "Pad", "title": "tweak-yr-space-pad", "type": "value", "min": -100, "max": 100, "step": 1, "target": "body" }
 @tweak-yr-space-pad: 1rem;
+:root { --tweak-yr-space-pad: @tweak-yr-space-pad; }
 
 // tweak: { "category": "Spacing", "label": "Paragraph", "title": "tweak-yr-space-p", "type": "value", "min": -100, "max": 100, "step": 1, "target": "p" }
 @tweak-yr-space-p: 0.5em;
+:root { --tweak-yr-space-p: @tweak-yr-space-p; }
 
 // tweak: { "category": "Spacing", "label": "Heading 1", "title": "tweak-yr-space-h1", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h1" }
 @tweak-yr-space-h1: 10vh;
+:root { --tweak-yr-space-h1: @tweak-yr-space-h1; }
 
 // tweak: { "category": "Spacing", "label": "Heading 2", "title": "tweak-yr-space-h2", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h2" }
 @tweak-yr-space-h2: 1em;
+:root { --tweak-yr-space-h2: @tweak-yr-space-h2; }
 
 // tweak: { "category": "Spacing", "label": "Heading 3", "title": "tweak-yr-space-h3", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h3" }
 @tweak-yr-space-h3: 1em;
+:root { --tweak-yr-space-h3: @tweak-yr-space-h3; }
 
 // tweak: { "category": "Spacing", "label": "Heading 4", "title": "tweak-yr-space-h4", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h4" }
 @tweak-yr-space-h4: 1.6em;
+:root { --tweak-yr-space-h4: @tweak-yr-space-h4; }
 
 // tweak: { "category": "Spacing", "label": "Heading 5", "title": "tweak-yr-space-h5", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h5" }
 @tweak-yr-space-h5: 1em;
+:root { --tweak-yr-space-h5: @tweak-yr-space-h5; }
 
 // tweak: { "category": "Spacing", "label": "Heading 6", "title": "tweak-yr-space-h6", "type": "value", "min": -100, "max": 100, "step": 1, "target": "h6" }
 @tweak-yr-space-h6: 1em;
+:root { --tweak-yr-space-h6: @tweak-yr-space-h6; }
 
 // tweak: { "category": "Spacing", "label": "Content Blocks", "title": "tweak-yr-space-content", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main .sqs-block" }
 @tweak-yr-space-content: 2em;
+:root { --tweak-yr-space-content: @tweak-yr-space-content; }
 
 
 /**
@@ -242,9 +243,11 @@
 
 // tweak: { "category": "Colors / Selection", "label": "Base", "title": "tweak-yr-color-selection-base", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-selection-base: #0f7a6d;
+:root { --tweak-yr-color-selection-base: @tweak-yr-color-selection-base; }
 
 // tweak: { "category": "Colors / Selection", "label": "Color", "title": "tweak-yr-color-selection-color", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-selection-color: #f8e2c9;
+:root { --tweak-yr-color-selection-color: @tweak-yr-color-selection-color; }
 
 
 /**
@@ -253,12 +256,15 @@
 
 // tweak: { "category": "Colors / Base", "label": "Tone 1", "title": "tweak-yr-color-base-tone-1", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-base-tone-1: #f8e2c9;
+:root { --tweak-yr-color-base-tone-1: @tweak-yr-color-base-tone-1; }
 
 // tweak: { "category": "Colors / Base", "label": "Tone 2", "title": "tweak-yr-color-base-tone-2", "type": "color", "disableTransparency": "false", "target": ".homepage" }
 @tweak-yr-color-base-tone-2: #f9efe0;
+:root { --tweak-yr-color-base-tone-2: @tweak-yr-color-base-tone-2; }
 
 // tweak: { "category": "Colors / Base", "label": "Tone 3", "title": "tweak-yr-color-base-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-footer" }
 @tweak-yr-color-base-tone-3: #fff9f2;
+:root { --tweak-yr-color-base-tone-3: @tweak-yr-color-base-tone-3; }
 
 
 /**
@@ -267,12 +273,15 @@
 
 // tweak: { "category": "Colors / Dark 1", "label": "Tone 1", "title": "tweak-yr-color-dark-1-tone-1", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-dark-1-tone-1: #000000;
+:root { --tweak-yr-color-dark-1-tone-1: @tweak-yr-color-dark-1-tone-1; }
 
 // tweak: { "category": "Colors / Dark 1", "label": "Tone 2", "title": "tweak-yr-color-dark-1-tone-2", "type": "color", "disableTransparency": "false", "target": ".homepage" }
 @tweak-yr-color-dark-1-tone-2: #161614;
+:root { --tweak-yr-color-dark-1-tone-2: @tweak-yr-color-dark-1-tone-2; }
 
 // tweak: { "category": "Colors / Dark 1", "label": "Tone 3", "title": "tweak-yr-color-dark-1-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-footer" }
 @tweak-yr-color-dark-1-tone-3: #323232;
+:root { --tweak-yr-color-dark-1-tone-3: @tweak-yr-color-dark-1-tone-3; }
 
 
 /**
@@ -281,12 +290,15 @@
 
 // tweak: { "category": "Colors / Dark 2", "label": "Tone 1", "title": "tweak-yr-color-dark-2-tone-1", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-dark-2-tone-1: rgba(0, 0, 0, 0.33);
+:root { --tweak-yr-color-dark-2-tone-1: @tweak-yr-color-dark-2-tone-1; }
 
 // tweak: { "category": "Colors / Dark 2", "label": "Tone 2", "title": "tweak-yr-color-dark-2-tone-2", "type": "color", "disableTransparency": "false", "target": "body" }
 @tweak-yr-color-dark-2-tone-2: #212031;
+:root { --tweak-yr-color-dark-2-tone-2: @tweak-yr-color-dark-2-tone-2; }
 
 // tweak: { "category": "Colors / Dark 2", "label": "Tone 3", "title": "tweak-yr-color-dark-2-tone-3", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-dark-2-tone-3: rgba(0, 0, 0, 0.66);
+:root { --tweak-yr-color-dark-2-tone-3: @tweak-yr-color-dark-2-tone-3; }
 
 
 /**
@@ -295,12 +307,15 @@
 
 // tweak: { "category": "Colors / Light 1", "label": "Tone 1", "title": "tweak-yr-color-light-1-tone-1", "type": "color", "disableTransparency": "false", "target": ".yr-nav-button, .yr-nav-hold-a, .yr-nav-toggler" }
 @tweak-yr-color-light-1-tone-1: #f8e2c9;
+:root { --tweak-yr-color-light-1-tone-1: @tweak-yr-color-light-1-tone-1; }
 
 // tweak: { "category": "Colors / Light 1", "label": "Tone 2", "title": "tweak-yr-color-light-1-tone-2", "type": "color", "disableTransparency": "false", "target": "body" }
 @tweak-yr-color-light-1-tone-2: #f9efe0;
+:root { --tweak-yr-color-light-1-tone-2: @tweak-yr-color-light-1-tone-2; }
 
 // tweak: { "category": "Colors / Light 1", "label": "Tone 3", "title": "tweak-yr-color-light-1-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-nav-panel, .yr-nav-a, .yr-nav-button, .yr-nav-hold-a" }
 @tweak-yr-color-light-1-tone-3: #fff9f2;
+:root { --tweak-yr-color-light-1-tone-3: @tweak-yr-color-light-1-tone-3; }
 
 
 /**
@@ -309,12 +324,15 @@
 
 // tweak: { "category": "Colors / Light 2", "label": "Tone 1", "title": "tweak-yr-color-light-2-tone-1", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-light-2-tone-1: rgba(255, 255, 255, 0.33);
+:root { --tweak-yr-color-light-2-tone-1: @tweak-yr-color-light-2-tone-1; }
 
 // tweak: { "category": "Colors / Light 2", "label": "Tone 2", "title": "tweak-yr-color-light-2-tone-2", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-light-2-tone-2: #fff;
+:root { --tweak-yr-color-light-2-tone-2: @tweak-yr-color-light-2-tone-2; }
 
 // tweak: { "category": "Colors / Light 2", "label": "Tone 3", "title": "tweak-yr-color-light-2-tone-3", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-light-2-tone-3: rgba(255, 255, 255, 0.66);
+:root { --tweak-yr-color-light-2-tone-3: @tweak-yr-color-light-2-tone-3; }
 
 
 /**
@@ -323,12 +341,15 @@
 
 // tweak: { "category": "Colors / Accent 1", "label": "Tone 1", "title": "tweak-yr-color-accent-1-tone-1", "type": "color", "disableTransparency": "false", "target": ".yr-nav-panel, .homepage .yr-nav-button" }
 @tweak-yr-color-accent-1-tone-1: #05443d;
+:root { --tweak-yr-color-accent-1-tone-1: @tweak-yr-color-accent-1-tone-1; }
 
 // tweak: { "category": "Colors / Accent 1", "label": "Tone 2", "title": "tweak-yr-color-accent-1-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav, .yr-nav, .yr-nav-panel, .yr-nav-folder-a" }
 @tweak-yr-color-accent-1-tone-2: #075e56;
+:root { --tweak-yr-color-accent-1-tone-2: @tweak-yr-color-accent-1-tone-2; }
 
 // tweak: { "category": "Colors / Accent 1", "label": "Tone 3", "title": "tweak-yr-color-accent-1-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-nav, .yr-nav-panel, .homepage .yr-nav-button" }
 @tweak-yr-color-accent-1-tone-3: #0f7a6d;
+:root { --tweak-yr-color-accent-1-tone-3: @tweak-yr-color-accent-1-tone-3; }
 
 
 /**
@@ -337,12 +358,15 @@
 
 // tweak: { "category": "Colors / Accent 2", "label": "Tone 1", "title": "tweak-yr-color-accent-2-tone-1", "type": "color", "disableTransparency": "false", "target": ".yr-nav-a" }
 @tweak-yr-color-accent-2-tone-1: #f96b2b;
+:root { --tweak-yr-color-accent-2-tone-1: @tweak-yr-color-accent-2-tone-1; }
 
 // tweak: { "category": "Colors / Accent 2", "label": "Tone 2", "title": "tweak-yr-color-accent-2-tone-2", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-accent-2-tone-2: #ff7c3a;
+:root { --tweak-yr-color-accent-2-tone-2: @tweak-yr-color-accent-2-tone-2; }
 
 // tweak: { "category": "Colors / Accent 2", "label": "Tone 3", "title": "tweak-yr-color-accent-2-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-loader, .yr-nav-panel" }
 @tweak-yr-color-accent-2-tone-3: #ff965e;
+:root { --tweak-yr-color-accent-2-tone-3: @tweak-yr-color-accent-2-tone-3; }
 
 
 /**
@@ -351,15 +375,19 @@
 
 // tweak: { "category": "Colors / Overlays / Dark", "label": "Tone 1", "title": "tweak-yr-color-overlays-dark-tone-1", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-overlays-dark-tone-1: rgba(0, 0, 0, 0.11);
+:root { --tweak-yr-color-overlays-dark-tone-1: @tweak-yr-color-overlays-dark-tone-1; }
 
 // tweak: { "category": "Colors / Overlays / Dark", "label": "Tone 2", "title": "tweak-yr-color-overlays-dark-tone-2", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-overlays-dark-tone-2: rgba(0, 0, 0, 0.33);
+:root { --tweak-yr-color-overlays-dark-tone-2: @tweak-yr-color-overlays-dark-tone-2; }
 
 // tweak: { "category": "Colors / Overlays / Dark", "label": "Tone 3", "title": "tweak-yr-color-overlays-dark-tone-3", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-overlays-dark-tone-3: rgba(0, 0, 0, 0.66);
+:root { --tweak-yr-color-overlays-dark-tone-3: @tweak-yr-color-overlays-dark-tone-3; }
 
 // tweak: { "category": "Colors / Overlays / Dark", "label": "Tone 4", "title": "tweak-yr-color-overlays-dark-tone-4", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-overlays-dark-tone-4: rgba(0, 0, 0, 0.8);
+:root { --tweak-yr-color-overlays-dark-tone-4: @tweak-yr-color-overlays-dark-tone-4; }
 
 
 /**
@@ -368,15 +396,19 @@
 
 // tweak: { "category": "Colors / Overlays / Light", "label": "Tone 1", "title": "tweak-yr-color-overlays-light-tone-1", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-overlays-light-tone-1: rgba(255, 255, 255, 0.11);
+:root { --tweak-yr-color-overlays-light-tone-1: @tweak-yr-color-overlays-light-tone-1; }
 
 // tweak: { "category": "Colors / Overlays / Light", "label": "Tone 2", "title": "tweak-yr-color-overlays-light-tone-2", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-overlays-light-tone-2: rgba(255, 255, 255, 0.33);
+:root { --tweak-yr-color-overlays-light-tone-2: @tweak-yr-color-overlays-light-tone-2; }
 
 // tweak: { "category": "Colors / Overlays / Light", "label": "Tone 3", "title": "tweak-yr-color-overlays-light-tone-3", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-overlays-light-tone-3: rgba(255, 255, 255, 0.66);
+:root { --tweak-yr-color-overlays-light-tone-3: @tweak-yr-color-overlays-light-tone-3; }
 
 // tweak: { "category": "Colors / Overlays / Light", "label": "Tone 4", "title": "tweak-yr-color-overlays-light-tone-4", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-overlays-light-tone-4: rgba(255, 255, 255, 0.9);
+:root { --tweak-yr-color-overlays-light-tone-4: @tweak-yr-color-overlays-light-tone-4; }
 
 
 /**
@@ -385,12 +417,15 @@
 
 // tweak: { "category": "Colors / Themes / 1", "label": "Tone 1", "title": "tweak-yr-color-theme-1-tone-1", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-theme-1-tone-1: #f96b2b;
+:root { --tweak-yr-color-theme-1-tone-1: @tweak-yr-color-theme-1-tone-1; }
 
 // tweak: { "category": "Colors / Themes / 1", "label": "Tone 2", "title": "tweak-yr-color-theme-1-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav-holds, .yr-nav-hold-a" }
 @tweak-yr-color-theme-1-tone-2: #ff7c3a;
+:root { --tweak-yr-color-theme-1-tone-2: @tweak-yr-color-theme-1-tone-2; }
 
 // tweak: { "category": "Colors / Themes / 1", "label": "Tone 3", "title": "tweak-yr-color-theme-1-tone-3", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-theme-1-tone-3: #ff965e;
+:root { --tweak-yr-color-theme-1-tone-3: @tweak-yr-color-theme-1-tone-3; }
 
 
 /**
@@ -399,12 +434,15 @@
 
 // tweak: { "category": "Colors / Themes / 2", "label": "Tone 1", "title": "tweak-yr-color-theme-2-tone-1", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-theme-2-tone-1: #057c72;
+:root { --tweak-yr-color-theme-2-tone-1: @tweak-yr-color-theme-2-tone-1; }
 
 // tweak: { "category": "Colors / Themes / 2", "label": "Tone 2", "title": "tweak-yr-color-theme-2-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav-hold .yr-use-hold-shape" }
 @tweak-yr-color-theme-2-tone-2: #07938e;
+:root { --tweak-yr-color-theme-2-tone-2: @tweak-yr-color-theme-2-tone-2; }
 
 // tweak: { "category": "Colors / Themes / 2", "label": "Tone 3", "title": "tweak-yr-color-theme-2-tone-3", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-theme-2-tone-3: #0caa9e;
+:root { --tweak-yr-color-theme-2-tone-3: @tweak-yr-color-theme-2-tone-3; }
 
 
 /**
@@ -413,12 +451,15 @@
 
 // tweak: { "category": "Colors / Themes / 3", "label": "Tone 1", "title": "tweak-yr-color-theme-3-tone-1", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-theme-3-tone-1: #630228;
+:root { --tweak-yr-color-theme-3-tone-1: @tweak-yr-color-theme-3-tone-1; }
 
 // tweak: { "category": "Colors / Themes / 3", "label": "Tone 2", "title": "tweak-yr-color-theme-3-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav-hold .yr-use-hold-shape" }
 @tweak-yr-color-theme-3-tone-2: #7f0030;
+:root { --tweak-yr-color-theme-3-tone-2: @tweak-yr-color-theme-3-tone-2; }
 
 // tweak: { "category": "Colors / Themes / 3", "label": "Tone 3", "title": "tweak-yr-color-theme-3-tone-3", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-theme-3-tone-3: #9e0542;
+:root { --tweak-yr-color-theme-3-tone-3: @tweak-yr-color-theme-3-tone-3; }
 
 
 /**
@@ -427,12 +468,15 @@
 
 // tweak: { "category": "Colors / Themes / 4", "label": "Tone 1", "title": "tweak-yr-color-theme-4-tone-1", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-theme-4-tone-1: #db992e;
+:root { --tweak-yr-color-theme-4-tone-1: @tweak-yr-color-theme-4-tone-1; }
 
 // tweak: { "category": "Colors / Themes / 4", "label": "Tone 2", "title": "tweak-yr-color-theme-4-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav-hold .yr-use-hold-shape" }
 @tweak-yr-color-theme-4-tone-2: #e5ac45;
+:root { --tweak-yr-color-theme-4-tone-2: @tweak-yr-color-theme-4-tone-2; }
 
 // tweak: { "category": "Colors / Themes / 4", "label": "Tone 3", "title": "tweak-yr-color-theme-4-tone-3", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-theme-4-tone-3: #f7b955;
+:root { --tweak-yr-color-theme-4-tone-3: @tweak-yr-color-theme-4-tone-3; }
 
 
 /**
@@ -441,12 +485,15 @@
 
 // tweak: { "category": "Colors / Themes / 5", "label": "Tone 1", "title": "tweak-yr-color-theme-5-tone-1", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-theme-5-tone-1: #f28781;
+:root { --tweak-yr-color-theme-5-tone-1: @tweak-yr-color-theme-5-tone-1; }
 
 // tweak: { "category": "Colors / Themes / 5", "label": "Tone 2", "title": "tweak-yr-color-theme-5-tone-2", "type": "color", "disableTransparency": "false", "target": ".yr-nav-hold .yr-use-hold-shape" }
 @tweak-yr-color-theme-5-tone-2: #ffa69d;
+:root { --tweak-yr-color-theme-5-tone-2: @tweak-yr-color-theme-5-tone-2; }
 
 // tweak: { "category": "Colors / Themes / 5", "label": "Tone 3", "title": "tweak-yr-color-theme-5-tone-3", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-theme-5-tone-3: #ffb5b3;
+:root { --tweak-yr-color-theme-5-tone-3: @tweak-yr-color-theme-5-tone-3; }
 
 
 /**
@@ -455,12 +502,15 @@
 
 // tweak: { "category": "Colors / Themes / None", "label": "Tone 1", "title": "tweak-yr-color-theme-none-tone-1", "type": "color", "disableTransparency": "false" }
 @tweak-yr-color-theme-none-tone-1: #05443d;
+:root { --tweak-yr-color-theme-none-tone-1: @tweak-yr-color-theme-none-tone-1; }
 
 // tweak: { "category": "Colors / Themes / None", "label": "Tone 2", "title": "tweak-yr-color-theme-none-tone-2", "type": "color", "disableTransparency": "false", "target": ".homepage" }
 @tweak-yr-color-theme-none-tone-2: #075e56;
+:root { --tweak-yr-color-theme-none-tone-2: @tweak-yr-color-theme-none-tone-2; }
 
 // tweak: { "category": "Colors / Themes / None", "label": "Tone 3", "title": "tweak-yr-color-theme-none-tone-3", "type": "color", "disableTransparency": "false", "target": ".yr-footer" }
 @tweak-yr-color-theme-none-tone-3: #0f7a6d;
+:root { --tweak-yr-color-theme-none-tone-3: @tweak-yr-color-theme-none-tone-3; }
 
 
 /**
@@ -469,6 +519,27 @@
 
 // @disable tweak: { "category": "Colors / Themes", "label": "Number Active", "title": "tweak-yr-color-themes-num", "type": "value", "min": 0, "max": 5, "step": 1 }
 @tweak-yr-color-themes-num: 5;
+:root { --tweak-yr-color-themes-num: @tweak-yr-color-themes-num; }
+
+
+/**
+ * Animate Pages
+ */
+
+// tweak: { "category": "Animate Pages", "label": "Animate Between Pages", "title": "tweak-yr-fade-page", "type": "dropdown", "options": ["Nah", "Simple", "Fancy"], "default": "Simple", target: ".yr-content", "js": "true" }
+
+// @note Style Editor doesn't handle time units in value sliders...
+// @tweak: { "category": "Animate Pages", "label": "Time", "title": "tweak-yr-fade-page-time", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-content", "showOnlyWhenPresent": ".tweak-yr-fade-page-simple, .tweak-yr-fade-page-fancy", "js": "true" }
+@tweak-yr-fade-page-time: 400ms;
+:root { --tweak-yr-fade-page-time: @tweak-yr-fade-page-time; }
+
+// tweak: { "category": "Animate Pages", "label": "Distance", "title": "tweak-yr-fade-page-move", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-content", "showOnlyWhenPresent": ".tweak-yr-fade-page-fancy" }
+@tweak-yr-fade-page-move: 30px;
+:root { --tweak-yr-fade-page-move: @tweak-yr-fade-page-move; }
+
+// tweak: { "category": "Animate Pages", "label": "Scale", "title": "tweak-yr-fade-page-scale", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-content", "showOnlyWhenPresent": ".tweak-yr-fade-page-fancy" }
+@tweak-yr-fade-page-scale: 0.99;
+:root { --tweak-yr-fade-page-scale: @tweak-yr-fade-page-scale; }
 
 
 /**
@@ -509,9 +580,10 @@
 
 // tweak: { "category": "Global Navigation", "label": "Overlay Color", "title": "tweak-yr-nav-main-overlay-color", "type": "color", "disableTransparency": "false", "target": ".yr-nav, .yr-nav-panel, .yr-nav-overlay", "showOnlyWhenPresent": ".tweak-yr-nav-overlay-simple, .tweak-yr-nav-overlay-fancy, .tweak-yr-nav-overlay-fancier" }
 @tweak-yr-nav-main-overlay-color: rgba(255, 255, 255, 0.33);
+:root { --tweak-yr-nav-main-overlay-color: @tweak-yr-nav-main-overlay-color; }
 
 // tweak: { "category": "Global Navigation", "label": "Show Floating Bar", "title": "tweak-yr-nav-main-show-bar", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header" }
-// tweak: { "category": "Global Navigation", "label": "Hide Floating Bar on Landing Page", "title": "tweak-yr-nav-main-hide-bar-home", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header", "showOnlyWhenPresent": ".tweak-yr-nav-main-show-bar" }
+// tweak: { "category": "Global Navigation", "label": "Hide Floating Bar on Home Page", "title": "tweak-yr-nav-main-hide-bar-home", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header", "showOnlyWhenPresent": ".tweak-yr-nav-main-show-bar" }
 
 
 /**
@@ -520,12 +592,15 @@
 
 // tweak: { "category": "Global Navigation / Buttons", "label": "Button Offset", "title": "tweak-yr-nav-button-offset", "type": "value", "min": 0, "max": 100, "step": 1, target: ".yr-nav-button, .yr-nav-toggler" }
 @tweak-yr-nav-button-offset: 2.7rem;
+:root { --tweak-yr-nav-button-offset: @tweak-yr-nav-button-offset; }
 
 // tweak: { "category": "Global Navigation / Buttons", "label": "Button Size", "title": "tweak-yr-nav-button-size", "type": "value", "min": 10, "max": 100, "step": 1, target: ".yr-nav-toggler" }
 @tweak-yr-nav-button-size: 22px;
+:root { --tweak-yr-nav-button-size: @tweak-yr-nav-button-size; }
 
 // tweak: { "category": "Global Navigation / Buttons", "label": "Home Button Size", "title": "tweak-yr-nav-home-size", "type": "value", "min": 10, "max": 100, "step": 1, target: ".yr-nav-home-a" }
 @tweak-yr-nav-home-size: 38px;
+:root { --tweak-yr-nav-home-size: @tweak-yr-nav-home-size; }
 
 
 /**
@@ -534,6 +609,7 @@
 
 // tweak: { "category": "Global Navigation / Panel", "label": "Maximum Size", "title": "tweak-yr-nav-main-size-max", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-panel" }
 @tweak-yr-nav-main-size-max: 32em;
+:root { --tweak-yr-nav-main-size-max: @tweak-yr-nav-main-size-max; }
 
 // tweak: { "category": "Global Navigation / Panel", "label": "Show Site Title", "title": "tweak-yr-nav-main-site-title-show", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header" }
 // tweak: { "category": "Global Navigation / Panel", "label": "Show Site Tagline", "title": "tweak-yr-nav-main-site-tagline-show", "type": "checkbox", "active": true, "target": ".yr-nav .yr-nav-header" }
@@ -582,13 +658,16 @@
 
 // tweak: { "category": "Navigation Page", "label": "Minimum Size", "title": "tweak-yr-nav-holds-size-min", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
 @tweak-yr-nav-holds-size-min: 9em;
+:root { --tweak-yr-nav-holds-size-min: @tweak-yr-nav-holds-size-min; }
 
 // tweak: { "category": "Navigation Page", "label": "Maximum Size", "title": "tweak-yr-nav-holds-size-max", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
 @tweak-yr-nav-holds-size-max: 18em;
+:root { --tweak-yr-nav-holds-size-max: @tweak-yr-nav-holds-size-max; }
 
 // @note Style Editor doesn't handle viewport units in value sliders...
 // tweak: { "category": "Navigation Page", "label": "Padding", "title": "tweak-yr-nav-holds-pad", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
 @tweak-yr-nav-holds-pad: 8vmin;
+:root { --tweak-yr-nav-holds-pad: @tweak-yr-nav-holds-pad; }
 
 // tweak: { "category": "Navigation Page", "label": "Hide Alternating Block Colours", "title": "tweak-yr-sqs-nav-holds-block-alt-hide", "type": "checkbox", "active": true, "target": ".yr-nav-holds-main", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid.tweak-yr-sqs-block-alt-show" }
 
@@ -601,9 +680,15 @@
 
 // tweak: { "category": "Navigation Page / Ring", "label": "Ring Layout Above Size", "title": "tweak-yr-size-hold-ring", "type": "value", "min": 0, "max": 2000, "step": 1, "target": ".yr-nav-holds", "showOnlyWhenPresent": ".tweak-yr-nav-holds-ring-show" }
 @tweak-yr-size-hold-ring: 700px;
+:root { --tweak-yr-size-hold-ring: @tweak-yr-size-hold-ring; }
+
+// tweak: { "category": "Navigation Page / Ring", "label": "Ring Layout Radius", "title": "tweak-yr-size-hold-ring-rad", "type": "value", "min": 0, "max": 2000, "step": 1, "target": ".yr-nav-holds", "showOnlyWhenPresent": ".tweak-yr-nav-holds-ring-show" }
+@tweak-yr-size-hold-ring-rad: 50vmin;
+:root { --tweak-yr-size-hold-ring-rad: @tweak-yr-size-hold-ring-rad; }
 
 // tweak: { "category": "Navigation Page / Ring", "label": "Number", "title": "tweak-yr-nav-holds-ring-num", "type": "value", "min": 0, "max": 10, "step": 1, "target": ".yr-nav-holds", "showOnlyWhenPresent": ".tweak-yr-nav-holds-ring-show" }
 @tweak-yr-nav-holds-ring-num: 5;
+:root { --tweak-yr-nav-holds-ring-num: @tweak-yr-nav-holds-ring-num; }
 
 
 /**
@@ -620,6 +705,7 @@
  */
 
 // tweak: { "category": "Navigation Page / Details", "label": "Enable Details Mode", "title": "tweak-yr-nav-holds-details-on", "type": "checkbox", "active": true, "target": ".yr-nav-holds" }
+// tweak: { "category": "Navigation Page / Details", "label": "Fit Within Ring Layout", "title": "tweak-yr-nav-holds-details-fit-ring", "type": "checkbox", "active": false, "target": ".yr-nav-holds", showOnlyWhenPresent: ".tweak-yr-nav-holds-details-on.tweak-yr-nav-holds-ring-show" }
 
 
 /**
@@ -651,9 +737,9 @@
 
 // tweak: { "category": "Footer / Business Info", "label": "Hide Business Info", "title": "tweak-yr-footer-business-hide", "type": "checkbox", "active": false, "target": ".yr-footer", "showOnlyWhenPresent": "body:not(.tweak-yr-footer-hide)" }
 // tweak: { "category": "Footer / Business Info", "label": "Hide Business Location", "title": "tweak-yr-footer-business-location-hide", "type": "checkbox", "active": false, "target": ".yr-footer", "showOnlyWhenPresent": "body:not(.tweak-yr-footer-business-hide):not(.tweak-yr-business-location-hide):not(.tweak-yr-footer-hide)" }
-// tweak: { "category": "Footer / Business Info", "label": "Hide Business Map", "title": "tweak-yr-footer-business-location-map-hide", "type": "checkbox", "active": false, "target": ".yr-footer", "showOnlyWhenPresent": "body:not(.tweak-yr-footer-business-hide):not(.tweak-yr-footer-business-location-hide):not(.tweak-yr-business-location-hide):not(.tweak-yr-footer-hide)" }
+// tweak: { "category": "Footer / Business Info", "label": "Hide Business Map", "title": "tweak-yr-footer-business-location-map-hide", "type": "checkbox", "active": true, "target": ".yr-footer", "showOnlyWhenPresent": "body:not(.tweak-yr-footer-business-hide):not(.tweak-yr-footer-business-location-hide):not(.tweak-yr-business-location-hide):not(.tweak-yr-footer-hide)" }
 // tweak: { "category": "Footer / Business Info", "label": "Hide Business Contact", "title": "tweak-yr-footer-business-contact-hide", "type": "checkbox", "active": false, "target": ".yr-footer", "showOnlyWhenPresent": "body:not(.tweak-yr-footer-business-hide):not(.tweak-yr-business-contact-hide):not(.tweak-yr-footer-hide)" }
-// tweak: { "category": "Footer / Business Info", "label": "Hide Business Hours", "title": "tweak-yr-footer-business-hours-hide", "type": "checkbox", "active": false, "target": ".yr-footer", "showOnlyWhenPresent": "body:not(.tweak-yr-footer-business-hide):not(.tweak-yr-business-hours-hide):not(.tweak-yr-footer-hide)" }
+// tweak: { "category": "Footer / Business Info", "label": "Hide Business Hours", "title": "tweak-yr-footer-business-hours-hide", "type": "checkbox", "active": true, "target": ".yr-footer", "showOnlyWhenPresent": "body:not(.tweak-yr-footer-business-hide):not(.tweak-yr-business-hours-hide):not(.tweak-yr-footer-hide)" }
 
 
 /**
@@ -667,15 +753,19 @@
 
 // tweak: { "category": "Block Styles / Stripes", "label": "Color 1", "title": "tweak-yr-block-style-base-stripes-color-1", "type": "color", "disableTransparency": "false", "target": ".yr-main .sqs-block" }
 @tweak-yr-block-style-base-stripes-color-1: #f9efe0;
+:root { --tweak-yr-block-style-base-stripes-color-1: @tweak-yr-block-style-base-stripes-color-1; }
 
 // tweak: { "category": "Block Styles / Stripes", "label": "Color 2", "title": "tweak-yr-block-style-base-stripes-color-2", "type": "color", "disableTransparency": "false", "target": ".yr-main .sqs-block" }
 @tweak-yr-block-style-base-stripes-color-2: rgba(0, 0, 0, 0);
+:root { --tweak-yr-block-style-base-stripes-color-2: @tweak-yr-block-style-base-stripes-color-2; }
 
 // tweak: { "category": "Block Styles / Stripes", "label": "Space", "title": "tweak-yr-block-style-base-stripes-space", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main .sqs-block" }
 @tweak-yr-block-style-base-stripes-space: 1em;
+:root { --tweak-yr-block-style-base-stripes-space: @tweak-yr-block-style-base-stripes-space; }
 
 // tweak: { "category": "Block Styles / Stripes", "label": "Width", "title": "tweak-yr-block-style-base-stripes-width", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-main .sqs-block" }
 @tweak-yr-block-style-base-stripes-width: 6px;
+:root { --tweak-yr-block-style-base-stripes-width: @tweak-yr-block-style-base-stripes-width; }
 
 // tweak: { "category": "Block Styles / Stripes", "label": "Sticky", "title": "tweak-yr-block-style-base-stripes-sticky", "type": "checkbox", "active": true, target: ".yr-main .sqs-block" }
 
@@ -705,7 +795,7 @@
  * Content / Block Styles / Markdown
  */
 
-// tweak: { "category": "Content / Block Styles / Markdown", "label": "Base", "title": "tweak-yr-sqs-block-markdown-style-base", "type": "dropdown", "options": ["Normal", "Dark", "Light", "Stripes"], "default": "Dark", target: ".sqs-layout .sqs-block-markdown" }
+// tweak: { "category": "Content / Block Styles / Markdown", "label": "Base", "title": "tweak-yr-sqs-block-markdown-style-base", "type": "dropdown", "options": ["Normal", "Dark", "Light", "Stripes"], "default": "Normal", target: ".sqs-layout .sqs-block-markdown" }
 // tweak: { "category": "Content / Block Styles / Markdown", "label": "Color", "title": "tweak-yr-sqs-block-markdown-style-color", "type": "dropdown", "options": ["Normal", "Theme"], "default": "Normal", target: ".sqs-layout .sqs-block-markdown" }
 
 
@@ -864,6 +954,7 @@
 // tweak: { "category": "Content / Grid", "label": "Show Alternating Block", "title": "tweak-yr-sqs-block-alt-show", "type": "checkbox", "active": true, "target": ".yr-main .sqs-layout", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid" }
 // tweak: { "category": "Content / Grid", "label": "Alternating Block Color", "title": "tweak-yr-sqs-block-alt-color", "type": "color", "disableTransparency": "false", "target": ".yr-main .sqs-layout", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid.tweak-yr-sqs-block-alt-show" }
 @tweak-yr-sqs-block-alt-color: rgba(0, 0, 0, 0.11);
+:root { --tweak-yr-sqs-block-alt-color: @tweak-yr-sqs-block-alt-color; }
 
 
 /**

@@ -25,7 +25,8 @@
     }
 
     @mq-ring-up: ~'only screen and @{yr-mq-hold-ring-up}';
-    @holds-radius: 50vmin;
+    @content-fit-ring: ~'.tweak-yr-nav-holds-details-on.tweak-yr-nav-holds-ring-show.tweak-yr-nav-holds-details-fit-ring';
+    @holds-radius: @tweak-yr-size-hold-ring-rad;
     @holds-radius-inner: @holds-radius * 0.6;
 
     /**
@@ -63,6 +64,8 @@
      * Using the nav "exit/home" button to exit details mode.
      */
 
+    @nav-bar-exit: ~'.homepage.tweak-yr-nav-main-show-bar.tweak-yr-nav-main-hide-bar-home';
+
     .yr-svg-shape {
         .yr-nav-svg-shape();
     }
@@ -70,8 +73,8 @@
     .yr-nav-holds-mode-exit {
         display: none;
 
-        .tweak-yr-nav-main-hide-bar-home.homepage & {
-            // Can rely on just the exit button if there's no nav bar.
+        @{nav-bar-exit} & {
+            // Can use the exit button if there's no nav bar.
             display: block;
             z-index: @yr-z-nav-holds-mode-exit;
             .yr-nav-fixed();
@@ -184,8 +187,10 @@
             z-index 0ms linear 500ms;
         .transition(@transition);
 
-        @media @mq-ring-up {
-            .transition(opacity 500ms ease-out);
+        .yr-on-(@content-fit-ring); .-do() {
+            @media @mq-ring-up {
+                .transition(opacity 500ms ease-out);
+            }
         }
     }
 
@@ -221,23 +226,27 @@
         text-align: center;
         /* @todo Cascade fade `.yr-site-title, .yr-site-tagline, .yr-site-description, yr-nav-holds-titles-block` */
 
-        @media @mq-ring-up {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            .transform(translate(-50%, -50%));
-            z-index: @yr-z-nav-holds-content;
-            max-width: @holds-radius-inner;
-            max-height: @holds-radius-inner;
-            overflow: auto;
+        .yr-on-(~'.tweak-yr-nav-holds-ring-show'); .-do() {
+            @media @mq-ring-up {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                .transform(translate(-50%, -50%));
+                z-index: @yr-z-nav-holds-content;
+                max-width: @holds-radius-inner;
+                max-height: @holds-radius-inner;
+                overflow: auto;
+            }
         }
     }
 
     .yr-nav-holds-header {
-        padding: @tweak-yr-space-content;
+        padding: @tweak-yr-nav-button-offset * 2;
 
-        @media @mq-ring-up {
-            padding: 0;
+        .yr-on-(@content-fit-ring); .-do() {
+            @media @mq-ring-up {
+                padding: 0;
+            }
         }
     }
 
@@ -259,16 +268,18 @@
         background-color: @tweak-yr-color-overlays-light-tone-4;
         border-radius: 2px;
 
-        @media @mq-ring-up {
-            position: relative;
-            width: 100%;
-            left: auto;
-            right: auto;
-            top: auto;
-            .transform(none);
-            max-height: none;
-            z-index: auto;
-            background-color: transparent;
+        .yr-on-(@content-fit-ring); .-do() {
+            @media @mq-ring-up {
+                position: relative;
+                width: 100%;
+                left: auto;
+                right: auto;
+                top: auto;
+                .transform(none);
+                max-height: none;
+                z-index: auto;
+                background-color: transparent;
+            }
         }
 
         // Rows and blocks at the top level are matched to hold pairs - grid tiers are:
@@ -319,12 +330,14 @@
         @transition: transform @switch-time-on ease-in;
         .transition(@transition);
 
-        @media @mq-ring-up {
-            position: relative;
-            bottom: auto;
-            color: inherit;
-            background-color: transparent;
-            .switcher();
+        .yr-on-(@content-fit-ring); .-do() {
+            @media @mq-ring-up {
+                position: relative;
+                bottom: auto;
+                color: inherit;
+                background-color: transparent;
+                .switcher();
+            }
         }
     }
 
@@ -336,8 +349,10 @@
             visibility 0ms linear @switch-time-off;
         .transition(@transition);
 
-        @media @mq-ring-up {
-            .switcher-off-flow();
+        .yr-on-(@content-fit-ring); .-do() {
+            @media @mq-ring-up {
+                .switcher-off-flow();
+            }
         }
     }
 
@@ -361,8 +376,10 @@
                 .yr-nav-holds-info-block {
                     .switcher-off();
 
-                    @media @mq-ring-up {
-                        .switcher-off-flow();
+                    .yr-on-(@content-fit-ring); .-do() {
+                        @media @mq-ring-up {
+                            .switcher-off-flow();
+                        }
                     }
                 }
             }
@@ -374,8 +391,10 @@
             ~ .yr-nav-holds-info-form .yr-nav-holds-info-reset {
                 pointer-events: all;
 
-                @media @mq-ring-up {
-                    opacity: 0.5;
+                .yr-on-(@content-fit-ring); .-do() {
+                    @media @mq-ring-up {
+                        opacity: 0.5;
+                    }
                 }
             }
 
@@ -405,8 +424,10 @@
                 z-index: @yr-z-nav-holds-info-modal-reset;
                 .transition(opacity 500ms ease-out);
 
-                @media @mq-ring-up {
-                    z-index: @yr-z-nav-holds-info-reset;
+                .yr-on-(@content-fit-ring); .-do() {
+                    @media @mq-ring-up {
+                        z-index: @yr-z-nav-holds-info-reset;
+                    }
                 }
             }
         }
@@ -460,8 +481,10 @@
                 }
 
                 .yr-nav-holds-header {
-                    @media @mq-ring-up {
-                        .switcher-off-flow();
+                    .yr-on-(~'.tweak-yr-nav-holds-ring-show'); .-do() {
+                        @media @mq-ring-up {
+                            .switcher-off-flow();
+                        }
                     }
                 }
             }
@@ -469,11 +492,6 @@
             ~ .yr-nav-holds-mode-hint {
                 .yr-nav-holds-mode-label {
                     border-style: dotted;
-                }
-
-                // Can rely on just the exit button if there's no nav bar.
-                .tweak-yr-nav-main-hide-bar-home.homepage & {
-                    .switcher-off();
                 }
             }
         }
@@ -546,7 +564,7 @@
         margin: 0 auto;
         z-index: @yr-z-nav-holds;
 
-        @margin: 10%;
+        @margin: 15%;
 
         &:nth-child(even) {
             margin: 0 @margin 0 auto;
@@ -760,5 +778,14 @@
                 stroke-miterlimit: 10px;
             }
         }
+    }
+
+
+    /**
+     * Generic content area.
+     */
+
+    .yr-nav-holds-content-block {
+        order: 1;
     }
 }

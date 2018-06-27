@@ -136,10 +136,10 @@ const waitFade = {
     bar: () => ((Tweak.getValue('tweak-yr-loader-show'))? 500 : 0),
     content() {
         let wait = 0;
-        const flagTweak = Tweak.getValue('tweak-yr-loader-fade-content');
+        const flagTweak = Tweak.getValue('tweak-yr-fade-page');
 
         if(flagTweak && !flagTweak.match(/nah/gi)) {
-            const timeTweak = (Tweak.getValue('tweak-yr-loader-fade-content-time') || '');
+            const timeTweak = (Tweak.getValue('tweak-yr-fade-page-time') || '');
 
             // Style Editor screws up this time units - fallback.
             const units = (timeTweak.match(/[a-zA-Z]*/gi) || '').join('');
@@ -147,7 +147,7 @@ const waitFade = {
                     parseFloat(timeTweak, 10)*timeUnits.map[units]
                 :   400);
             
-            console.log('tweak-yr-loader-fade-content-time', timeTweak, time);
+            console.log('tweak-yr-fade-page-time', timeTweak, time);
 
             wait = ((flagTweak.match(/simple/gi))?
                     time
