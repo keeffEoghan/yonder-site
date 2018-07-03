@@ -215,9 +215,15 @@
         }
     }
 
-    .sqs-block-collectionlink {
+    .sqs-block-collectionlink,
+    .link-block {
         .collectionlink-thumbnail {
             width: 100%;
+            height: auto;
+        }
+
+        .collectionlink-title {
+            text-align: center;
         }
 
         a:not(.content-fill) {
@@ -501,5 +507,10 @@
     .sqs-block-tagcloud .sqs-tagcloud {
         text-align: center;
         max-width: none;
+    }
+
+    [class*="sqs-block-socialaccountlinks"] a {
+        // Override any fancy link stuff
+        border: none !important;
     }
 }
