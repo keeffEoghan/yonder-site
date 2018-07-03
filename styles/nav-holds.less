@@ -25,7 +25,9 @@
     }
 
     @mq-ring-up: ~'only screen and @{yr-mq-hold-ring-up}';
-    @content-fit-ring: ~'.tweak-yr-nav-holds-details-on.tweak-yr-nav-holds-ring-show.tweak-yr-nav-holds-details-fit-ring';
+    @details-ring: ~'.tweak-yr-nav-holds-details-on.tweak-yr-nav-holds-ring-show';
+    @info-fits-ring: ~'@{details-ring}.tweak-yr-nav-holds-info-fits-ring';
+    @hint-fits-ring: ~'@{details-ring}.tweak-yr-nav-holds-hint-fits-ring';
     @holds-radius: @tweak-yr-size-hold-ring-rad;
     @holds-radius-inner: @holds-radius * 0.6;
 
@@ -196,7 +198,7 @@
             z-index 0ms linear 500ms;
         .transition(@transition);
 
-        .yr-on-(@content-fit-ring); .-do() {
+        .yr-on-(~'@{info-fits-ring}, @{hint-fits-ring}'); .-do() {
             @media @mq-ring-up {
                 .transition(opacity 500ms ease-out);
             }
@@ -238,18 +240,13 @@
 
     // On small screens, show the info as a modal over the top.
     .yr-nav-holds-info {
-        // Need to override system styles here, hence deeper selector
         &,
         &@{yr-select-sqs-edit-on} {
+            // Need to override system styles here, hence deeper selector
             position: fixed;
-            z-index: @yr-z-nav-holds-info-modal;
-
-            .yr-on-(@content-fit-ring); .-do() {
-                @media @mq-ring-up {
-                    .fit-content-in-ring();
-                }
-            }
         }
+
+        z-index: @yr-z-nav-holds-info-modal;
     }
 
     /**
@@ -268,8 +265,14 @@
         background-color: @tweak-yr-color-overlays-light-tone-4;
         border-radius: 2px;
 
-        .yr-on-(@content-fit-ring); .-do() {
+        .yr-on-(@info-fits-ring); .-do() {
             @media @mq-ring-up {
+                // Need to override system styles here, hence deeper selector
+                &,
+                &@{yr-select-sqs-edit-on} {
+                    .fit-content-in-ring();
+                }
+
                 background-color: transparent;
             }
         }
@@ -321,8 +324,14 @@
         @transition: transform @switch-time-on ease-in;
         .transition(@transition);
 
-        .yr-on-(@content-fit-ring); .-do() {
+        .yr-on-(@hint-fits-ring); .-do() {
             @media @mq-ring-up {
+                // Need to override system styles here, hence deeper selector
+                &,
+                &@{yr-select-sqs-edit-on} {
+                    .fit-content-in-ring();
+                }
+
                 bottom: auto;
                 color: inherit;
                 background-color: transparent;
@@ -339,7 +348,7 @@
             visibility 0ms linear @switch-time-off;
         .transition(@transition);
 
-        .yr-on-(@content-fit-ring); .-do() {
+        .yr-on-(@hint-fits-ring); .-do() {
             @media @mq-ring-up {
                 .switcher-off-flow();
             }
@@ -366,7 +375,7 @@
                 .yr-nav-holds-info-block {
                     .switcher-off();
 
-                    .yr-on-(@content-fit-ring); .-do() {
+                    .yr-on-(@info-fits-ring); .-do() {
                         @media @mq-ring-up {
                             .switcher-off-flow();
                         }
@@ -381,7 +390,7 @@
             ~ .yr-nav-holds-info-form .yr-nav-holds-info-reset {
                 pointer-events: all;
 
-                .yr-on-(@content-fit-ring); .-do() {
+                .yr-on-(@info-fits-ring); .-do() {
                     @media @mq-ring-up {
                         opacity: 0.5;
                     }
@@ -414,7 +423,7 @@
                 z-index: @yr-z-nav-holds-info-modal-reset;
                 .transition(opacity 500ms ease-out);
 
-                .yr-on-(@content-fit-ring); .-do() {
+                .yr-on-(@info-fits-ring); .-do() {
                     @media @mq-ring-up {
                         z-index: @yr-z-nav-holds-info-reset;
                     }
