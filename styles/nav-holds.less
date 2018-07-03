@@ -230,6 +230,7 @@
 
         .yr-on-(~'.tweak-yr-nav-holds-ring-show'); .-do() {
             @media @mq-ring-up {
+                padding: 0;
                 .fit-content-in-ring();
             }
         }
@@ -707,17 +708,21 @@
     .yr-nav-hold-view {
         position: absolute;
         pointer-events: none;
-        top: -10%;
-        right: -10%;
-        bottom: -10%;
-        left: -10%;
-        width: 120%;
-        height: 120%;
+
+        @offset: 10%;
+        top: -@offset;
+        right: -@offset;
+        bottom: -@offset;
+        left: -@offset;
+        width: 100% + @offset;
+        height: 100% + @offset;
+
         fill: currentColor;
         stroke: currentColor;
         fill-opacity: 0;
         stroke-opacity: 0;
         stroke-width: 0;
+
         @transition: fill-opacity 600ms ease-in-out,
             stroke-opacity 800ms ease-out 100ms,
             stroke-width 400ms ease-out;
