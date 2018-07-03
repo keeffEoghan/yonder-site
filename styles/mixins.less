@@ -198,8 +198,8 @@
 
 .yr-loader-fade-base() {
     will-change: transform, opacity;
-    @transition: transform @yr-loader-fade-time @yr-ease-far-out,
-        opacity @yr-loader-fade-time @yr-ease-far-out;
+    @transition: transform @yr-fade-page-time @yr-ease-far-out,
+        opacity @yr-fade-page-time @yr-ease-far-out;
     .transition(@transition);
 }
 
@@ -215,8 +215,8 @@
 
     [data-yr-ajax-loading="navigate"] &,
     [data-yr-ajax-loading="unload"] & {
-        @transition: transform @yr-loader-fade-time @yr-ease-far-in,
-            opacity @yr-loader-fade-time @yr-ease-far-in;
+        @transition: transform @yr-fade-page-time @yr-ease-far-in,
+            opacity @yr-fade-page-time @yr-ease-far-in;
         .transition(@transition);
     }
 
@@ -244,7 +244,7 @@
 .yr-loader-fade-stagger-rand(@seed: 123) {
     // Returns `@rand`.
     .yr-rand(@seed);
-    @stagger: @rand * @yr-loader-fade-time;
+    @stagger: @rand * @yr-fade-page-time;
 
     [data-yr-ajax-loading] & {
         // Fade out quickly.
@@ -253,14 +253,14 @@
 
     [data-yr-ajax-loading="load"] & {
         // How long the parent has to do its animation in before the children do.
-        .transition-delay(@yr-loader-fade-time + @stagger);
+        .transition-delay(@yr-fade-page-time + @stagger);
     }
 }
 
 .yr-loader-fade-stagger-outer() {
     [data-yr-ajax-loading] & {
         // How long the children have to do their animations out before the parent does.
-        .transition-delay(@yr-loader-fade-time * 2);
+        .transition-delay(@yr-fade-page-time * 2);
     }
 
     [data-yr-ajax-loading="load"] & {
