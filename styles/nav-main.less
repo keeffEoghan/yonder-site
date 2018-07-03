@@ -3,9 +3,6 @@
  * @see `mixins.less` also.
  */
 
-@nav-overlay-time: 600ms;
-
-
 /**
  * Common styles.
  */
@@ -172,8 +169,8 @@
         pointer-events: none;
         background-color: @tweak-yr-nav-main-overlay-color;
         will-change: opacity, bottom;
-        @transition: opacity @nav-overlay-time ease-out,
-            bottom 0ms linear @nav-overlay-time;
+        @transition: opacity @yr-fade-page-time ease-out,
+            bottom 0ms linear @yr-fade-page-time;
         .transition(@transition);
 
         .yr-nav-toggler:checked + & {
@@ -181,7 +178,7 @@
             bottom: 0;
             pointer-events: all;
 
-            @transition: opacity @nav-overlay-time ease-out,
+            @transition: opacity @yr-fade-page-time ease-out,
                 bottom 0ms linear 0ms;
             .transition(@transition);
         }
@@ -199,7 +196,9 @@
      */
 
     @nav-gap: 2.7rem;
-    @fades: 4;
+    @num-fades: 4;
+    @time-pane: @yr-fade-page-time * 0.5;
+    @time-fades: @yr-fade-page-time * 0.5 / @num-fades;
 
     .yr-nav-panel {
         .display(flex);
@@ -218,7 +217,7 @@
         text-align: center;
         overflow-y: auto;
         will-change: transform;
-        .transition(transform 300ms @yr-ease-slide (@fades * 70ms));
+        .transition(transform @time-pane @yr-ease-slide (@num-fades * @time-fades));
         .yr-align-nav-left(100%);
 
         .yr-nav-toggler:checked + & {
@@ -232,9 +231,9 @@
             .yr-nav-fade {
                 opacity: 1;
 
-                .yr-for-(@fades); .-each(@i) {
+                .yr-for-(@num-fades); .-each(@i) {
                     &:nth-child(@i) {
-                        .transition-delay(300ms + ((@i - 1) * 100ms));
+                        .transition-delay(@time-pane + ((@i - 1) * @time-fades));
                     }
                 }
             }
@@ -388,9 +387,9 @@
         will-change: opacity;
         .transition(opacity 200ms @yr-ease-fade);
 
-        .yr-for-(@fades); .-each(@i) {
+        .yr-for-(@num-fades); .-each(@i) {
             &:nth-child(@i) {
-                .transition-delay((@i - 1) * 100ms);
+                .transition-delay((@i - 1) * @time-fades);
             }
         }
     }
@@ -417,13 +416,15 @@
     padding: 0;
     border: none;
 
+    @time-content: @yr-fade-page-time * 0.5;
+
     ~ .yr-content {
         .tweak-yr-nav-overlay-fancy &,
         .tweak-yr-nav-overlay-fancier & {
             will-change: opacity, transform, filter;
-            @transition: opacity @nav-overlay-time ease-in,
-                transform @nav-overlay-time ease-in,
-                filter @nav-overlay-time ease-in;
+            @transition: opacity @time-content ease-in,
+                transform @time-content ease-in @time-content,
+                filter @time-content ease-in;
             .transition(@transition);
         }
     }
@@ -434,20 +435,21 @@
             .tweak-yr-nav-overlay-fancier & {
                 opacity: 0.5;
 
+                // Issues with `transform-origin` on long pages
+                // @scale: @tweak-yr-fade-page-scale;
+                @scale: 1;
                 @move: @tweak-yr-fade-page-move * 0.5;
 
-                @transform: translateX(-@move)
-                    scale(@tweak-yr-fade-page-scale);
+                @transform: translateX(-@move) scale(@scale);
                 .transform(@transform);
 
-                @transition: opacity @nav-overlay-time ease-out,
-                    transform @nav-overlay-time ease-out,
-                    filter @nav-overlay-time ease-out;
+                @transition: opacity @time-content ease-out,
+                    transform @time-content ease-out,
+                    filter @time-content ease-out;
                 .transition(@transition);
 
                 .tweak-yr-nav-align-switch & {
-                    @transform: translateX(@move)
-                        scale(@tweak-yr-fade-page-scale);
+                    @transform: translateX(@move) scale(@scale);
                     .transform(@transform);
                 }
             }

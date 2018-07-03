@@ -145,7 +145,8 @@ const waitFade = {
             const units = (timeTweak.match(/[a-zA-Z]*/gi) || '').join('');
             const time = ((units in timeUnitsMap)?
                     parseFloat(timeTweak, 10)*timeUnits.map[units]
-                :   400);
+                    // Ensure this value is the same as `@yr-fade-page-time` in `styles/vars.less`
+                :   600);
             
             console.log('tweak-yr-fade-page-time', timeTweak, time);
 

@@ -214,7 +214,8 @@
 // Style Editor has trouble with time units, so this is a way to provide fallbacks.
 // (Less 1.3.0 bullshit again, stupid variable scoping and missing functions pushed me this way.)
 
-@yr-fade-page-time: 400ms;
+// Ensure this value is the same in `scripts/controllers/site.js`
+@yr-fade-page-time: 600ms;
 
 .yr-fade-page-time(@unit) when (@unit = s), (@unit = ms) {
     @yr-fade-page-time: @tweak-yr-fade-page-time;
