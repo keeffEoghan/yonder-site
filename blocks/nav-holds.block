@@ -36,43 +36,40 @@
     </div>
 
     <section class="yr-nav-holds-main">
-        <section class="yr-nav-holds-content">
-            <header class="yr-nav-holds-header">
-                {@|apply titles.block}
-                <squarespace:block-field id="nav-holds-titles-block"
-                    class="yr-nav-holds-titles-block yr-a" columns="12"/>
-            </header>
+        <header class="yr-nav-holds-header">
+            {@|apply titles.block}
+            <squarespace:block-field id="nav-holds-titles-block"
+                class="yr-nav-holds-titles-block yr-a" columns="12"/>
+        </header>
 
-            <article class="yr-nav-holds-info">
-                <squarespace:block-field id="nav-holds-info-hint-block"
-                    class="yr-nav-holds-info-hint-block" columns="12"/>
+        <squarespace:block-field id="nav-holds-info-hint-block"
+            class="yr-nav-holds-info-hint-block yr-nav-holds-info" columns="12"/>
 
-                {##BEGIN}
-                    For hold pairs details.
+        {##BEGIN}
+            For hold pairs details.
 
-                    Squarespace is not the ideal environment for setting this up.
-                    JSON-T's loop logic is too basic to loop the number of `block-field`
-                    items needed - also can't inject `open-block`s with JavaScript at runtime,
-                    since the content injection for these blocks happens before runtime...
-                    So, need to use a method where the blocks are set up ahead-of-time, and
-                    the CMS user edits them for the right amount of content (with hints from
-                    JS/CSS as to which content matches which state).
+            Squarespace is not the ideal environment for setting this up.
+            JSON-T's loop logic is too basic to loop the number of `block-field`
+            items needed - also can't inject `open-block`s with JavaScript at runtime,
+            since the content injection for these blocks happens before runtime...
+            So, need to use a method where the blocks are set up ahead-of-time, and
+            the CMS user edits them for the right amount of content (with hints from
+            JS/CSS as to which content matches which state).
 
-                    Puts the burden of correctly creating the content on that user, but
-                    hopefully should be straighforward enough.
-                    Essentially, this `block-field` is an open box within which the content
-                    needs to be defined in the right number, with some hints to help clarify.
+            Puts the burden of correctly creating the content on that user, but
+            hopefully should be straighforward enough.
+            Essentially, this `block-field` is an open box within which the content
+            needs to be defined in the right number, with some hints to help clarify.
 
-                    The relevant `block-field` content blocks for any selected state will
-                    be shown on click, to help clarify where the content needs to be filled in.
-                    For paired holds info, the `block-field` should have enough content
-                    blocks to correspond to all holds (for pairs: `nC2`; `n = 5 => 5C2 = 10`).
+            The relevant `block-field` content blocks for any selected state will
+            be shown on click, to help clarify where the content needs to be filled in.
+            For paired holds info, the `block-field` should have enough content
+            blocks to correspond to all holds (for pairs: `nC2`; `n = 5 => 5C2 = 10`).
 
-                    @see The controller script for example combinations.
-                {END##}
-                <squarespace:block-field id="nav-holds-info-block" class="yr-nav-holds-info-block" columns="12"></squarespace:block-field>
-            </article>
-        </section>
+            @see The controller script for example combinations.
+        {END##}
+        <squarespace:block-field id="nav-holds-info-block"
+            class="yr-nav-holds-info-block yr-nav-holds-info" columns="12"/>
 
         {##BEGIN} Default SVG hold shapes definitions. {END##}
         <svg class="yr-nav-holds-defs">

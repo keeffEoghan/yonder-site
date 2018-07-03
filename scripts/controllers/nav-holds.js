@@ -26,7 +26,7 @@ function navHolds(element) {
 
     const info = {
         $form: $element.find('.yr-nav-holds-info-form'),
-        $container: $element.find('.yr-nav-holds-content'),
+        $container: $element.find('.yr-nav-holds-info-block'),
         $block: $element.find('.yr-nav-holds-info-block'),
 
         $holds: null,

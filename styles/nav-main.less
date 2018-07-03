@@ -421,7 +421,8 @@
     ~ .yr-content {
         .tweak-yr-nav-overlay-fancy &,
         .tweak-yr-nav-overlay-fancier & {
-            will-change: opacity, transform, filter;
+            // Messes with stacking contents too widely
+            // will-change: opacity, transform, filter;
             @transition: opacity @time-content ease-in,
                 transform @time-content ease-in @time-content,
                 filter @time-content ease-in;
