@@ -236,13 +236,18 @@
         }
     }
 
+    // On small screens, show the info as a modal over the top.
     .yr-nav-holds-info {
-        position: relative;
-        z-index: @yr-z-nav-holds-info-modal;
+        // Need to override system styles here, hence deeper selector
+        &,
+        &@{yr-select-sqs-edit-on} {
+            position: fixed;
+            z-index: @yr-z-nav-holds-info-modal;
 
-        .yr-on-(@content-fit-ring); .-do() {
-            @media @mq-ring-up {
-                .fit-content-in-ring();
+            .yr-on-(@content-fit-ring); .-do() {
+                @media @mq-ring-up {
+                    .fit-content-in-ring();
+                }
             }
         }
     }
@@ -254,8 +259,6 @@
      * Very dependent on layout engine and DOM structure.
      */
     .yr-nav-holds-info-block {
-        // On small screens, show the info as a modal over the top.
-        position: fixed;
         left: 1em;
         right: 1em;
         top: 50%;
@@ -311,7 +314,6 @@
     }
 
     .yr-nav-holds-info-hint-block {
-        position: fixed;
         bottom: 0;
         color: @tweak-yr-color-light-1-tone-3;
         background-color: @tweak-yr-color-overlays-dark-tone-4;
