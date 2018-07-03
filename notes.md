@@ -77,6 +77,8 @@
 # Done
 
 - Content feedback
+    - Comparison view
+        - Use overlay for desktop as well - flag.
     - Feature link
         - Better text position, taller image container (or maintain a nicer aspect ratio)
 - Content
