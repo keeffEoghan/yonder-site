@@ -10,7 +10,6 @@
         - Comparison view
         - Navigation blurb
     - Comparison view
-        - Use overlay for desktop as well.
         - More obvious way to exit the comparison mode (test with users)
     - Simple events schedule
         - Colin calendar embed (need embed endpoint, maybe different view options)

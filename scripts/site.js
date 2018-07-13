@@ -11,6 +11,8 @@ import controller from '@squarespace/controller';
 
 import site from './controllers/site';
 import navHolds from './controllers/nav-holds';
+import sticky from './controllers/sticky';
 
 controller.register('yr-site', site);
 controller.register('yr-nav-holds', navHolds);
+controller.register('yr-sticky', sticky);

@@ -1,0 +1,47 @@
+.yr-sticky {
+    position: relative;
+
+    &,
+    &.yr-sticky-scroll {
+        .display(block);
+        width: 100%;
+        padding: @tweak-yr-space-content;
+
+        &.yr-sticky-spread {
+            .flex-flow(row wrap);
+            .justify-content(space-around);
+            .align-items(center);
+        }
+    }
+
+    &.yr-sticky-spread {
+        .display(flex);
+    }
+
+    // The contents copied to a sticky element fixed to the top of the viewport.
+    &.yr-sticky-scroll {
+        .display(none);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: @yr-z-nav;
+        background: blue;
+    }
+
+    &.yr-sticky-stuck {
+        // Keep the space in the document flow without any jumping around.
+        visibility: hidden;
+
+        // Seamlessly swap in the sticky contents.
+        &.yr-sticky-scroll {
+            .display(block);
+
+            &.yr-sticky-spread {
+                .display(flex);
+            }
+
+            visibility: visible;
+        }
+    }
+}

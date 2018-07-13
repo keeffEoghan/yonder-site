@@ -160,7 +160,7 @@ function navHolds(element) {
      */
 
     const darwin = new Darwin({
-        callback: (mutations) => {
+        callback(mutations) {
             if(mutations.some((mutation) => mutation.type === 'childList')) {
                 info.retoggle();
             }

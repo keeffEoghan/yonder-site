@@ -197,8 +197,8 @@
 
     @nav-gap: 2.7rem;
     @num-fades: 4;
-    @time-pane: @yr-fade-page-time * 0.5;
-    @time-fades: @yr-fade-page-time * 0.5 / @num-fades;
+    @time-pane: @yr-fade-page-time * 0.7;
+    @time-fades: @yr-fade-page-time * 0.3 / @num-fades;
 
     .yr-nav-panel {
         .display(flex);
@@ -424,7 +424,7 @@
             // Messes with stacking contents too widely
             // will-change: opacity, transform, filter;
             @transition: opacity @time-content ease-in,
-                transform @time-content ease-in @time-content,
+                transform @time-content @yr-ease-slide @time-content,
                 filter @time-content ease-in;
             .transition(@transition);
         }
@@ -445,7 +445,7 @@
                 .transform(@transform);
 
                 @transition: opacity @time-content ease-out,
-                    transform @time-content ease-out,
+                    transform @time-content @yr-ease-slide,
                     filter @time-content ease-out;
                 .transition(@transition);
 

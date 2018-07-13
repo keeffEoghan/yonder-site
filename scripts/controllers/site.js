@@ -2,6 +2,7 @@ import $ from 'zepto';
 import { refresh } from '@squarespace/controller';
 import { Lifecycle, Tweak, ImageLoader } from '@squarespace/core';
 import Mercury from '@squarespace/mercury';
+import Darwin from '../libs/custom/darwin';
 
 import { authenticated, debug } from '../constants';
 
@@ -126,6 +127,25 @@ function loadAJAX() {
 const loadImages = () =>
     $element.find('img[data-src]').not('.loaded, [src]:not([src=""])')
         .each((i, image) => ImageLoader.load(image, { load: true }));
+
+
+/**
+ * Refresh controllers when CMS edits have occurred.
+ * (Otherwise we'll be referencing detached DOM.)
+ */
+
+const darwin = new Darwin({
+    callback(mutations) {
+        if(mutations.some((mutation) => mutation.type === 'childList')) {
+            refresh();
+        }
+    },
+
+    targets: ['.sqs-layout']
+});
+
+darwin.init();
+
 
 const timeUnitsMap = {
     'ms': 1,

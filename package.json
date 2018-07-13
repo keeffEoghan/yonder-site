@@ -34,6 +34,7 @@
     "svg.js": "^2.6.4",
     "svg.pathmorphing2.js": "^0.1.0",
     "svgpath": "^2.2.1",
+    "uid": "0.0.2",
     "zepto": "^1.2.0"
   },
   "devDependencies": {

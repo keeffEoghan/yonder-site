@@ -186,14 +186,17 @@
  * Eases
  */
 
-@yr-ease-slide: ease-in-out;
-
 @yr-ease-fade: ease-in-out;
 @yr-ease-fade-in: ease-in;
 @yr-ease-fade-out: ease-out;
 
-@yr-ease-far-in: cubic-bezier(1, 0, 0.75, 1);
+@yr-ease-far: cubic-bezier(0.6, 0, 0.4, 1);
+@yr-ease-far-in: cubic-bezier(1, 0, 0.6, 1);
 @yr-ease-far-out: cubic-bezier(0.25, 0, 0, 1);
+
+@yr-ease-slide: @yr-ease-far-in;
+@yr-ease-slide-in: @yr-ease-far-in;
+@yr-ease-slide-out: @yr-ease-far-out;
 
 :root {
     --yr-ease-slide: @yr-ease-slide;
