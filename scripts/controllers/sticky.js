@@ -17,9 +17,10 @@ function stickyHeader(element) {
 
     function scroll() {
         const scrollTop = $(document.documentElement).scrollTop();
-        const offset = $('.yr-sticky-scroll.yr-sticky-stuck').reduce((offset, other) =>
+        const offset = $('.yr-sticky-scroll.yr-sticky-stuck')
+            .reduce((offset, other) =>
                 ((other === $scroll[0])? offset : offset+$(other).height()),
-            0);
+                0);
 
         if($element.offset().top-offset < scrollTop) {
             // Account for the height of any marked sticky elements.
