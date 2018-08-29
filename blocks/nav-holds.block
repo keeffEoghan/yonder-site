@@ -117,10 +117,9 @@
         </ul>
     </section>
 
-    <squarespace:block-field id="nav-holds-content-block"
-        class="yr-nav-holds-content-block yr-a" columns="12"/>
-
     <script type="text/javascript">
         ((self.debug) && console.log('nav-holds', {@|json-pretty|html}));
     </script>
 </nav>
+<squarespace:block-field id="nav-holds-content-block"
+    class="yr-nav-holds-content-block yr-a" columns="12"/>

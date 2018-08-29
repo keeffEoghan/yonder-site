@@ -5,7 +5,7 @@ import uid from 'uid';
 function stickyHeader(element) {
     const $element = $(element);
     const $self = $(self);
-    const $container = $('.yr-main');
+    const $container = $('body');
     const $scroll = $element.clone().addClass('yr-sticky-scroll').attr('data-controller', '');
     const $all = $element.add($scroll);
 
@@ -52,7 +52,7 @@ function stickyHeader(element) {
 
     darwin.init();
 
-    $scroll.appendTo($container);
+    $scroll.prependTo($container);
     update();
     $self.on('scroll', scroll);
 

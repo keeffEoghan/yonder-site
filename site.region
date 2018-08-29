@@ -1,4 +1,7 @@
 <!doctype html>
+{.var @n0 externalLink.url|slugify}
+{.var @n1 collection.urlId|slugify}
+
 <html class="yr-site" data-controller="yr-site"
     {.if authenticatedAccount}data-authenticated-account{.end}
     >
@@ -11,8 +14,6 @@
         <squarespace:navigation navigationId="nav-holds" template="nav-colors"/>
         {@|apply colors-theme-on.block}
     </head>
-    {.var @n0 externalLink.url|slugify}
-    {.var @n1 collection.urlId|slugify}
     <body id="{squarespace.page-id}" class="{squarespace.page-classes} yr-color-theme-{@n0}{@n1}">
         <div class="yr-loader"></div>
 

@@ -784,13 +784,17 @@
             }
         }
     }
+}
 
 
-    /**
-     * Generic content area.
-     */
+/**
+    * Generic content area.
+    */
 
-    .yr-nav-holds-content-block {
-        order: 1;
+.yr-nav-holds-content-block {
+    order: 1;
+
+    &@{yr-select-sqs-block-empty} {
+        min-width: 60px;
     }
 }
