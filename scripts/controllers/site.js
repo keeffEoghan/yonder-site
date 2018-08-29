@@ -61,6 +61,8 @@ const updateMatrix = [
     { selector: 'link[rel="canonical"]', updateAttrs: true },
     { selector: 'link[rel="image_src"]', updateAttrs: true },
     { selector: 'link[rel="alternate"]', updateAttrs: true },
+    { selector: '.yr-colors-theme-on', updateHTML: true },
+    { selector: '.yr-colors-theme-nav', updateHTML: true },
     { selector: 'body', updateAttrs: true },
     { selector: '.yr-main', updateAttrs: true, updateHTML: true },
     { selector: '.yr-nav .yr-nav-links', updateAttrs: true, updateHTML: true }
@@ -164,11 +166,11 @@ const waitFade = {
             // Style Editor screws up this time units - fallback.
             const units = (timeTweak.match(/[a-zA-Z]*/gi) || '').join('');
             const time = ((units in timeUnitsMap)?
-                    parseFloat(timeTweak, 10)*timeUnits.map[units]
+                    parseFloat(timeTweak, 10)*timeUnitsMap[units]
                     // Ensure this value is the same as `@yr-fade-page-time` in `styles/vars.less`
                 :   600);
             
-            console.log('tweak-yr-fade-page-time', timeTweak, time);
+            // console.log('tweak-yr-fade-page-time', timeTweak, time);
 
             wait = ((flagTweak.match(/simple/gi))?
                     time

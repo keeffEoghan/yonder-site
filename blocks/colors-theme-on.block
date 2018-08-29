@@ -3,6 +3,7 @@
     :root {
         {.var @n0 externalLink.url|slugify}
         {.var @n1 collection.urlId|slugify}
+
         --yr-color-theme-on-tone-1: var(--tweak-yr-color-theme-{@n0}{@n1}-tone-1) !important;
         --yr-color-theme-on-tone-2: var(--tweak-yr-color-theme-{@n0}{@n1}-tone-2) !important;
         --yr-color-theme-on-tone-3: var(--tweak-yr-color-theme-{@n0}{@n1}-tone-3) !important;

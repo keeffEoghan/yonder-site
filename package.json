@@ -29,6 +29,7 @@
     "@squarespace/mercury": "^1.1.5",
     "bezier": "^0.1.0",
     "gl-matrix": "^2.5.1",
+    "lodash": "^4.17.10",
     "pepjs": "^0.4.3",
     "popmotion": "^8.1.22",
     "svg.js": "^2.6.4",

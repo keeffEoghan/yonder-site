@@ -6,10 +6,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1">
 
+        {squarespace-headers}
+
         <squarespace:navigation navigationId="nav-holds" template="nav-colors"/>
         {@|apply colors-theme-on.block}
-
-        {squarespace-headers}
     </head>
     {.var @n0 externalLink.url|slugify}
     {.var @n1 collection.urlId|slugify}

@@ -2,6 +2,8 @@ import $ from 'zepto';
 // @todo Import only the needed functions
 import { vec2 } from 'gl-matrix';
 import bezier from 'bezier';
+import throttle from 'lodash/fp/throttle';
+
 import {
         cubicSuperPath, uncubicSuperPath, splitAtPositions, positions
     } from 'svg.pathmorphing2.js/src/cubicsuperpath';
@@ -178,10 +180,8 @@ function navHolds(element) {
 
 
     // Test
-    
+    return;
     (() => {
-        return;
-
         if(!SVG.supported) { return; }
 
         // Init... needed internally in SVG.js even if we're not drawing in this element.
@@ -255,7 +255,7 @@ function navHolds(element) {
                     shape = shape.replace(shape.reference(href).clone(shape.parent()));
                 }
 
-                // @todo Increase the SVG size as much as needed.
+                // @todo Increase the SVG canvas size as much as needed.
 
                 // Prepare the effect.
                 shape.select('path').each((p, paths) => {
@@ -280,7 +280,8 @@ function navHolds(element) {
                     const slice = length/Math.ceil(length/maxSlice);
 
                     const splitPositions = Array(Math.floor(length/slice)-1).fill(0)
-                        .reduce((_a, _b, i, all) => (all[i] = (i+1)*slice/length, all), null);
+                        .reduce((_a, _b, i, all) =>
+                            (all[i] = (i+1)*slice/length, all), null);
 
                     const pathPositions = positions(fineCSP);
 
@@ -332,8 +333,8 @@ function navHolds(element) {
             morphVia.points.length = 0;
             morphVia.index = -1;
 
-            // Account for being on the middle of a curve when crossing the end of the
-            // array... so far assumes closed shapes.
+            // Account for being on the middle of a curve when crossing the end of
+            // the array... so far assumes closed shapes.
             for(let i = 0; i < moves.length || morphVia.index >= 0; ++i) {
                 const m = i%moves.length;
                 const move = moves[m];
@@ -349,7 +350,8 @@ function navHolds(element) {
                         morphVia.index = m;
 
                         // Need a point before the first point curved through.
-                        const start = pickMoveEndpoint(moves, wrapNum(m-1, moves.length));
+                        const start = pickMoveEndpoint(moves,
+                            wrapNum(m-1, moves.length));
 
                         morphVia.points.push(start);
                     }
@@ -713,10 +715,10 @@ function navHolds(element) {
         hits.resize();
         $(window).on('resize', hits.resize);
 
-        $element.on('pointermove', ({ x, y }) => {
+        $element.on('pointermove', throttle(200, ({ x, y }) => {
             vec2.set(force.pos, x, y);
             hits.get(force.pos, force.rad).forEach((hit) => blobPointer(hit, force));
-        });
+        }));
     })();
 }
 

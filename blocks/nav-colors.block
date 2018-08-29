@@ -1,5 +1,5 @@
-{##BEGIN} Define the theme colours according to the position in `nav-holds` {END##}
-<style type="text/css">
+<style type="text/css" class="yr-colors-theme-nav">
+    {##BEGIN} Define the theme colours according to the position in `nav-holds` {END##}
     {.repeated section items}
         {.var @n0 externalLink.url|slugify}
         {.var @n1 collection.urlId|slugify}
