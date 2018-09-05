@@ -17,22 +17,28 @@
     <body id="{squarespace.page-id}" class="{squarespace.page-classes} yr-color-theme-{@n0}{@n1}">
         <div class="yr-loader"></div>
 
-        <squarespace:navigation navigationId="nav-main" template="nav-main"></squarespace:navigation>
+        {.equal? collection.typeName "raw"}
+            {squarespace.main-content}
+        {.or}
+            <squarespace:navigation navigationId="nav-main" template="nav-main"></squarespace:navigation>
 
-        <section class="yr-content">
-            <main class="yr-main" role="main" data-content-field="main-content">
-                {squarespace.main-content}
-            </main>
+            <section class="yr-content">
+                <main class="yr-main" role="main" data-content-field="main-content">
+                    {squarespace.main-content}
+                </main>
 
-            {@|apply footer.block}
-        </section>
+                {@|apply footer.block}
+            </section>
+        {.end}
+
+        {##BEGIN}
+        <script type="text/javascript">
+            console.log('site', {@|json-pretty|html});
+        </script>
+        {END##}
 
         <squarespace:script src="site-bundle.js" combo="false"></squarespace:script>
 
         {squarespace-footers}
-
-        <script type="text/javascript">
-            ((self.debug) && console.log('site', {@|json-pretty|html}));
-        </script>
     </body>
 </html>
