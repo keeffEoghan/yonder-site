@@ -5,16 +5,22 @@
         {.var @n1 collection.urlId|slugify}
 
         :root {
-            --tweak-yr-color-theme-{@n0}{@n1}-tone-1: var(--tweak-yr-color-theme-{@index}-tone-1);
-            --tweak-yr-color-theme-{@n0}{@n1}-tone-2: var(--tweak-yr-color-theme-{@index}-tone-2);
-            --tweak-yr-color-theme-{@n0}{@n1}-tone-3: var(--tweak-yr-color-theme-{@index}-tone-3);
+            --tweak-yr-color-theme-{@n0}{@n1}-tone-1: var(--tweak-yr-color-theme-{@index}-tone-1,
+                @tweak-yr-color-theme-none-tone-3);
+
+            --tweak-yr-color-theme-{@n0}{@n1}-tone-2: var(--tweak-yr-color-theme-{@index}-tone-2,
+                @tweak-yr-color-theme-none-tone-3);
+
+            --tweak-yr-color-theme-{@n0}{@n1}-tone-3: var(--tweak-yr-color-theme-{@index}-tone-3,
+                @tweak-yr-color-theme-none-tone-3);
         }
 
         .yr-color-theme-{@index},
         .yr-color-theme-{@n0}{@n1},
         .yr-color-theme-{@index} .yr-nav::before,
         .yr-color-theme-{@n0}{@n1} .yr-nav::before {
-            background-color: var(--tweak-yr-color-theme-{@index}-tone-2);
+            background-color: var(--tweak-yr-color-theme-{@index}-tone-2,
+                @tweak-yr-color-theme-none-tone-2);
         }
     {.end}
 </style>
