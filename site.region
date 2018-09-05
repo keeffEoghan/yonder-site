@@ -17,7 +17,7 @@
     <body id="{squarespace.page-id}" class="{squarespace.page-classes} yr-color-theme-{@n0}{@n1}">
         <div class="yr-loader"></div>
 
-        {.equal? collection.typeName "raw"}
+        {.equal? collection.typeName "custom"}
             {squarespace.main-content}
         {.or}
             <squarespace:navigation navigationId="nav-main" template="nav-main"></squarespace:navigation>
