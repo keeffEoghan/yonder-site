@@ -110,7 +110,7 @@
 
                     {##BEGIN} Default SVG hold shape. {END##}
                     <svg class="yr-nav-hold-view" width="100%" height="100%">
-                        <use class="yr-use-hold-shape" href="#yr-hold-shape-{@index}"></use>
+                        <use class="yr-use-hold-shape" xlink:href="#yr-hold-shape-{@index}"></use>
                     </svg>
                 </li>
             {.end}

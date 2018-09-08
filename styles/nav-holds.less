@@ -731,8 +731,6 @@
         width: 100% + (@offset * 2);
         height: 100% + (@offset * 2);
 
-        fill: currentColor;
-        stroke: currentColor;
         fill-opacity: 0;
         stroke-opacity: 0;
         stroke-width: 0;
@@ -766,6 +764,9 @@
         stroke-linecap: round;
 
         path {
+            fill: currentColor;
+            stroke: currentColor;
+
             &:nth-child(1) {
                 fill-opacity: 1;
                 stroke-opacity: 1;
