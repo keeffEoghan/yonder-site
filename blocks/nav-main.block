@@ -5,7 +5,7 @@
 <section class="yr-nav yr-sticky-scroll yr-sticky-stuck" data-content-field="navigation-nav-main">
     <a class="yr-nav-home-a yr-nav-button" href="/"
         title="Go home" aria-label="Go home">
-        <squarespace:block-field id="yr-nav-main-home-icon"
+        <squarespace:block-field id="nav-main-home-icon"
             class="yr-nav-button-icon-block yr-no-alt-block-color" columns="1">
         </squarespace:block-field>
         <div class="yr-nav-button-icon">{@|apply nav-main/home.svg.block}</div>
@@ -16,7 +16,7 @@
 
     {##BEGIN} Controlled by `.yr-nav-toggler`, DOM position important. {END##}
     <div class="yr-nav-toggle yr-nav-toggle-open yr-nav-button">
-        <squarespace:block-field id="yr-nav-main-toggle-open-icon"
+        <squarespace:block-field id="nav-main-toggle-open-icon"
             class="yr-nav-button-icon-block yr-no-alt-block-color" columns="1">
         </squarespace:block-field>
         <div class="yr-nav-button-icon">{@|apply nav-main/open.svg.block}</div>
@@ -25,7 +25,7 @@
     <nav class="yr-nav-panel">
         {##BEGIN} Controlled by `.yr-nav-toggler`, DOM position important. {END##}
         <div class="yr-nav-toggle yr-nav-toggle-close yr-nav-button yr-nav-fade">
-            <squarespace:block-field id="yr-nav-main-toggle-close-icon"
+            <squarespace:block-field id="nav-main-toggle-close-icon"
                 class="yr-nav-button-icon-block yr-no-alt-block-color" columns="1">
             </squarespace:block-field>
             <div class="yr-nav-button-icon">{@|apply nav-main/close.svg.block}</div>
