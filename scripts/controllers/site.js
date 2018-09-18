@@ -4,8 +4,6 @@ import { Lifecycle, Tweak, ImageLoader } from '@squarespace/core';
 import Mercury from '@squarespace/mercury';
 import Darwin from '../libs/custom/darwin';
 
-import { authenticated, debug } from '../constants';
-
 let element;
 let $element;
 

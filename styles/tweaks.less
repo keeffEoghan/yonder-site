@@ -231,6 +231,10 @@
 @tweak-yr-space-content: 2em;
 :root { --tweak-yr-space-content: @tweak-yr-space-content; }
 
+// tweak: { "category": "Spacing", "label": "Sticky Navigation", "title": "tweak-yr-space-sticky", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-sticky" }
+@tweak-yr-space-sticky: 2em;
+:root { --tweak-yr-space-sticky: @tweak-yr-space-sticky; }
+
 
 /**
  * Colors
@@ -707,6 +711,13 @@
 // tweak: { "category": "Navigation Page / Details", "label": "Enable Details Mode", "title": "tweak-yr-nav-holds-details-on", "type": "checkbox", "active": true, "target": ".yr-nav-holds" }
 // tweak: { "category": "Navigation Page / Details", "label": "Fit Info in Ring Layout", "title": "tweak-yr-nav-holds-info-fits-ring", "type": "checkbox", "active": false, "target": ".yr-nav-holds", showOnlyWhenPresent: ".tweak-yr-nav-holds-details-on.tweak-yr-nav-holds-ring-show" }
 // tweak: { "category": "Navigation Page / Details", "label": "Fit Hint in Ring Layout", "title": "tweak-yr-nav-holds-hint-fits-ring", "type": "checkbox", "active": false, "target": ".yr-nav-holds", showOnlyWhenPresent: ".tweak-yr-nav-holds-details-on.tweak-yr-nav-holds-ring-show" }
+
+
+/**
+ * Navigation Page / Blobs
+ */
+
+// tweak: { "category": "Navigation Page / Blobs", "label": "Blobby Buttons", "title": "tweak-yr-nav-holds-blob-show", "type": "checkbox", "active": true, "target": ".yr-nav-holds", "js": true }
 
 
 /**

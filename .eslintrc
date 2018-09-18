@@ -9,6 +9,9 @@
         "indent": ["warn", 4],
         "operator-linebreak": "off",
         "no-multi-spaces": "off",
-        "space-infix-ops": "off"
+        "space-infix-ops": "off",
+        "keyword-spacing": {
+            "after": false
+        }
     }
 }

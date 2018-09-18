@@ -393,7 +393,7 @@ export const pathWinding = (path) => path.reduce((sum, move, m, moves) => {
  * @param {Boolean?} closed Whether to close the path.
  * @param {Array?} out The output array to store the result in.
  *
- * @return {Array?} The `SVG.PathArray` notation of the bézier curve, if any is possible.
+ * @return {Array?} The `SVG.PathArray` notation of the bézier curve, if possible.
  */
 export function bezierVia(points, tension = 0.25, ends = null, closed = false, out = []) {
     const l = points.length;
@@ -445,7 +445,10 @@ export function bezierVia(points, tension = 0.25, ends = null, closed = false, o
         else {
             const first = vec2.create();
 
-            ctrl[0] = [null, vec2.scale(first, vec2.add(first, points[0], ctrl[1][0]), 0.5)];
+            ctrl[0] = [
+                null,
+                vec2.scale(first, vec2.add(first, points[0], ctrl[1][0]), 0.5)
+            ];
         }
 
         if(ends && ends[1]) {
@@ -454,7 +457,10 @@ export function bezierVia(points, tension = 0.25, ends = null, closed = false, o
         else {
             const last = vec2.create();
 
-            ctrl[l-1] = [vec2.scale(last, vec2.add(last, points[l-1], ctrl[l-2][1]), 0.5), null];
+            ctrl[l-1] = [
+                vec2.scale(last, vec2.add(last, points[l-1], ctrl[l-2][1]), 0.5),
+                null
+            ];
         }
 
         // Define the curves.

@@ -68,7 +68,6 @@
             height: @tweak-yr-nav-button-size;
             min-height: @tweak-yr-nav-home-size;
             padding: @tweak-yr-nav-button-offset;
-            z-index: @yr-z-nav;
         }
 
         &::before {
@@ -78,6 +77,7 @@
             top: 0;
             left: 0;
             right: 0;
+            z-index: @yr-z-nav-bar;
             will-change: background-color;
             .transition(background-color @yr-fade-page-time ease-out);
         }

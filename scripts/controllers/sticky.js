@@ -6,7 +6,10 @@ function stickyHeader(element) {
     const $element = $(element);
     const $self = $(self);
     const $container = $('body');
-    const $scroll = $element.clone().addClass('yr-sticky-scroll').attr('data-controller', '');
+
+    const $scroll = $element.clone()
+        .addClass('yr-sticky-scroll').attr('data-controller', '');
+
     const $all = $element.add($scroll);
 
     const id = uid();

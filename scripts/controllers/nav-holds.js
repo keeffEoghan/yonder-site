@@ -10,6 +10,7 @@ import {
 
 import SVG from '../libs/custom/svg';
 import Darwin from '../libs/custom/darwin';
+import { Tweak } from '@squarespace/core';
 
 import {
         pathCircle, pathMetaball, pickMovePoints, pickMoveEndpoint, movePointOffsets,
@@ -61,8 +62,8 @@ function navHolds(element) {
          * Index into list of info content for pairs of selections.
          * The number of selections is `nC2` (e.g: for `n === 5; nC2 === 10`).
          *
-         * Intuitive cascade from the combination maths - each number's pairs in turn, minus
-         * already-used pairs:
+         * Intuitive cascade from the combination maths - each number's pairs in
+         * turn, minus already-used pairs:
          *     0 | 0-2, 0-2, 0-3, 0-4
          *     1 | 1-2, 1-3, 1-4
          *     2 | 2-3, 2-4
@@ -83,7 +84,8 @@ function navHolds(element) {
          *     - | 4 |  -
          *
          * @param {Number} [a, b] Chosen pair of indexes.
-         * @param {Number} n The number of options to choose from (`n` in `nCr` or `n choose r`).
+         * @param {Number} n The number of options to choose from (`n` in `nCr` or
+         *     `n choose r`).
          * @return {Number} The matching info item index for the selected pair.
          */
         combo([a, b] = info.chosen(), n = info.$holds.length) {
@@ -179,12 +181,14 @@ function navHolds(element) {
     darwin.init();
 
 
-    // Test
-    return;
-    (() => {
+    /**
+     * Set up blobby holds and animations.
+     */
+    function setupBlobs() {
         if(!SVG.supported) { return; }
 
-        // Init... needed internally in SVG.js even if we're not drawing in this element.
+        // Init... needed internally in SVG.js even if we're not drawing in this
+        // element.
         const svg = SVG($('.yr-nav-holds-defs')[0]);
 
         // @todo Caching is an optimisation... don't do it prematurely.
@@ -224,13 +228,17 @@ function navHolds(element) {
         const hits = {
             items: [],
             boxes: [],
-            resize: () => hits.items.forEach((item, i) => hits.boxes[i] = item.rbox()),
+            resize: () =>
+                hits.items.forEach((item, i) => hits.boxes[i] = item.rbox()),
+
             get: ([px, py], rad) => hits.items.filter((item, i) => {
                 const { x, y, x2, y2 } = hits.boxes[i];
 
                 return (px+rad >= x && py+rad >= y && px-rad <= x2 && py-rad <= y2);
             })
         };
+
+        /** (1) Setup: */
 
         const $holds = $element.find('.yr-nav-hold');
 
@@ -242,13 +250,13 @@ function navHolds(element) {
             const $block = $hold.find('.yr-nav-holds-shape-block');
 
             const $shapes = (($block.hasClass('empty'))? $hold : $block)
-                // These classes must be added to any custom SVGs to opt them into this effect.
-                .find('svg.yr-hold-shape, use.yr-use-hold-shape');
+                // These classes must be on any SVGs to opt in to this effect.
+                .find('.yr-hold-shape, .yr-use-hold-shape');
 
             $shapes.each((s, shape) => {
                 shape = SVG.adopt(shape);
 
-                // Replace any relevant `use` with the symbol - so we can use it independently.
+                // Replace any relevant `use` with the symbol - to use independently.
                 if(shape.hasClass('yr-use-hold-shape')) {
                     const href = ((shape.attr('href'))? 'href' : 'xlink:href');
 
@@ -260,17 +268,12 @@ function navHolds(element) {
                 // Prepare the effect.
                 shape.select('path').each((p, paths) => {
                     const path = paths[p];
-
-                    // @todo Remove.
-                    // path.scale(0.5);
-
                     const coarseMoves = path.array().value;
 
 
                     // Prepare paths:
 
                     // Normalize path as bézier curves.
-
                     const fineCSP = cubicSuperPath(coarseMoves);
 
                     // Subdivide into finer pieces.
@@ -279,63 +282,88 @@ function navHolds(element) {
                     const maxSlice = 10;
                     const slice = length/Math.ceil(length/maxSlice);
 
-                    const splitPositions = Array(Math.floor(length/slice)-1).fill(0)
+                    const splitPositions = Array(Math.floor(length/slice)-1).fill()
                         .reduce((_a, _b, i, all) =>
                             (all[i] = (i+1)*slice/length, all), null);
 
-                    const pathPositions = positions(fineCSP);
-
-                    splitAtPositions(fineCSP, pathPositions, splitPositions);
+                    splitAtPositions(fineCSP, positions(fineCSP), splitPositions);
 
                     // Replace the old path.
 
                     const finePathArray = uncubicSuperPath(fineCSP);
-
-                    path.plot(finePathArray.clone());
-
-                    // A clone we can modify for morphing, keeping the original.
                     const morphPathArray = finePathArray.clone();
 
-                    // Store the superpaths to be used later for interaction.
+                    path.plot(morphPathArray);
+
+                    // Store for use in later interaction.
                     path.remember('fine', finePathArray);
                     path.remember('morph', morphPathArray);
 
-
-                    // Create a hit area for pointers - in a single layer, to manage `z` etc.
+                    // Create a hit area for pointers - in a shared layer, to
+                    // manage `z` etc.
                     hits.items.push(path);
                 });
             });
         });
 
 
-        // (2) Respond to interaction:
+        /** (2) Respond to interaction: */
 
         // Points to draw a bezier curve through, and index offset.
         const morphVia = {
+            // The points we'll draw our curve through.
             points: [],
+            // The start of the new curve in the original path array; or -1 if none.
             index: -1,
-            vec2: Array(2).fill(0).map(vec2.create)
+            // The number of points in the new curve.
+            length: 0,
+            // Invalidates the new curve.
+            reset() {
+                morphVia.index = -1;
+                morphVia.length = 0;
+            },
+            // Cache.
+            vec2: Array(2).fill().map(vec2.create)
         };
 
-        function blobPointer(path, force) {
-            // (2.1) Morph points towards pointer - interploate within radius, eased by
-            // force/distance.
+        const spliceCurve = (moves, offset, curves) => curves.forEach((curve, c) => {
+            const move = moves[offset+c];
 
+            if(move[0].search(/^m$/i) >= 0) {
+                // We might've replaced an 'M' move.
+                move.splice(0, Infinity,
+                    ((move[0] === 'm')? 'm' : 'M'),
+                    curve[curve.length-2], curve[curve.length-1]);
+            }
+            else if(move[0].search(/^z$/i) >= 0) {
+                // We might've replaced a 'Z' move.
+                move.splice(0, Infinity, 'Z');
+            }
+            else {
+                // Bézier's fine for anything else.
+                move.splice(0, Infinity, ...curve);
+            }
+        });
+
+        function blobPointer(path, force) {
+            /**
+             * (2.1) Morph points towards pointer - interploate within radius, eased
+             *     by force/distance.
+             */
+
+            // The force position relative to the path.
             const pos = pojoToVec2(path.point(...force.pos), morphVia.vec2[0]);
 
             // Draw curves through points close enough to the pointer.
             const morphMoves = path.remember('morph').value;
-            // @todo Use the morphed path instead of the original path, as the source?
-            // const moves = morphMoves;
             const moves = path.remember('fine').value;
 
-            // @todo Reuse memory with indeces, rather than emptying array?
-            morphVia.points.length = 0;
-            morphVia.index = -1;
+            morphVia.reset();
 
-            // Account for being on the middle of a curve when crossing the end of
-            // the array... so far assumes closed shapes.
-            for(let i = 0; i < moves.length || morphVia.index >= 0; ++i) {
+            // Account for wrapping; being in the middle of a curve when passing
+            // the end of the array.
+            // So far, assumes closed shapes.
+            for(let i = 0; i < Math.max(0, morphVia.index)+moves.length; ++i) {
                 const m = i%moves.length;
                 const move = moves[m];
 
@@ -353,57 +381,37 @@ function navHolds(element) {
                         const start = pickMoveEndpoint(moves,
                             wrapNum(m-1, moves.length));
 
-                        morphVia.points.push(start);
+                        morphVia.points[morphVia.length++] = start;
                     }
 
+                    // Get/create the next morphed point as needed.
+                    const next = (morphVia.points[morphVia.length] ||
+                        (morphVia.points[morphVia.length] = vec2.create()));
+
                     // @todo Might need to use a normal here as `lerp` target instead.
-                    const morphed = vec2.lerp(vec2.create(), point, pos,
-                        morphEase(dist/force.rad));
-
-                    morphVia.points.push(morphed);
+                    vec2.lerp(next, point, pos, morphEase(dist/force.rad));
+                    morphVia.length++;
                 }
-                else if(morphVia.index >= 0) {
-                    // Curve through the points.
+                else if(morphVia.length) {
+                    // Curve through any gathered points.
 
-                    // @todo Reuse memory, rather than new array?
+                    morphVia.points.length = morphVia.length;
+
                     const curves = bezierVia(morphVia.points);
 
-                    // @todo Loop or view into array, rather than new array.
-                    const spliceCurve = (offset, curves) =>
-                        curves.forEach((curve, c) => {
-                            const move = morphMoves[offset+c];
-
-                            if(move[0].search(/^m$/i) >= 0) {
-                                // We might've replaced an 'M' move.
-                                move.splice(0, Infinity,
-                                    ((move[0] === 'm')? 'm' : 'M'),
-                                    curve[curve.length-2], curve[curve.length-1]);
-                            }
-                            else if(move[0].search(/^z$/i) >= 0) {
-                                // We might've replaced an 'Z' move.
-                                move.splice(0, Infinity, 'Z');
-                            }
-                            else {
-                                // Béziers fine for anything else.
-                                move.splice(0, Infinity, ...curve);
-                            }
-                        });
-
-                    // Merge in the new curves - accounting for wrapping in the arrays.
+                    // Merge in the new curves - accounting for array wrapping.
 
                     const extra = (morphVia.index+curves.length)-morphMoves.length;
 
-                    // @todo Indexes or view into array, rather than new array.
-
+                    // Splice in the extra wrapped part of the new curve, if any.
                     if(extra > 0) {
-                        spliceCurve(0, curves.splice(-extra, extra));
+                        // @todo Indexes or view into array, not new `spliced` array.
+                        spliceCurve(morphMoves, 0, curves.splice(-extra));
                     }
 
-                    spliceCurve(morphVia.index, curves);
+                    spliceCurve(morphMoves, morphVia.index, curves);
 
-                    // Reset the collection.
-                    morphVia.index = -1;
-                    morphVia.points.length = 0;
+                    morphVia.reset();
                 }
             }
 
@@ -412,6 +420,7 @@ function navHolds(element) {
                 .plot(morphMoves);
         }
 
+        // @todo Delete old - here for reference
         $holds.each((h, hold) => {
             return;
             const $hold = $(hold);
@@ -719,7 +728,11 @@ function navHolds(element) {
             vec2.set(force.pos, x, y);
             hits.get(force.pos, force.rad).forEach((hit) => blobPointer(hit, force));
         }));
-    })();
+    }
+
+    if(Tweak.getValue('tweak-yr-nav-holds-blob-show')) {
+        setupBlobs();
+    }
 }
 
 export default navHolds;
