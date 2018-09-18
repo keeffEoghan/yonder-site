@@ -4,20 +4,14 @@ import { vec2 } from 'gl-matrix';
 import bezier from 'bezier';
 import throttle from 'lodash/fp/throttle';
 
-import {
-        cubicSuperPath, uncubicSuperPath, splitAtPositions, positions
-    } from 'svg.pathmorphing2.js/src/cubicsuperpath';
+import { cubicSuperPath, uncubicSuperPath, splitAtPositions, positions }
+    from 'svg.pathmorphing2.js/src/cubicsuperpath';
 
 import SVG from '../libs/custom/svg';
 import Darwin from '../libs/custom/darwin';
 import { Tweak } from '@squarespace/core';
 
-import {
-        pathCircle, pathMetaball, pickMovePoints, pickMoveEndpoint, movePointOffsets,
-        bezierVia, pathWinding
-    }
-    from '../svg/paths';
-
+import { pickMoveEndpoint, bezierVia } from '../svg/paths';
 import nearestOnPath from '../svg/nearest-on-path';
 
 import { __ } from '../constants';
@@ -195,7 +189,6 @@ function navHolds(element) {
         const cache = {
             pojo: Array(2).fill().map(() => ({})),
             vec2: Array(3).fill().map(vec2.create),
-            // mat2d: Array(1).fill().map(mat2d.create),
             array: Array(2).fill().map(Array)
         };
 
@@ -210,16 +203,11 @@ function navHolds(element) {
         const force = {
             pos: vec2.fromValues(0, 0),
             rad: 60,
-            pow: 0.3
+            pow: (parseFloat(Tweak.getValue('tweak-yr-nav-holds-blob-power'), 10) ||
+                0.15)
         };
 
         const pojoToVec2 = (pojo, out = vec2.create()) => vec2.set(out, pojo.x, pojo.y);
-        const vec2ToPojo = (vec2, out = {}) => (out.x = vec2[0], out.y = vec2[1], out);
-
-        const boxRad = ({ w, h }) => Math.sqrt(w*h)*0.5;
-
-        // force.rad2 = force.rad*force.rad;
-        // force.angle = Math.atan2(force.pos[1], force.pos[0]);
 
         const morphBezier = [0, 0, 1, 1];
         const morphEase = (t) => bezier(morphBezier, t);
@@ -291,7 +279,6 @@ function navHolds(element) {
 
                     const finePathArray = uncubicSuperPath(fineCSP);
 
-                    // path.plot(finePathArray.clone());
                     path.plot(finePathArray);
 
                     // Store for use in later interaction.
@@ -325,8 +312,7 @@ function navHolds(element) {
         };
 
         const spliceCurve = (moves, offset, curves) => curves.forEach((curve, c) => {
-            const m = offset+c;
-            const move = moves[m];
+            const move = moves[offset+c];
             const type = move[0];
 
             if(type.search(/^m$/i) >= 0) {
@@ -385,15 +371,14 @@ function navHolds(element) {
                     const next = (morphVia.points[morphVia.length] ||
                         (morphVia.points[morphVia.length] = vec2.create()));
 
-                    const eased = morphEase(dist/force.rad)*force.pow;
-
                     /**
                      * @todo Might need to use the nearest point on a circle as
                      *     `lerp` target instead - so the blob isn't pointy.
                      * @todo Might look better if we only move away from the shape
                      *     center, never back inwards.
                      */
-                    vec2.lerp(next, point, pos, eased);
+                    vec2.lerp(next, point, pos, morphEase(dist/force.rad)*force.pow);
+
                     morphVia.length++;
                 }
                 else if(morphVia.length) {
@@ -420,10 +405,9 @@ function navHolds(element) {
             }
 
             path
-                .animate(200, '<')
+                .animate(250, '<')
                 .plot(morphPathArray)
-                .animate(400, '<>')
-                // .plot(path.remember('base').clone());
+                .animate(500, '<>')
                 .plot(path.remember('base'));
         }
 
@@ -431,13 +415,13 @@ function navHolds(element) {
         hits.resize();
         $(window).on('resize', hits.resize);
 
-        $element.on('pointermove', throttle(40, ({ x, y }) => {
+        $element.on('pointermove', throttle(50, ({ x, y }) => {
             vec2.set(force.pos, x, y);
             hits.get(force.pos, force.rad).forEach((hit) => blobPointer(hit, force));
         }));
     }
 
-    if(true || Tweak.getValue('tweak-yr-nav-holds-blob-show') === 'true') {
+    if(Tweak.getValue('tweak-yr-nav-holds-blob-show') === 'true') {
         setupBlobs();
     }
 }
