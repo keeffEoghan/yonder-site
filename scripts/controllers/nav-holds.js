@@ -730,7 +730,11 @@ function navHolds(element) {
         }));
     }
 
-    if(Tweak.getValue('tweak-yr-nav-holds-blob-show')) {
+    const useBlobs = Tweak.getValue('tweak-yr-nav-holds-blob-show');
+
+    console.log('useBlobs', useBlobs, typeof useBlobs);
+
+    if(false && useBlobs) {
         setupBlobs();
     }
 }
