@@ -5,9 +5,8 @@
 <section class="yr-nav" data-content-field="navigation-nav-main">
     <a class="yr-nav-home-a yr-nav-button" href="/"
         title="Go home" aria-label="Go home">
-        <squarespace:block-field id="nav-main-home-icon"
-            class="yr-nav-button-icon-block yr-no-alt-block-color" columns="1">
-        </squarespace:block-field>
+        <squarespace:block-field id="nav-main-home-button"
+            class="yr-nav-button-icon-block yr-no-alt-block-color" columns="1"></squarespace:block-field>
         <div class="yr-nav-button-icon">{@|apply nav-main/home.svg.block}</div>
     </a>
 
@@ -16,26 +15,23 @@
 
     {##BEGIN} Controlled by `.yr-nav-toggler`, DOM position important. {END##}
     <div class="yr-nav-toggle yr-nav-toggle-open yr-nav-button">
-        <squarespace:block-field id="nav-main-toggle-open-icon"
-            class="yr-nav-button-icon-block yr-no-alt-block-color" columns="1">
-        </squarespace:block-field>
+        <squarespace:block-field id="nav-main-toggle-open-button"
+            class="yr-nav-button-icon-block yr-no-alt-block-color" columns="1"></squarespace:block-field>
         <div class="yr-nav-button-icon">{@|apply nav-main/open.svg.block}</div>
     </div>
 
     <nav class="yr-nav-panel">
         {##BEGIN} Controlled by `.yr-nav-toggler`, DOM position important. {END##}
         <div class="yr-nav-toggle yr-nav-toggle-close yr-nav-button yr-nav-fade">
-            <squarespace:block-field id="nav-main-toggle-close-icon"
-                class="yr-nav-button-icon-block yr-no-alt-block-color" columns="1">
-            </squarespace:block-field>
+            <squarespace:block-field id="nav-main-toggle-close-button"
+                class="yr-nav-button-icon-block yr-no-alt-block-color" columns="1"></squarespace:block-field>
             <div class="yr-nav-button-icon">{@|apply nav-main/close.svg.block}</div>
         </div>
 
         <header class="yr-nav-header yr-nav-fade">
             {@|apply titles.block}
             <squarespace:block-field id="nav-header-block"
-                class="yr-nav-header-block" columns="12">
-            </squarespace:block-field>
+                class="yr-nav-header-block" columns="12"></squarespace:block-field>
         </header>
         <div class="yr-nav-links yr-nav-fade yr-a">
             {.repeated section items}
@@ -75,8 +71,7 @@
 
         <squarespace:block-field id="nav-footer-block"
             class="yr-nav-footer-block yr-nav-fade" columns="12"
-            data-content-field="connected-accounts">
-        </squarespace:block-field>
+            data-content-field="connected-accounts"></squarespace:block-field>
     </nav>
 
     <script type="text/javascript">
