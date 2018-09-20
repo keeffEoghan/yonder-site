@@ -279,6 +279,18 @@ function navHolds(element) {
 
                     const finePathArray = uncubicSuperPath(fineCSP);
 
+                    /**
+                     * @todo `uncubicSuperPath` only accounts for `m` and `c` moves.
+                     *     For a smoothly closed path, we also need `z`.
+                     *     This isn't perfect, but it'll keep the last `z` if any.
+                     */
+                    const zPrev = coarseMoves.value[coarseMoves.value.length-1];
+                    const zNext = finePathArray.value[finePathArray.value.length-1];
+
+                    if(zPrev[0].search(/^z$/i) >= 0 && zNext[0].search(/^z$/i) < 0) {
+                        finePathArray.value.push(['z']);
+                    }
+
                     path.plot(finePathArray);
 
                     // Store for use in later interaction.
