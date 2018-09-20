@@ -19,7 +19,9 @@ function stickyHeader(element) {
     const update = () => $scroll.html($element.html());
 
     function scroll() {
-        const scrollTop = $(document.documentElement).scrollTop();
+        const scrollTop = $(document.documentElement).scrollTop()+
+            $(document.body).scrollTop();
+
         const offset = $('.yr-sticky-scroll.yr-sticky-stuck')
             .reduce((offset, other) =>
                 ((other === $scroll[0])? offset : offset+$(other).height()),
