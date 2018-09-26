@@ -192,6 +192,8 @@ function navHolds(element) {
             array: Array(2).fill().map(Array)
         };
 
+        const clipHolds = Tweak.getValue('tweak-yr-nav-holds-blob-clip') === 'true';
+
 
         /**
          * @todo Remove redundant libs:
@@ -227,21 +229,20 @@ function navHolds(element) {
 
         /** (1) Setup: */
 
-        const $holds = $element.find('.yr-nav-hold');
-
-        $holds.each((h, hold) => {
-            const $hold = $(hold);
-
-            // Find the SVGs we want - the default, or one in a `block-field`.
-
+        // Find the SVGs we want - the default, or one in a `block-field`.
+        function findShapes($hold) {
             const $block = $hold.find('.yr-nav-holds-shape-block');
 
-            const $shapes = (($block.hasClass('empty'))? $hold : $block)
+            return (($block.hasClass('empty'))? $hold : $block)
                 // These classes must be on any SVGs to opt in to this effect.
                 .find('.yr-hold-shape, .yr-use-hold-shape');
+        }
 
-            $shapes.each((s, shape) => {
-                shape = SVG.adopt(shape);
+        $element.find('.yr-nav-hold').each((h, hold) => {
+            const $hold = $(hold);
+
+            findShapes($hold).each((s, shape) => {
+                shape = (shape.instance || SVG.adopt(shape));
 
                 // Replace any relevant `use` with the symbol - to use independently.
                 if(shape.hasClass('yr-use-hold-shape')) {
@@ -301,6 +302,22 @@ function navHolds(element) {
                     hits.items.push(path);
                 });
             });
+
+            // Clip the hold to the SVG path to keep everything inside the lines.
+            if(clipHolds) {
+                // This class must be on any SVGs to opt in to this clipping effect.
+                let clipPath = findShapes($hold).find('.yr-hold-clip')[0];
+
+                if(clipPath) {
+                    clipPath = (clipPath.instance || SVG.adopt(clipPath));
+
+                    const clipSVG = clipPath.doc();
+                    const clipDef = clipSVG.clip().add(clipSVG.use(clipPath));
+
+                    $hold.find('.yr-nav-hold-a')
+                        .css('clip-path', `url(#${ clipDef.attr('id') })`);
+                }
+            }
         });
 
 
