@@ -296,7 +296,8 @@
         display: block;
         text-decoration: none;
     }
-
+    
+    .yr-nav-content,
     .yr-nav-links,
     .yr-nav-folder-links {
         .display(flex);
@@ -305,8 +306,38 @@
         .align-items(center);
         width: 100%;
         min-height: 2em;
-        padding: 0.3em 0;
         margin: auto;
+    }
+
+    .yr-nav-content {
+        position: relative;
+        .flex(0 1 auto);
+        margin: 1em 0;
+
+        &::before,
+        &::after {
+            display: block;
+            position: absolute;
+            text-align: center;
+            left: 0;
+            right: 0;
+            opacity: 0.6;
+        }
+
+        &::before {
+            content: '▲';
+            bottom: 100%;
+        }
+        
+        &::after {
+            content: '▼';
+            top: 100%;
+        }
+    }
+
+    .yr-nav-links,
+    .yr-nav-folder-links {
+        padding: 0.3em 0;
     }
 
     .yr-nav-links {

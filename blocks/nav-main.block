@@ -33,40 +33,42 @@
             <squarespace:block-field id="nav-header-block"
                 class="yr-nav-header-block" columns="12"></squarespace:block-field>
         </header>
-        <div class="yr-nav-links yr-nav-fade yr-a">
-            {.repeated section items}
-                {.folder?}
-                    <a class="yr-nav-a{.equal? active true} yr-active{.end} yr-nav-folder-a" href="{collection.fullUrl}">{collection.navigationTitle}</a>
+        <div class="yr-nav-content yr-nav-fade">
+            <div class="yr-nav-links yr-a">
+                {.repeated section items}
+                    {.folder?}
+                        <a class="yr-nav-a{.equal? active true} yr-active{.end} yr-nav-folder-a" href="{collection.fullUrl}">{collection.navigationTitle}</a>
 
-                    <div class="yr-nav-folder-links">
-                        {.repeated section items}
-                            {.section collection}
-                                <a class="yr-nav-a{.equal? active true} yr-active{.end} yr-nav-collection-a"
-                                    href="{collection.fullUrl}">
-                                    {collection.navigationTitle}
-                                </a>
+                        <div class="yr-nav-folder-links">
+                            {.repeated section items}
+                                {.section collection}
+                                    <a class="yr-nav-a{.equal? active true} yr-active{.end} yr-nav-collection-a"
+                                        href="{collection.fullUrl}">
+                                        {collection.navigationTitle}
+                                    </a>
+                                {.end}
+                                {.section externalLink}
+                                    <a class="yr-nav-a yr-nav-out-a" href="{url}"
+                                        {.section newWindow} target="_blank"{.end}>
+                                        {title}
+                                    </a>
+                                {.end}
                             {.end}
-                            {.section externalLink}
-                                <a class="yr-nav-a yr-nav-out-a" href="{url}"
-                                    {.section newWindow} target="_blank"{.end}>
-                                    {title}
-                                </a>
-                            {.end}
+                        </div>
+                    {.or}
+                        {.section collection}
+                            <a class="yr-nav-a{.equal? active true} yr-active{.end} yr-nav-collection-a" href="{fullUrl}">{navigationTitle}</a>
                         {.end}
-                    </div>
-                {.or}
-                    {.section collection}
-                        <a class="yr-nav-a{.equal? active true} yr-active{.end} yr-nav-collection-a" href="{fullUrl}">{navigationTitle}</a>
-                    {.end}
-                    {.section externalLink}
-                        <a class="yr-nav-a{.equal? active true} yr-active{.end} yr-nav-out-a"
-                            href="{url}"
-                            {.section newWindow} target="_blank"{.end}>
-                            {title}
-                        </a>
+                        {.section externalLink}
+                            <a class="yr-nav-a{.equal? active true} yr-active{.end} yr-nav-out-a"
+                                href="{url}"
+                                {.section newWindow} target="_blank"{.end}>
+                                {title}
+                            </a>
+                        {.end}
                     {.end}
                 {.end}
-            {.end}
+            </div>
         </div>
 
         <squarespace:block-field id="nav-footer-block"

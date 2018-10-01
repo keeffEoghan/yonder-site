@@ -1,6 +1,11 @@
 .yr-nav-holds {
-    min-height: 100%;
-    min-height: 100vh;
+    min-height: 90%;
+
+    .yr-on-(~'.tweak-yr-nav-holds-ring-show'); .-do() {
+        @media @mq-ring-up {
+            min-height: @holds-radius * 2;
+        }
+    }
 
     &,
     .yr-nav-holds-main {
@@ -525,15 +530,6 @@
         max-width: 1300px;
         padding: 2em;
         margin: auto;
-        // filter: url('#yr-filter-goo');
-        // z-index: @yr-z-nav-holds-info-toggle;
-
-        .yr-on-(~'.tweak-yr-nav-holds-ring-show'); .-do() {
-            @media @mq-ring-up {
-                min-height: @holds-radius * 1.8;
-                // z-index: @yr-z-nav-holds;
-            }
-        }
     }
 
     .yr-site-title {
