@@ -563,14 +563,12 @@
         margin: 0 auto;
         z-index: @yr-z-nav-holds;
 
-        @margin: 15%;
-
         &:nth-child(even) {
-            margin: 0 @margin 0 auto;
+            margin: 0 @tweak-yr-nav-holds-stagger 0 auto;
         }
 
         &:nth-child(odd) {
-            margin: 0 auto 0 @margin;
+            margin: 0 auto 0 @tweak-yr-nav-holds-stagger;
         }
 
         .yr-for-(@yr-color-themes-num); .-each(@i) {

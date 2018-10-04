@@ -648,7 +648,14 @@
  * Navigation Page
  */
 
-// tweak: { "category": "Navigation Page", "label": "Font", "title": "tweak-yr-font-nav-holds", "type": "font", "loadAllVariants": true, "target": ".yr-nav-hold-a" }
+// tweak: { "category": "Navigation Page", "label": "Hide Alternating Block Colours", "title": "tweak-yr-sqs-nav-holds-block-alt-hide", "type": "checkbox", "active": true, "target": ".yr-nav-holds-main", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid.tweak-yr-sqs-block-alt-show" }
+
+
+/**
+* Navigation Page / Ring
+*/
+
+// tweak: { "category": "Navigation Page / Links", "label": "Font", "title": "tweak-yr-font-nav-holds", "type": "font", "loadAllVariants": true, "target": ".yr-nav-hold-a" }
 .tweak-yr-font-nav-holds {
     // Doesn't display well in `Style Editor`... but font-picker won't take custom fonts anyway.
     font-family: @yr-font-sans;
@@ -660,34 +667,37 @@
     text-transform: none;
 }
 
-// tweak: { "category": "Navigation Page", "label": "Minimum Size", "title": "tweak-yr-nav-holds-size-min", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
+// tweak: { "category": "Navigation Page / Links", "label": "Minimum Size", "title": "tweak-yr-nav-holds-size-min", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
 @tweak-yr-nav-holds-size-min: 9em;
 :root { --tweak-yr-nav-holds-size-min: @tweak-yr-nav-holds-size-min; }
 
-// tweak: { "category": "Navigation Page", "label": "Maximum Size", "title": "tweak-yr-nav-holds-size-max", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
+// tweak: { "category": "Navigation Page / Links", "label": "Maximum Size", "title": "tweak-yr-nav-holds-size-max", "type": "value", "min": 0, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
 @tweak-yr-nav-holds-size-max: 18em;
 :root { --tweak-yr-nav-holds-size-max: @tweak-yr-nav-holds-size-max; }
 
 // @note Style Editor doesn't handle viewport units in value sliders...
-// tweak: { "category": "Navigation Page", "label": "Padding", "title": "tweak-yr-nav-holds-pad", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
+// @disable tweak: { "category": "Navigation Page / Links", "label": "Padding", "title": "tweak-yr-nav-holds-pad", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
 @tweak-yr-nav-holds-pad: 8vmin;
 :root { --tweak-yr-nav-holds-pad: @tweak-yr-nav-holds-pad; }
 
-// tweak: { "category": "Navigation Page", "label": "Hide Alternating Block Colours", "title": "tweak-yr-sqs-nav-holds-block-alt-hide", "type": "checkbox", "active": true, "target": ".yr-nav-holds-main", "showOnlyWhenPresent": ".tweak-yr-sqs-alt-grid.tweak-yr-sqs-block-alt-show" }
+// tweak: { "category": "Navigation Page / Links", "label": "Stagger Offset", "title": "tweak-yr-nav-holds-stagger", "type": "value", "min": -100, "max": 100, "step": 1, "target": ".yr-nav-hold-a" }
+@tweak-yr-nav-holds-stagger: 27%;
+:root { --tweak-yr-nav-holds-stagger: @tweak-yr-nav-holds-stagger; }
 
 
 /**
- * Navigation Page / Ring
- */
+* Navigation Page / Ring
+*/
 
 // tweak: { "category": "Navigation Page / Ring", "label": "Show Ring Layout", "title": "tweak-yr-nav-holds-ring-show", "type": "checkbox", "active": true, "target": ".yr-nav-holds" }
 
 // tweak: { "category": "Navigation Page / Ring", "label": "Ring Layout Above Size", "title": "tweak-yr-size-hold-ring", "type": "value", "min": 0, "max": 2000, "step": 1, "target": ".yr-nav-holds", "showOnlyWhenPresent": ".tweak-yr-nav-holds-ring-show" }
-@tweak-yr-size-hold-ring: 700px;
+@tweak-yr-size-hold-ring: 600px;
 :root { --tweak-yr-size-hold-ring: @tweak-yr-size-hold-ring; }
 
+// @note Style Editor doesn't handle viewport units in value sliders...
 // @disable tweak: { "category": "Navigation Page / Ring", "label": "Ring Layout Radius", "title": "tweak-yr-size-hold-ring-rad", "type": "value", "min": 0, "max": 2000, "step": 1, "target": ".yr-nav-holds", "showOnlyWhenPresent": ".tweak-yr-nav-holds-ring-show" }
-@tweak-yr-size-hold-ring-rad: 42vmin;
+@tweak-yr-size-hold-ring-rad: 45vmin;
 :root { --tweak-yr-size-hold-ring-rad: @tweak-yr-size-hold-ring-rad; }
 
 // tweak: { "category": "Navigation Page / Ring", "label": "Number", "title": "tweak-yr-nav-holds-ring-num", "type": "value", "min": 0, "max": 10, "step": 1, "target": ".yr-nav-holds", "showOnlyWhenPresent": ".tweak-yr-nav-holds-ring-show" }
