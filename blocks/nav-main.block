@@ -3,7 +3,7 @@
     title="Toggle navigation menu" aria-label="Toggle navigation menu">
 
 <section class="yr-nav" data-content-field="navigation-nav-main">
-    <a class="yr-nav-home-a yr-nav-button" href="/"
+    <a class="yr-nav-home-a yr-nav-button" href="/home"
         title="Go home" aria-label="Go home">
         <squarespace:block-field id="nav-main-home-button"
             class="yr-nav-button-icon-block yr-no-alt-block-color" columns="1"></squarespace:block-field>
