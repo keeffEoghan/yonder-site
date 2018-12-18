@@ -1,0 +1,34 @@
+<!--
+    A Glofox view integrated into the website, within a striped border.
+    Typically entered into a code block.
+    Resizes the Glofox `iframe` to fit its contents, using `iFrameResizer`.
+    The Glofox `iframe` code should be replaced with your latest, and can be found in
+    the [Glofox portal's website integration section](https://app.glofox.com/dashboard/#/webportal).
+-->
+<div class="yr-block-style-base-stripes yr-block-style-base-stripes-sticky">
+    <div class="yr-block-style-content">
+        <iframe class="yr-iframe-resize"
+            src="https://app.glofox.com/portal/#/branch/5b72e65cd8631a11ae2fd500/classes-week-view"
+            frameborder="0" width="100%" height="400" scrolling="auto">
+        </iframe>
+    </div>
+</div>
+
+<!--
+    In order to correctly resize the iframe, the following scripts should also be
+    added to the page, only once per page.
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.15/iframeResizer.min.js"></script>
+<script type="text/javascript">
+    Array.prototype.forEach.call(document.querySelectorAll('.yr-iframe-resize'),
+        function(el) {
+            iFrameResize({
+                    log: false,
+                    checkOrigin: false,
+                    heightCalculationMethod: 'lowestElement',
+                    minHeight: 400,
+                    scrolling: 'omit'
+                },
+                el);
+        });
+</script>
